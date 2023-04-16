@@ -25,7 +25,8 @@ public class Player : MonoBehaviour
     private bool m_canDoubleJump = false;
     [SerializeField]
     private float m_walkingSpeed = 2.25f;
-    private const float k_jump = 6f;
+    [SerializeField]
+    private float k_jump = 5f;
     private Rigidbody2D m_rigidBody;
     private short m_DoubleJumpCount = 2;
 
@@ -70,6 +71,7 @@ public class Player : MonoBehaviour
             m_rigidBody.AddForce(Vector3.up * k_jump, ForceMode2D.Impulse);
             m_canJump = false;
             m_DoubleJumpCount++;
+            Debug.Log(m_DoubleJumpCount);
         }
         Vector3 direction = new Vector3(horizontalInput, 0, 0);
         transform.Translate(direction * (m_walkingSpeed * Time.deltaTime));

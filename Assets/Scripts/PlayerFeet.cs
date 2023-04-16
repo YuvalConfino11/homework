@@ -10,7 +10,7 @@ namespace DefaultNamespace
         
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.CompareTag("Platform"))
+            if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("PushPlatform"))
             {
                 m_player.setCanJump(true);
                 if (m_player.getCanDoubleJump())
@@ -19,10 +19,21 @@ namespace DefaultNamespace
                 }
             }
         }
-
+        private void OnCollisionStay2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("PushPlatform"))
+            {
+                m_player.setCanJump(true);
+                if (m_player.getCanDoubleJump())
+                {
+                    m_player.resetDoubleJumpCount();
+                }
+            }
+        }
+        
         private void OnCollisionExit2D(Collision2D collision)
         {
-            if (collision.gameObject.CompareTag("Platform"))
+            if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("PushPlatform"))
             {
                 m_player.setCanJump(false);
             }
