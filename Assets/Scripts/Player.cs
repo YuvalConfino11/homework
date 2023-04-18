@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Abilities;
 using UnityEngine;
-using Skills;
 using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
@@ -20,15 +20,18 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float m_Defence;
     [SerializeField]
-    private bool m_canJump = true;
-    [SerializeField] 
-    private bool m_canDoubleJump = false;
-    [SerializeField]
     private float m_walkingSpeed = 2.25f;
     [SerializeField]
-    private float k_jump = 5f;
+    private bool m_grounded = true;
+    [SerializeField]
+    private float m_jumpHeight = 2f;
+    [SerializeField]
+    private float m_glideFactor = 0.1f;
+    private const float m_defultGravityScale = 1f;
+    
     private Rigidbody2D m_rigidBody;
-    private short m_DoubleJumpCount = 2;
+    private DoubleJump m_doubleJump = new DoubleJump();
+    private Glide m_glide = new Glide();
 
     private void Awake()
     {
@@ -39,19 +42,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckForUnlockedSAvailabilities();
         calculateMovement();
-        if (Input.GetKeyDown(KeyCode.Q) && m_Level >= DoubleJump.GetAvailableFromLevel())
-        {
-            StartCoroutine(doubleJump());
-        }
-        if (Input.GetKey(KeyCode.LeftShift) && m_Level >= Glide.GetAvailableFromLevel() && m_rigidBody.velocity.y <= 0)
-        {
-            glide(0.1f);
-        }
-        else if (m_rigidBody.gravityScale < 1)
-        {
-            glide(1f);
-        }
+        // {
+        //     glide(0.1f);
+        // }
+        // else if (m_rigidBody.gravityScale < 1)
+        // {
+        //     glide(1f);
+        // }
     }
 
     private void calculateMovement()
@@ -66,31 +65,42 @@ public class Player : MonoBehaviour
         // {
         //     animator.SetBool("walk", false);
         // }
-        if (Input.GetKeyDown(KeyCode.Space) && (m_canJump || m_DoubleJumpCount < 2))
+        if (Input.GetKeyDown(KeyCode.LeftCommand) || Input.GetKeyDown(KeyCode.LeftAlt))
         {
-            m_rigidBody.AddForce(Vector3.up * k_jump, ForceMode2D.Impulse);
-            m_canJump = false;
-            m_DoubleJumpCount++;
-            Debug.Log(m_DoubleJumpCount);
+            if (getIsGrounded())
+            {
+                float jumpForce = Mathf.Sqrt( -2 * m_jumpHeight * (Physics2D.gravity.y * m_rigidBody.gravityScale));
+                m_rigidBody.velocity = Vector2.up * jumpForce;
+                // m_rigidBody.AddForce((Vector3.up * jumpForce), ForceMode2D.Impulse);
+            }
+            else if (m_doubleJump.getIsAvailable())
+            {
+                m_doubleJump.runAbility(m_jumpHeight,m_rigidBody);
+            }
+        }
+        if (Input.GetKey(KeyCode.LeftShift) && m_glide.getIsAvailable() && !getIsGrounded() && m_rigidBody.velocity.y < 0)
+        {
+            m_glide.runAbility(m_glideFactor, m_rigidBody); 
+        }
+        else if (m_rigidBody.gravityScale != m_defultGravityScale)
+        {
+            m_glide.runAbility(m_defultGravityScale, m_rigidBody);  
         }
         Vector3 direction = new Vector3(horizontalInput, 0, 0);
         transform.Translate(direction * (m_walkingSpeed * Time.deltaTime));
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
 
-    
 
-    private IEnumerator doubleJump()
+
+    public bool getIsGrounded()
     {
-        m_canDoubleJump = true;
-        m_DoubleJumpCount = 0;
-        yield return new WaitForSeconds(DoubleJump.GetCooldownTime());
-        m_canDoubleJump = false;
+        return m_grounded;
     }
-
-    private void glide(float i_gravityScale)
+    
+    public void setIsGrounded(bool i_isGrounded)
     {
-        m_rigidBody.gravityScale = i_gravityScale;
+        m_grounded = i_isGrounded;
     }
     
     void attack()
@@ -98,19 +108,43 @@ public class Player : MonoBehaviour
         
     }
 
-    public void setCanJump(bool i_CanJump)
+
+    public DoubleJump getDoubleJump()
     {
-        m_canJump = i_CanJump;
+        return m_doubleJump;
     }
 
-    public bool getCanDoubleJump()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        return m_canDoubleJump;
+        if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("PushPlatform"))
+        {
+            if (Vector3.Dot(collision.contacts[0].normal, Vector3.up) > 0.5)
+            {
+                setIsGrounded(true);
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("PushPlatform"))
+        {
+            setIsGrounded(false);
+            m_doubleJump.setIsAvailable(true);
+            m_glide.setIsAvailable(true);
+        }
     }
     
-    public void resetDoubleJumpCount()
+    private void CheckForUnlockedSAvailabilities()
     {
-        m_DoubleJumpCount = 0;
+        if (m_Level >= m_doubleJump.getAvailabilityLevel())
+        {
+            m_doubleJump.setIsUnlocked(true);
+        }
+        
+        if (m_Level >= m_glide.getAvailabilityLevel())
+        {
+            m_glide.setIsUnlocked(true);
+        }
     }
-    
 }

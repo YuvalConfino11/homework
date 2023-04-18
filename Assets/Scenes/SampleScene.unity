@@ -1518,8 +1518,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1976411317}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.13, y: -9.91, z: 0}
-  m_LocalScale: {x: 6.302886, y: 4.968999, z: 1}
+  m_LocalPosition: {x: 7.0938, y: -9.91, z: 0}
+  m_LocalScale: {x: 5.605429, y: 4.968999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1576,9 +1576,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2791408007386546726, guid: 6587761d0a58b470e8cf00115c806771, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2791408007386546746, guid: 6587761d0a58b470e8cf00115c806771, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791408008496424957, guid: 6587761d0a58b470e8cf00115c806771, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2791408008496424958, guid: 6587761d0a58b470e8cf00115c806771, type: 3}
       propertyPath: m_LocalScale.x
