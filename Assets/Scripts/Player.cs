@@ -75,6 +75,10 @@ public class Player : MonoBehaviour
             }
             else if (m_doubleJump.getIsAvailable())
             {
+                if (m_rigidBody.gravityScale != m_defultGravityScale)
+                {
+                    m_glide.runAbility(m_defultGravityScale, m_rigidBody);  
+                }
                 m_doubleJump.runAbility(m_jumpHeight,m_rigidBody);
             }
         }
