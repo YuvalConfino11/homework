@@ -2,38 +2,38 @@ namespace Abilities
 {
     public class Ability
     {
-        private bool m_isUnlocked = false;
-        private bool m_isAvailableToUse = false;
-        private short m_availabilityLevel;
+        private bool m_IsUnlocked = false;
+        private bool m_IsAvailableToUse = false;
+        private short m_AvailabilityLevel;
         
-        public bool getIsUnlocked()
+        public bool GetIsUnlocked()
         {
-            return m_isUnlocked;
+            return m_IsUnlocked;
         }
 
-        public void setIsUnlocked(bool i_isUnlocked)
+        public void SetIsUnlocked(bool i_isUnlocked)
         {
-            m_isUnlocked = i_isUnlocked;
+            m_IsUnlocked = i_isUnlocked;
         }
         
-        public bool getIsAvailable()
+        public bool GetIsAvailable()
         {
-            return m_isAvailableToUse;
+            return m_IsAvailableToUse;
         }
 
-        public void setIsAvailable(bool i_isAvailable)
+        public void SetIsAvailable(bool i_isAvailable)
         {
-            m_isAvailableToUse = i_isAvailable;
+            m_IsAvailableToUse = i_isAvailable;
         }
 
-        protected void setAvailabilityLevel(short i_AvailabilityLevel)
+        protected void SetAvailabilityLevel(short i_AvailabilityLevel)
         {
-            m_availabilityLevel = i_AvailabilityLevel;
+            m_AvailabilityLevel = i_AvailabilityLevel;
         }
         
-        public short getAvailabilityLevel()
+        public short GetAvailabilityLevel()
         {
-            return m_availabilityLevel;
+            return m_AvailabilityLevel;
         }
         
     }

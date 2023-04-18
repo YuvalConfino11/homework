@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Abilities;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Object = System.Object;
 
 public class Player : MonoBehaviour
 {
@@ -20,43 +21,59 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float m_Defence;
     [SerializeField]
-    private float m_walkingSpeed = 2.25f;
+    private float m_WalkingSpeed = 2.25f;
     [SerializeField]
-    private bool m_grounded = true;
+    private bool m_Grounded = true;
     [SerializeField]
-    private float m_jumpHeight = 2f;
+    private float m_JumpHeight = 2f;
     [SerializeField]
-    private float m_glideFactor = 0.1f;
-    private const float m_defultGravityScale = 1f;
+    private float m_GlideFactor = 0.1f;
+    [SerializeField]
+    private float m_DashSpeed = 10f;
+
+        
+    private const float k_DefaultGravityScale = 1f;
+    private float m_LastArrowKeyPressTime;
     
-    private Rigidbody2D m_rigidBody;
-    private DoubleJump m_doubleJump = new DoubleJump();
-    private Glide m_glide = new Glide();
+    private Rigidbody2D m_RigidBody;
+    private readonly DoubleJump r_DoubleJump = new DoubleJump();
+    private readonly Glide r_Glide = new Glide();
+    private readonly Dash r_Dash = new Dash();
+
 
     private void Awake()
     {
         // transform.position = new Vector3(0, 0, 0);
-        m_rigidBody = GetComponent<Rigidbody2D>();
+        m_RigidBody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckForUnlockedSAvailabilities();
-        calculateMovement();
-        // {
-        //     glide(0.1f);
-        // }
-        // else if (m_rigidBody.gravityScale < 1)
-        // {
-        //     glide(1f);
-        // }
+        float horizontalInput = Input.GetAxis("Horizontal");
+        calculateMovement(horizontalInput);
+        if (Input.GetKeyDown(KeyCode.LeftCommand) || Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            dash(horizontalInput);
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            doubleJump();
+        }
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            glide(m_GlideFactor);
+        }
+
+        if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            glide(k_DefaultGravityScale);
+        }
+        checkForUnlockedSAvailabilities();
     }
 
-    private void calculateMovement()
+    private void calculateMovement(float i_horizontalInput)
     {
-        
-        float horizontalInput = Input.GetAxis("Horizontal");
         // if (horizontalInput != 0 || verticalInput != 0)
         // {
         //     animator.SetBool("walk", true);
@@ -65,59 +82,62 @@ public class Player : MonoBehaviour
         // {
         //     animator.SetBool("walk", false);
         // }
-        if (Input.GetKeyDown(KeyCode.LeftCommand) || Input.GetKeyDown(KeyCode.LeftAlt))
-        {
-            if (getIsGrounded())
-            {
-                float jumpForce = Mathf.Sqrt( -2 * m_jumpHeight * (Physics2D.gravity.y * m_rigidBody.gravityScale));
-                m_rigidBody.velocity = Vector2.up * jumpForce;
-                // m_rigidBody.AddForce((Vector3.up * jumpForce), ForceMode2D.Impulse);
-            }
-            else if (m_doubleJump.getIsAvailable())
-            {
-                if (m_rigidBody.gravityScale != m_defultGravityScale)
-                {
-                    m_glide.runAbility(m_defultGravityScale, m_rigidBody);  
-                }
-                m_doubleJump.runAbility(m_jumpHeight,m_rigidBody);
-            }
-        }
-        if (Input.GetKey(KeyCode.LeftShift) && m_glide.getIsAvailable() && !getIsGrounded() && m_rigidBody.velocity.y < 0)
-        {
-            m_glide.runAbility(m_glideFactor, m_rigidBody); 
-        }
-        else if (m_rigidBody.gravityScale != m_defultGravityScale)
-        {
-            m_glide.runAbility(m_defultGravityScale, m_rigidBody);  
-        }
-        Vector3 direction = new Vector3(horizontalInput, 0, 0);
-        transform.Translate(direction * (m_walkingSpeed * Time.deltaTime));
+        Vector3 movingDirection = new Vector3(i_horizontalInput, 0, 0);
+        transform.Translate(movingDirection * (m_WalkingSpeed * Time.deltaTime));
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+    }
+
+    private void doubleJump()
+    {
+        if (GetIsGrounded())
+        {
+            float jumpForce = Mathf.Sqrt( -2 * m_JumpHeight * (Physics2D.gravity.y * m_RigidBody.gravityScale));
+            m_RigidBody.velocity = Vector2.up * jumpForce;
+            // m_RigidBody.AddForce((Vector3.up * jumpForce), ForceMode2D.Impulse);
+        }
+        else if (r_DoubleJump.GetIsAvailable())
+        {
+            if (m_RigidBody.gravityScale != k_DefaultGravityScale)
+            {
+                r_Glide.RunAbility(k_DefaultGravityScale, m_RigidBody);  
+            }
+            r_DoubleJump.RunAbility(m_JumpHeight, m_RigidBody);
+        }
+    }
+
+    private void glide(float i_glideFactor)
+    {
+        if (r_Glide.GetIsAvailable() && !GetIsGrounded() && m_RigidBody.velocity.y < 0)
+        {
+            r_Glide.RunAbility(i_glideFactor, m_RigidBody); 
+        }
+    }
+
+    private void dash(float i_walkingDirection)
+    {
+        if (GetIsGrounded() && r_Dash.GetIsAvailable())
+        {
+            r_Dash.RunAbility(i_walkingDirection, m_DashSpeed, m_RigidBody);
+        }
     }
 
 
 
-    public bool getIsGrounded()
+    public bool GetIsGrounded()
     {
-        return m_grounded;
+        return m_Grounded;
     }
     
     public void setIsGrounded(bool i_isGrounded)
     {
-        m_grounded = i_isGrounded;
+        m_Grounded = i_isGrounded;
     }
     
     void attack()
     {
         
     }
-
-
-    public DoubleJump getDoubleJump()
-    {
-        return m_doubleJump;
-    }
-
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("PushPlatform"))
@@ -134,21 +154,26 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("PushPlatform"))
         {
             setIsGrounded(false);
-            m_doubleJump.setIsAvailable(true);
-            m_glide.setIsAvailable(true);
+            r_DoubleJump.SetIsAvailable(true);
+            r_Glide.SetIsAvailable(true);
         }
     }
     
-    private void CheckForUnlockedSAvailabilities()
+    private void checkForUnlockedSAvailabilities()
     {
-        if (m_Level >= m_doubleJump.getAvailabilityLevel())
+        if (m_Level >= r_DoubleJump.GetAvailabilityLevel())
         {
-            m_doubleJump.setIsUnlocked(true);
+            r_DoubleJump.SetIsUnlocked(true);
         }
         
-        if (m_Level >= m_glide.getAvailabilityLevel())
+        if (m_Level >= r_Glide.GetAvailabilityLevel())
         {
-            m_glide.setIsUnlocked(true);
+            r_Glide.SetIsUnlocked(true);
+        }
+        
+        if (m_Level >= r_Dash.GetAvailabilityLevel())
+        {
+            r_Dash.SetIsUnlocked(true);
         }
     }
 }

@@ -4,14 +4,14 @@ namespace Abilities
 {
     public class Glide : Ability
     {
-        private const short m_availabilityLevel = 2;
+        private const short k_AvailabilityLevel = 2;
         
         public Glide()
         {
-            this.setAvailabilityLevel(m_availabilityLevel);
+            this.SetAvailabilityLevel(k_AvailabilityLevel);
         }
 
-        public void runAbility(float i_graviryFactor, Rigidbody2D i_rigidBody)
+        public void RunAbility(float i_graviryFactor, Rigidbody2D i_rigidBody)
         {
                 i_rigidBody.gravityScale = i_graviryFactor;
         }
