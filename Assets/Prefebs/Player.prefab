@@ -106,8 +106,9 @@ MonoBehaviour:
   m_Attack: 0
   m_Defence: 0
   m_walkingSpeed: 2.25
-  m_jumpHeight: 2
   m_grounded: 1
+  m_jumpHeight: 2
+  m_glideFactor: 0.1
 --- !u!61 &2791408007386546727
 BoxCollider2D:
   m_ObjectHideFlags: 0
