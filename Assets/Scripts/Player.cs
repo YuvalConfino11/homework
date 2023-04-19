@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         calculateMovement(horizontalInput);
-        if (Input.GetKeyDown(KeyCode.LeftCommand) || Input.GetKeyDown(KeyCode.LeftAlt))
+        if ((Input.GetKeyDown(KeyCode.LeftCommand) || Input.GetKeyDown(KeyCode.LeftAlt)) && r_Dash.GetIsUnlocked())
         {
             dash(horizontalInput);
         }
@@ -63,17 +63,15 @@ public class Player : MonoBehaviour
         {
             jump();
         }
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow) && r_Glide.GetIsUnlocked())
         {
-            glide(m_GlideFactor);
+            glide();
         }
-
-        if (Input.GetKeyUp(KeyCode.UpArrow))
+        else
         {
-            glide(k_DefaultGravityScale);
-        }
+            m_rigidBody.gravityScale = k_DefaultGravityScale;
+        }   
         checkForUnlockedSAvailabilities();
-        Debug.DrawRay(transform.position, Vector3.down * m_boxCollider.bounds.extents.y - new Vector3(0,0.5f,0));
     }
 
     private void calculateMovement(float i_horizontalInput)
@@ -99,7 +97,7 @@ public class Player : MonoBehaviour
             m_rigidBody.velocity = Vector2.up * jumpForce;
             // m_rigidBody.AddForce((Vector3.up * jumpForce), ForceMode2D.Impulse);
         }
-        else if (r_DoubleJump.GetIsAvailable())
+        else if (r_DoubleJump.GetIsAvailable() && r_DoubleJump.GetIsUnlocked())
         {
             if (m_rigidBody.gravityScale != k_DefaultGravityScale)
             {
@@ -109,11 +107,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void glide(float i_glideFactor)
+    private void glide()
     {
         if (r_Glide.GetIsAvailable() && !GetIsGrounded() && m_rigidBody.velocity.y < 0)
         {
-            r_Glide.RunAbility(i_glideFactor, m_rigidBody); 
+            r_Glide.RunAbility(m_GlideFactor, m_rigidBody); 
         }
     }
 
