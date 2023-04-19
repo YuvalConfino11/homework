@@ -5,6 +5,7 @@ namespace Abilities
         private bool m_IsUnlocked = false;
         private bool m_IsAvailableToUse = false;
         private short m_AvailabilityLevel;
+        private float m_CooldownTime = 0f;
         
         public bool GetIsUnlocked()
         {
@@ -34,6 +35,16 @@ namespace Abilities
         public short GetAvailabilityLevel()
         {
             return m_AvailabilityLevel;
+        }
+        
+        protected void SetCooldownTime(float i_CooldownTime)
+        {
+            m_CooldownTime = i_CooldownTime;
+        }
+        
+        public float GetCooldownTime()
+        {
+            return m_CooldownTime;
         }
         
     }

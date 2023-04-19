@@ -742,7 +742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5278bef0bee4344be8b497278253c014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_upAndDownMovementSpeed: 0.2
+  m_UpAndDownMovementSpeed: 0.2
 --- !u!1 &848087992
 GameObject:
   m_ObjectHideFlags: 0
@@ -1583,6 +1583,18 @@ PrefabInstance:
     - target: {fileID: 2791408007386546746, guid: 6587761d0a58b470e8cf00115c806771, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791408007386546747, guid: 6587761d0a58b470e8cf00115c806771, type: 3}
+      propertyPath: m_JumpHeight
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791408007386546747, guid: 6587761d0a58b470e8cf00115c806771, type: 3}
+      propertyPath: m_GlideFactor
+      value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791408007386546747, guid: 6587761d0a58b470e8cf00115c806771, type: 3}
+      propertyPath: m_WalkingSpeed
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2791408008496424957, guid: 6587761d0a58b470e8cf00115c806771, type: 3}
       propertyPath: m_IsActive
