@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
         {
             jump();
         }
-        if (Input.GetKey(KeyCode.UpArrow) && m_Glide.GetAbilityStats().GetIsUnlocked())
+        if (Input.GetKey(KeyCode.LeftShift) && m_Glide.GetAbilityStats().GetIsUnlocked())
         {
             glide();
         }

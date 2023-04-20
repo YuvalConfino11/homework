@@ -9,7 +9,7 @@ namespace Abilities
         private short m_AvailabilityLevel;
         private float m_CooldownTime;
 
-        public AbilityStats(short i_AvailabilityLevel, bool i_IsUnlocked = false, bool i_IsAvailableToUse = false,
+        public AbilityStats(short i_AvailabilityLevel, bool i_IsUnlocked = false, bool i_IsAvailableToUse = true,
             float i_CooldownTime = 0)
         {
             m_IsUnlocked = i_IsUnlocked;
