@@ -1,11 +1,24 @@
+using UnityEngine;
+
 namespace Abilities
 {
-    public class Ability
+    public class AbilityStats
     {
-        private bool m_IsUnlocked = false;
-        private bool m_IsAvailableToUse = false;
+        private bool m_IsUnlocked;
+        private bool m_IsAvailableToUse;
         private short m_AvailabilityLevel;
-        private float m_CooldownTime = 0f;
+        private float m_CooldownTime;
+
+        public AbilityStats(short i_AvailabilityLevel, bool i_IsUnlocked = false, bool i_IsAvailableToUse = false,
+            float i_CooldownTime = 0)
+        {
+            m_IsUnlocked = i_IsUnlocked;
+            m_IsAvailableToUse = i_IsAvailableToUse;
+            m_AvailabilityLevel = i_AvailabilityLevel;
+            m_CooldownTime = i_CooldownTime;
+
+
+        }
         
         public bool GetIsUnlocked()
         {
@@ -27,7 +40,7 @@ namespace Abilities
             m_IsAvailableToUse = i_isAvailable;
         }
 
-        protected void SetAvailabilityLevel(short i_AvailabilityLevel)
+        public void SetAvailabilityLevel(short i_AvailabilityLevel)
         {
             m_AvailabilityLevel = i_AvailabilityLevel;
         }
@@ -37,7 +50,7 @@ namespace Abilities
             return m_AvailabilityLevel;
         }
         
-        protected void SetCooldownTime(float i_CooldownTime)
+        public void SetCooldownTime(float i_CooldownTime)
         {
             m_CooldownTime = i_CooldownTime;
         }

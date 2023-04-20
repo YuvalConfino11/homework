@@ -31,16 +31,20 @@ public class Player : MonoBehaviour
     private float m_GlideFactor = 0.1f;
     [SerializeField]
     private float m_DashSpeed = 10f;
-
-        
+    [SerializeField]
+    private DoubleJump m_DoubleJump;
+    [SerializeField]
+    private Glide m_Glide;
+    [SerializeField]
+    private Dash m_Dash;
+    
     private const float k_DefaultGravityScale = 1f;
+    private LayerMask m_layerMask;
     private float m_LastArrowKeyPressTime;
-    private Ray2D m_raycast;
+    private RaycastHit2D  m_raycastHit;
     private Rigidbody2D m_rigidBody;
     private BoxCollider2D m_boxCollider;
-    private readonly DoubleJump r_DoubleJump = new DoubleJump();
-    private readonly Glide r_Glide = new Glide();
-    private readonly Dash r_Dash = new Dash();
+   
 
 
     private void Awake()
@@ -48,6 +52,7 @@ public class Player : MonoBehaviour
         // transform.position = new Vector2(0, 0);
         m_rigidBody = GetComponent<Rigidbody2D>();
         m_boxCollider = GetComponent<BoxCollider2D>();
+        m_layerMask = LayerMask.GetMask("Ground");
     }
 
     // Update is called once per frame
@@ -55,7 +60,7 @@ public class Player : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         calculateMovement(horizontalInput);
-        if ((Input.GetKeyDown(KeyCode.LeftCommand) || Input.GetKeyDown(KeyCode.LeftAlt)) && r_Dash.GetIsUnlocked())
+        if ((Input.GetKeyDown(KeyCode.LeftCommand) || Input.GetKeyDown(KeyCode.LeftAlt)) && m_Dash.GetAbilityStats().GetIsUnlocked())
         {
             dash(horizontalInput);
         }
@@ -63,14 +68,17 @@ public class Player : MonoBehaviour
         {
             jump();
         }
-        if (Input.GetKey(KeyCode.UpArrow) && r_Glide.GetIsUnlocked())
+        if (Input.GetKey(KeyCode.UpArrow) && m_Glide.GetAbilityStats().GetIsUnlocked())
         {
             glide();
         }
         else
         {
             m_rigidBody.gravityScale = k_DefaultGravityScale;
-        }   
+        }
+        m_raycastHit = Physics2D.Raycast(transform.position, Vector2.down, m_boxCollider.size.y * 0.5f,m_layerMask);
+        m_Grounded = m_raycastHit.collider != null;
+        Debug.DrawRay(transform.position,new Vector3(0,-1 * m_boxCollider.size.y * 0.5f,0),Color.green);
         checkForUnlockedSAvailabilities();
     }
 
@@ -95,32 +103,33 @@ public class Player : MonoBehaviour
         {
             float jumpForce = Mathf.Sqrt( -2 * m_JumpHeight * (Physics2D.gravity.y * m_rigidBody.gravityScale));
             m_rigidBody.velocity = Vector2.up * jumpForce;
+            m_DoubleJump.GetAbilityStats().SetIsAvailable(true);
             // m_rigidBody.AddForce((Vector3.up * jumpForce), ForceMode2D.Impulse);
         }
-        else if (r_DoubleJump.GetIsAvailable() && r_DoubleJump.GetIsUnlocked())
+        else if (m_DoubleJump.GetAbilityStats().GetIsAvailable() && m_DoubleJump.GetAbilityStats().GetIsUnlocked())
         {
             if (m_rigidBody.gravityScale != k_DefaultGravityScale)
             {
-                r_Glide.RunAbility(k_DefaultGravityScale, m_rigidBody);  
+                m_rigidBody.gravityScale = k_DefaultGravityScale;
             }
-            r_DoubleJump.RunAbility(m_JumpHeight, m_rigidBody);
+            m_DoubleJump.RunAbility(m_JumpHeight, m_rigidBody);
         }
     }
 
     private void glide()
     {
-        if (r_Glide.GetIsAvailable() && !GetIsGrounded() && m_rigidBody.velocity.y < 0)
+        if (m_Glide.GetAbilityStats().GetIsAvailable() && !GetIsGrounded() && m_rigidBody.velocity.y < 0)
         {
-            r_Glide.RunAbility(m_GlideFactor, m_rigidBody); 
+            m_Glide.RunAbility(m_GlideFactor, m_rigidBody); 
         }
     }
 
     private void dash(float i_walkingDirection)
     {
-        if (GetIsGrounded() && r_Dash.GetIsAvailable())
+        if (GetIsGrounded() && m_Dash.GetAbilityStats().GetIsAvailable())
         {
-            r_Dash.RunAbility(i_walkingDirection, m_DashSpeed, m_rigidBody);
-            StartCoroutine(abilityCooldown(r_Dash,r_Dash.GetCooldownTime()));
+            m_Dash.RunAbility(i_walkingDirection, m_DashSpeed, m_rigidBody);
+            StartCoroutine(abilityCooldown(m_Dash.GetAbilityStats(),m_Dash.GetAbilityStats().GetCooldownTime()));
         }
     }
 
@@ -140,47 +149,46 @@ public class Player : MonoBehaviour
         
     }
     
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("PushPlatform"))
-        {
-            if (Vector3.Dot(collision.contacts[0].normal, Vector3.up) > 0.5)
-            {
-                setIsGrounded(true);
-            }
-        }
-    }
+    // private void OnCollisionEnter2D(Collision2D collision)
+    // {
+    //     if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("PushPlatform"))
+    //     {
+    //         if (Vector3.Dot(collision.contacts[0].normal, Vector3.up) > 0.5)
+    //         {
+    //             setIsGrounded(true);
+    //         }
+    //     }
+    // }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if ((collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("PushPlatform")) && 
-            collision.transform.position.y < transform.position.y)
-        {
-            setIsGrounded(false);
-            r_DoubleJump.SetIsAvailable(true);
-            r_Glide.SetIsAvailable(true);
-        }
-    }
+    // private void OnCollisionExit2D(Collision2D collision)
+    // {
+    //     if ((collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("PushPlatform")) && 
+    //         collision.transform.position.y < transform.position.y)
+    //     {
+    //         setIsGrounded(false);
+    //         m_Glide.GetAbilityStats().SetIsAvailable(true);
+    //     }
+    // }
     
     private void checkForUnlockedSAvailabilities()
     {
-        if (m_Level >= r_DoubleJump.GetAvailabilityLevel())
+        if (m_Level >= m_DoubleJump.GetAbilityStats().GetAvailabilityLevel())
         {
-            r_DoubleJump.SetIsUnlocked(true);
+            m_DoubleJump.GetAbilityStats().SetIsUnlocked(true);
         }
         
-        if (m_Level >= r_Glide.GetAvailabilityLevel())
+        if (m_Level >= m_Glide.GetAbilityStats().GetAvailabilityLevel())
         {
-            r_Glide.SetIsUnlocked(true);
+            m_Glide.GetAbilityStats().SetIsUnlocked(true);
         }
         
-        if (m_Level >= r_Dash.GetAvailabilityLevel())
+        if (m_Level >= m_Dash.GetAbilityStats().GetAvailabilityLevel())
         {
-            r_Dash.SetIsUnlocked(true);
+            m_Dash.GetAbilityStats().SetIsUnlocked(true);
         }
     }
 
-    private IEnumerator abilityCooldown(Ability i_Ability, float i_cooldownTime)
+    private IEnumerator abilityCooldown(AbilityStats i_Ability, float i_cooldownTime)
     {
         yield return new WaitForSeconds(i_cooldownTime);
         i_Ability.SetIsAvailable(true);

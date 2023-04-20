@@ -2,18 +2,26 @@ using UnityEngine;
 
 namespace Abilities
 {
-    public class Glide : Ability
+    [CreateAssetMenu(menuName = "Scriptable Objects/Glide",fileName = "Glide")]
+    public class Glide : ScriptableObject
     {
-        private const short k_AvailabilityLevel = 2;
+        [SerializeField]
+        private short k_AvailabilityLevel = 2;
+        private readonly AbilityStats m_AbilityStats;
         
         public Glide()
         {
-            this.SetAvailabilityLevel(k_AvailabilityLevel);
+            m_AbilityStats = new AbilityStats(k_AvailabilityLevel);
         }
 
         public void RunAbility(float i_graviryFactor, Rigidbody2D i_rigidBody)
         {
                 i_rigidBody.gravityScale = i_graviryFactor;
+        }
+        
+        public AbilityStats GetAbilityStats()
+        {
+            return m_AbilityStats;
         }
     }
 

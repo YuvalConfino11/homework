@@ -2,13 +2,16 @@ using UnityEngine;
 
 namespace Abilities
 {
-    public class DoubleJump : Ability
+    [CreateAssetMenu(menuName = "Scriptable Objects/Double Jump",fileName = "Double Jump")]
+    public class DoubleJump : ScriptableObject
     {
-        private const short k_AvailabilityLevel = 2;
+        [SerializeField]
+        private short k_AvailabilityLevel = 2;
+        private readonly AbilityStats m_AbilityStats;
         
         public DoubleJump()
         {
-            this.SetAvailabilityLevel(k_AvailabilityLevel);
+            m_AbilityStats = new AbilityStats(k_AvailabilityLevel);
         }
 
         public void RunAbility(float i_jumpHeight,Rigidbody2D i_rigidBody)
@@ -16,7 +19,11 @@ namespace Abilities
             float jumpForce = Mathf.Sqrt( -2 * i_jumpHeight * (Physics2D.gravity.y * i_rigidBody.gravityScale));
             i_rigidBody.velocity = Vector2.up * jumpForce;
             // i_rigidBody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-            SetIsAvailable(false);
+            m_AbilityStats.SetIsAvailable(false);
+        }
+        public AbilityStats GetAbilityStats()
+        {
+            return m_AbilityStats;
         }
         
     }
