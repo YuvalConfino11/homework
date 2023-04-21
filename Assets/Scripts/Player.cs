@@ -22,13 +22,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float m_Defence;
     [SerializeField]
-    private float m_WalkingSpeed = 2.25f;
+    private float m_WalkingSpeed = 4f;
     [SerializeField]
     private bool m_Grounded = true;
     [SerializeField]
-    private float m_JumpHeight = 2f;
+    private float m_JumpHeight = 3f;
     [SerializeField]
-    private float m_GlideFactor = 0.1f;
+    private float m_GlideFactor = 0.09f;
     [SerializeField]
     private float m_DashSpeed = 10f;
     [SerializeField]
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
     private float m_LastArrowKeyPressTime;
     private RaycastHit2D  m_raycastHit;
     private Rigidbody2D m_rigidBody;
-    private BoxCollider2D m_boxCollider;
+    private CapsuleCollider2D m_capsuleCollider;
    
 
 
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
     {
         // transform.position = new Vector2(0, 0);
         m_rigidBody = GetComponent<Rigidbody2D>();
-        m_boxCollider = GetComponent<BoxCollider2D>();
+        m_capsuleCollider = GetComponent<CapsuleCollider2D>();
         m_layerMask = LayerMask.GetMask("Ground");
     }
 
@@ -76,9 +76,9 @@ public class Player : MonoBehaviour
         {
             m_rigidBody.gravityScale = k_DefaultGravityScale;
         }
-        m_raycastHit = Physics2D.Raycast(transform.position, Vector2.down, m_boxCollider.size.y * 0.5f,m_layerMask);
+        m_raycastHit = Physics2D.Raycast(transform.position, Vector2.down, m_capsuleCollider.size.y * 0.5f,m_layerMask);
         m_Grounded = m_raycastHit.collider != null;
-        Debug.DrawRay(transform.position,new Vector3(0,-1 * m_boxCollider.size.y * 0.5f,0),Color.green);
+        Debug.DrawRay(transform.position,new Vector3(0,-1 * m_capsuleCollider.size.y * 0.5f,0),Color.green);
         checkForUnlockedSAvailabilities();
     }
 
