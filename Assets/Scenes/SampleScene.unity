@@ -1499,6 +1499,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 11b5e48388c2e452899168f9a023d2dc, type: 2}
     - target: {fileID: 2791408007386546747, guid: 6587761d0a58b470e8cf00115c806771, type: 3}
+      propertyPath: m_bullet
+      value: 
+      objectReference: {fileID: 5051759465369138895, guid: 5ec0ddc53edbdc043ab4fc7bb5741e2d, type: 3}
+    - target: {fileID: 2791408007386546747, guid: 6587761d0a58b470e8cf00115c806771, type: 3}
       propertyPath: m_JumpHeight
       value: 3
       objectReference: {fileID: 0}
@@ -1509,6 +1513,10 @@ PrefabInstance:
     - target: {fileID: 2791408007386546747, guid: 6587761d0a58b470e8cf00115c806771, type: 3}
       propertyPath: m_GlideFactor
       value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791408007386546747, guid: 6587761d0a58b470e8cf00115c806771, type: 3}
+      propertyPath: m_bulletSpeed
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2791408007386546747, guid: 6587761d0a58b470e8cf00115c806771, type: 3}
       propertyPath: m_WalkingSpeed

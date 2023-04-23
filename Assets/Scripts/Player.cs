@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
     private Glide m_Glide;
     [SerializeField]
     private Dash m_Dash;
+    [SerializeField]
+    private float m_bulletSpeed = 4f;
+    public GameObject m_bullet;
     
     private const float k_DefaultGravityScale = 1f;
     private LayerMask m_layerMask;
@@ -80,6 +83,11 @@ public class Player : MonoBehaviour
         m_Grounded = m_raycastHit.collider != null;
         Debug.DrawRay(transform.position,new Vector3(0,-1 * m_boxCollider.size.y * 0.5f,0),Color.green);
         checkForUnlockedSAvailabilities();
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            attack();
+        }
     }
 
     private void calculateMovement(float i_horizontalInput)
@@ -146,7 +154,8 @@ public class Player : MonoBehaviour
     
     void attack()
     {
-        
+        GameObject bullet = Instantiate(m_bullet, transform.position, transform.rotation);
+        bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * m_bulletSpeed;
     }
     
     // private void OnCollisionEnter2D(Collision2D collision)
@@ -192,5 +201,10 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(i_cooldownTime);
         i_Ability.SetIsAvailable(true);
+    }
+
+    public Vector2 GetPosition()
+    {
+        return transform.position;
     }
 }
