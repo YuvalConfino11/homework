@@ -28,15 +28,14 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float m_JumpHeight = 3f;
     [SerializeField]
-    private float m_GlideFactor = 0.09f;
-    [SerializeField]
-    private float m_DashSpeed = 10f;
-    [SerializeField]
     private DoubleJump m_DoubleJump;
     [SerializeField]
     private Glide m_Glide;
     [SerializeField]
     private Dash m_Dash;
+    [SerializeField]
+    private float m_bulletSpeed = 4f;
+    public GameObject m_bullet;
     
     private const float k_DefaultGravityScale = 1f;
     private LayerMask m_layerMask;
@@ -62,7 +61,7 @@ public class Player : MonoBehaviour
         calculateMovement(horizontalInput);
         if ((Input.GetKeyDown(KeyCode.LeftCommand) || Input.GetKeyDown(KeyCode.LeftAlt)) && m_Dash.GetAbilityStats().GetIsUnlocked())
         {
-            dash(horizontalInput);
+            StartCoroutine(dash(horizontalInput));
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -80,6 +79,11 @@ public class Player : MonoBehaviour
         m_Grounded = m_raycastHit.collider != null;
         Debug.DrawRay(transform.position,new Vector3(0,-1 * m_capsuleCollider.size.y * 0.5f,0),Color.green);
         checkForUnlockedSAvailabilities();
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            attack();
+        }
     }
 
     private void calculateMovement(float i_horizontalInput)
@@ -102,9 +106,8 @@ public class Player : MonoBehaviour
         if (GetIsGrounded())
         {
             float jumpForce = Mathf.Sqrt( -2 * m_JumpHeight * (Physics2D.gravity.y * m_rigidBody.gravityScale));
-            m_rigidBody.velocity = Vector2.up * jumpForce;
+            m_rigidBody.velocity = new Vector2(m_rigidBody.velocity.x, jumpForce);
             m_DoubleJump.GetAbilityStats().SetIsAvailable(true);
-            // m_rigidBody.AddForce((Vector3.up * jumpForce), ForceMode2D.Impulse);
         }
         else if (m_DoubleJump.GetAbilityStats().GetIsAvailable() && m_DoubleJump.GetAbilityStats().GetIsUnlocked())
         {
@@ -112,6 +115,9 @@ public class Player : MonoBehaviour
             {
                 m_rigidBody.gravityScale = k_DefaultGravityScale;
             }
+            float jumpForce = Mathf.Sqrt( -2 * m_JumpHeight * (Physics2D.gravity.y * m_rigidBody.gravityScale));
+            m_rigidBody.velocity = Vector2.up * jumpForce;
+            m_DoubleJump.GetAbilityStats().SetIsAvailable(false);
             m_DoubleJump.RunAbility(m_JumpHeight, m_rigidBody);
         }
     }
@@ -120,15 +126,18 @@ public class Player : MonoBehaviour
     {
         if (m_Glide.GetAbilityStats().GetIsAvailable() && !GetIsGrounded() && m_rigidBody.velocity.y < 0)
         {
-            m_Glide.RunAbility(m_GlideFactor, m_rigidBody); 
+            m_rigidBody.gravityScale = m_Glide.GetGlideFactor();
         }
     }
 
-    private void dash(float i_walkingDirection)
+    private IEnumerator dash(float i_movingDirection)
     {
-        if (GetIsGrounded() && m_Dash.GetAbilityStats().GetIsAvailable())
+        if (m_Dash.GetAbilityStats().GetIsAvailable() && GetIsGrounded())
         {
-            m_Dash.RunAbility(i_walkingDirection, m_DashSpeed, m_rigidBody);
+            m_Dash.GetAbilityStats().SetIsAvailable(false);
+            Vector2 dashDirection = new Vector2(transform.localScale.x * i_movingDirection, 0);
+            m_rigidBody.velocity = dashDirection.normalized * m_Dash.GetDashSpeed();
+            yield return new WaitForSeconds(0.5f);
             StartCoroutine(abilityCooldown(m_Dash.GetAbilityStats(),m_Dash.GetAbilityStats().GetCooldownTime()));
         }
     }
@@ -146,7 +155,8 @@ public class Player : MonoBehaviour
     
     void attack()
     {
-        
+        GameObject bullet = Instantiate(m_bullet, transform.position, transform.rotation);
+        bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * m_bulletSpeed;
     }
     
     // private void OnCollisionEnter2D(Collision2D collision)
@@ -192,5 +202,10 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(i_cooldownTime);
         i_Ability.SetIsAvailable(true);
+    }
+
+    public Vector2 GetPosition()
+    {
+        return transform.position;
     }
 }
