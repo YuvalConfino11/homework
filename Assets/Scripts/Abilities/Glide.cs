@@ -7,21 +7,23 @@ namespace Abilities
     {
         [SerializeField]
         private short k_AvailabilityLevel = 2;
+        [SerializeField]
+        private float m_glideFactor = 0.09f;
         private readonly AbilityStats m_AbilityStats;
         
         public Glide()
         {
             m_AbilityStats = new AbilityStats(k_AvailabilityLevel);
         }
-
-        public void RunAbility(float i_graviryFactor, Rigidbody2D i_rigidBody)
-        {
-                i_rigidBody.gravityScale = i_graviryFactor;
-        }
         
         public AbilityStats GetAbilityStats()
         {
             return m_AbilityStats;
+        }
+
+        public float GetGlideFactor()
+        {
+            return m_glideFactor;
         }
     }
 
