@@ -1,11 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Abilities;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UIElements;
-using Object = System.Object;
 
 public class Player : MonoBehaviour
 {
@@ -34,9 +29,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Dash m_Dash;
     [SerializeField]
-    private float m_bulletSpeed = 4f;
-    public GameObject m_bullet;
-    
+    private float m_bulletSpeed = 8f;
+    [SerializeField]
+    private GameObject m_bullet;
+
+    private float m_lastMovingDirection = 1f;
     private const float k_DefaultGravityScale = 1f;
     private LayerMask m_layerMask;
     private float m_LastArrowKeyPressTime;
@@ -58,8 +55,9 @@ public class Player : MonoBehaviour
     void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
+        m_lastMovingDirection = horizontalInput == 0 ? m_lastMovingDirection : horizontalInput > 0 ? 1 : -1;
         calculateMovement(horizontalInput);
-        if ((Input.GetKeyDown(KeyCode.LeftCommand) || Input.GetKeyDown(KeyCode.LeftAlt)) && m_Dash.GetAbilityStats().GetIsUnlocked())
+        if ((Input.GetKeyDown(KeyCode.LeftCommand) || Input.GetKeyDown(KeyCode.LeftAlt)) && GetIsGrounded() && m_Dash.GetAbilityStats().GetIsUnlocked())
         {
             StartCoroutine(dash(horizontalInput));
         }
@@ -75,15 +73,14 @@ public class Player : MonoBehaviour
         {
             m_rigidBody.gravityScale = k_DefaultGravityScale;
         }
-        m_raycastHit = Physics2D.Raycast(transform.position, Vector2.down, m_capsuleCollider.size.y * 0.5f,m_layerMask);
-        m_Grounded = m_raycastHit.collider != null;
-        Debug.DrawRay(transform.position,new Vector3(0,-1 * m_capsuleCollider.size.y * 0.5f,0),Color.green);
-        checkForUnlockedSAvailabilities();
-
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             attack();
         }
+        m_raycastHit = Physics2D.Raycast(transform.position, Vector2.down, m_capsuleCollider.size.y * 0.5f,m_layerMask);
+        m_Grounded = m_raycastHit.collider != null;
+        Debug.DrawRay(transform.position,new Vector3(0,-1 * m_capsuleCollider.size.y * 0.5f,0),Color.green);
+        checkForUnlockedSAvailabilities();
     }
 
     private void calculateMovement(float i_horizontalInput)
@@ -142,6 +139,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void attack()
+    {
+        GameObject bullet = Instantiate(m_bullet, transform.position, transform.rotation);
+        bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * (m_lastMovingDirection * m_bulletSpeed);
+    }
 
     private bool GetIsGrounded()
     {
@@ -151,12 +153,6 @@ public class Player : MonoBehaviour
     private void setIsGrounded(bool i_isGrounded)
     {
         m_Grounded = i_isGrounded;
-    }
-    
-    void attack()
-    {
-        GameObject bullet = Instantiate(m_bullet, transform.position, transform.rotation);
-        bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * m_bulletSpeed;
     }
     
     // private void OnCollisionEnter2D(Collision2D collision)
