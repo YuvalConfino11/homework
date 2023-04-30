@@ -1,11 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Abilities;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UIElements;
-using Object = System.Object;
 
 public class Player : MonoBehaviour
 {
@@ -22,28 +17,29 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float m_Defence;
     [SerializeField]
-    private float m_WalkingSpeed = 2.25f;
+    private float m_WalkingSpeed = 4f;
     [SerializeField]
     private bool m_Grounded = true;
     [SerializeField]
-    private float m_JumpHeight = 2f;
-    [SerializeField]
-    private float m_GlideFactor = 0.1f;
-    [SerializeField]
-    private float m_DashSpeed = 10f;
+    private float m_JumpHeight = 3f;
     [SerializeField]
     private DoubleJump m_DoubleJump;
     [SerializeField]
     private Glide m_Glide;
     [SerializeField]
     private Dash m_Dash;
-    
+    [SerializeField]
+    private float m_bulletSpeed = 8f;
+    [SerializeField]
+    private GameObject m_bullet;
+
+    private float m_lastMovingDirection = 1f;
     private const float k_DefaultGravityScale = 1f;
     private LayerMask m_layerMask;
     private float m_LastArrowKeyPressTime;
     private RaycastHit2D  m_raycastHit;
     private Rigidbody2D m_rigidBody;
-    private BoxCollider2D m_boxCollider;
+    private CapsuleCollider2D m_capsuleCollider;
    
 
 
@@ -51,7 +47,7 @@ public class Player : MonoBehaviour
     {
         // transform.position = new Vector2(0, 0);
         m_rigidBody = GetComponent<Rigidbody2D>();
-        m_boxCollider = GetComponent<BoxCollider2D>();
+        m_capsuleCollider = GetComponent<CapsuleCollider2D>();
         m_layerMask = LayerMask.GetMask("Ground");
     }
 
@@ -59,10 +55,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
+        m_lastMovingDirection = horizontalInput == 0 ? m_lastMovingDirection : horizontalInput > 0 ? 1 : -1;
         calculateMovement(horizontalInput);
-        if ((Input.GetKeyDown(KeyCode.LeftCommand) || Input.GetKeyDown(KeyCode.LeftAlt)) && m_Dash.GetAbilityStats().GetIsUnlocked())
+        if ((Input.GetKeyDown(KeyCode.LeftCommand) || Input.GetKeyDown(KeyCode.LeftAlt)) && GetIsGrounded() && m_Dash.GetAbilityStats().GetIsUnlocked())
         {
-            dash(horizontalInput);
+            StartCoroutine(dash(horizontalInput));
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -76,9 +73,13 @@ public class Player : MonoBehaviour
         {
             m_rigidBody.gravityScale = k_DefaultGravityScale;
         }
-        m_raycastHit = Physics2D.Raycast(transform.position, Vector2.down, m_boxCollider.size.y * 0.5f,m_layerMask);
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            attack();
+        }
+        m_raycastHit = Physics2D.Raycast(transform.position, Vector2.down, m_capsuleCollider.size.y * 0.5f,m_layerMask);
         m_Grounded = m_raycastHit.collider != null;
-        Debug.DrawRay(transform.position,new Vector3(0,-1 * m_boxCollider.size.y * 0.5f,0),Color.green);
+        Debug.DrawRay(transform.position,new Vector3(0,-1 * m_capsuleCollider.size.y * 0.5f,0),Color.green);
         checkForUnlockedSAvailabilities();
     }
 
@@ -102,9 +103,8 @@ public class Player : MonoBehaviour
         if (GetIsGrounded())
         {
             float jumpForce = Mathf.Sqrt( -2 * m_JumpHeight * (Physics2D.gravity.y * m_rigidBody.gravityScale));
-            m_rigidBody.velocity = Vector2.up * jumpForce;
+            m_rigidBody.velocity = new Vector2(m_rigidBody.velocity.x, jumpForce);
             m_DoubleJump.GetAbilityStats().SetIsAvailable(true);
-            // m_rigidBody.AddForce((Vector3.up * jumpForce), ForceMode2D.Impulse);
         }
         else if (m_DoubleJump.GetAbilityStats().GetIsAvailable() && m_DoubleJump.GetAbilityStats().GetIsUnlocked())
         {
@@ -112,6 +112,9 @@ public class Player : MonoBehaviour
             {
                 m_rigidBody.gravityScale = k_DefaultGravityScale;
             }
+            float jumpForce = Mathf.Sqrt( -2 * m_JumpHeight * (Physics2D.gravity.y * m_rigidBody.gravityScale));
+            m_rigidBody.velocity = Vector2.up * jumpForce;
+            m_DoubleJump.GetAbilityStats().SetIsAvailable(false);
             m_DoubleJump.RunAbility(m_JumpHeight, m_rigidBody);
         }
     }
@@ -120,19 +123,27 @@ public class Player : MonoBehaviour
     {
         if (m_Glide.GetAbilityStats().GetIsAvailable() && !GetIsGrounded() && m_rigidBody.velocity.y < 0)
         {
-            m_Glide.RunAbility(m_GlideFactor, m_rigidBody); 
+            m_rigidBody.gravityScale = m_Glide.GetGlideFactor();
         }
     }
 
-    private void dash(float i_walkingDirection)
+    private IEnumerator dash(float i_movingDirection)
     {
-        if (GetIsGrounded() && m_Dash.GetAbilityStats().GetIsAvailable())
+        if (m_Dash.GetAbilityStats().GetIsAvailable() && GetIsGrounded())
         {
-            m_Dash.RunAbility(i_walkingDirection, m_DashSpeed, m_rigidBody);
+            m_Dash.GetAbilityStats().SetIsAvailable(false);
+            Vector2 dashDirection = new Vector2(transform.localScale.x * i_movingDirection, 0);
+            m_rigidBody.velocity = dashDirection.normalized * m_Dash.GetDashSpeed();
+            yield return new WaitForSeconds(0.5f);
             StartCoroutine(abilityCooldown(m_Dash.GetAbilityStats(),m_Dash.GetAbilityStats().GetCooldownTime()));
         }
     }
 
+    private void attack()
+    {
+        GameObject bullet = Instantiate(m_bullet, transform.position, transform.rotation);
+        bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * (m_lastMovingDirection * m_bulletSpeed);
+    }
 
     private bool GetIsGrounded()
     {
@@ -142,11 +153,6 @@ public class Player : MonoBehaviour
     private void setIsGrounded(bool i_isGrounded)
     {
         m_Grounded = i_isGrounded;
-    }
-    
-    void attack()
-    {
-        
     }
     
     // private void OnCollisionEnter2D(Collision2D collision)
@@ -192,5 +198,10 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(i_cooldownTime);
         i_Ability.SetIsAvailable(true);
+    }
+
+    public Vector2 GetPosition()
+    {
+        return transform.position;
     }
 }
