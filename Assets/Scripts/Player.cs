@@ -47,19 +47,17 @@ public class Player : MonoBehaviour
     private RaycastHit2D  m_raycastHit;
     private Rigidbody2D m_rigidBody;
     private CapsuleCollider2D m_capsuleCollider;
-    private Collider2D[] m_inExplosionRadius;
+    private Collider2D[] m_mobsInExplosionRadius;
 
 
 
     private void Awake()
     {
-        // transform.position = new Vector2(0, 0);
         m_rigidBody = GetComponent<Rigidbody2D>();
         m_capsuleCollider = GetComponent<CapsuleCollider2D>();
         m_layerMask = LayerMask.GetMask("Ground");
     }
 
-    // Update is called once per frame
     void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -172,8 +170,8 @@ public class Player : MonoBehaviour
         float explosionRadius = m_EnergyExplosion.GetExplosionRadius();
         float explosionForce = m_EnergyExplosion.GetExplosionForce();
         Vector3 imaginaryFriendPosition = m_ImaginaryFriend.transform.position;
-        m_inExplosionRadius = Physics2D.OverlapCircleAll(m_ImaginaryFriend.transform.position, explosionRadius);
-        foreach (Collider2D mob in m_inExplosionRadius) {
+        m_mobsInExplosionRadius = Physics2D.OverlapCircleAll(m_ImaginaryFriend.transform.position, explosionRadius);
+        foreach (Collider2D mob in m_mobsInExplosionRadius) {
             if (mob.CompareTag(m_MobTag))
             {
                 Rigidbody2D mobRigidbody2D = mob.GetComponent<Rigidbody2D>();
