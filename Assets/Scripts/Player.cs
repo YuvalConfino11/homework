@@ -1,5 +1,6 @@
 using System.Collections;
 using Abilities;
+using Skills;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -29,9 +30,15 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Dash m_Dash;
     [SerializeField]
+    private EnergyExplosion m_EnergyExplosion;
+    [SerializeField]
+    private GameObject m_ImaginaryFriend;
+    [SerializeField]
     private float m_bulletSpeed = 8f;
     [SerializeField]
     private GameObject m_bullet;
+    [SerializeField]
+    private string m_MobTag = "Mob";
 
     private float m_lastMovingDirection = 1f;
     private const float k_DefaultGravityScale = 1f;
@@ -40,7 +47,8 @@ public class Player : MonoBehaviour
     private RaycastHit2D  m_raycastHit;
     private Rigidbody2D m_rigidBody;
     private CapsuleCollider2D m_capsuleCollider;
-   
+    private Collider2D[] m_inExplosionRadius;
+
 
 
     private void Awake()
@@ -57,15 +65,15 @@ public class Player : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         m_lastMovingDirection = horizontalInput == 0 ? m_lastMovingDirection : horizontalInput > 0 ? 1 : -1;
         calculateMovement(horizontalInput);
-        if ((Input.GetKeyDown(KeyCode.LeftCommand) || Input.GetKeyDown(KeyCode.LeftAlt)) && GetIsGrounded() && m_Dash.GetAbilityStats().GetIsUnlocked())
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.LeftAlt)) && GetIsGrounded() && m_Dash.GetAbilityStats().GetIsUnlocked())
         {
             StartCoroutine(dash(horizontalInput));
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             jump();
         }
-        if (Input.GetKey(KeyCode.LeftShift) && m_Glide.GetAbilityStats().GetIsUnlocked())
+        if (Input.GetKey(KeyCode.Space) && m_Glide.GetAbilityStats().GetIsUnlocked())
         {
             glide();
         }
@@ -76,6 +84,10 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             attack();
+        }
+        if (Input.GetKeyUp(KeyCode.LeftCommand) || Input.GetKeyUp(KeyCode.LeftAlt))
+        {
+            explosion();
         }
         m_raycastHit = Physics2D.Raycast(transform.position, Vector2.down, m_capsuleCollider.size.y * 0.5f,m_layerMask);
         m_Grounded = m_raycastHit.collider != null;
@@ -155,16 +167,35 @@ public class Player : MonoBehaviour
         m_Grounded = i_isGrounded;
     }
     
-    // private void OnCollisionEnter2D(Collision2D collision)
-    // {
-    //     if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("PushPlatform"))
-    //     {
-    //         if (Vector3.Dot(collision.contacts[0].normal, Vector3.up) > 0.5)
-    //         {
-    //             setIsGrounded(true);
-    //         }
-    //     }
-    // }
+    private void explosion()
+    {
+        float explosionRadius = m_EnergyExplosion.GetExplosionRadius();
+        float explosionForce = m_EnergyExplosion.GetExplosionForce();
+        Vector3 imaginaryFriendPosition = m_ImaginaryFriend.transform.position;
+        m_inExplosionRadius = Physics2D.OverlapCircleAll(m_ImaginaryFriend.transform.position, explosionRadius);
+        foreach (Collider2D mob in m_inExplosionRadius) {
+            if (mob.CompareTag(m_MobTag))
+            {
+                Rigidbody2D mobRigidbody2D = mob.GetComponent<Rigidbody2D>();
+                Vector2 mobDirection = mob.transform.position - imaginaryFriendPosition;
+                float mobDistance = Vector2.Distance(imaginaryFriendPosition, mob.transform.position);
+                float calculatedExplosionForce =
+                    Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1) * explosionForce;
+                mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(m_ImaginaryFriend.transform.position,m_EnergyExplosion.GetExplosionRadius());
+    }
+    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+            Debug.Log(collision.gameObject.tag);
+    }
 
     // private void OnCollisionExit2D(Collision2D collision)
     // {
@@ -199,9 +230,5 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(i_cooldownTime);
         i_Ability.SetIsAvailable(true);
     }
-
-    public Vector2 GetPosition()
-    {
-        return transform.position;
-    }
+    
 }
