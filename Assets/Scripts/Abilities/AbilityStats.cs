@@ -16,8 +16,6 @@ namespace Abilities
             m_IsAvailableToUse = i_IsAvailableToUse;
             m_AvailabilityLevel = i_AvailabilityLevel;
             m_CooldownTime = i_CooldownTime;
-
-
         }
         
         public bool GetIsUnlocked()
