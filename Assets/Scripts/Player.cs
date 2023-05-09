@@ -87,9 +87,8 @@ public class Player : MonoBehaviour
         {
             explosion();
         }
-        m_raycastHit = Physics2D.Raycast(transform.position, Vector2.down, m_capsuleCollider.size.y * 0.5f,m_layerMask);
+        m_raycastHit = Physics2D.Raycast(transform.position, Vector2.down, m_capsuleCollider.size.y * 0.4f,m_layerMask);
         m_Grounded = m_raycastHit.collider != null;
-        Debug.DrawRay(transform.position,new Vector3(0,-1 * m_capsuleCollider.size.y * 0.5f,0),Color.green);
         checkForUnlockedSAvailabilities();
     }
 
@@ -170,15 +169,17 @@ public class Player : MonoBehaviour
         float explosionRadius = m_EnergyExplosion.GetExplosionRadius();
         float explosionForce = m_EnergyExplosion.GetExplosionForce();
         Vector3 imaginaryFriendPosition = m_ImaginaryFriend.transform.position;
-        m_mobsInExplosionRadius = Physics2D.OverlapCircleAll(m_ImaginaryFriend.transform.position, explosionRadius);
+        
+        m_mobsInExplosionRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+        
         foreach (Collider2D mob in m_mobsInExplosionRadius) {
             if (mob.CompareTag(m_MobTag))
             {
                 Rigidbody2D mobRigidbody2D = mob.GetComponent<Rigidbody2D>();
-                Vector2 mobDirection = mob.transform.position - imaginaryFriendPosition;
-                float mobDistance = Vector2.Distance(imaginaryFriendPosition, mob.transform.position);
-                float calculatedExplosionForce =
-                    Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1) * explosionForce;
+                Vector2 mobDirection = (mob.transform.position - imaginaryFriendPosition).normalized;
+                float mobDistance = Vector2.Distance(mob.transform.position, imaginaryFriendPosition);
+                float distanceRatio = Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1);
+                float calculatedExplosionForce = explosionForce * distanceRatio;
                 mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
             }
         }
@@ -188,11 +189,15 @@ public class Player : MonoBehaviour
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(m_ImaginaryFriend.transform.position,m_EnergyExplosion.GetExplosionRadius());
+        if (m_capsuleCollider != null && transform.position != null)
+        {
+            Gizmos.DrawRay(transform.position,new Vector3(0,-1 * m_capsuleCollider.size.y * 0.4f ,0));
+        }
     }
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
-            Debug.Log(collision.gameObject.tag);
+        
     }
 
     // private void OnCollisionExit2D(Collision2D collision)
