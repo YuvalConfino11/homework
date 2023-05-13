@@ -10,8 +10,14 @@ namespace Mobs
     {
         [SerializeField] 
         private float m_WalkingSpeed = 4f;
+        [SerializeField]
+        private float m_damage = 4f;
+        [SerializeField]
+        private float m_health = 30f;
         [SerializeField] 
         private float m_MobFieldOfViewRadius = 10f;
+        [SerializeField] 
+        private float m_MobFieldOfHitRadius = 1f;
         [SerializeField] 
         private LayerMask m_PlayerLayerMask;
         [SerializeField] 
@@ -36,6 +42,7 @@ namespace Mobs
         private float m_movingDirection = 1;
         private float m_sameDirectionWalkTimer;
         private float m_randomTimeOfWalkingInSameDirection;
+        private Player playerScript;
 
 
         private void Awake()
@@ -44,19 +51,19 @@ namespace Mobs
             m_randomTimeOfWalkingInSameDirection = Random.Range(minWalkingOnSameDirectionTime, maxWalkingOnSameDirectionTime);
             m_RigidBody = GetComponent<Rigidbody2D>();
             m_CapsuleCollider = GetComponent<PolygonCollider2D>();
-            
             StartCoroutine(FOVCheck());
+            StartCoroutine(playerHitCheck());
         }
 
         private void Update()
         {
             m_sameDirectionWalkTimer += Time.deltaTime;
-            if (m_sameDirectionWalkTimer > m_randomTimeOfWalkingInSameDirection && !GetCanSeePlayer())
+            if (m_sameDirectionWalkTimer > m_randomTimeOfWalkingInSameDirection && !getCanSeePlayer())
             {
                 StartCoroutine(patrolStopForThink());
             }
         }
-
+        
         private void FixedUpdate()
         {
             if (!m_canSeePlayer)
@@ -146,24 +153,34 @@ namespace Mobs
         
         private IEnumerator FOVCheck()
         {
+           
             WaitForSeconds wait = new WaitForSeconds(0.2f);
-            
             while (true)
             {
                 yield return wait;
                 FOV();
             }
         }
+        
+        private IEnumerator playerHitCheck()
+        {
+            WaitForSeconds wait = new WaitForSeconds(0.5f);
+            while (true)
+            {
+                yield return wait;
+                hit();
+            }
+        }
 
         private void FOV()
         {
-            Collider2D[] rangeCheck = Physics2D.OverlapCircleAll(transform.position, m_MobFieldOfViewRadius, m_PlayerLayerMask);
+            Collider2D[] rangeCheck = Physics2D.OverlapCircleAll(transform.position, m_MobFieldOfViewRadius * transform.localScale.x, m_PlayerLayerMask);
 
             if (rangeCheck.Length > 0)
             {
                 Transform target = rangeCheck[0].transform;
                 Vector2 directionToTarget = (target.position - transform.position).normalized;
-                Debug.DrawRay(transform.position, directionToTarget * m_MobFieldOfViewRadius,Color.red,2);
+                Debug.DrawRay(transform.position, (directionToTarget * (m_MobFieldOfViewRadius * transform.localScale.x)),Color.red,2);
                 float distanceToTarget = Vector2.Distance(transform.position, target.position);
                 if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, m_GroundLayerMask))
                 {
@@ -181,22 +198,33 @@ namespace Mobs
                 setCanSeePlayer(false);
             }
         }
-        
-        private void OnDrawGizmos()
+
+        private void hit()
         {
-            Gizmos.color = Color.red;
-            
-            if (m_CapsuleCollider != null && transform.position != null)
+            Collider2D hitPlayer = Physics2D.OverlapCircle(transform.position, m_MobFieldOfHitRadius * transform.localScale.x, m_PlayerLayerMask);
+            if (hitPlayer != null)
             {
-                Gizmos.DrawWireSphere(transform.position, m_MobFieldOfViewRadius);
+                m_PlayerGameObject.GetComponent<Player>().getHit(m_damage);
             }
         }
         
-        public bool GetCanSeePlayer()
+        private void OnDrawGizmos()
+        {
+            if (m_CapsuleCollider != null && transform.position != null)
+            {
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawWireSphere(transform.position, m_MobFieldOfViewRadius * transform.localScale.x);
+                Gizmos.color = Color.gray;
+                Gizmos.DrawWireSphere(transform.position, m_MobFieldOfHitRadius * transform.localScale.x);
+            }
+        }
+
+        private bool getCanSeePlayer()
         {
             return m_canSeePlayer;
         }
-
+        
+        
         private void setCanSeePlayer(bool i_canSeePlayer)
         {
             m_canSeePlayer = i_canSeePlayer;

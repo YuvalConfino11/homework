@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using Abilities;
+using Mobs;
 using Skills;
 using TMPro;
 using UnityEngine;
@@ -90,11 +92,12 @@ public class Player : MonoBehaviour
         {
             explosion();
         }
-        m_raycastHit = Physics2D.Raycast(transform.position, Vector2.down, m_capsuleCollider.size.y * 0.4f,m_groundLayerMask);
+        m_raycastHit = Physics2D.Raycast(transform.position, Vector2.down, m_capsuleCollider.size.y * transform.localScale.y,m_groundLayerMask);
         m_Grounded = m_raycastHit.collider != null;
         checkForUnlockedSAvailabilities();
     }
 
+    
     private void movement(float i_horizontalInput)
     {
         // if (horizontalInput != 0 || verticalInput != 0)
@@ -186,24 +189,9 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(m_ImaginaryFriend.transform.position,m_EnergyExplosion.GetExplosionRadius());
         if (m_capsuleCollider != null && transform.position != null)
         {
-            Gizmos.DrawRay(transform.position,new Vector3(0,-1 * m_capsuleCollider.size.y * 0.4f ,0));
+            Gizmos.DrawRay(transform.position,new Vector3(0,-1 * m_capsuleCollider.size.y * transform.localScale.y,0));
         }
     }
-    
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-    }
-
-    // private void OnCollisionExit2D(Collision2D collision)
-    // {
-    //     if ((collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("PushPlatform")) && 
-    //         collision.transform.position.y < transform.position.y)
-    //     {
-    //         setIsGrounded(false);
-    //         m_Glide.GetAbilityStats().SetIsAvailable(true);
-    //     }
-    // }
     
     private void checkForUnlockedSAvailabilities()
     {
@@ -227,6 +215,12 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(i_cooldownTime);
         i_Ability.SetIsAvailable(true);
+    }
+
+    public void getHit(float i_damage)
+    {
+        m_CurrentHealthPoint = Mathf.Clamp(m_CurrentHealthPoint - i_damage,0,100);
+        Debug.Log(m_CurrentHealthPoint);
     }
 
     public float GetMaxHealth()

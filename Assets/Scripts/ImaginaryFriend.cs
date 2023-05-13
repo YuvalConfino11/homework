@@ -1,15 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Skills;
-using System.Linq;
 using Skills;
 
 public class ImaginaryFriend : MonoBehaviour
 {
-    [SerializeField]
-    private float m_UpAndDownMovementSpeed = 0.2f;
-    
     [SerializeField]
     private ImaginaryFriendAttack m_ImaginaryFriendAttack;
     [SerializeField]
@@ -27,32 +20,18 @@ public class ImaginaryFriend : MonoBehaviour
 
 
     private Collider2D m_MobInAttackRadius;
-    private short m_UpAndDownMovementDirection = 1;
 
 
     void Update()
     {
-        Vector2 currentPosition = new Vector2(transform.position.x, transform.position.y);
-        Vector2 startFriendPosition = new Vector2(transform.parent.position.x + 0.75f, transform.parent.position.y + 1f);
-        bool isAtStrartPosition = Mathf.Abs(currentPosition.x - startFriendPosition.x) <= 0.75f && Mathf.Abs(currentPosition.y - startFriendPosition.y) >= 0.4f && Mathf.Abs(currentPosition.y - startFriendPosition.y) <= 0.6f;
         float attackRadius = m_ImaginaryFriendAttack.GetAttackRadius();
         m_LayerMask = LayerMask.GetMask("Mob");
         m_MobInAttackRadius = Physics2D.OverlapCircle(transform.position, attackRadius, m_LayerMask);
         
         if (m_FriendDuringAttack == false)
         {
-            float newYPosition = m_UpAndDownMovementSpeed * m_UpAndDownMovementDirection * Time.deltaTime;
-            if (transform.position.y - transform.parent.position.y >= 0.6)
-            {
-                m_UpAndDownMovementDirection = -1;
-            }
-            else if (transform.position.y - transform.parent.position.y <= 0.4)
-            {
-                m_UpAndDownMovementDirection = 1;
-            }
             Vector2.MoveTowards(transform.position, m_StartingFriendPos.transform.position, m_MoveSpeedTowardPlayer * Time.deltaTime);
         }
-        Debug.Log(Vector2.Distance( transform.position , m_StartingFriendPos.transform.position));
 
         if (m_MobInAttackRadius != null)
         {
@@ -87,12 +66,7 @@ public class ImaginaryFriend : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, m_StartingFriendPos.transform.position, m_MoveSpeedTowardPlayer * Time.deltaTime);
         }
     }
-
-    private void attack()
-    {
-       
-    }
-
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.black;

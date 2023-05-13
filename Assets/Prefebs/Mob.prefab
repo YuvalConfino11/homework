@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 7153606485435401554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.89, y: -2.78, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4421562829511533466}
@@ -152,16 +152,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a7f3794a5834668bc42de167da368a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_WalkingSpeed: 2
+  m_WalkingSpeed: 10
+  m_damage: 4
+  m_health: 30
   m_MobFieldOfViewRadius: 5
+  m_MobFieldOfHitRadius: 0.5
   m_PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 128
   m_castPosition: {fileID: 4421562829511533466}
-  m_baseCastDistance: 1
+  m_baseCastDistance: 5
   m_GroundLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  maxThinkPauseTime: 2
+  minThinkPauseTime: 0.5
+  minWalkingOnSameDirectionTime: 1.5
+  maxWalkingOnSameDirectionTime: 6
 --- !u!60 &5992101690853225265
 PolygonCollider2D:
   m_ObjectHideFlags: 0
