@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7525364982458621804}
   - component: {fileID: 6263809582834792182}
   - component: {fileID: 4701685866829865937}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -101,6 +101,12 @@ MonoBehaviour:
   m_ImaginaryFriend: {fileID: 6692209332614666491}
   m_bulletSpeed: 4
   m_bullet: {fileID: 5051759465369138895, guid: 5ec0ddc53edbdc043ab4fc7bb5741e2d, type: 3}
+  m_MobLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  m_groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1001 &2569205428236481567
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ public class ImaginaryFriend : MonoBehaviour
 { 
     [SerializeField] 
     private float m_UpAndDownMovementSpeed = 0.2f;
-
+    
     private short m_UpAndDownMovementDirection = 1;
 
     void Update()

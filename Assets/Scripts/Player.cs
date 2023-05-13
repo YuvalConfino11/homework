@@ -1,6 +1,7 @@
 using System.Collections;
 using Abilities;
 using Skills;
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -38,11 +39,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject m_bullet;
     [SerializeField]
-    private string m_MobTag = "Mob";
+    private LayerMask m_MobLayerMask;
+    [SerializeField]
+    private LayerMask m_groundLayerMask;
 
     private float m_lastMovingDirection = 1f;
     private const float k_DefaultGravityScale = 1f;
-    private LayerMask m_layerMask;
     private float m_LastArrowKeyPressTime;
     private RaycastHit2D  m_raycastHit;
     private Rigidbody2D m_rigidBody;
@@ -55,14 +57,13 @@ public class Player : MonoBehaviour
     {
         m_rigidBody = GetComponent<Rigidbody2D>();
         m_capsuleCollider = GetComponent<CapsuleCollider2D>();
-        m_layerMask = LayerMask.GetMask("Ground");
     }
 
     void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         m_lastMovingDirection = horizontalInput == 0 ? m_lastMovingDirection : horizontalInput > 0 ? 1 : -1;
-        calculateMovement(horizontalInput);
+        movement(horizontalInput);
         if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.LeftAlt)) && GetIsGrounded() && m_Dash.GetAbilityStats().GetIsUnlocked())
         {
             StartCoroutine(dash(horizontalInput));
@@ -87,12 +88,12 @@ public class Player : MonoBehaviour
         {
             explosion();
         }
-        m_raycastHit = Physics2D.Raycast(transform.position, Vector2.down, m_capsuleCollider.size.y * 0.4f,m_layerMask);
+        m_raycastHit = Physics2D.Raycast(transform.position, Vector2.down, m_capsuleCollider.size.y * 0.4f,m_groundLayerMask);
         m_Grounded = m_raycastHit.collider != null;
         checkForUnlockedSAvailabilities();
     }
 
-    private void calculateMovement(float i_horizontalInput)
+    private void movement(float i_horizontalInput)
     {
         // if (horizontalInput != 0 || verticalInput != 0)
         // {
@@ -158,11 +159,6 @@ public class Player : MonoBehaviour
     {
         return m_Grounded;
     }
-
-    private void setIsGrounded(bool i_isGrounded)
-    {
-        m_Grounded = i_isGrounded;
-    }
     
     private void explosion()
     {
@@ -170,18 +166,15 @@ public class Player : MonoBehaviour
         float explosionForce = m_EnergyExplosion.GetExplosionForce();
         Vector3 imaginaryFriendPosition = m_ImaginaryFriend.transform.position;
         
-        m_mobsInExplosionRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+        m_mobsInExplosionRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius,m_MobLayerMask);
         
         foreach (Collider2D mob in m_mobsInExplosionRadius) {
-            if (mob.CompareTag(m_MobTag))
-            {
-                Rigidbody2D mobRigidbody2D = mob.GetComponent<Rigidbody2D>();
-                Vector2 mobDirection = (mob.transform.position - imaginaryFriendPosition).normalized;
-                float mobDistance = Vector2.Distance(mob.transform.position, imaginaryFriendPosition);
-                float distanceRatio = Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1);
-                float calculatedExplosionForce = explosionForce * distanceRatio;
-                mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
-            }
+            Rigidbody2D mobRigidbody2D = mob.GetComponent<Rigidbody2D>();
+            Vector2 mobDirection = (mob.transform.position - imaginaryFriendPosition).normalized;
+            float mobDistance = Vector2.Distance(mob.transform.position, imaginaryFriendPosition);
+            float distanceRatio = Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1);
+            float calculatedExplosionForce = explosionForce * distanceRatio;
+            mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
         }
     }
 
