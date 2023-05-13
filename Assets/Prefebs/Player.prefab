@@ -291,7 +291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2766098684695293520, guid: 8295b606f92319440b91acec69a9b066, type: 3}
       propertyPath: m_Bounds.m_Extent.y
-      value: 0.6487973
+      value: 0.6487975
       objectReference: {fileID: 0}
     - target: {fileID: 2766098684695293520, guid: 8295b606f92319440b91acec69a9b066, type: 3}
       propertyPath: m_Bounds.m_Extent.z
