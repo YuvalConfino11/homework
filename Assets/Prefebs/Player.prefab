@@ -101,6 +101,7 @@ MonoBehaviour:
   m_ImaginaryFriend: {fileID: 6692209332614666491}
   m_bulletSpeed: 4
   m_bullet: {fileID: 5051759465369138895, guid: 5ec0ddc53edbdc043ab4fc7bb5741e2d, type: 3}
+  m_MobTag: Mob
 --- !u!1001 &2569205428236481567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -285,7 +286,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2766098684695293520, guid: 8295b606f92319440b91acec69a9b066, type: 3}
       propertyPath: m_Bounds.m_Extent.y
-      value: 0.6487973
+      value: 0.6487975
       objectReference: {fileID: 0}
     - target: {fileID: 2766098684695293520, guid: 8295b606f92319440b91acec69a9b066, type: 3}
       propertyPath: m_Bounds.m_Extent.z
