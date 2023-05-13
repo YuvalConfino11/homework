@@ -6,7 +6,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private float m_HealthPoint = 100;
+    private float m_MaxHealthPoint = 100;
+    [SerializeField]
+    private float m_CurrentHealthPoint = 100;
     [SerializeField]
     private float m_ManaPoint;
     [SerializeField]
@@ -228,5 +230,14 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(i_cooldownTime);
         i_Ability.SetIsAvailable(true);
     }
-    
+
+    public float GetMaxHealth()
+    {
+        return m_MaxHealthPoint;
+    }
+
+    public float GetCurrentHealth()
+    {
+        return m_CurrentHealthPoint;
+    }
 }

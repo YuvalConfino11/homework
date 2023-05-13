@@ -101,6 +101,7 @@ MonoBehaviour:
   m_ImaginaryFriend: {fileID: 6692209332614666491}
   m_bulletSpeed: 4
   m_bullet: {fileID: 5051759465369138895, guid: 5ec0ddc53edbdc043ab4fc7bb5741e2d, type: 3}
+  m_MobTag: Mob
 --- !u!1001 &2569205428236481567
 PrefabInstance:
   m_ObjectHideFlags: 0
