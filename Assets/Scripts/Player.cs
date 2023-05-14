@@ -48,6 +48,8 @@ public class Player : MonoBehaviour
     private Rigidbody2D m_rigidBody;
     private CapsuleCollider2D m_capsuleCollider;
     private Collider2D[] m_mobsInExplosionRadius;
+    private bool m_isFacingRight = false;
+    
 
 
 
@@ -92,21 +94,25 @@ public class Player : MonoBehaviour
         checkForUnlockedSAvailabilities();
     }
 
-    private void calculateMovement(float i_horizontalInput)
+    private void movement(float i_horizontalInput)
     {
-        // if (horizontalInput != 0 || verticalInput != 0)
-        // {
-        //     animator.SetBool("walk", true);
-        // }
-        // else
-        // {
-        //     animator.SetBool("walk", false);
-        // }
-        Vector3 movingDirection = new Vector3(i_horizontalInput, 0, 0);
-        transform.Translate(movingDirection * (m_WalkingSpeed * Time.deltaTime));
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        m_rigidBody.velocity = new Vector2(i_horizontalInput * m_WalkingSpeed, m_rigidBody.velocity.y);
+        if (i_horizontalInput < 0 && m_isFacingRight)
+        {
+            flip();
+        }
+        else if(i_horizontalInput > 0 && !m_isFacingRight)
+        {
+            flip();
+        }
     }
 
+    private void flip()
+    {
+        m_isFacingRight = !m_isFacingRight;
+        transform.Rotate(0f, 180f, 0f);
+    }
+   
     private void jump()
     {
         if (GetIsGrounded())
