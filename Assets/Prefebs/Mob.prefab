@@ -42,8 +42,9 @@ GameObject:
   - component: {fileID: 7153606485435401553}
   - component: {fileID: 7153606485435401558}
   - component: {fileID: 7153606485435401552}
-  - component: {fileID: 4630492852500563315}
   - component: {fileID: 5992101690853225265}
+  - component: {fileID: 4630492852500563315}
+  - component: {fileID: 4657077256374970642}
   m_Layer: 9
   m_Name: Mob
   m_TagString: Mob
@@ -60,7 +61,7 @@ Transform:
   m_GameObject: {fileID: 7153606485435401554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.89, y: -2.78, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 15, y: 15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4421562829511533466}
@@ -140,35 +141,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4630492852500563315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7153606485435401554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a7f3794a5834668bc42de167da368a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_WalkingSpeed: 10
-  m_Damage: 4
-  m_Health: 30
-  m_MobFieldOfViewRadius: 5
-  m_MobFieldOfHitRadius: 0.5
-  m_PlayerLayerMask:
-    serializedVersion: 2
-    m_Bits: 128
-  m_CastPosition: {fileID: 4421562829511533466}
-  m_BaseCastDistance: 0
-  m_GroundLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  m_MaxThinkPauseTime: 2
-  m_MinThinkPauseTime: 0.5
-  m_MinWalkingOnSameDirectionTime: 1.5
-  m_MaxWalkingOnSameDirectionTime: 6
 --- !u!60 &5992101690853225265
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -214,3 +186,47 @@ PolygonCollider2D:
       - {x: 0.421875, y: -0.421875}
       - {x: 0.46875, y: -0.359375}
       - {x: 0.4921875, y: -0.28515625}
+--- !u!114 &4630492852500563315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7153606485435401554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a7f3794a5834668bc42de167da368a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Damage: 4
+  m_Health: 30
+  m_MobFieldOfHitRadius: 0.5
+  m_PlayerLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!114 &4657077256374970642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7153606485435401554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d4532dd28764e7a87b1a927d9bee397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MobFieldOfViewRadius: 4
+  m_PlayerLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  m_CastPosition: {fileID: 4421562829511533466}
+  m_BaseCastDistance: 0
+  m_GroundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  m_MaxThinkPauseTime: 2
+  m_MinThinkPauseTime: 0.5
+  m_MinWalkingOnSameDirectionTime: 1.5
+  m_MaxWalkingOnSameDirectionTime: 6
+  m_WalkingSpeed: 4
