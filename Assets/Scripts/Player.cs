@@ -1,17 +1,12 @@
-using System;
 using System.Collections;
 using Abilities;
-using Mobs;
 using Skills;
-using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private float m_MaxHealthPoint = 100;
-    [SerializeField]
-    private float m_CurrentHealthPoint = 100;
+    private float m_HealthPoint = 100;
     [SerializeField]
     private float m_ManaPoint;
     [SerializeField]
@@ -43,18 +38,16 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject m_bullet;
     [SerializeField]
-    private LayerMask m_MobLayerMask;
-    [SerializeField]
-    private LayerMask m_groundLayerMask;
+    private string m_MobTag = "Mob";
 
     private float m_lastMovingDirection = 1f;
     private const float k_DefaultGravityScale = 1f;
+    private LayerMask m_layerMask;
     private float m_LastArrowKeyPressTime;
     private RaycastHit2D  m_raycastHit;
     private Rigidbody2D m_rigidBody;
     private CapsuleCollider2D m_capsuleCollider;
     private Collider2D[] m_mobsInExplosionRadius;
-    private float m_MovingDirection;
 
 
 
@@ -62,13 +55,14 @@ public class Player : MonoBehaviour
     {
         m_rigidBody = GetComponent<Rigidbody2D>();
         m_capsuleCollider = GetComponent<CapsuleCollider2D>();
+        m_layerMask = LayerMask.GetMask("Ground");
     }
 
     void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         m_lastMovingDirection = horizontalInput == 0 ? m_lastMovingDirection : horizontalInput > 0 ? 1 : -1;
-        movement(horizontalInput);
+        calculateMovement(horizontalInput);
         if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.LeftAlt)) && GetIsGrounded() && m_Dash.GetAbilityStats().GetIsUnlocked())
         {
             StartCoroutine(dash(horizontalInput));
@@ -93,13 +87,12 @@ public class Player : MonoBehaviour
         {
             explosion();
         }
-        m_raycastHit = Physics2D.Raycast(transform.position, Vector2.down, m_capsuleCollider.size.y * transform.localScale.y,m_groundLayerMask);
+        m_raycastHit = Physics2D.Raycast(transform.position, Vector2.down, m_capsuleCollider.size.y*0.75f ,m_layerMask);
         m_Grounded = m_raycastHit.collider != null;
         checkForUnlockedSAvailabilities();
     }
 
-    
-    private void movement(float i_horizontalInput)
+    private void calculateMovement(float i_horizontalInput)
     {
         // if (horizontalInput != 0 || verticalInput != 0)
         // {
@@ -110,19 +103,8 @@ public class Player : MonoBehaviour
         //     animator.SetBool("walk", false);
         // }
         Vector3 movingDirection = new Vector3(i_horizontalInput, 0, 0);
-        m_MovingDirection = movingDirection.x;
-        changeLookingDirection();
         transform.Translate(movingDirection * (m_WalkingSpeed * Time.deltaTime));
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-    }
-    
-    private void changeLookingDirection()
-    {
-        Vector3 currentScale = transform.localScale;
-        if (Math.Abs(Mathf.Sign(currentScale.x) - Mathf.Sign(m_MovingDirection)) < 0)
-        {
-            transform.localScale = new Vector3(-currentScale.x,currentScale.y,currentScale.z); 
-        }
     }
 
     private void jump()
@@ -176,6 +158,11 @@ public class Player : MonoBehaviour
     {
         return m_Grounded;
     }
+
+    private void setIsGrounded(bool i_isGrounded)
+    {
+        m_Grounded = i_isGrounded;
+    }
     
     private void explosion()
     {
@@ -183,16 +170,18 @@ public class Player : MonoBehaviour
         float explosionForce = m_EnergyExplosion.GetExplosionForce();
         Vector3 imaginaryFriendPosition = m_ImaginaryFriend.transform.position;
         
-        m_mobsInExplosionRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius,m_MobLayerMask);
+        m_mobsInExplosionRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
         
         foreach (Collider2D mob in m_mobsInExplosionRadius) {
-            Rigidbody2D mobRigidbody2D = mob.GetComponent<Rigidbody2D>();
-            Vector2 mobDirection = (mob.transform.position - imaginaryFriendPosition).normalized;
-            float mobDistance = Vector2.Distance(mob.transform.position, imaginaryFriendPosition);
-            float distanceRatio = Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1);
-            float calculatedExplosionForce = explosionForce * distanceRatio;
-            mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
-            mob.GetComponent<MobStats>().GetHit(m_EnergyExplosion.GetExplosionDamage());
+            if (mob.CompareTag(m_MobTag))
+            {
+                Rigidbody2D mobRigidbody2D = mob.GetComponent<Rigidbody2D>();
+                Vector2 mobDirection = (mob.transform.position - imaginaryFriendPosition).normalized;
+                float mobDistance = Vector2.Distance(mob.transform.position, imaginaryFriendPosition);
+                float distanceRatio = Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1);
+                float calculatedExplosionForce = explosionForce * distanceRatio;
+                mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
+            }
         }
     }
 
@@ -202,9 +191,24 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(m_ImaginaryFriend.transform.position,m_EnergyExplosion.GetExplosionRadius());
         if (m_capsuleCollider != null && transform.position != null)
         {
-            Gizmos.DrawRay(transform.position,new Vector3(0,-1 * m_capsuleCollider.size.y * transform.localScale.y * 0.75f,0));
+            Gizmos.DrawRay(transform.position,new Vector3(0,-1 * m_capsuleCollider.size.y *0.75f ,0));
         }
     }
+    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+    }
+
+    // private void OnCollisionExit2D(Collision2D collision)
+    // {
+    //     if ((collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("PushPlatform")) && 
+    //         collision.transform.position.y < transform.position.y)
+    //     {
+    //         setIsGrounded(false);
+    //         m_Glide.GetAbilityStats().SetIsAvailable(true);
+    //     }
+    // }
     
     private void checkForUnlockedSAvailabilities()
     {
@@ -229,19 +233,5 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(i_cooldownTime);
         i_Ability.SetIsAvailable(true);
     }
-
-    public void getHit(float i_damage)
-    {
-        m_CurrentHealthPoint = Mathf.Clamp(m_CurrentHealthPoint - i_damage,0,100);
-    }
-
-    public float GetMaxHealth()
-    {
-        return m_MaxHealthPoint;
-    }
-
-    public float GetCurrentHealth()
-    {
-        return m_CurrentHealthPoint;
-    }
+    
 }

@@ -10,8 +10,6 @@ namespace Skills
         private float m_maxExplosionRadius = 10f;
         [SerializeField]
         private float m_ExplosionForce = 5f;
-        [SerializeField] 
-        private float m_ExplosionDamage = 25f;
         private readonly SkillsStats m_SkillsStats;
 
         public EnergyExplosion()
@@ -32,11 +30,6 @@ namespace Skills
         public float GetExplosionForce()
         {
            return m_ExplosionForce;
-        }
-
-        public float GetExplosionDamage()
-        {
-            return m_ExplosionDamage;
         }
     }
 }
