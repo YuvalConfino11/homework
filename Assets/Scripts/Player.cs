@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
         m_Grounded = m_raycastHit.collider != null;
         checkForUnlockedSAvailabilities();
     }
-
+    
     private void movement(float i_horizontalInput)
     {
         m_rigidBody.velocity = new Vector2(i_horizontalInput * m_WalkingSpeed, m_rigidBody.velocity.y);
@@ -183,7 +183,7 @@ public class Player : MonoBehaviour
             Vector2 mobDirection = (mob.transform.position - imaginaryFriendPosition).normalized;
             float mobDistance = Vector2.Distance(mob.transform.position, imaginaryFriendPosition);
             float distanceRatio = Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1);
-            float calculatedExplosionForce = explosionForce * distanceRatio * transform.localScale.y * 200f;
+            float calculatedExplosionForce = explosionForce * distanceRatio * transform.localScale.y;
             Debug.Log(mobDirection+"  "+calculatedExplosionForce);
             mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
             mob.GetComponent<MobStats>().GetHit(m_EnergyExplosion.GetExplosionDamage());

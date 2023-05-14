@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: EnergyExplosion
   m_EditorClassIdentifier: 
   k_AvailabilityLevel: 2
-  m_maxExplosionRadius: 75
-  m_ExplosionForce: 25
+  m_maxExplosionRadius: 50
+  m_ExplosionForce: 100
   m_ExplosionDamage: 25
