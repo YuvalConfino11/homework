@@ -183,16 +183,18 @@ public class Player : MonoBehaviour
             Vector2 mobDirection = (mob.transform.position - imaginaryFriendPosition).normalized;
             float mobDistance = Vector2.Distance(mob.transform.position, imaginaryFriendPosition);
             float distanceRatio = Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1);
-            float calculatedExplosionForce = explosionForce * distanceRatio;
+            float calculatedExplosionForce = explosionForce * distanceRatio * transform.localScale.y * 200f;
+            Debug.Log(mobDirection+"  "+calculatedExplosionForce);
             mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
             mob.GetComponent<MobStats>().GetHit(m_EnergyExplosion.GetExplosionDamage());
+            Debug.DrawLine(transform.position,mob.transform.position,Color.magenta,2);
         }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(m_ImaginaryFriend.transform.position,m_EnergyExplosion.GetExplosionRadius());
+        Gizmos.DrawWireSphere(transform.position,m_EnergyExplosion.GetExplosionRadius());
         if (m_capsuleCollider != null && transform.position != null)
         {
             Gizmos.DrawRay(transform.position,new Vector3(0,-1 * m_capsuleCollider.size.y * transform.localScale.y * 0.75f,0));
