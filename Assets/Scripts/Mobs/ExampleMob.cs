@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -8,27 +9,27 @@ namespace Mobs
 {
     public class ExampleMob : MonoBehaviour
     {
-        [SerializeField]
-        private float m_Damage = 4f;
-        [SerializeField]
-        private float m_Health = 30f;
         [SerializeField] 
         private float m_MobFieldOfHitRadius = 1f;
         [SerializeField] 
         private LayerMask m_PlayerLayerMask;
-        
-        
+        [SerializeField] 
         private MobStats m_mobStats;
+        
         private GameObject m_PlayerGameObject;
 
         private void Awake()
         {
             StartCoroutine(playerHitCheck());
+            m_mobStats = GetComponent<MobStats>();
         }
 
         private void Update()
         {
-            
+            if (m_mobStats.isDead())
+            {
+                Destroy(this.gameObject);
+            }
         }
 
         private IEnumerator playerHitCheck()
@@ -47,7 +48,7 @@ namespace Mobs
             if (hitPlayer != null)
             {
                 m_PlayerGameObject = hitPlayer.gameObject;
-                m_PlayerGameObject.GetComponent<Player>().getHit(m_Damage);
+                m_PlayerGameObject.GetComponent<Player>().getHit(m_mobStats.GetDamage());
             }
         }
         
