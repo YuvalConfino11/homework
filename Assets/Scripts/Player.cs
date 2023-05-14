@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D m_rigidBody;
     private CapsuleCollider2D m_capsuleCollider;
     private Collider2D[] m_mobsInExplosionRadius;
+    private float m_MovingDirection;
 
 
 
@@ -109,8 +110,19 @@ public class Player : MonoBehaviour
         //     animator.SetBool("walk", false);
         // }
         Vector3 movingDirection = new Vector3(i_horizontalInput, 0, 0);
+        m_MovingDirection = movingDirection.x;
+        changeLookingDirection();
         transform.Translate(movingDirection * (m_WalkingSpeed * Time.deltaTime));
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+    }
+    
+    private void changeLookingDirection()
+    {
+        Vector3 currentScale = transform.localScale;
+        if (Math.Abs(Mathf.Sign(currentScale.x) - Mathf.Sign(m_MovingDirection)) < 0)
+        {
+            transform.localScale = new Vector3(-currentScale.x,currentScale.y,currentScale.z); 
+        }
     }
 
     private void jump()
@@ -180,6 +192,7 @@ public class Player : MonoBehaviour
             float distanceRatio = Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1);
             float calculatedExplosionForce = explosionForce * distanceRatio;
             mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
+            mob.GetComponent<MobStats>().GetHit(m_EnergyExplosion.GetExplosionDamage());
         }
     }
 
@@ -189,7 +202,7 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(m_ImaginaryFriend.transform.position,m_EnergyExplosion.GetExplosionRadius());
         if (m_capsuleCollider != null && transform.position != null)
         {
-            Gizmos.DrawRay(transform.position,new Vector3(0,-1 * m_capsuleCollider.size.y * transform.localScale.y,0));
+            Gizmos.DrawRay(transform.position,new Vector3(0,-1 * m_capsuleCollider.size.y * transform.localScale.y * 0.75f,0));
         }
     }
     
@@ -220,7 +233,6 @@ public class Player : MonoBehaviour
     public void getHit(float i_damage)
     {
         m_CurrentHealthPoint = Mathf.Clamp(m_CurrentHealthPoint - i_damage,0,100);
-        Debug.Log(m_CurrentHealthPoint);
     }
 
     public float GetMaxHealth()

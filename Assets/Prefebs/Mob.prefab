@@ -153,22 +153,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_WalkingSpeed: 10
-  m_damage: 4
-  m_health: 30
+  m_Damage: 4
+  m_Health: 30
   m_MobFieldOfViewRadius: 5
   m_MobFieldOfHitRadius: 0.5
   m_PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  m_castPosition: {fileID: 4421562829511533466}
-  m_baseCastDistance: 5
+  m_CastPosition: {fileID: 4421562829511533466}
+  m_BaseCastDistance: 0
   m_GroundLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  maxThinkPauseTime: 2
-  minThinkPauseTime: 0.5
-  minWalkingOnSameDirectionTime: 1.5
-  maxWalkingOnSameDirectionTime: 6
+  m_MaxThinkPauseTime: 2
+  m_MinThinkPauseTime: 0.5
+  m_MinWalkingOnSameDirectionTime: 1.5
+  m_MaxWalkingOnSameDirectionTime: 6
 --- !u!60 &5992101690853225265
 PolygonCollider2D:
   m_ObjectHideFlags: 0
