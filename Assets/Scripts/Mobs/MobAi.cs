@@ -21,16 +21,15 @@ namespace Mobs
         private Rigidbody2D m_RigidBody;
         private GameObject m_PlayerGameObject;
         private bool m_CanSeePlayer;
-        private float m_MovingDirection = 1;
+        private float m_MovingDirection = -1;
         private float m_SameDirectionWalkTimer;
         private float m_RandomTimeOfWalkingInSameDirection;
 
         private void Awake()
         {
-            m_SameDirectionWalkTimer = 0;
+            m_SameDirectionWalkTimer = 0f;
             m_RandomTimeOfWalkingInSameDirection =
                 Random.Range(m_MinWalkingOnSameDirectionTime, m_MaxWalkingOnSameDirectionTime);
-
             m_RigidBody = GetComponent<Rigidbody2D>();
             StartCoroutine(fovCheck());
         }

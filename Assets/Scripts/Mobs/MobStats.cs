@@ -21,7 +21,6 @@ namespace Mobs
         
         public void GetHit(float i_damage)
         {
-            Debug.Log(1);
             m_Health = Mathf.Clamp(m_Health - i_damage, 0, 100);
         }
 
