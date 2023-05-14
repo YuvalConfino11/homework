@@ -44,8 +44,8 @@ GameObject:
   - component: {fileID: 7153606485435401558}
   - component: {fileID: 332608565604718228}
   - component: {fileID: 4630492852500563315}
-  - component: {fileID: 4657077256374970642}
   - component: {fileID: 3732124924582079859}
+  - component: {fileID: 7633578894733046738}
   m_Layer: 9
   m_Name: Mob
   m_TagString: Mob
@@ -407,32 +407,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   m_mobStats: {fileID: 0}
---- !u!114 &4657077256374970642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7153606485435401554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d4532dd28764e7a87b1a927d9bee397, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MobFieldOfViewRadius: 7
-  m_PlayerLayerMask:
-    serializedVersion: 2
-    m_Bits: 128
-  m_CastPosition: {fileID: 4421562829511533466}
-  m_BaseCastDistance: 0
-  m_GroundLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  m_MaxThinkPauseTime: 2
-  m_MinThinkPauseTime: 0.5
-  m_MinWalkingOnSameDirectionTime: 1.5
-  m_MaxWalkingOnSameDirectionTime: 6
-  m_WalkingSpeed: 4
 --- !u!114 &3732124924582079859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,3 +421,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Damage: 4
   m_Health: 30
+--- !u!114 &7633578894733046738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7153606485435401554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b7ae2d5613349449a6beeb3d81a1657, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MobFieldOfViewRadius: 10
+  m_PlayerLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  m_CastPosition: {fileID: 4421562829511533466}
+  m_BaseCastDistance: 0
+  m_GroundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  m_MaxThinkPauseTime: 2
+  m_MinThinkPauseTime: 0.5
+  m_MinWalkingOnSameDirectionTime: 1.5
+  m_MaxWalkingOnSameDirectionTime: 6
+  m_WalkingSpeed: 4

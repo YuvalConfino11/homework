@@ -202,7 +202,7 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(m_ImaginaryFriend.transform.position,m_EnergyExplosion.GetExplosionRadius());
         if (m_capsuleCollider != null && transform.position != null)
         {
-            Gizmos.DrawRay(transform.position,new Vector3(0,-1 * m_capsuleCollider.size.y * transform.localScale.y * 0.75f,0));
+            Gizmos.DrawRay(transform.position,new Vector3(0,-1 * m_capsuleCollider.size.y * transform.localScale.y * 0.52f,0));
         }
     }
     
