@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
     private LayerMask m_groundLayerMask;
 
     private float m_lastMovingDirection = 1f;
-    private const float k_DefaultGravityScale = 1f;
+    private const float k_DefaultGravityScale = 5f;
     private float m_LastArrowKeyPressTime;
     private RaycastHit2D  m_raycastHit;
     private Rigidbody2D m_rigidBody;
