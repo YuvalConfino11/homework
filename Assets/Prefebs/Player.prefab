@@ -202,7 +202,7 @@ MonoBehaviour:
   m_CurrentHealthPoint: 100
   m_ManaPoint: 0
   m_ExperiencePoints: 0
-  m_Level: 2
+  m_Level: 1
   m_Attack: 0
   m_Defence: 0
   m_WalkingSpeed: 20

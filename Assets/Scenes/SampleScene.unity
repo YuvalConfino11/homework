@@ -1168,10 +1168,6 @@ PrefabInstance:
       value: ImaginaryFriendStartPosition
       objectReference: {fileID: 0}
     - target: {fileID: 3070312050616550591, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
-      propertyPath: m_Level
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3070312050616550591, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
       propertyPath: m_ImaginaryFriend
       value: 
       objectReference: {fileID: 53275538}
@@ -1294,10 +1290,6 @@ PrefabInstance:
     - target: {fileID: 8007440378402045639, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
       propertyPath: m_Bounds.m_Extent.y
       value: 0.64879775
-      objectReference: {fileID: 0}
-    - target: {fileID: 8395473248632379404, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8408835292570353165, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
       propertyPath: m_Bounds.m_Center.x
