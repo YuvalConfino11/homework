@@ -2,35 +2,32 @@ using UnityEngine;
 
 namespace Mobs
 {
-    public class MobStats : Component
+    public class MobStats : MonoBehaviour
     {
-        private float m_health;
-        private float m_damage;
-
-        public MobStats(float i_health, float i_damage)
-        {
-            m_health = i_health;
-            m_damage = i_damage;
-        }
-
+        [SerializeField]
+        private float m_Damage = 4f;
+        [SerializeField]
+        private float m_Health = 30f;
+        
         public float GetDamage()
         {
-            return m_damage;
+            return m_Damage;
         }
 
         public float getHealth()
         {
-            return m_health;
+            return m_Health;
         }
         
         public void GetHit(float i_damage)
         {
-            m_health = Mathf.Clamp(m_health - i_damage, 0, 100);
+            Debug.Log(1);
+            m_Health = Mathf.Clamp(m_Health - i_damage, 0, 100);
         }
 
         public bool isDead()
         {
-            return m_health <= 0;
+            return m_Health <= 0;
         }
     }
 }
