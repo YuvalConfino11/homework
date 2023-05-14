@@ -73,8 +73,6 @@ public class ImaginaryFriend : MonoBehaviour
         {
             m_FriendHitMob = true;
             collision.gameObject.GetComponent<MobStats>().GetHit(m_ImaginaryFriendAttack.getAttackDamage());
-            Debug.Log(collision.gameObject.GetComponent<MobStats>().getHealth());
-            Debug.Log(collision.gameObject.GetComponent<MobStats>().isDead());
         }
     }
 }

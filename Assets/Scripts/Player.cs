@@ -48,13 +48,14 @@ public class Player : MonoBehaviour
     private LayerMask m_groundLayerMask;
 
     private float m_lastMovingDirection = 1f;
-    private const float k_DefaultGravityScale = 1f;
+    private const float k_DefaultGravityScale = 5f;
     private float m_LastArrowKeyPressTime;
     private RaycastHit2D  m_raycastHit;
     private Rigidbody2D m_rigidBody;
     private CapsuleCollider2D m_capsuleCollider;
     private Collider2D[] m_mobsInExplosionRadius;
-    private float m_MovingDirection;
+    private bool m_isFacingRight = false;
+    
 
 
 
@@ -97,34 +98,26 @@ public class Player : MonoBehaviour
         m_Grounded = m_raycastHit.collider != null;
         checkForUnlockedSAvailabilities();
     }
-
     
     private void movement(float i_horizontalInput)
     {
-        // if (horizontalInput != 0 || verticalInput != 0)
-        // {
-        //     animator.SetBool("walk", true);
-        // }
-        // else
-        // {
-        //     animator.SetBool("walk", false);
-        // }
-        Vector3 movingDirection = new Vector3(i_horizontalInput, 0, 0);
-        m_MovingDirection = movingDirection.x;
-        changeLookingDirection();
-        transform.Translate(movingDirection * (m_WalkingSpeed * Time.deltaTime));
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-    }
-    
-    private void changeLookingDirection()
-    {
-        Vector3 currentScale = transform.localScale;
-        if (Math.Abs(Mathf.Sign(currentScale.x) - Mathf.Sign(m_MovingDirection)) < 0)
+        m_rigidBody.velocity = new Vector2(i_horizontalInput * m_WalkingSpeed, m_rigidBody.velocity.y);
+        if (i_horizontalInput < 0 && m_isFacingRight)
         {
-            transform.localScale = new Vector3(-currentScale.x,currentScale.y,currentScale.z); 
+            flip();
+        }
+        else if(i_horizontalInput > 0 && !m_isFacingRight)
+        {
+            flip();
         }
     }
 
+    private void flip()
+    {
+        m_isFacingRight = !m_isFacingRight;
+        transform.Rotate(0f, 180f, 0f);
+    }
+   
     private void jump()
     {
         if (GetIsGrounded())
@@ -190,16 +183,18 @@ public class Player : MonoBehaviour
             Vector2 mobDirection = (mob.transform.position - imaginaryFriendPosition).normalized;
             float mobDistance = Vector2.Distance(mob.transform.position, imaginaryFriendPosition);
             float distanceRatio = Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1);
-            float calculatedExplosionForce = explosionForce * distanceRatio;
+            float calculatedExplosionForce = explosionForce * distanceRatio * transform.localScale.y;
+            Debug.Log(mobDirection+"  "+calculatedExplosionForce);
             mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
             mob.GetComponent<MobStats>().GetHit(m_EnergyExplosion.GetExplosionDamage());
+            Debug.DrawLine(transform.position,mob.transform.position,Color.magenta,2);
         }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(m_ImaginaryFriend.transform.position,m_EnergyExplosion.GetExplosionRadius());
+        Gizmos.DrawWireSphere(transform.position,m_EnergyExplosion.GetExplosionRadius());
         if (m_capsuleCollider != null && transform.position != null)
         {
             Gizmos.DrawRay(transform.position,new Vector3(0,-1 * m_capsuleCollider.size.y * transform.localScale.y * 0.52f,0));

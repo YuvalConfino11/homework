@@ -8,6 +8,7 @@ TagManager:
   - PushPlatform
   - Mob
   - Trrugger
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -25,9 +26,6 @@ TagManager:
   - Backgound
   - Midground
   - Forground
-  - 
-  - 
-  - 
   - 
   - 
   - 
