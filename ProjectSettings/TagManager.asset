@@ -19,9 +19,6 @@ TagManager:
   - Player
   - Bullet
   - Mob
-  - Imaginary Friend
-  - 
-  - 
   - Backgound
   - Midground
   - Forground
@@ -45,9 +42,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
-    uniqueID: 1142286055
-    locked: 0
   - name: sky
     uniqueID: 2207130045
     locked: 0

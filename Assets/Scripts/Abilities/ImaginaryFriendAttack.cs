@@ -11,9 +11,7 @@ namespace Skills
         [SerializeField]
         private short k_AvailabilityLevel = 2;
         [SerializeField]
-        private float m_AttackRadius = 50;
-        [SerializeField]
-        private float m_AttackDamage = 30;
+        private float m_AttackRadius;
         private readonly SkillsStats m_SkillsStats;
 
 
@@ -33,10 +31,6 @@ namespace Skills
             return m_AttackRadius;
         }
 
-        public float getAttackDamage()
-        {
-            return m_AttackDamage;
-        }
-        
+
     }
 }
