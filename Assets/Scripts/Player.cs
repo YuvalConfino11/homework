@@ -87,7 +87,7 @@ public class Player : MonoBehaviour
         {
             explosion();
         }
-        m_raycastHit = Physics2D.Raycast(transform.position, Vector2.down, m_capsuleCollider.size.y * 0.4f,m_layerMask);
+        m_raycastHit = Physics2D.Raycast(transform.position, Vector2.down, m_capsuleCollider.size.y*0.75f ,m_layerMask);
         m_Grounded = m_raycastHit.collider != null;
         checkForUnlockedSAvailabilities();
     }
@@ -191,7 +191,7 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(m_ImaginaryFriend.transform.position,m_EnergyExplosion.GetExplosionRadius());
         if (m_capsuleCollider != null && transform.position != null)
         {
-            Gizmos.DrawRay(transform.position,new Vector3(0,-1 * m_capsuleCollider.size.y * 0.4f ,0));
+            Gizmos.DrawRay(transform.position,new Vector3(0,-1 * m_capsuleCollider.size.y *0.75f ,0));
         }
     }
     
