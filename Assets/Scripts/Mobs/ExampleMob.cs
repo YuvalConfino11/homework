@@ -17,11 +17,15 @@ namespace Mobs
         private MobStats m_mobStats;
         
         private GameObject m_PlayerGameObject;
+        private Rigidbody2D m_rigidbody2D;
+        private Collider2D m_collider2D;
 
         private void Awake()
         {
             StartCoroutine(playerHitCheck());
             m_mobStats = GetComponent<MobStats>();
+            m_rigidbody2D = GetComponent<Rigidbody2D>();
+            m_collider2D = GetComponent<Collider2D>();
         }
 
         private void Update()
@@ -51,7 +55,7 @@ namespace Mobs
                 m_PlayerGameObject.GetComponent<Player>().getHit(m_mobStats.GetDamage());
             }
         }
-        
+
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.gray;

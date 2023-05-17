@@ -74,7 +74,7 @@ namespace Mobs
             }
 
             Vector3 targetPosition = m_CastPosition.position;
-            targetPosition.x += castDistance + m_MovingDirection * transform.localScale.y;
+            targetPosition.x += castDistance + m_MovingDirection * transform.localScale.y * 2;
 
             Debug.DrawLine(m_CastPosition.position, targetPosition, Color.red);
             if (Physics2D.Linecast(m_CastPosition.position, targetPosition, m_GroundLayerMask))
@@ -90,7 +90,7 @@ namespace Mobs
             bool isNearEdge = true;
             float castDistance = m_BaseCastDistance;
             Vector3 targetPosition = m_CastPosition.position;
-            targetPosition.y -= transform.localScale.y;
+            targetPosition.y -= transform.localScale.y * 3f;
             targetPosition.x += m_MovingDirection * transform.localScale.y;
             Debug.DrawLine(m_CastPosition.position, targetPosition, Color.green);
             if (Physics2D.Linecast(m_CastPosition.position, targetPosition, m_GroundLayerMask))
