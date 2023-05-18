@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Pathfinding;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,6 +18,8 @@ namespace Mobs
         [SerializeField] private float m_MinWalkingOnSameDirectionTime = 1.5f;
         [SerializeField] private float m_MaxWalkingOnSameDirectionTime = 6f;
         [SerializeField] private float m_WalkingSpeed = 4f;
+        [SerializeField]
+        private bool m_Grounded = true;
 
         private Rigidbody2D m_RigidBody;
         private GameObject m_PlayerGameObject;
@@ -24,6 +27,9 @@ namespace Mobs
         private float m_MovingDirection = -1;
         private float m_SameDirectionWalkTimer;
         private float m_RandomTimeOfWalkingInSameDirection;
+        private RaycastHit2D  m_raycastHit;
+        private BoxCollider2D m_feetBoxCollider2D;
+        
 
         private void Awake()
         {
@@ -31,15 +37,28 @@ namespace Mobs
             m_RandomTimeOfWalkingInSameDirection =
                 Random.Range(m_MinWalkingOnSameDirectionTime, m_MaxWalkingOnSameDirectionTime);
             m_RigidBody = GetComponent<Rigidbody2D>();
+            m_feetBoxCollider2D = GetComponent<BoxCollider2D>();
             StartCoroutine(fovCheck());
         }
 
         private void Update()
         {
             m_SameDirectionWalkTimer += Time.deltaTime;
+            Vector3 rayStartPosition =
+                new Vector3(transform.position.x + 0.5f * m_MovingDirection, transform.position.y, 0);
+            m_raycastHit = Physics2D.Raycast(rayStartPosition, Vector2.down, transform.localScale.y * 2.25f,m_GroundLayerMask);
+            m_Grounded = m_raycastHit.collider != null;
             if (m_SameDirectionWalkTimer > m_RandomTimeOfWalkingInSameDirection && !getCanSeePlayer())
             {
                 StartCoroutine(patrolStopForThink());
+            }
+            if (!GetIsGrounded() && m_RigidBody.velocity.y > 0)
+            {
+                m_feetBoxCollider2D.enabled = false;
+            }
+            if (m_RigidBody.velocity.y <= 0)
+            {
+                m_feetBoxCollider2D.enabled = true;
             }
         }
 
@@ -190,7 +209,15 @@ namespace Mobs
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, m_MobFieldOfViewRadius * transform.localScale.y);
-            Gizmos.color = Color.gray;
+            Gizmos.color = Color.cyan;
+            Vector3 rayStartPosition =
+                new Vector3(transform.position.x + 0.5f * m_MovingDirection, transform.position.y, 0);
+            Gizmos.DrawRay(rayStartPosition,new Vector3(0,-1 * transform.localScale.y * 2.25f,0));
+        }
+        
+        private bool GetIsGrounded()
+        {
+            return m_Grounded;
         }
     }
 }
