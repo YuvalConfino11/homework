@@ -16,10 +16,10 @@ TagManager:
   - 
   - Water
   - UI
-  - Ground
   - Player
-  - Bullet
   - Mob
+  - Bullet
+  - Ground
   - Imaginary Friend
   - 
   - 
@@ -43,6 +43,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Player
+    uniqueID: 3117953971
+    locked: 0
+  - name: Mob
+    uniqueID: 3627620521
+    locked: 0
+  - name: Ground
+    uniqueID: 2037740423
+    locked: 0
   - name: Background
     uniqueID: 1142286055
     locked: 0

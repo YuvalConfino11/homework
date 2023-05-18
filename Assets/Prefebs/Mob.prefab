@@ -43,10 +43,11 @@ GameObject:
   - component: {fileID: 7153606485435401552}
   - component: {fileID: 7153606485435401558}
   - component: {fileID: 332608565604718228}
+  - component: {fileID: 8193078469532997646}
   - component: {fileID: 4630492852500563315}
   - component: {fileID: 4657077256374970642}
   - component: {fileID: 3732124924582079859}
-  m_Layer: 9
+  m_Layer: 7
   m_Name: Mob
   m_TagString: Mob
   m_Icon: {fileID: 0}
@@ -140,7 +141,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!60 &332608565604718228
 PolygonCollider2D:
@@ -152,7 +153,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -390,6 +391,32 @@ PolygonCollider2D:
       - {x: 0.049999997, y: 2.08}
       - {x: 0.049999997, y: 2.1299999}
       - {x: 0.02, y: 2.1599998}
+--- !u!61 &8193078469532997646
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7153606485435401554}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.07849014, y: -1.6226451}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5, y: 5}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.1880181, y: 0.07698107}
+  m_EdgeRadius: 0
 --- !u!114 &4630492852500563315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,8 +432,8 @@ MonoBehaviour:
   m_MobFieldOfHitRadius: 0.5
   m_PlayerLayerMask:
     serializedVersion: 2
-    m_Bits: 128
-  m_mobStats: {fileID: 0}
+    m_Bits: 64
+  m_mobStats: {fileID: 3732124924582079859}
 --- !u!114 &4657077256374970642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,17 +449,18 @@ MonoBehaviour:
   m_MobFieldOfViewRadius: 7
   m_PlayerLayerMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   m_CastPosition: {fileID: 4421562829511533466}
   m_BaseCastDistance: 0
   m_GroundLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 512
   m_MaxThinkPauseTime: 2
   m_MinThinkPauseTime: 0.5
   m_MinWalkingOnSameDirectionTime: 4
   m_MaxWalkingOnSameDirectionTime: 20
   m_WalkingSpeed: 15
+  m_Grounded: 1
 --- !u!114 &3732124924582079859
 MonoBehaviour:
   m_ObjectHideFlags: 0
