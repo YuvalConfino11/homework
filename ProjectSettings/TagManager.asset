@@ -23,9 +23,9 @@ TagManager:
   - Imaginary Friend
   - 
   - 
-  - Backgound
-  - Midground
-  - Forground
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -46,12 +46,18 @@ TagManager:
   - name: Background
     uniqueID: 1142286055
     locked: 0
-  - name: sky
-    uniqueID: 2207130045
-    locked: 0
-  - name: background
-    uniqueID: 3485005109
-    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Midground
+    uniqueID: 2573104865
+    locked: 0
+  - name: ground
+    uniqueID: 1643153931
+    locked: 0
+  - name: Player
+    uniqueID: 3485005109
+    locked: 0
+  - name: Forground
+    uniqueID: 1672644539
     locked: 0
