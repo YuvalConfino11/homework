@@ -34,12 +34,10 @@ public class ImaginaryFriendAi : MonoBehaviour
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_MainTarget = m_ImaginaryFriendStartPosition;
         InvokeRepeating("UpdatePath", 0f, 0.5f);
-        
-
     }
 
     void UpdatePath()     
-    { 
+    {
         if(m_MobInAttackRadius != null && m_FriendDuringAttack == false)
         {
             m_MainTarget = m_MobInAttackRadius.transform;

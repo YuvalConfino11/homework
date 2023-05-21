@@ -224,7 +224,7 @@ MonoBehaviour:
   m_NextWayPointDistance: 3
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 128
   m_ImaginaryFriendStartPosition: {fileID: 0}
   m_FriendDuringAttack: 0
   m_FriendHitMob: 0

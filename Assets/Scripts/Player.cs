@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
     private CapsuleCollider2D m_capsuleCollider;
     private Collider2D[] m_mobsInExplosionRadius;
     private bool m_isFacingRight = false;
+    private BoxCollider2D m_feetBoxCollider2D;
     
 
 
@@ -63,6 +64,7 @@ public class Player : MonoBehaviour
     {
         m_rigidBody = GetComponent<Rigidbody2D>();
         m_capsuleCollider = GetComponent<CapsuleCollider2D>();
+        m_feetBoxCollider2D = GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -94,8 +96,18 @@ public class Player : MonoBehaviour
         {
             explosion();
         }
-        m_raycastHit = Physics2D.Raycast(transform.position, Vector2.down, m_capsuleCollider.size.y * transform.localScale.y,m_groundLayerMask);
+        Vector3 rayStartPosition =
+            new Vector3(transform.position.x + 0.5f * m_lastMovingDirection, transform.position.y, 0);
+        m_raycastHit = Physics2D.Raycast(rayStartPosition, Vector2.down, m_capsuleCollider.size.y *2.75f,m_groundLayerMask);
         m_Grounded = m_raycastHit.collider != null;
+        if (!GetIsGrounded() && m_rigidBody.velocity.y > 0)
+        {
+            m_feetBoxCollider2D.enabled = false;
+        }
+        if (m_rigidBody.velocity.y <= 0)
+        {
+            m_feetBoxCollider2D.enabled = true;
+        }
         checkForUnlockedSAvailabilities();
     }
     
@@ -197,7 +209,10 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position,m_EnergyExplosion.GetExplosionRadius());
         if (m_capsuleCollider != null && transform.position != null)
         {
-            Gizmos.DrawRay(transform.position,new Vector3(0,-1 * m_capsuleCollider.size.y * transform.localScale.y * 0.75f,0));
+            Gizmos.color = Color.red;
+            Vector3 rayStartPosition =
+                new Vector3(transform.position.x + 0.5f * m_lastMovingDirection, transform.position.y, 0);
+            Gizmos.DrawRay(rayStartPosition,new Vector3(0,-1 * m_capsuleCollider.size.y * 2.75f,0));
         }
     }
     
