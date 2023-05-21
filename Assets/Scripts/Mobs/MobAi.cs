@@ -8,21 +8,30 @@ namespace Mobs
 {
     public class MobAi : MonoBehaviour
     {
-        [SerializeField] private float m_MobFieldOfViewRadius = 10f;
-        [SerializeField] private LayerMask m_PlayerLayerMask;
-        [SerializeField] private Transform m_CastPosition;
-        [SerializeField] private float m_BaseCastDistance;
-        [SerializeField] private LayerMask m_GroundLayerMask;
-        [SerializeField] private float m_MaxThinkPauseTime = 2f;
-        [SerializeField] private float m_MinThinkPauseTime = 0.5f;
-        [SerializeField] private float m_MinWalkingOnSameDirectionTime = 1.5f;
-        [SerializeField] private float m_MaxWalkingOnSameDirectionTime = 6f;
-        [SerializeField] private float m_WalkingSpeed = 4f;
+        [SerializeField] 
+        private float m_MobFieldOfViewRadius = 10f;
+        [SerializeField] 
+        private LayerMask m_PlayerLayerMask;
+        [SerializeField] 
+        private float m_BaseCastDistance;
+        [SerializeField] 
+        private LayerMask m_GroundLayerMask;
+        [SerializeField] 
+        private float m_MaxThinkPauseTime = 2f;
+        [SerializeField] 
+        private float m_MinThinkPauseTime = 0.5f;
+        [SerializeField] 
+        private float m_MinWalkingOnSameDirectionTime = 1.5f;
+        [SerializeField] 
+        private float m_MaxWalkingOnSameDirectionTime = 6f;
+        [SerializeField] 
+        private float m_WalkingSpeed = 4f;
         [SerializeField]
         private bool m_Grounded = true;
 
         private Rigidbody2D m_RigidBody;
         private GameObject m_PlayerGameObject;
+        private Transform m_CastPosition;
         private bool m_CanSeePlayer;
         private float m_MovingDirection = -1;
         private float m_SameDirectionWalkTimer;
@@ -38,6 +47,7 @@ namespace Mobs
                 Random.Range(m_MinWalkingOnSameDirectionTime, m_MaxWalkingOnSameDirectionTime);
             m_RigidBody = GetComponent<Rigidbody2D>();
             m_feetBoxCollider2D = GetComponent<BoxCollider2D>();
+            m_CastPosition = transform.GetChild(0).transform;
             StartCoroutine(fovCheck());
         }
 
@@ -85,15 +95,8 @@ namespace Mobs
         private bool isHittingWall()
         {
             bool isHittingWall = false;
-            float castDistance = m_BaseCastDistance;
-
-            if (m_MovingDirection < 0)
-            {
-                castDistance = -m_BaseCastDistance;
-            }
-
             Vector3 targetPosition = m_CastPosition.position;
-            targetPosition.x += castDistance + m_MovingDirection * transform.localScale.y * 2;
+            targetPosition.x += m_MovingDirection * m_feetBoxCollider2D.size.x * m_BaseCastDistance;
 
             Debug.DrawLine(m_CastPosition.position, targetPosition, Color.red);
             if (Physics2D.Linecast(m_CastPosition.position, targetPosition, m_GroundLayerMask))
@@ -108,10 +111,12 @@ namespace Mobs
         {
             bool isNearEdge = true;
             float castDistance = m_BaseCastDistance;
-            Vector3 targetPosition = m_CastPosition.position;
-            targetPosition.y -= transform.localScale.y * 3f;
-            targetPosition.x += m_MovingDirection * transform.localScale.y;
-            Debug.DrawLine(m_CastPosition.position, targetPosition, Color.green);
+            Vector3 targetPosition = m_feetBoxCollider2D.transform.position;
+            targetPosition.y -= castDistance * 2f;
+            targetPosition.x += castDistance * m_MovingDirection * 0.5f;
+            Vector3 startPosition = m_CastPosition.position;
+            startPosition.y -= transform.localScale.y * 1.5f;
+            Debug.DrawLine(startPosition,targetPosition, Color.magenta);
             if (Physics2D.Linecast(m_CastPosition.position, targetPosition, m_GroundLayerMask))
             {
                 isNearEdge = false;
@@ -219,5 +224,6 @@ namespace Mobs
         {
             return m_Grounded;
         }
+        
     }
 }
