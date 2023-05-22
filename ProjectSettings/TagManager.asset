@@ -21,7 +21,7 @@ TagManager:
   - Bullet
   - Ground
   - Imaginary Friend
-  - 
+  - EnergyBall
   - 
   - Backgound
   - Midground
@@ -43,23 +43,26 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Player
-    uniqueID: 3117953971
-    locked: 0
-  - name: Mob
-    uniqueID: 3627620521
-    locked: 0
-  - name: Ground
-    uniqueID: 2037740423
-    locked: 0
   - name: Background
     uniqueID: 1142286055
+    locked: 0
+  - name: background
+    uniqueID: 3485005109
     locked: 0
   - name: sky
     uniqueID: 2207130045
     locked: 0
-  - name: background
-    uniqueID: 3485005109
+  - name: Ground
+    uniqueID: 2037740423
+    locked: 0
+  - name: Mob
+    uniqueID: 3627620521
+    locked: 0
+  - name: Player
+    uniqueID: 3117953971
+    locked: 0
+  - name: EnergyBall
+    uniqueID: 3191053637
     locked: 0
   - name: Default
     uniqueID: 0

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6749796713079209225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01, y: 0.02, z: 0}
+  m_LocalPosition: {x: 0, y: -0.503, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,8 +44,8 @@ GameObject:
   - component: {fileID: 7153606485435401558}
   - component: {fileID: 332608565604718228}
   - component: {fileID: 8193078469532997646}
+  - component: {fileID: 1586193529970484105}
   - component: {fileID: 4630492852500563315}
-  - component: {fileID: 4657077256374970642}
   - component: {fileID: 3732124924582079859}
   m_Layer: 7
   m_Name: Mob
@@ -108,8 +108,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -667346775
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b417ba6d17916475882393a4296e76ef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -417,6 +417,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1880181, y: 0.07698107}
   m_EdgeRadius: 0
+--- !u!114 &1586193529970484105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7153606485435401554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b912f65b8c61d47a7cc41bb7697dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MobFieldOfViewRadius: 10
+  m_PlayerLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  m_BaseCastDistance: 12.5
+  m_GroundLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  m_MaxThinkPauseTime: 4
+  m_MinThinkPauseTime: 2
+  m_MinWalkingOnSameDirectionTime: 4
+  m_MaxWalkingOnSameDirectionTime: 12
+  m_WalkingSpeed: 4
+  m_Grounded: 1
+  m_FeetBoxCollider2D: {fileID: 8193078469532997646}
+  m_CastPosition: {fileID: 4421562829511533466}
 --- !u!114 &4630492852500563315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,32 +462,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   m_mobStats: {fileID: 3732124924582079859}
---- !u!114 &4657077256374970642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7153606485435401554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d4532dd28764e7a87b1a927d9bee397, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MobFieldOfViewRadius: 7
-  m_PlayerLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  m_BaseCastDistance: 7.5
-  m_GroundLayerMask:
-    serializedVersion: 2
-    m_Bits: 512
-  m_MaxThinkPauseTime: 2
-  m_MinThinkPauseTime: 0.5
-  m_MinWalkingOnSameDirectionTime: 4
-  m_MaxWalkingOnSameDirectionTime: 20
-  m_WalkingSpeed: 15
-  m_Grounded: 1
+  m_ManaBall: {fileID: 7015440925964673975, guid: 1bef5d4fe15565c469e49d6663a7b924, type: 3}
 --- !u!114 &3732124924582079859
 MonoBehaviour:
   m_ObjectHideFlags: 0
