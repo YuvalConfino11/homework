@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float m_Defence;
     [SerializeField]
+    private float m_DefaultGravityScale = 5f;
+    [SerializeField]
     private float m_WalkingSpeed = 4f;
     [SerializeField]
     private bool m_Grounded = true;
@@ -48,7 +50,6 @@ public class Player : MonoBehaviour
     private LayerMask m_groundLayerMask;
 
     private float m_lastMovingDirection = 1f;
-    private const float k_DefaultGravityScale = 5f;
     private float m_LastArrowKeyPressTime;
     private RaycastHit2D  m_raycastHit;
     private Rigidbody2D m_rigidBody;
@@ -86,7 +87,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            m_rigidBody.gravityScale = k_DefaultGravityScale;
+            m_rigidBody.gravityScale = m_DefaultGravityScale;
         }
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
@@ -140,9 +141,9 @@ public class Player : MonoBehaviour
         }
         else if (m_DoubleJump.GetAbilityStats().GetIsAvailable() && m_DoubleJump.GetAbilityStats().GetIsUnlocked())
         {
-            if (m_rigidBody.gravityScale != k_DefaultGravityScale)
+            if (m_rigidBody.gravityScale != m_DefaultGravityScale)
             {
-                m_rigidBody.gravityScale = k_DefaultGravityScale;
+                m_rigidBody.gravityScale = m_DefaultGravityScale;
             }
             float jumpForce = Mathf.Sqrt( -2 * m_JumpHeight * (Physics2D.gravity.y * m_rigidBody.gravityScale));
             m_rigidBody.velocity = Vector2.up * jumpForce;
