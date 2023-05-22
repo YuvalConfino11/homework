@@ -3,7 +3,13 @@ guid: 21d61d7bfc9384fc88783c4ed9ee4d31
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_DoubleJump: {fileID: 11400000, guid: c5ea01e8c31624e1ead50c365cf92820, type: 2}
+  - m_Glide: {fileID: 11400000, guid: 11b5e48388c2e452899168f9a023d2dc, type: 2}
+  - m_Dash: {fileID: 11400000, guid: 246c30c96851940c4b4a7c85512e01b0, type: 2}
+  - m_EnergyExplosion: {fileID: 11400000, guid: 02a886e824e53411885b808e544f916f, type: 2}
+  - m_ImaginaryFriend: {fileID: 9185133599018937572, guid: 26a814c7996b64a099ec0dca631bb33d, type: 3}
+  - m_bullet: {fileID: 5051759465369138895, guid: 5ec0ddc53edbdc043ab4fc7bb5741e2d, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
