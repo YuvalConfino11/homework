@@ -143,6 +143,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1586193529970484105, guid: 4eb542fbff1ad43018eb231a66d3dbe0, type: 3}
+      propertyPath: m_FeetBoxCollider2D
+      value: 
+      objectReference: {fileID: 1942155279}
     - target: {fileID: 4630492852500563315, guid: 4eb542fbff1ad43018eb231a66d3dbe0, type: 3}
       propertyPath: m_CastPosition
       value: 
@@ -1029,6 +1033,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1586193529970484105, guid: 4eb542fbff1ad43018eb231a66d3dbe0, type: 3}
+      propertyPath: m_FeetBoxCollider2D
+      value: 
+      objectReference: {fileID: 1942155279}
     - target: {fileID: 4421562829511533466, guid: 4eb542fbff1ad43018eb231a66d3dbe0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.001
@@ -2871,6 +2879,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1942155279 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8193078469532997646, guid: 4eb542fbff1ad43018eb231a66d3dbe0, type: 3}
+  m_PrefabInstance: {fileID: 1835704609}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1945379112
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2878,10 +2891,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 332608565604718228, guid: 4eb542fbff1ad43018eb231a66d3dbe0, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1220753332947659012, guid: 4eb542fbff1ad43018eb231a66d3dbe0, type: 3}
       propertyPath: m_RootOrder
       value: 7
