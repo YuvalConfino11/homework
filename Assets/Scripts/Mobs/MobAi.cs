@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using Pathfinding;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,28 +6,40 @@ namespace Mobs
 {
     public class MobAi : MonoBehaviour
     {
-        [SerializeField] private float m_MobFieldOfViewRadius = 10f;
-        [SerializeField] private LayerMask m_PlayerLayerMask;
-        [SerializeField] private Transform m_CastPosition;
-        [SerializeField] private float m_BaseCastDistance;
-        [SerializeField] private LayerMask m_GroundLayerMask;
-        [SerializeField] private float m_MaxThinkPauseTime = 2f;
-        [SerializeField] private float m_MinThinkPauseTime = 0.5f;
-        [SerializeField] private float m_MinWalkingOnSameDirectionTime = 1.5f;
-        [SerializeField] private float m_MaxWalkingOnSameDirectionTime = 6f;
-        [SerializeField] private float m_WalkingSpeed = 4f;
+        [SerializeField] 
+        private float m_MobFieldOfViewRadius = 10f;
+        [SerializeField] 
+        private LayerMask m_PlayerLayerMask;
+        [SerializeField] 
+        private float m_BaseCastDistance;
+        [SerializeField] 
+        private LayerMask m_GroundLayerMask;
+        [SerializeField] 
+        private float m_MaxThinkPauseTime = 2f;
+        [SerializeField] 
+        private float m_MinThinkPauseTime = 0.5f;
+        [SerializeField] 
+        private float m_MinWalkingOnSameDirectionTime = 1.5f;
+        [SerializeField] 
+        private float m_MaxWalkingOnSameDirectionTime = 6f;
+        [SerializeField] 
+        private float m_WalkingSpeed = 4f;
         [SerializeField]
         private bool m_Grounded = true;
-
+        [SerializeField]
+        private BoxCollider2D m_FeetBoxCollider2D;
+        [SerializeField]
+        private Transform m_CastPosition;
+        
         private Rigidbody2D m_RigidBody;
         private GameObject m_PlayerGameObject;
         private bool m_CanSeePlayer;
-        private float m_MovingDirection = -1;
+        private float m_MovingDirection;
         private float m_SameDirectionWalkTimer;
         private float m_RandomTimeOfWalkingInSameDirection;
-        private RaycastHit2D  m_raycastHit;
-        private BoxCollider2D m_feetBoxCollider2D;
-        
+        private RaycastHit2D  m_RaycastHit;
+        private bool m_encounterObstacle;
+
 
         private void Awake()
         {
@@ -37,7 +47,10 @@ namespace Mobs
             m_RandomTimeOfWalkingInSameDirection =
                 Random.Range(m_MinWalkingOnSameDirectionTime, m_MaxWalkingOnSameDirectionTime);
             m_RigidBody = GetComponent<Rigidbody2D>();
-            m_feetBoxCollider2D = GetComponent<BoxCollider2D>();
+            m_FeetBoxCollider2D = m_FeetBoxCollider2D == null ? GetComponent<BoxCollider2D>() : m_FeetBoxCollider2D;
+            m_CastPosition = m_CastPosition == null ? transform.GetChild(0).transform : m_CastPosition;
+            m_PlayerGameObject = GameObject.FindGameObjectWithTag("Player");
+            m_MovingDirection = Mathf.Sign(transform.localScale.x);
             StartCoroutine(fovCheck());
         }
 
@@ -46,24 +59,29 @@ namespace Mobs
             m_SameDirectionWalkTimer += Time.deltaTime;
             Vector3 rayStartPosition =
                 new Vector3(transform.position.x + 0.5f * m_MovingDirection, transform.position.y, 0);
-            m_raycastHit = Physics2D.Raycast(rayStartPosition, Vector2.down, transform.localScale.y * 2.25f,m_GroundLayerMask);
-            m_Grounded = m_raycastHit.collider != null;
-            if (m_SameDirectionWalkTimer > m_RandomTimeOfWalkingInSameDirection && !getCanSeePlayer())
+            m_RaycastHit = Physics2D.Raycast(rayStartPosition, Vector2.down, transform.localScale.y * 2.25f,m_GroundLayerMask);
+            m_Grounded = m_RaycastHit.collider != null;
+            if (m_SameDirectionWalkTimer >= m_RandomTimeOfWalkingInSameDirection && !getCanSeePlayer())
             {
                 StartCoroutine(patrolStopForThink());
             }
             if (!GetIsGrounded() && m_RigidBody.velocity.y > 0)
             {
-                m_feetBoxCollider2D.enabled = false;
+                m_FeetBoxCollider2D.enabled = false;
             }
             if (m_RigidBody.velocity.y <= 0)
             {
-                m_feetBoxCollider2D.enabled = true;
+                m_FeetBoxCollider2D.enabled = true;
             }
         }
 
         private void FixedUpdate()
         {
+            if (isHittingWall() || isNearEdge())
+            {
+                StartCoroutine(obstacleEncounterHandler());
+            }
+            
             if (!getCanSeePlayer())
             {
                 m_RigidBody.velocity = new Vector3(m_MovingDirection * m_WalkingSpeed, m_RigidBody.velocity.y);
@@ -73,51 +91,29 @@ namespace Mobs
                 m_MovingDirection = m_PlayerGameObject.transform.position.x.CompareTo(transform.position.x);
                 m_RigidBody.velocity = new Vector2(m_MovingDirection * m_WalkingSpeed, m_RigidBody.velocity.y);
                 changeLookingDirection();
-
-            }
-
-            if (isHittingWall() || isNearEdge())
-            {
-                changeMovingDirection();
             }
         }
 
         private bool isHittingWall()
         {
-            bool isHittingWall = false;
-            float castDistance = m_BaseCastDistance;
-
-            if (m_MovingDirection < 0)
-            {
-                castDistance = -m_BaseCastDistance;
-            }
-
             Vector3 targetPosition = m_CastPosition.position;
-            targetPosition.x += castDistance + m_MovingDirection * transform.localScale.y * 2;
-
-            Debug.DrawLine(m_CastPosition.position, targetPosition, Color.red);
-            if (Physics2D.Linecast(m_CastPosition.position, targetPosition, m_GroundLayerMask))
-            {
-                isHittingWall = true;
-            }
-
-            return isHittingWall;
+            
+            targetPosition.x += m_MovingDirection * m_FeetBoxCollider2D.size.x * m_BaseCastDistance * 1.25f;
+           
+            return Physics2D.Linecast(m_CastPosition.position, targetPosition, m_GroundLayerMask).collider != null;
         }
 
         private bool isNearEdge()
         {
-            bool isNearEdge = true;
             float castDistance = m_BaseCastDistance;
-            Vector3 targetPosition = m_CastPosition.position;
-            targetPosition.y -= transform.localScale.y * 3f;
-            targetPosition.x += m_MovingDirection * transform.localScale.y;
-            Debug.DrawLine(m_CastPosition.position, targetPosition, Color.green);
-            if (Physics2D.Linecast(m_CastPosition.position, targetPosition, m_GroundLayerMask))
-            {
-                isNearEdge = false;
-            }
-
-            return isNearEdge;
+            Vector3 targetPosition = m_FeetBoxCollider2D.transform.position;
+            Vector3 startPosition = m_CastPosition.position;
+            
+            startPosition.y -= transform.localScale.y;
+            targetPosition.y -= castDistance * 2f;
+            targetPosition.x += castDistance * m_MovingDirection * 0.5f;
+            
+            return Physics2D.Linecast(startPosition, targetPosition, m_GroundLayerMask).collider == null;
         }
 
         private void changeMovingDirection()
@@ -133,7 +129,7 @@ namespace Mobs
         private void changeLookingDirection()
         {
             Vector3 currentScale = transform.localScale;
-            if (Math.Abs(Mathf.Sign(currentScale.x) - Mathf.Sign(m_MovingDirection)) > 0)
+            if (!Mathf.Sign(currentScale.x).Equals(Mathf.Sign(m_MovingDirection)))
             {
                 transform.localScale = new Vector3(-currentScale.x, currentScale.y, currentScale.z);
             }
@@ -152,9 +148,19 @@ namespace Mobs
                 Random.Range(m_MinWalkingOnSameDirectionTime, m_MaxWalkingOnSameDirectionTime);
         }
 
+        private IEnumerator obstacleEncounterHandler()
+        {
+            m_SameDirectionWalkTimer = 0;
+            m_MovingDirection *= -1;
+            changeLookingDirection();
+            m_SameDirectionWalkTimer = 0;
+            m_RandomTimeOfWalkingInSameDirection = Random.Range(m_MinWalkingOnSameDirectionTime, m_MaxWalkingOnSameDirectionTime);
+            yield return new WaitForSeconds(m_RandomTimeOfWalkingInSameDirection);
+            m_encounterObstacle = false;
+        }
+
         private IEnumerator fovCheck()
         {
-
             WaitForSeconds wait = new WaitForSeconds(0.2f);
             while (true)
             {
@@ -166,26 +172,24 @@ namespace Mobs
 
         private void fov()
         {
-            Collider2D[] rangeCheck = Physics2D.OverlapCircleAll(transform.position,
+            Collider2D playerInRangeCheck = Physics2D.OverlapCircle(transform.position,
                 m_MobFieldOfViewRadius * transform.localScale.y, m_PlayerLayerMask);
 
-            if (rangeCheck.Length > 0)
+            if (playerInRangeCheck != null)
             {
-                Transform target = rangeCheck[0].transform;
+                Transform target = playerInRangeCheck.transform;
                 Vector2 directionToTarget = (target.position - transform.position).normalized;
                 Debug.DrawRay(transform.position,
-                    (directionToTarget * (m_MobFieldOfViewRadius * transform.localScale.y)), Color.red, 2);
+                    (directionToTarget * (m_MobFieldOfViewRadius * transform.localScale.y)), Color.red, 1);
 
                 float distanceToTarget = Vector2.Distance(transform.position, target.position);
-                if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, m_GroundLayerMask))
+                if (Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, m_GroundLayerMask).collider == null)
                 {
-                    setCanSeePlayer(true);
                     m_PlayerGameObject = target.gameObject;
                 }
-                else
-                {
-                    setCanSeePlayer(false);
-                }
+                
+                m_encounterObstacle = !m_encounterObstacle ? isHittingWall() || isNearEdge() : m_encounterObstacle;
+                setCanSeePlayer(!m_encounterObstacle);
             }
 
             else if (m_CanSeePlayer)
@@ -207,17 +211,37 @@ namespace Mobs
 
         private void OnDrawGizmos()
         {
+            float castDistance = m_BaseCastDistance;
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, m_MobFieldOfViewRadius * transform.localScale.y);
-            Gizmos.color = Color.cyan;
-            Vector3 rayStartPosition =
-                new Vector3(transform.position.x + 0.5f * m_MovingDirection, transform.position.y, 0);
-            Gizmos.DrawRay(rayStartPosition,new Vector3(0,-1 * transform.localScale.y * 2.25f,0));
+            
+            Gizmos.color = Color.green;
+            
+            Vector3 startPosition = m_CastPosition.position;
+            startPosition.y -= transform.localScale.y;
+            
+            Vector3 targetPosition = m_FeetBoxCollider2D.transform.position;
+            targetPosition.y -= castDistance * 2f;
+            targetPosition.x += castDistance * m_MovingDirection * 0.5f;
+            
+            Gizmos.DrawLine(startPosition, targetPosition);
+            
+            Gizmos.color = Color.magenta;
+            targetPosition = m_CastPosition.position;
+            targetPosition.x += m_MovingDirection * m_FeetBoxCollider2D.size.x * m_BaseCastDistance * 1.25f;
+            Gizmos.DrawLine(m_CastPosition.position, targetPosition);
+            
+            Gizmos.color = Color.Lerp(Color.red, Color.yellow, 0.5f);
+            startPosition = new Vector3(transform.position.x + 0.5f * m_MovingDirection, transform.position.y, 0);
+            targetPosition = startPosition;
+            targetPosition.y -= transform.localScale.y * 2.25f;
+            Gizmos.DrawLine(m_CastPosition.position, targetPosition);
         }
         
         private bool GetIsGrounded()
         {
             return m_Grounded;
         }
+        
     }
 }
