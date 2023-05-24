@@ -2197,18 +2197,28 @@ MonoBehaviour:
       spriteIndex: 2
       corner: 1
       m_CornerMode: 1
-    - position: {x: -2.5892944, y: 0.5802536, z: 0}
+    - position: {x: -2.5892968, y: 0.5802533, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
-      rightTangent: {x: 0, y: 0, z: 0}
-      mode: 0
+      rightTangent: {x: 1.546936, y: 0.19115597, z: 0}
+      mode: 2
       height: 0.97
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
+    - position: {x: 0.7689984, y: 1.7757156, z: 0}
+      leftTangent: {x: -1.4240911, y: -0.25072753, z: 0}
+      rightTangent: {x: 0.8308294, y: 0.14754367, z: 0}
+      mode: 1
+      height: 1
+      bevelCutoff: 0
+      bevelSize: 0
+      spriteIndex: 2
+      corner: 1
+      m_CornerMode: 1
     - position: {x: 4.765299, y: 1.489058, z: 0}
-      leftTangent: {x: -5.3640513, y: 1.1095634, z: 0}
+      leftTangent: {x: -1.9792764, y: 0.40941525, z: 0}
       rightTangent: {x: 7.787241, y: -1.6108499, z: 0}
       mode: 1
       height: 1.33
