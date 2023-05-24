@@ -41,9 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats:
-    - _QueueControl: 0
-    - _QueueOffset: 0
+    m_Floats: []
     m_Colors:
-    - _Color: {r: 0.33624265, g: 0.33624265, b: 1.7148374, a: 0}
+    - _Color: {r: 434.71698, g: 145.17905, b: 145.17905, a: 1}
   m_BuildTextureStacks: []

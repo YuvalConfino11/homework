@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2128541361394828340}
   - component: {fileID: 2128541361394828343}
+  - component: {fileID: 2128541361394828342}
   m_Layer: 10
   m_Name: ImaginaryFriendGFX
   m_TagString: Untagged
@@ -84,6 +85,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2128541361394828342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128541361394828341}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5278bef0bee4344be8b497278253c014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImaginaryFriendAttack: {fileID: 11400000, guid: 07d207efe46c4484188a068a8f128969, type: 2}
+  m_MoveSpeedTowardMob: 12
+  m_MoveSpeedTowardPlayer: 12
+  m_FriendDuringAttack: 0
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  m_StartingFriendPos: {fileID: 0}
+  m_FriendHitMob: 0
 --- !u!1 &4707838281379028626
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +121,7 @@ GameObject:
   - component: {fileID: 1976107485801959185}
   m_Layer: 10
   m_Name: ImaginaryFriend
-  m_TagString: ImaginaryFriend
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,8 +133,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4707838281379028626}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -297.76, y: -6.29, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -231.05, y: -5.5, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 1.3333334}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -203,5 +225,6 @@ MonoBehaviour:
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 128
+  m_ImaginaryFriendStartPosition: {fileID: 0}
   m_FriendDuringAttack: 0
   m_FriendHitMob: 0
