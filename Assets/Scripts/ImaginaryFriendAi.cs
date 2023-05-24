@@ -13,8 +13,6 @@ public class ImaginaryFriendAi : MonoBehaviour
     [SerializeField]
     private LayerMask m_LayerMask;
     [SerializeField]
-    private Transform m_ImaginaryFriendStartPosition;
-    [SerializeField]
     private bool m_FriendDuringAttack = false;
     [SerializeField]
     private bool m_FriendHitMob = false;
@@ -25,6 +23,7 @@ public class ImaginaryFriendAi : MonoBehaviour
     private Seeker m_Seeker;
     private Rigidbody2D m_Rigidbody2D;
     private Collider2D m_MobInAttackRadius;
+    private Transform m_ImaginaryFriendStartPosition;
     
     
     // Start is called before the first frame update
@@ -32,7 +31,7 @@ public class ImaginaryFriendAi : MonoBehaviour
     {
         m_Seeker = GetComponent<Seeker>();
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
-        m_MainTarget = m_ImaginaryFriendStartPosition;
+        m_ImaginaryFriendStartPosition = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0);
         InvokeRepeating("UpdatePath", 0f, 0.5f);
     }
 

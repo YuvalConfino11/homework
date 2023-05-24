@@ -15,6 +15,8 @@ namespace Mobs
         private LayerMask m_PlayerLayerMask;
         [SerializeField] 
         private MobStats m_mobStats;
+        [SerializeField]
+        private GameObject m_ManaBall;
         
         private GameObject m_PlayerGameObject;
 
@@ -29,6 +31,7 @@ namespace Mobs
             if (m_mobStats.isDead())
             {
                 Destroy(this.gameObject);
+                Instantiate(m_ManaBall, transform.position, transform.rotation);
             }
         }
 
