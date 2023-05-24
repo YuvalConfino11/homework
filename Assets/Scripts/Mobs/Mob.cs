@@ -1,16 +1,12 @@
-using System;
 using System.Collections;
-using System.Security.Cryptography;
-using Unity.VisualScripting;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Mobs
 {
-    public class ExampleMob : MonoBehaviour
+    public class Mob : MonoBehaviour
     {
         [SerializeField] 
-        private float m_MobFieldOfHitRadius = 1f;
+        private float m_MobFieldOfHitRadius = 0.5f;
         [SerializeField] 
         private LayerMask m_PlayerLayerMask;
         [SerializeField] 
