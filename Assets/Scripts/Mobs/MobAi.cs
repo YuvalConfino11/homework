@@ -126,6 +126,14 @@ namespace Mobs
             changeLookingDirection();
         }
 
+        private IEnumerator obstacleEncounterHandler()
+        {
+            changeMovingDirection();
+            yield return new WaitForSeconds(m_RandomTimeOfWalkingInSameDirection);
+            m_encounterObstacle = false;
+        }
+
+        
         private void changeLookingDirection()
         {
             Vector3 currentScale = transform.localScale;
@@ -148,16 +156,6 @@ namespace Mobs
                 Random.Range(m_MinWalkingOnSameDirectionTime, m_MaxWalkingOnSameDirectionTime);
         }
 
-        private IEnumerator obstacleEncounterHandler()
-        {
-            m_SameDirectionWalkTimer = 0;
-            m_MovingDirection *= -1;
-            changeLookingDirection();
-            m_SameDirectionWalkTimer = 0;
-            m_RandomTimeOfWalkingInSameDirection = Random.Range(m_MinWalkingOnSameDirectionTime, m_MaxWalkingOnSameDirectionTime);
-            yield return new WaitForSeconds(m_RandomTimeOfWalkingInSameDirection);
-            m_encounterObstacle = false;
-        }
 
         private IEnumerator fovCheck()
         {
@@ -186,10 +184,13 @@ namespace Mobs
                 if (Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, m_GroundLayerMask).collider == null)
                 {
                     m_PlayerGameObject = target.gameObject;
+                    m_encounterObstacle = !m_encounterObstacle ? isHittingWall() || isNearEdge() : m_encounterObstacle;
+                    setCanSeePlayer(!m_encounterObstacle);
                 }
-                
-                m_encounterObstacle = !m_encounterObstacle ? isHittingWall() || isNearEdge() : m_encounterObstacle;
-                setCanSeePlayer(!m_encounterObstacle);
+                else
+                {
+                    setCanSeePlayer(false);
+                }
             }
 
             else if (m_CanSeePlayer)
