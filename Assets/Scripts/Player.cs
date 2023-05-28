@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
 using Abilities;
 using Mobs;
 using Skills;
-using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
