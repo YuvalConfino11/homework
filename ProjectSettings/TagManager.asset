@@ -9,7 +9,6 @@ TagManager:
   - Mob
   - Trrugger
   - Floor
-  - ImaginaryFriend
   layers:
   - Default
   - TransparentFX
