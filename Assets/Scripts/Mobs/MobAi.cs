@@ -30,15 +30,9 @@ namespace Mobs
         private BoxCollider2D m_FeetBoxCollider2D;
         [SerializeField]
         private Transform m_CastPosition;
-        [SerializeField] 
-        private MobAnimation m_MobAnimation;
-        [SerializeField] 
-        private float m_GroundCastDistance = 10f;
-        [SerializeField]
-        private bool m_MonsterGrowled;
-        [SerializeField]
-        private string m_monsterAudio;
 
+        [SerializeField] private MobAnimation m_MobAnimation;
+        
         private Rigidbody2D m_RigidBody;
         private GameObject m_PlayerGameObject;
         private bool m_CanSeePlayer;
@@ -46,7 +40,7 @@ namespace Mobs
         private float m_SameDirectionWalkTimer;
         private float m_RandomTimeOfWalkingInSameDirection;
         private RaycastHit2D  m_RaycastHit;
-        private bool m_EncounterObstacle;
+        private bool m_encounterObstacle;
         
 
 
@@ -66,14 +60,15 @@ namespace Mobs
         private void Update()
         {
             m_SameDirectionWalkTimer += Time.deltaTime;
-            Vector3 rayStartPosition = new Vector3(m_CastPosition.position.x, m_CastPosition.position.y, 0);
-            m_RaycastHit = Physics2D.Raycast(rayStartPosition, Vector2.down, m_GroundCastDistance,m_GroundLayerMask);
+            Vector3 rayStartPosition =
+                new Vector3(transform.position.x + 0.5f * m_MovingDirection, transform.position.y, 0);
+            m_RaycastHit = Physics2D.Raycast(rayStartPosition, Vector2.down, transform.localScale.y * 2.25f,m_GroundLayerMask);
             m_Grounded = m_RaycastHit.collider != null;
             if (m_SameDirectionWalkTimer >= m_RandomTimeOfWalkingInSameDirection && !getCanSeePlayer())
             {
                 StartCoroutine(patrolStopForThink());
             }
-            if (!getIsGrounded() && m_RigidBody.velocity.y > 0)
+            if (!GetIsGrounded() && m_RigidBody.velocity.y > 0)
             {
                 m_FeetBoxCollider2D.enabled = false;
             }
@@ -82,7 +77,6 @@ namespace Mobs
                 m_FeetBoxCollider2D.enabled = true;
             }
             m_MobAnimation.PlayMobAnimation(m_RigidBody.velocity.x);
-            MakeSound(m_monsterAudio);
         }
 
         private void FixedUpdate()
@@ -107,7 +101,8 @@ namespace Mobs
         private bool isHittingWall()
         {
             Vector3 targetPosition = m_CastPosition.position;
-            targetPosition.x += m_MovingDirection * m_BaseCastDistance;
+            
+            targetPosition.x += m_MovingDirection * m_FeetBoxCollider2D.size.x * m_BaseCastDistance * 1.25f;
            
             return Physics2D.Linecast(m_CastPosition.position, targetPosition, m_GroundLayerMask).collider != null;
         }
@@ -139,7 +134,7 @@ namespace Mobs
         {
             changeMovingDirection();
             yield return new WaitForSeconds(m_RandomTimeOfWalkingInSameDirection);
-            m_EncounterObstacle = false;
+            m_encounterObstacle = false;
         }
 
         
@@ -193,8 +188,8 @@ namespace Mobs
                 if (Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, m_GroundLayerMask).collider == null)
                 {
                     m_PlayerGameObject = target.gameObject;
-                    m_EncounterObstacle = !m_EncounterObstacle ? isHittingWall() || isNearEdge() : m_EncounterObstacle;
-                    setCanSeePlayer(!m_EncounterObstacle);
+                    m_encounterObstacle = !m_encounterObstacle ? isHittingWall() || isNearEdge() : m_encounterObstacle;
+                    setCanSeePlayer(!m_encounterObstacle);
                 }
                 else
                 {
@@ -214,59 +209,43 @@ namespace Mobs
         }
 
 
-        private void setCanSeePlayer(bool i_CanSeePlayer)
+        private void setCanSeePlayer(bool i_canSeePlayer)
         {
-            m_CanSeePlayer = i_CanSeePlayer;
+            m_CanSeePlayer = i_canSeePlayer;
         }
 
         private void OnDrawGizmos()
         {
+            float castDistance = m_BaseCastDistance;
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(m_CastPosition.position, m_MobFieldOfViewRadius);
-            
-            Gizmos.color = Color.cyan;
-            Vector3 nearEdgeTargetPosition = m_FeetBoxCollider2D.transform.position;
-            Vector3 nearEdgeStartPosition = m_CastPosition.position;
-            nearEdgeTargetPosition.y -= m_BaseCastDistance * 2f;
-            nearEdgeTargetPosition.x += m_BaseCastDistance * m_MovingDirection * 1.25f;
-            Gizmos.DrawLine(nearEdgeStartPosition, nearEdgeTargetPosition);
-            Vector3 hitWallStartPosition = m_CastPosition.position;
-            Vector3 hitWallTargetPosition = m_CastPosition.position;
-            hitWallTargetPosition.x += m_MovingDirection * m_BaseCastDistance;
-            Gizmos.DrawLine(hitWallStartPosition, hitWallTargetPosition);
+            Gizmos.DrawWireSphere(transform.position, m_MobFieldOfViewRadius * transform.localScale.y);
             
             Gizmos.color = Color.green;
-            Vector3 groundedPosition = m_CastPosition.position;
-            Vector3 groundedTargetPosition = groundedPosition;
-            groundedTargetPosition.y -= m_GroundCastDistance;
-            Gizmos.DrawLine(groundedPosition, groundedTargetPosition);
-
+            
+            Vector3 startPosition = m_CastPosition.position;
+            startPosition.y -= transform.localScale.y;
+            
+            Vector3 targetPosition = m_FeetBoxCollider2D.transform.position;
+            targetPosition.y -= castDistance * 2f;
+            targetPosition.x += castDistance * m_MovingDirection * 0.5f;
+            
+            Gizmos.DrawLine(startPosition, targetPosition);
+            
+            Gizmos.color = Color.magenta;
+            targetPosition = m_CastPosition.position;
+            targetPosition.x += m_MovingDirection * m_FeetBoxCollider2D.size.x * m_BaseCastDistance * 1.25f;
+            Gizmos.DrawLine(m_CastPosition.position, targetPosition);
+            
+            Gizmos.color = Color.Lerp(Color.red, Color.yellow, 0.5f);
+            startPosition = new Vector3(transform.position.x + 0.5f * m_MovingDirection, transform.position.y, 0);
+            targetPosition = startPosition;
+            targetPosition.y -= transform.localScale.y * 2.25f;
+            Gizmos.DrawLine(m_CastPosition.position, targetPosition);
         }
         
-        private bool getIsGrounded()
+        private bool GetIsGrounded()
         {
             return m_Grounded;
-        }
-        //// omer after adding sound add in parentasis of the function string i_ audio which will get the required audio
-        private void MakeSound(string i_audio)
-        {
-            Collider2D playerInRangeCheck = Physics2D.OverlapCircle(transform.position, m_MobFieldOfViewRadius * transform.localScale.y, m_PlayerLayerMask);
-            if (playerInRangeCheck != null)
-            {
-                if (m_MonsterGrowled == false)
-                {
-                    AudioManager.Instance.PlaySFX(i_audio);
-                    m_MonsterGrowled = true;
-                }
-                else
-                {
-                    return;
-                }
-            }
-            else
-            {
-                m_MonsterGrowled = false;
-            }
         }
         
     }

@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D m_rigidBody;
     private CapsuleCollider2D m_capsuleCollider;
     private Collider2D[] m_mobsInExplosionRadius;
-    private bool m_isFacingRight = false;
+    private bool m_isFacingRight = true;
     private BoxCollider2D m_feetBoxCollider2D;
     
 
