@@ -155,7 +155,17 @@ public class Player : MonoBehaviour
         {
             m_feetBoxCollider2D.enabled = false;
         }
+        m_capsuleCollider.isTrigger = true;
     }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Ground"))
+        {
+            m_capsuleCollider.isTrigger = false;
+        }
+    }
+
 
     private void movement(float i_horizontalInput)
     {

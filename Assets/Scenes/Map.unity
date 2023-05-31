@@ -1468,6 +1468,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7525364982458621804, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: fc994adede1b14a52a2a9ad018277093, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
 --- !u!1 &282950180
@@ -1554,6 +1558,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &295460231 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 953440646292869076, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
+  m_PrefabInstance: {fileID: 270445006}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &355072070
 GameObject:
   m_ObjectHideFlags: 0
@@ -4513,7 +4522,7 @@ GameObject:
   - component: {fileID: 1172312639}
   m_Layer: 0
   m_Name: Platform1
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9376,7 +9385,7 @@ GameObject:
   - component: {fileID: 2023624957}
   m_Layer: 0
   m_Name: Platform2
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10224,6 +10233,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2128541361394828342, guid: a3dd9a67c9b7d46f2968c1343540da1c, type: 3}
+      propertyPath: m_StartingFriendPos
+      value: 
+      objectReference: {fileID: 295460231}
     - target: {fileID: 4707838281379028626, guid: a3dd9a67c9b7d46f2968c1343540da1c, type: 3}
       propertyPath: m_Name
       value: ImaginaryFriend
