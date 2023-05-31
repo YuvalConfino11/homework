@@ -5,6 +5,7 @@ using Mobs;
 using Skills;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class Player : MonoBehaviour
     private float m_CurrentHealthPoint = 100;
     [SerializeField]
     private float m_ManaPoint;
+    [SerializeField]
+    private float m_MaxManaPoint = 100;
+    [SerializeField]
+    private ManaBarScript m_ManaBar;
     [SerializeField]
     private float m_ExperiencePoints;
     [SerializeField]
@@ -71,7 +76,9 @@ public class Player : MonoBehaviour
         m_rigidBody = GetComponent<Rigidbody2D>();
         m_capsuleCollider = GetComponent<CapsuleCollider2D>();
         m_feetBoxCollider2D = GetComponent<BoxCollider2D>();
-        m_ImaginaryFriend = GameObject.FindGameObjectWithTag("ImaginaryFriend");
+
+        m_ManaPoint = GetMaxMana();
+        m_ManaBar.SetMaxMana(GetMaxMana());
     }
 
     void Update()
@@ -112,6 +119,23 @@ public class Player : MonoBehaviour
             m_feetBoxCollider2D.enabled = true;
         }
         checkForUnlockedSAvailabilities();
+
+        if(m_CurrentHealthPoint == 0)
+        {
+            SceneManager.LoadScene("DeathScene");
+        }
+
+
+
+        ////////delete later/////
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            SetMana(-10);
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            SetMana(10);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -328,4 +352,20 @@ public class Player : MonoBehaviour
     {
         return m_CurrentHealthPoint;
     }
+
+    public float GetMana()
+    {
+        return m_ManaPoint;
+    }
+    public void SetMana(float mana)
+    {
+        m_ManaPoint += mana;
+        m_ManaPoint = Math.Clamp(m_ManaPoint, 0f, 100f);
+        m_ManaBar.SetMana(m_ManaPoint);
+    }
+    public float GetMaxMana()
+    {
+        return m_MaxManaPoint;
+    }
+
 }
