@@ -1300,7 +1300,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048463905334582}
   - component: {fileID: 3207048463905334581}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Background trees blur_6 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1384,7 +1384,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048463906994958}
   - component: {fileID: 3207048463906994957}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Tilable background trees
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1468,7 +1468,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048464143902472}
   - component: {fileID: 3207048464143902487}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Background trees blur_6 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1552,7 +1552,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048464144788465}
   - component: {fileID: 3207048464144788464}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Background trees blur_3 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1636,7 +1636,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048464207123148}
   - component: {fileID: 3207048464207123147}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Background trees blur_3 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1720,7 +1720,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048464252297853}
   - component: {fileID: 3207048464252297852}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: grass field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1804,7 +1804,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048464361590416}
   - component: {fileID: 3207048464361590431}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Background trees blur_3 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1921,7 +1921,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048464445844164}
   - component: {fileID: 3207048464445844163}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Background trees blur_3 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2004,7 +2004,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3207048464460769509}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: -Foreground-
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2042,7 +2042,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048464499228015}
   - component: {fileID: 3207048464499228014}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Background trees blur_6 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2126,7 +2126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048464506688913}
   - component: {fileID: 3207048464506688912}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Tree 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2855,7 +2855,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048464551073890}
   - component: {fileID: 3207048464551073889}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: grass field_4 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2939,7 +2939,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048464713648907}
   - component: {fileID: 3207048464713648906}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Background trees blur_6 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3023,7 +3023,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048464731016559}
   - component: {fileID: 3207048464731016558}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Background trees blur_3 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3106,7 +3106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3207048464794975292}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: -Ground-
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3141,7 +3141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048464812150322}
   - component: {fileID: 3207048464812150321}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Background trees blur_3 (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3224,7 +3224,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3207048464822447856}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: -Background-
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3608,7 +3608,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048464921260762}
   - component: {fileID: 3207048464921260761}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Tilable background trees (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3692,7 +3692,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048464928302295}
   - component: {fileID: 3207048464928302294}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Background trees blur_3 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3776,7 +3776,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048465001636473}
   - component: {fileID: 3207048465001636472}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: grass field_4 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3860,7 +3860,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048465041248483}
   - component: {fileID: 3207048465041248482}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: grass field_4 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3944,7 +3944,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048465051461745}
   - component: {fileID: 3207048465051461744}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: grass field_4 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4028,7 +4028,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048465052432970}
   - component: {fileID: 3207048465052432969}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: grass field_4 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4111,7 +4111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3207048465070284736}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Backgrounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4145,7 +4145,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3207048465084672006}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: -Platform-
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4197,7 +4197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048465102723528}
   - component: {fileID: 3207048465102723543}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Background trees blur_3 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4282,7 +4282,7 @@ GameObject:
   - component: {fileID: 3207048465122514675}
   - component: {fileID: 3207048465122514673}
   - component: {fileID: 3207048465122514674}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Grass field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4458,7 +4458,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048465141915468}
   - component: {fileID: 3207048465141915467}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Background trees blur_6 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4542,7 +4542,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048465150205945}
   - component: {fileID: 3207048465150205944}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: grass field_4 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4626,7 +4626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048465260059888}
   - component: {fileID: 3207048465260059903}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Background trees blur_3 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4710,7 +4710,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048465268445925}
   - component: {fileID: 3207048465268445924}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Background trees blur_3 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4794,7 +4794,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048465365472595}
   - component: {fileID: 3207048465365472594}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4911,7 +4911,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048465436802689}
   - component: {fileID: 3207048465436802688}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Background trees blur_3 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4995,7 +4995,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048465443233571}
   - component: {fileID: 3207048465443233570}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Background trees blur_6 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5079,7 +5079,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048465463052491}
   - component: {fileID: 3207048465463052490}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Background trees blur_3 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5163,7 +5163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048465538362374}
   - component: {fileID: 3207048465538362373}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Background trees blur_3 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5247,7 +5247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048465540147757}
   - component: {fileID: 3207048465540147756}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: grass field_4 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7277,7 +7277,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048465561134812}
   - component: {fileID: 3207048465561134811}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Background trees blur_3 (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7361,7 +7361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048465603728753}
   - component: {fileID: 3207048465603728752}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: grass field_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8109,7 +8109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3207048465618260533}
   - component: {fileID: 3207048465618260532}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Background trees blur_3 (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8183,6 +8183,69 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4413422911689756663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6415444603007992100}
+  m_Layer: 9
+  m_Name: TopLeftSpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6415444603007992100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4413422911689756663}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -684, y: 77, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2758947705670265176}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5419200659420692357
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2758947705670265176}
+  m_Layer: 9
+  m_Name: -SpawnMangers-
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2758947705670265176
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5419200659420692357}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 96.067566, y: 155.60947, z: 268.05402}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6415444603007992100}
+  m_Father: {fileID: 9197569008643517918}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6064131090005809418
 GameObject:
   m_ObjectHideFlags: 0
@@ -8192,9 +8255,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9197569008643517918}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Map
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8215,6 +8278,7 @@ Transform:
   - {fileID: 3207048464822447856}
   - {fileID: 3207048464794975292}
   - {fileID: 3207048465084672006}
+  - {fileID: 2758947705670265176}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8615,6 +8679,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform2 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6327179777697808153, guid: 274b320baa62b4b48b1fc117a9249aa8, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 274b320baa62b4b48b1fc117a9249aa8, type: 3}
 --- !u!4 &8885340286908817236 stripped
@@ -8677,6 +8745,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform2
       objectReference: {fileID: 0}
+    - target: {fileID: 6327179777697808153, guid: 274b320baa62b4b48b1fc117a9249aa8, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 274b320baa62b4b48b1fc117a9249aa8, type: 3}
 --- !u!4 &8885340286911775888 stripped
@@ -8738,6 +8810,10 @@ PrefabInstance:
     - target: {fileID: 6327179777697808153, guid: 274b320baa62b4b48b1fc117a9249aa8, type: 3}
       propertyPath: m_Name
       value: Platform2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6327179777697808153, guid: 274b320baa62b4b48b1fc117a9249aa8, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 274b320baa62b4b48b1fc117a9249aa8, type: 3}
@@ -8924,6 +9000,10 @@ PrefabInstance:
     - target: {fileID: 6327179777697808153, guid: 274b320baa62b4b48b1fc117a9249aa8, type: 3}
       propertyPath: m_Name
       value: Platform2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6327179777697808153, guid: 274b320baa62b4b48b1fc117a9249aa8, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 274b320baa62b4b48b1fc117a9249aa8, type: 3}
@@ -9173,6 +9253,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform2 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6327179777697808153, guid: 274b320baa62b4b48b1fc117a9249aa8, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 274b320baa62b4b48b1fc117a9249aa8, type: 3}
 --- !u!4 &8885340288581217149 stripped
@@ -9359,6 +9443,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform2 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6327179777697808153, guid: 274b320baa62b4b48b1fc117a9249aa8, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 274b320baa62b4b48b1fc117a9249aa8, type: 3}
 --- !u!4 &8885340287939070633 stripped
@@ -9421,6 +9509,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6327179777697808153, guid: 274b320baa62b4b48b1fc117a9249aa8, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 274b320baa62b4b48b1fc117a9249aa8, type: 3}
 --- !u!4 &8885340287927072531 stripped
@@ -9482,6 +9574,10 @@ PrefabInstance:
     - target: {fileID: 6327179777697808153, guid: 274b320baa62b4b48b1fc117a9249aa8, type: 3}
       propertyPath: m_Name
       value: Platform2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6327179777697808153, guid: 274b320baa62b4b48b1fc117a9249aa8, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 274b320baa62b4b48b1fc117a9249aa8, type: 3}
