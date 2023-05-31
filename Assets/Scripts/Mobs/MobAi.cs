@@ -30,6 +30,8 @@ namespace Mobs
         private BoxCollider2D m_FeetBoxCollider2D;
         [SerializeField]
         private Transform m_CastPosition;
+
+        [SerializeField] private MobAnimation m_MobAnimation;
         
         private Rigidbody2D m_RigidBody;
         private GameObject m_PlayerGameObject;
@@ -39,6 +41,7 @@ namespace Mobs
         private float m_RandomTimeOfWalkingInSameDirection;
         private RaycastHit2D  m_RaycastHit;
         private bool m_encounterObstacle;
+        
 
 
         private void Awake()
@@ -73,6 +76,7 @@ namespace Mobs
             {
                 m_FeetBoxCollider2D.enabled = true;
             }
+            m_MobAnimation.PlayMobAnimation(m_RigidBody.velocity.x);
         }
 
         private void FixedUpdate()
