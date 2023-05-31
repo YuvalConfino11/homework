@@ -32,6 +32,7 @@ public class ImaginaryFriendAi : MonoBehaviour
         m_Seeker = GetComponent<Seeker>();
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_ImaginaryFriendStartPosition = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0);
+        
         InvokeRepeating("UpdatePath", 0f, 0.5f);
     }
 

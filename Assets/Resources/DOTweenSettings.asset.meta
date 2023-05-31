@@ -1,8 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/DOTweenSettings.asset.meta
 guid: 4b314e9142b60a04e923dca161bd0293
+========
+guid: 072acb60326d24f5192a9a86656608a1
+>>>>>>>> Omri:Assets/Shaders/GlowMet.mat.meta
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 11400000
+  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

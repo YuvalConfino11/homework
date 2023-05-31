@@ -53,7 +53,11 @@ public class Player : MonoBehaviour
     private LayerMask m_MobLayerMask;
     [SerializeField]
     private LayerMask m_groundLayerMask;
-
+    [SerializeField]
+    private bool m_isAbleToShot = true;
+    [SerializeField]
+    private float m_shootingRate = 0.5f;
+    
     private float m_lastMovingDirection = 1f;
     private float m_LastArrowKeyPressTime;
     private RaycastHit2D  m_raycastHit;
@@ -62,6 +66,7 @@ public class Player : MonoBehaviour
     private Collider2D[] m_mobsInExplosionRadius;
     private bool m_isFacingRight = false;
     private BoxCollider2D m_feetBoxCollider2D;
+    
     
 
 
@@ -108,11 +113,7 @@ public class Player : MonoBehaviour
         Vector3 rayStartPosition =
             new Vector3(transform.position.x + 0.5f * m_lastMovingDirection, transform.position.y, 0);
         m_raycastHit = Physics2D.Raycast(rayStartPosition, Vector2.down, m_capsuleCollider.size.y *2.75f,m_groundLayerMask);
-        m_Grounded = m_raycastHit.collider != null;
-        if (!GetIsGrounded() && m_rigidBody.velocity.y > 0)
-        {
-            m_feetBoxCollider2D.enabled = false;
-        }
+        m_Grounded = m_raycastHit.collider != null &&  m_rigidBody.velocity.y <= 0;
         if (m_rigidBody.velocity.y <= 0)
         {
             m_feetBoxCollider2D.enabled = true;
@@ -136,7 +137,65 @@ public class Player : MonoBehaviour
             SetMana(10);
         }
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            if (m_rigidBody.velocity.y > 0)
+            {
+                m_feetBoxCollider2D.enabled = false;
+            }
+            else
+            {
+                m_feetBoxCollider2D.enabled = true; 
+            }
+        }
+
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            m_feetBoxCollider2D.enabled = true;
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            if (m_rigidBody.velocity.y > 0)
+            {
+                m_feetBoxCollider2D.enabled = false;
+            }
+            else
+            {
+                m_feetBoxCollider2D.enabled = true; 
+            }
+        }
+
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            m_feetBoxCollider2D.enabled = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (m_rigidBody.velocity.y > 0)
+        {
+            m_feetBoxCollider2D.enabled = false;
+        }
+        m_capsuleCollider.isTrigger = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Ground"))
+        {
+            m_capsuleCollider.isTrigger = false;
+        }
+    }
+
+
     private void movement(float i_horizontalInput)
     {
         m_rigidBody.velocity = new Vector2(i_horizontalInput * m_WalkingSpeed, m_rigidBody.velocity.y);
@@ -199,8 +258,14 @@ public class Player : MonoBehaviour
 
     private void attack()
     {
-        GameObject bullet = Instantiate(m_bullet, transform.position, transform.rotation);
-        bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * (m_lastMovingDirection * m_bulletSpeed);
+        if (m_isAbleToShot)
+        {
+            m_isAbleToShot = false;
+            GameObject bullet = Instantiate(m_bullet, transform.position, transform.rotation);
+            bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * (m_lastMovingDirection * m_bulletSpeed);
+            StartCoroutine(shootingCooldown());
+        }
+        
     }
 
     private bool GetIsGrounded()
@@ -264,6 +329,13 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(i_cooldownTime);
         i_Ability.SetIsAvailable(true);
+    }
+    
+    private IEnumerator shootingCooldown()
+    {
+        yield return new WaitForSeconds(m_shootingRate);
+
+        m_isAbleToShot = true;
     }
 
     public void getHit(float i_damage)
