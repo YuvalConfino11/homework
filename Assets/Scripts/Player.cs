@@ -49,6 +49,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private LayerMask m_groundLayerMask;
 
+    [SerializeField] private PlayerAnimation m_PlayerAnimation;
+
     private float m_lastMovingDirection = 1f;
     private float m_LastArrowKeyPressTime;
     private RaycastHit2D  m_raycastHit;
@@ -100,13 +102,14 @@ public class Player : MonoBehaviour
         }
         Vector3 rayStartPosition =
             new Vector3(transform.position.x + 0.5f * m_lastMovingDirection, transform.position.y, 0);
-        m_raycastHit = Physics2D.Raycast(rayStartPosition, Vector2.down, m_capsuleCollider.size.y *2.75f,m_groundLayerMask);
-        m_Grounded = m_raycastHit.collider != null &&  m_rigidBody.velocity.y <= 0;
+        m_raycastHit = Physics2D.Raycast(rayStartPosition, Vector2.down, m_capsuleCollider.size.y * 1.25f,m_groundLayerMask);
+        m_Grounded = m_raycastHit.collider != null;
         if (m_rigidBody.velocity.y <= 0)
         {
             m_feetBoxCollider2D.enabled = true;
         }
         checkForUnlockedSAvailabilities();
+        m_PlayerAnimation.PlayPlayerAnimation(m_rigidBody.velocity.x, m_rigidBody.velocity.y, GetIsGrounded());
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -182,6 +185,7 @@ public class Player : MonoBehaviour
         {
             float jumpForce = Mathf.Sqrt( -2 * m_JumpHeight * (Physics2D.gravity.y * m_rigidBody.gravityScale));
             m_rigidBody.velocity = new Vector2(m_rigidBody.velocity.x, jumpForce);
+            m_PlayerAnimation.JumpAnimation();
             m_DoubleJump.GetAbilityStats().SetIsAvailable(true);
         }
         else if (m_DoubleJump.GetAbilityStats().GetIsAvailable() && m_DoubleJump.GetAbilityStats().GetIsUnlocked())
@@ -192,6 +196,7 @@ public class Player : MonoBehaviour
             }
             float jumpForce = Mathf.Sqrt( -2 * m_JumpHeight * (Physics2D.gravity.y * m_rigidBody.gravityScale));
             m_rigidBody.velocity = Vector2.up * jumpForce;
+            m_PlayerAnimation.JumpAnimation();
             m_DoubleJump.GetAbilityStats().SetIsAvailable(false);
             m_DoubleJump.RunAbility(m_JumpHeight, m_rigidBody);
         }
@@ -258,7 +263,7 @@ public class Player : MonoBehaviour
             Gizmos.color = Color.red;
             Vector3 rayStartPosition =
                 new Vector3(transform.position.x + 0.5f * m_lastMovingDirection, transform.position.y, 0);
-            Gizmos.DrawRay(rayStartPosition,new Vector3(0,-1 * m_capsuleCollider.size.y * 2.75f,0));
+            Gizmos.DrawRay(rayStartPosition,new Vector3(0,-1 * m_capsuleCollider.size.y * 1.25f,0));
         }
     }
     
