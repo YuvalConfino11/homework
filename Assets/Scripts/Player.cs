@@ -124,18 +124,6 @@ public class Player : MonoBehaviour
         {
             SceneManager.LoadScene("DeathScene");
         }
-
-
-
-        ////////delete later/////
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            SetMana(-10);
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            SetMana(10);
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
