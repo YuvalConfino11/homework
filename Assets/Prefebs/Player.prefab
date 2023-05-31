@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 9010140335367180418}
   - component: {fileID: 495996886149879785}
-  m_Layer: 10
-  m_Name: ImagineryFriendStartPosition
+  m_Layer: 6
+  m_Name: ImaginaryFriendStartPosition
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953440646292869076}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.75, y: 1.462, z: 0}
+  m_LocalPosition: {x: -8.4, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4227881873574935474}
   - component: {fileID: 1894751276267746035}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,8 +70,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1717031959415057891}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.33, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalPosition: {x: 1.7, y: -1.6, z: 0}
+  m_LocalScale: {x: -0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5279076933203895377}
@@ -115,8 +115,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1177013325
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7f694d1793e334d88b7b5b3f39aee87b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 3070312050616550591}
   - component: {fileID: 8395473248632379404}
   - component: {fileID: 2174727239527324068}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ Transform:
   m_GameObject: {fileID: 5279076933203895378}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2, y: -1.5, z: 0}
-  m_LocalScale: {x: 5.0885, y: 5.0885, z: 1.0177}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9010140335367180418}
@@ -182,7 +182,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fc994adede1b14a52a2a9ad018277093, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -203,17 +203,18 @@ MonoBehaviour:
   m_CurrentHealthPoint: 100
   m_ManaPoint: 0
   m_ExperiencePoints: 0
-  m_Level: 1
+  m_Level: 2
   m_Attack: 0
   m_Defence: 0
+  m_DefaultGravityScale: 5
   m_WalkingSpeed: 20
   m_Grounded: 1
-  m_JumpHeight: 10
+  m_JumpHeight: 30
   m_DoubleJump: {fileID: 11400000, guid: c5ea01e8c31624e1ead50c365cf92820, type: 2}
   m_Glide: {fileID: 11400000, guid: 11b5e48388c2e452899168f9a023d2dc, type: 2}
   m_Dash: {fileID: 11400000, guid: 246c30c96851940c4b4a7c85512e01b0, type: 2}
   m_EnergyExplosion: {fileID: 11400000, guid: 02a886e824e53411885b808e544f916f, type: 2}
-  m_ImaginaryFriend: {fileID: 4707838281379028626, guid: a3dd9a67c9b7d46f2968c1343540da1c, type: 3}
+  m_ImaginaryFriend: {fileID: 0}
   m_bulletSpeed: 35
   m_bullet: {fileID: 5051759465369138895, guid: 5ec0ddc53edbdc043ab4fc7bb5741e2d, type: 3}
   m_MobLayerMask:
@@ -235,8 +236,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.41828004, y: 0.1184681}
-  m_Size: {x: 1.1842835, y: 4.5473185}
+  m_Offset: {x: -0.00036621094, y: -1.4070892}
+  m_Size: {x: 5.224365, y: 22.33078}
   m_Direction: 0
 --- !u!61 &2174727239527324068
 BoxCollider2D:
@@ -251,7 +252,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.3549347, y: -2.145978}
+  m_Offset: {x: -0.23919678, y: -11.987137}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -262,5 +263,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8580246, y: 0.06288767}
+  m_Size: {x: 4.0631104, y: 0.59609985}
   m_EdgeRadius: 0
