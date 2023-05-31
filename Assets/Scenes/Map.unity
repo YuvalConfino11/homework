@@ -1468,10 +1468,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7525364982458621804, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: fc994adede1b14a52a2a9ad018277093, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
 --- !u!1 &282950180
@@ -1558,11 +1554,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &295460231 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 953440646292869076, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
-  m_PrefabInstance: {fileID: 270445006}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &355072070
 GameObject:
   m_ObjectHideFlags: 0
@@ -5500,7 +5491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAAAQIewaDXf2igIAAEsFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMtymzAU/RWP1jUDGLDpriWO00UST9xONmxkdDEaC4mRRGwn43+vJMBQd+Xrc+7j3If4QpSrBgot5EZS8iwIoO8zZG30bTaST3DGB8F39BMGn3dKdGWdsPN5w5oKgwc2TIkatKTFD35g1tk3YMtpKWS9JgfIhNLKwCVmCgwlhbbR3EBfM3Q2P/PUhlyMFS6t9Wms1J9djVkA1yAnrkEaeekiWCTJEBJ4YZwm4WrRR84TbxXGSZys5/7SJWl5wXDdALEdjbmWi9CLwiDtEwVR4kWraLGMXRA3nff+gRclHWMVCcao6vUjfWncfDLcqNZ0bxwIxWYeTnTgWVEV0EOlrdRp+GtZKtD9uCS+PFBpBtvlRT9FN+0aq2Mn+AOz1laKg9DJ65I+/8fPA0eXUtRPQ93AtzV0RYvjG74UWOnJOqbww0S6m9sJsyPeM3ivgL+IjRQtJ4bUsrWhrYLwYfx7ay2roDiOeCf1DmybcRHD9ofd2x6urvtzxmi9t5QXdcCOCTdxdzIgzZJ+GcHuoFSfwqBWxR8Fv/Fhenk98Uil0obqu+RW3l600rqitZuZ7abVmZAcHNyLboBjpi9bk0bfr/COm5S9Yx6xfWN98Z4bns5diINHf9+/o7bidFuWqsTpGVT12mpGOYyiLfFi5pQJzrsLm85kCNu1ssTFJOzQUvLvaSE/gVW4wEm8JABphOcFxj4JEz8m+zhJowK526Pc9InZthPaj8dsjY/Jubmz4dMz20jcuGsnEp829LMWU4GUl2JXSAD+2qW4KQdpqpgXStaEmgntQGvK3cLRV46YKI5A8lvN3LW6PmuJ8zFLjhr6IbRFcpS5j02OLHw75q2EDwonW3xIdkXXv1BLAwQUAAAICAAAECHsoH3G/G0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNdRUEovSizIKAaKGII4pZkpIHa0koFZqoWRcaKZqXlKaqqlSaJucmKiQYqRmYFpSpKpmaVJslIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAAECHsGg139ooCAABLBQAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAECHsoH3G/G0AAAB4AAAACQAkAAAAAAAAAAAAAADXAgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAI8DAAAAAA==
+    dataString: UEsDBBQAAAgIAAAQIey4kp5agQIAADwFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMzsVjG2Ogt9YhpIckTGgnF1+EtcYabMkjyQGS4b93JdvYpSfEe/tWbz/kL8KFriEzUm0UZ8+SAfk+IfZMvk0G8gnO9CDFjn9CH/POmSlsEHUxb9RwiXhgZVpWYBTPfohDaYN9BBvBc6mqNTtAIrXRCOe01ICUksaqBUJfE3LGn+nKSi54Chf29ImnlT+54jEDYUCNQqOF7/mzKIyCXhLOvFUcL+K4U7bCRmQlrWpgtopBH8bL0Av9VScO/EXoLZezeeREAqvt4ufeLI6iYGk9yLLkunNMzKV2HUlorRusFwMYp9gBZzPwZggUwA+FsdeN5a95rsF0DVL08sAVtrLNS37Ktr8V1cfW7gctG+ckCJ25Nunzf/w0cHSuZPXU3xv49g5T8Oz4Ri8Z1WY0gDH8MLLuunai5ZHuS3gvQLzIjZKNYEga1VhpoyF8GP7eSksKyI4D3lq9A5t6GEM/737atoarq/6clLzaW8qLWmBXStdxtySgcES/0LBbId2lQNS6+KPhNz2Md60jHrnSBqmuSmHt7WWjbChZu57ZahqTSCXAwZ3pGgQtzWWLacz9CO+40bV3zCO1r6q7vOP6x3IncfAQ7/t31FaebsPShTw9gy5eG1NyAYNpS7xgnxIpRLth4570sl2jcpqNZIeGs39Xi/gxLMMZjecLBrCK6DSj1Gdh7M/Zfh6vooy43eMC66TltjXatQenJobkAves/9hMNorWbtuZoqcN/6zkqOVc5HKXKQDx2ma4GQeFl+DzZGvGsUE7MIYLN2/ylZJSZkdg6S1R6ipdn42i6ZAlJTX/kMYiKUnc1yUlFr7t8lbBB4eTvbxPdiXXv1BLAwQUAAAICAAAECHsoH3G/G0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNdRUEovSizIKAaKGII4pZkpIHa0koFZqoWRcaKZqXlKaqqlSaJucmKiQYqRmYFpSpKpmaVJslIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAAECHsuJKeWoECAAA8BQAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAECHsoH3G/G0AAAB4AAAACQAkAAAAAAAAAAAAAADOAgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAIYDAAAAAA==
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -5549,7 +5540,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1434889838}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.4, y: 2.3, z: 0}
+  m_LocalPosition: {x: -471, y: 226, z: 0}
   m_LocalScale: {x: 1, y: 1.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10233,10 +10224,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2128541361394828342, guid: a3dd9a67c9b7d46f2968c1343540da1c, type: 3}
-      propertyPath: m_StartingFriendPos
-      value: 
-      objectReference: {fileID: 295460231}
     - target: {fileID: 4707838281379028626, guid: a3dd9a67c9b7d46f2968c1343540da1c, type: 3}
       propertyPath: m_Name
       value: ImaginaryFriend

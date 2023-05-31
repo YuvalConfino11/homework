@@ -48,7 +48,11 @@ public class Player : MonoBehaviour
     private LayerMask m_MobLayerMask;
     [SerializeField]
     private LayerMask m_groundLayerMask;
-
+    [SerializeField]
+    private bool m_isAbleToShot = true;
+    [SerializeField]
+    private float m_shootingRate = 0.5f;
+    
     private float m_lastMovingDirection = 1f;
     private float m_LastArrowKeyPressTime;
     private RaycastHit2D  m_raycastHit;
@@ -57,6 +61,7 @@ public class Player : MonoBehaviour
     private Collider2D[] m_mobsInExplosionRadius;
     private bool m_isFacingRight = false;
     private BoxCollider2D m_feetBoxCollider2D;
+    
     
 
 
@@ -229,8 +234,14 @@ public class Player : MonoBehaviour
 
     private void attack()
     {
-        GameObject bullet = Instantiate(m_bullet, transform.position, transform.rotation);
-        bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * (m_lastMovingDirection * m_bulletSpeed);
+        if (m_isAbleToShot)
+        {
+            m_isAbleToShot = false;
+            GameObject bullet = Instantiate(m_bullet, transform.position, transform.rotation);
+            bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * (m_lastMovingDirection * m_bulletSpeed);
+            StartCoroutine(shootingCooldown());
+        }
+        
     }
 
     private bool GetIsGrounded()
@@ -294,6 +305,13 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(i_cooldownTime);
         i_Ability.SetIsAvailable(true);
+    }
+    
+    private IEnumerator shootingCooldown()
+    {
+        yield return new WaitForSeconds(m_shootingRate);
+
+        m_isAbleToShot = true;
     }
 
     public void getHit(float i_damage)
