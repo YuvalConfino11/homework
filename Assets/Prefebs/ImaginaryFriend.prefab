@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 1976107485801959185}
   m_Layer: 10
   m_Name: ImaginaryFriend
-  m_TagString: Untagged
+  m_TagString: ImaginaryFriend
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -225,6 +225,5 @@ MonoBehaviour:
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 128
-  m_ImaginaryFriendStartPosition: {fileID: 0}
   m_FriendDuringAttack: 0
   m_FriendHitMob: 0
