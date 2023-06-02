@@ -209,7 +209,7 @@ MonoBehaviour:
   m_PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  m_BaseCastDistance: 10
+  m_BaseCastDistance: 11
   m_GroundLayerMask:
     serializedVersion: 2
     m_Bits: 512

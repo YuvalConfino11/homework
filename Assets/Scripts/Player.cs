@@ -38,8 +38,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject m_ImaginaryFriend;
     [SerializeField]
-    private float m_BulletSpeed = 8f;
-    [SerializeField]
     private GameObject m_Bullet;
     [SerializeField]
     private LayerMask m_MobLayerMask;
@@ -55,6 +53,8 @@ public class Player : MonoBehaviour
     private float m_ObjectiveCollectRadius = 10f;
     [SerializeField]
     private float m_GroundRaycastDistance = 10f;
+    [SerializeField]
+    private Heal m_Heal;
 
     [SerializeField] private PlayerAnimation m_PlayerAnimation;
 
@@ -67,10 +67,6 @@ public class Player : MonoBehaviour
     private bool m_IsFacingRight = true;
     private BoxCollider2D m_FeetBoxCollider2D;
     
-    
-
-
-
     private void Awake()
     {
         m_RigidBody = GetComponent<Rigidbody2D>();
@@ -110,7 +106,10 @@ public class Player : MonoBehaviour
         {
             explosion();
         }
-
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            heal();
+        }
         if (Input.GetKeyDown(KeyCode.Z))
         {
             unlockedSAvailabilitiesAndSkills();
@@ -259,7 +258,8 @@ public class Player : MonoBehaviour
         {
             m_IsAbleToShot = false;
             GameObject bullet = Instantiate(m_Bullet, transform.position, transform.rotation);
-            bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * (m_LastMovingDirection * m_BulletSpeed);
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * (m_LastMovingDirection * bulletScript.GetSpeed());
             StartCoroutine(shootingCooldown());
         }
         
@@ -291,6 +291,16 @@ public class Player : MonoBehaviour
                 mob.GetComponent<MobStats>().GetHit(m_EnergyExplosion.GetExplosionDamage());
                 Debug.DrawLine(transform.position,mob.transform.position,Color.magenta,2);
             }
+            SetMana(-m_EnergyExplosion.getExplosionManaPoints());
+        }
+    }
+
+    private void heal()
+    {
+        if (m_Heal.GetSkillsStats().GetIsUnlocked() && m_Heal.GetSkillsStats().GetIsAvailable())
+        {
+            m_CurrentHealthPoint += m_Heal.GetHealAmount();
+            SetMana(-m_Heal.GetManaPointsCost());
         }
     }
 
@@ -312,7 +322,7 @@ public class Player : MonoBehaviour
     private void unlockedSAvailabilitiesAndSkills()
     {
         Collider2D objectivesInRadius = Physics2D.OverlapCircle(transform.position, m_ObjectiveCollectRadius,m_ObjectiveLayerMask);
-        if (!objectivesInRadius.Equals(null))
+        if (objectivesInRadius != null)
         {
             switch (objectivesInRadius.name)
             {
@@ -331,6 +341,10 @@ public class Player : MonoBehaviour
                 case "Glide":
                     m_Glide.GetAbilityStats().SetIsUnlocked(true);
                     m_Glide.GetAbilityStats().SetIsAvailable(true);
+                    break;
+                case "Heal":
+                    m_Heal.GetSkillsStats().SetIsUnlocked(true);
+                    m_Heal.GetSkillsStats().SetIsAvailable(true);
                     break;
             }
             Destroy(objectivesInRadius.gameObject);
