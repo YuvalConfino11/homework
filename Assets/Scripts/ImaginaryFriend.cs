@@ -65,18 +65,7 @@ public class ImaginaryFriend : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, m_StartingFriendPos.transform.position, m_MoveSpeedTowardPlayer * Time.deltaTime);
     }
     
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.black;
-        Gizmos.DrawWireSphere(transform.position, m_ImaginaryFriendAttack.GetAttackRadius());
-    }
+    
 
-    private void OnCollisionEnter2D(Collision2D i_Collision)
-    {
-        if (i_Collision.gameObject.CompareTag("Mob"))
-        {
-            m_FriendHitMob = true;
-            i_Collision.gameObject.GetComponent<MobStats>().GetHit(m_ImaginaryFriendAttack.getAttackDamage());
-        }
-    }
+    
 }

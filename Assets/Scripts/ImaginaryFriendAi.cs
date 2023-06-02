@@ -1,3 +1,4 @@
+using Mobs;
 using UnityEngine;
 using Pathfinding;
 using Skills;
@@ -7,101 +8,80 @@ public class ImaginaryFriendAi : MonoBehaviour
     [SerializeField]
     private ImaginaryFriendAttack m_ImaginaryFriendAttack;
     [SerializeField]
-    private float m_MoveSpeed = 200f;
-    [SerializeField]
-    private float m_NextWayPointDistance;
-    [SerializeField]
-    private LayerMask m_LayerMask;
+    private LayerMask m_MobLayerMask;
     [SerializeField]
     private bool m_FriendDuringAttack = false;
     [SerializeField]
     private bool m_FriendHitMob = false;
+    [SerializeField]
+    private float m_MoveSpeedTowardMob = 12f; 
+    [SerializeField]
+    private float m_MoveSpeedTowardPlayer = 12f;
     
     private Transform m_MainTarget;
     private Path m_Path;
     private int m_CurrentWayPoint = 0;
-    private Seeker m_Seeker;
-    private Rigidbody2D m_Rigidbody2D;
     private Collider2D m_MobInAttackRadius;
     private Transform m_ImaginaryFriendStartPosition;
+    private float m_AttackRadius;
     
     
-    // Start is called before the first frame update
     void Start()
     {
-        m_Seeker = GetComponent<Seeker>();
-        m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_ImaginaryFriendStartPosition = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0);
-        
-        InvokeRepeating("updatePath", 0f, 0.5f);
+        m_AttackRadius = m_ImaginaryFriendAttack.GetAttackRadius();
     }
-
-    void updatePath()     
-    {
-        if(m_MobInAttackRadius != null && m_FriendDuringAttack == false)
-        {
-            m_MainTarget = m_MobInAttackRadius.transform;
-            m_FriendDuringAttack = true;
-        }
-        if (m_FriendHitMob)
-        {
-            m_MainTarget = m_ImaginaryFriendStartPosition;
-        }
-        if (Vector2.Distance(transform.position, m_ImaginaryFriendStartPosition.position) < 1)
-        {
-            m_FriendDuringAttack = false;
-            m_FriendHitMob = false;
-        }
-        if (m_MobInAttackRadius == null)
-        {
-            m_MainTarget = m_ImaginaryFriendStartPosition;
-        }
-        m_Seeker.StartPath(m_Rigidbody2D.position, m_MainTarget.position, OnPathComplete);
-    }
-
-    void OnPathComplete(Path i_P)
-    {
-        if (!i_P.error)
-        {
-            m_Path = i_P;
-            m_CurrentWayPoint = 0;
-        }
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        float attackRadius = m_ImaginaryFriendAttack.GetAttackRadius();
-        m_MobInAttackRadius = Physics2D.OverlapCircle(transform.position, attackRadius, m_LayerMask);
-         if(m_Path == null)
-         {
-             return;
-         }
-
-         if (m_CurrentWayPoint >= m_Path.vectorPath.Count)
+        m_MobInAttackRadius = Physics2D.OverlapCircle(transform.position, m_AttackRadius, m_MobLayerMask);
+        if (m_MobInAttackRadius != null)
         {
-            return;
+            if (!m_FriendDuringAttack || (m_FriendDuringAttack && !m_FriendHitMob))
+            {
+                attack();
+            }
+            else
+            {
+                returnToPlayer();
+            }
         }
-        if(m_Path.vectorPath.Count == 0)
+        else if (m_MobInAttackRadius == null)
         {
-            return;
+            transform.position = Vector2.MoveTowards(transform.position, m_ImaginaryFriendStartPosition.position, m_MoveSpeedTowardPlayer * Time.deltaTime);
         }
-        Vector2 direction = ((Vector2)m_Path.vectorPath[m_CurrentWayPoint] - m_Rigidbody2D.position).normalized;
-        Vector2 force = direction * m_MoveSpeed * Time.deltaTime;
-        m_Rigidbody2D.AddForce(force);
-
-        float distance = Vector2.Distance(m_Rigidbody2D.position, m_Path.vectorPath[m_CurrentWayPoint]);
-        if (distance < m_NextWayPointDistance)
+        if (Vector2.Distance(transform.position, m_ImaginaryFriendStartPosition.position) < 0.01)
         {
-            m_CurrentWayPoint++;
+            transform.position = m_ImaginaryFriendStartPosition.position;
+            m_FriendHitMob = false;
+            m_FriendDuringAttack = true;
         }
     }
 
+    private void attack()
+    {
+        m_FriendDuringAttack = true;
+        transform.position = Vector2.MoveTowards(transform.position, m_MobInAttackRadius.transform.position, m_MoveSpeedTowardMob * Time.deltaTime);
+    }
+
+    private void returnToPlayer()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, m_ImaginaryFriendStartPosition.position, m_MoveSpeedTowardPlayer * Time.deltaTime);
+    }
+    
+    
     private void OnTriggerEnter2D(Collider2D i_Collision)
     {
         if (i_Collision.gameObject.CompareTag("Mob"))
         {
             m_FriendHitMob = true;
+            i_Collision.gameObject.GetComponent<MobStats>().GetHit(m_ImaginaryFriendAttack.getAttackDamage());
         }
+    }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(transform.position,m_AttackRadius);
     }
 }

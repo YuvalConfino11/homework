@@ -12,11 +12,6 @@ TagManager:
   - Ground
   - ImaginaryFriend
   - Objective
-  - Key
-  - Gate
-  - Spike
-  - ResetWall
-  - Change Scene Wall
   layers:
   - Default
   - TransparentFX
@@ -35,11 +30,11 @@ TagManager:
   - Midground
   - Forground
   - Platform
-  - Gate
-  - PlayerFeet
-  - Spike
-  - Key
-  - MobFeet
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

@@ -7,17 +7,13 @@ namespace Skills
 
     public class ImaginaryFriendAttack : ScriptableObject
     {
-
-        [SerializeField]
-        private short m_AvailabilityLevel = 2;
+        
         [SerializeField]
         private float m_AttackRadius = 50;
         [SerializeField]
         private float m_AttackDamage = 30;
         private readonly SkillsStats r_SkillsStats;
-
-
-
+        
         public ImaginaryFriendAttack()
         {
             r_SkillsStats = new SkillsStats(true,true);

@@ -497,7 +497,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6266914334891637388, guid: 19e961891290a4528a4e7d4fffa2b397, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6266914334891637388, guid: 19e961891290a4528a4e7d4fffa2b397, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1781,7 +1781,7 @@ PrefabInstance:
       objectReference: {fileID: 1055180880}
     - target: {fileID: 5279076933203895377, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5279076933203895377, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2385,7 +2385,7 @@ GameObject:
   - component: {fileID: 490636075}
   - component: {fileID: 490636077}
   - component: {fileID: 490636076}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: background
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -2570,7 +2570,7 @@ GameObject:
   - component: {fileID: 527469249}
   - component: {fileID: 527469251}
   - component: {fileID: 527469250}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: background
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -3112,7 +3112,7 @@ GameObject:
   - component: {fileID: 719753389}
   - component: {fileID: 719753388}
   - component: {fileID: 719753390}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: foreground
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -4676,7 +4676,7 @@ GameObject:
   - component: {fileID: 1065646941}
   - component: {fileID: 1065646940}
   - component: {fileID: 1065646942}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: foreground
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -5035,7 +5035,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1172312639}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform1
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -6217,7 +6217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAAAQIewaDXf2igIAAEsFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMtymzAU/RWP1jUDGLDpriWO00UST9xONmxkdDEaC4mRRGwn43+vJMBQd+Xrc+7j3If4QpSrBgot5EZS8iwIoO8zZG30bTaST3DGB8F39BMGn3dKdGWdsPN5w5oKgwc2TIkatKTFD35g1tk3YMtpKWS9JgfIhNLKwCVmCgwlhbbR3EBfM3Q2P/PUhlyMFS6t9Wms1J9djVkA1yAnrkEaeekiWCTJEBJ4YZwm4WrRR84TbxXGSZys5/7SJWl5wXDdALEdjbmWi9CLwiDtEwVR4kWraLGMXRA3nff+gRclHWMVCcao6vUjfWncfDLcqNZ0bxwIxWYeTnTgWVEV0EOlrdRp+GtZKtD9uCS+PFBpBtvlRT9FN+0aq2Mn+AOz1laKg9DJ65I+/8fPA0eXUtRPQ93AtzV0RYvjG74UWOnJOqbww0S6m9sJsyPeM3ivgL+IjRQtJ4bUsrWhrYLwYfx7ay2roDiOeCf1DmybcRHD9ofd2x6urvtzxmi9t5QXdcCOCTdxdzIgzZJ+GcHuoFSfwqBWxR8Fv/Fhenk98Uil0obqu+RW3l600rqitZuZ7abVmZAcHNyLboBjpi9bk0bfr/COm5S9Yx6xfWN98Z4bns5diINHf9+/o7bidFuWqsTpGVT12mpGOYyiLfFi5pQJzrsLm85kCNu1ssTFJOzQUvLvaSE/gVW4wEm8JABphOcFxj4JEz8m+zhJowK526Pc9InZthPaj8dsjY/Jubmz4dMz20jcuGsnEp829LMWU4GUl2JXSAD+2qW4KQdpqpgXStaEmgntQGvK3cLRV46YKI5A8lvN3LW6PmuJ8zFLjhr6IbRFcpS5j02OLHw75q2EDwonW3xIdkXXv1BLAwQUAAAICAAAECHsoH3G/G0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNdRUEovSizIKAaKGII4pZkpIHa0koFZqoWRcaKZqXlKaqqlSaJucmKiQYqRmYFpSpKpmaVJslIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAAECHsGg139ooCAABLBQAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAECHsoH3G/G0AAAB4AAAACQAkAAAAAAAAAAAAAADXAgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAI8DAAAAAA==
+    dataString: UEsDBBQAAAgIAAAQIeylg6WEfgIAADoFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMzg1jTGxwb61DSA9JmNBOLr4Ia401yJJHkgMkw3/vSraxS09R3tu3+/bDfBEuTQ25VXqtOXtWDMj3CXFv8m0ykE9wonslt/wT+ph3zmzpgqiPeaOWK8RnTmZUBVbz/IfcCxccINhIXihdrdgeUmWsQbigwgBSWlmnlgh9TcgJ/9wlTnLGV7hwr098JcHkgs8cpAU9Cp1FwXSRxHES9pJwOZ1H83mna2WNzAWtamCuh0EdJmEyjZeLqNMuI9QGceI1ElvtwsPpMp4FocuZKyG46ewSe679OFJamwabxQDGKbbvPc6mTlEC35fWZRnLX4vCgO2mo+n5gWucY5uX/FTtcCtqDq3bDyoaVymahd5cm/T5P/5u5ulCq+qprzsLXA1b8vzwRs85NXY0/TH8MLLuh3ak4kB3At5LkC9qrVUjGZJWN07aGAgfhn+vraUl5IcBb63egE09bKFfdr9q18PFd39KBa92jpret8BWKD9xfyGgcUW/0LC/H9OlQNS5+GPgN92PD60jHrk2FqmuS+ns7VSjXShZ+Zm5bhqbKi3Bw53pGiQV9rzBNPZ2hTfcqOwN80jdJ9UV77j+S7mReHiID4IbaqOO12WZUh2fwZSvjRVcwmDaES84p1RJ2V7YeCa9bNvoguYj2b7h7N/TIkEMy3BO42jBAJJ7epdTGrAwDiK2i+LkPif+9rjEPqnYtEa78eDW5JBc4p31vzSTtaa1v3am6XHNPys1Nshloba5BpCvbYqrc9BYBb9PtmIcJ7QFa7n0CydfGREqPwDLrjUz3+rqZDXNhiwZqfmHsg7JSOp/WzLi4OsxbzR8cDi64n2yC7n8BVBLAwQUAAAICAAAECHsoH3G/G0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNdRUEovSizIKAaKGII4pZkpIHa0koFZqoWRcaKZqXlKaqqlSaJucmKiQYqRmYFpSpKpmaVJslIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAAECHspYOlhH4CAAA6BQAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAECHsoH3G/G0AAAB4AAAACQAkAAAAAAAAAAAAAADLAgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAIMDAAAAAA==
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -8049,7 +8049,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1957978464}
   m_LocalRotation: {x: -0, y: -0, z: 0.047956795, w: -0.99884945}
-  m_LocalPosition: {x: -99, y: 15, z: 164}
+  m_LocalPosition: {x: -99, y: 14.8, z: 164}
   m_LocalScale: {x: 6, y: 6, z: 3.6686528}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10794,7 +10794,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2023624957}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform2
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -11936,7 +11936,7 @@ GameObject:
   - component: {fileID: 2739341093672799134}
   - component: {fileID: 2739341093672799132}
   - component: {fileID: 2739341093672799133}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: background
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -12141,7 +12141,7 @@ GameObject:
   - component: {fileID: 2739341093764939550}
   - component: {fileID: 2739341093764939548}
   - component: {fileID: 2739341093764939549}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: background
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -12157,7 +12157,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2739341093784478605}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform1
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -12379,7 +12379,7 @@ GameObject:
   - component: {fileID: 2739341093784567766}
   - component: {fileID: 2739341093784567764}
   - component: {fileID: 2739341093784567765}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: background
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -12412,7 +12412,7 @@ GameObject:
   - component: {fileID: 2739341093837094052}
   - component: {fileID: 2739341093837094054}
   - component: {fileID: 2739341093837094055}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: background
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -12603,7 +12603,7 @@ GameObject:
   - component: {fileID: 2739341093910281077}
   - component: {fileID: 2739341093910281076}
   - component: {fileID: 2739341093910281078}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: foreground
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -13129,7 +13129,7 @@ GameObject:
   - component: {fileID: 2739341094034066514}
   - component: {fileID: 2739341094034066512}
   - component: {fileID: 2739341094034066513}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: background
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -13162,7 +13162,7 @@ GameObject:
   - component: {fileID: 2739341094079035024}
   - component: {fileID: 2739341094079035026}
   - component: {fileID: 2739341094079035027}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: background
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -13367,7 +13367,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2739341094088012320}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform1
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -13385,7 +13385,7 @@ GameObject:
   - component: {fileID: 2739341094103867673}
   - component: {fileID: 2739341094103867675}
   - component: {fileID: 2739341094103867674}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: background
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -13605,7 +13605,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2739341094167288882}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform1 (1)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -13945,7 +13945,7 @@ GameObject:
   - component: {fileID: 2739341094182201032}
   - component: {fileID: 2739341094182201033}
   - component: {fileID: 2739341094182201035}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: foreground
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -13979,7 +13979,7 @@ GameObject:
   - component: {fileID: 2739341094244439614}
   - component: {fileID: 2739341094244439615}
   - component: {fileID: 2739341094244439613}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: foreground
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -14319,7 +14319,7 @@ GameObject:
   - component: {fileID: 2739341094270790908}
   - component: {fileID: 2739341094270790909}
   - component: {fileID: 2739341094270790911}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: foreground
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -14965,7 +14965,7 @@ GameObject:
   - component: {fileID: 2739341094417945074}
   - component: {fileID: 2739341094417945075}
   - component: {fileID: 2739341094417945073}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: foreground
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -15305,7 +15305,7 @@ GameObject:
   - component: {fileID: 2739341094499034554}
   - component: {fileID: 2739341094499034555}
   - component: {fileID: 2739341094499034553}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: foreground
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -15645,7 +15645,7 @@ GameObject:
   - component: {fileID: 2739341094527116658}
   - component: {fileID: 2739341094527116659}
   - component: {fileID: 2739341094527116657}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: foreground
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -15661,7 +15661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2739341094561919209}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform1 (1)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -15883,7 +15883,7 @@ GameObject:
   - component: {fileID: 2739341094716074718}
   - component: {fileID: 2739341094716074716}
   - component: {fileID: 2739341094716074717}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: background
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -15916,7 +15916,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2739341094723874414}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform1 (5)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -15949,7 +15949,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2739341094731338924}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform1 (2)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -15982,7 +15982,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2739341094802859098}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform1 (3)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -16322,7 +16322,7 @@ GameObject:
   - component: {fileID: 2739341094821961376}
   - component: {fileID: 2739341094821961377}
   - component: {fileID: 2739341094821961379}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: foreground
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -16647,7 +16647,7 @@ GameObject:
   - component: {fileID: 2739341094980989563}
   - component: {fileID: 2739341094980989562}
   - component: {fileID: 2739341094980989560}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: foreground
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -16695,7 +16695,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2739341095013820384}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform1 (4)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -16885,7 +16885,7 @@ GameObject:
   - component: {fileID: 2739341095018691443}
   - component: {fileID: 2739341095018691441}
   - component: {fileID: 2739341095018691440}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: background
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -16933,7 +16933,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2739341095018702632}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform1 (7)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -16966,7 +16966,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2739341095106237280}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform1 (6)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -17156,7 +17156,7 @@ GameObject:
   - component: {fileID: 2739341095190046743}
   - component: {fileID: 2739341095190046741}
   - component: {fileID: 2739341095190046740}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: background
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -17190,7 +17190,7 @@ GameObject:
   - component: {fileID: 2739341095210180895}
   - component: {fileID: 2739341095210180894}
   - component: {fileID: 2739341095210180892}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: foreground
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -17851,7 +17851,7 @@ GameObject:
   - component: {fileID: 2739341095446540466}
   - component: {fileID: 2739341095446540467}
   - component: {fileID: 2739341095446540465}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: foreground
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -17867,7 +17867,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2739341095604353511}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform1 (8)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -17917,7 +17917,7 @@ GameObject:
   - component: {fileID: 2739341095684539596}
   - component: {fileID: 2739341095684539598}
   - component: {fileID: 2739341095684539599}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: background
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -18103,14 +18103,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1665843917365385329, guid: 069bdd964f05441e58219b1083a709ef, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1665843917365385329, guid: 069bdd964f05441e58219b1083a709ef, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1665843919082795423, guid: 069bdd964f05441e58219b1083a709ef, type: 3}
       propertyPath: m_Player
       value: 
@@ -18212,10 +18204,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1976107485801959185, guid: a3dd9a67c9b7d46f2968c1343540da1c, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2128541361394828342, guid: a3dd9a67c9b7d46f2968c1343540da1c, type: 3}
       propertyPath: m_StartingFriendPos
       value: 
@@ -18226,7 +18214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4707838281379028631, guid: a3dd9a67c9b7d46f2968c1343540da1c, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4707838281379028631, guid: a3dd9a67c9b7d46f2968c1343540da1c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18268,10 +18256,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5699456555272815884, guid: a3dd9a67c9b7d46f2968c1343540da1c, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3dd9a67c9b7d46f2968c1343540da1c, type: 3}
 --- !u!4 &5991456418434310329
@@ -18291,7 +18275,7 @@ Transform:
   - {fileID: 1220850011}
   - {fileID: 1535190369}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &6327179777309223840
 Transform:
@@ -18319,7 +18303,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6327179777309223840}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform2 (3)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -18353,7 +18337,7 @@ GameObject:
   - component: {fileID: 6327179777368265172}
   - component: {fileID: 6327179777368265173}
   - component: {fileID: 6327179777368265175}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: foreground
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -18613,7 +18597,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6327179777376274935}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform2
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -18646,7 +18630,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6327179777383764531}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform2 (2)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -18697,7 +18681,7 @@ GameObject:
   - component: {fileID: 6327179777389980782}
   - component: {fileID: 6327179777389980783}
   - component: {fileID: 6327179777389980781}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: foreground
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -18974,7 +18958,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6327179777511250864}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform2
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -19159,7 +19143,7 @@ GameObject:
   - component: {fileID: 6327179777529443788}
   - component: {fileID: 6327179777529443786}
   - component: {fileID: 6327179777529443787}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: background
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -19192,7 +19176,7 @@ GameObject:
   - component: {fileID: 6327179777948576162}
   - component: {fileID: 6327179777948576164}
   - component: {fileID: 6327179777948576165}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: background
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -19377,7 +19361,7 @@ GameObject:
   - component: {fileID: 6327179777969460248}
   - component: {fileID: 6327179777969460254}
   - component: {fileID: 6327179777969460255}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: background
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -19807,7 +19791,7 @@ GameObject:
   - component: {fileID: 6327179778090044858}
   - component: {fileID: 6327179778090044859}
   - component: {fileID: 6327179778090044857}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: foreground
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -19840,7 +19824,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6327179778411923406}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform2 (5)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -19873,7 +19857,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6327179778424601204}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform2 (1)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -19892,7 +19876,7 @@ GameObject:
   - component: {fileID: 6327179778433884759}
   - component: {fileID: 6327179778433884758}
   - component: {fileID: 6327179778433884756}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: foreground
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -20414,7 +20398,7 @@ GameObject:
   - component: {fileID: 6327179778439051667}
   - component: {fileID: 6327179778439051666}
   - component: {fileID: 6327179778439051664}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: foreground
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -20707,7 +20691,7 @@ GameObject:
   - component: {fileID: 6327179778501066752}
   - component: {fileID: 6327179778501066753}
   - component: {fileID: 6327179778501066755}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: foreground
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -20985,7 +20969,7 @@ GameObject:
   - component: {fileID: 6327179778567548944}
   - component: {fileID: 6327179778567548945}
   - component: {fileID: 6327179778567548947}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: foreground
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -21003,7 +20987,7 @@ GameObject:
   - component: {fileID: 6327179778930301473}
   - component: {fileID: 6327179778930301479}
   - component: {fileID: 6327179778930301478}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: background
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -21340,7 +21324,7 @@ GameObject:
   - component: {fileID: 6327179778933522917}
   - component: {fileID: 6327179778933522915}
   - component: {fileID: 6327179778933522914}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: background
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -21540,7 +21524,7 @@ GameObject:
   - component: {fileID: 6327179778997467254}
   - component: {fileID: 6327179778997467248}
   - component: {fileID: 6327179778997467249}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: background
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -21573,7 +21557,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6327179779045713434}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Platform2 (4)
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -21758,7 +21742,7 @@ GameObject:
   - component: {fileID: 6327179779065202790}
   - component: {fileID: 6327179779065202784}
   - component: {fileID: 6327179779065202785}
-  m_Layer: 9
+  m_Layer: 16
   m_Name: background
   m_TagString: Platform
   m_Icon: {fileID: 0}

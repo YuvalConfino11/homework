@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private EnergyExplosion m_EnergyExplosion;
     [SerializeField]
+    private Heal m_Heal;
+    [SerializeField]
     private GameObject m_ImaginaryFriend;
     [SerializeField]
     private GameObject m_Bullet;
@@ -53,8 +55,7 @@ public class Player : MonoBehaviour
     private float m_ObjectiveCollectRadius = 10f;
     [SerializeField]
     private float m_GroundRaycastDistance = 10f;
-    [SerializeField]
-    private Heal m_Heal;
+
 
     [SerializeField] private PlayerAnimation m_PlayerAnimation;
 
@@ -209,8 +210,6 @@ public class Player : MonoBehaviour
    
     private void jump()
     {
-        Debug.Log(m_DoubleJump.GetAbilityStats().GetIsAvailable() && m_DoubleJump.GetAbilityStats().GetIsUnlocked());
-
         if (getIsGrounded())
         {
             float jumpForce = Mathf.Sqrt( -2 * m_JumpHeight * (Physics2D.gravity.y * m_RigidBody.gravityScale));
