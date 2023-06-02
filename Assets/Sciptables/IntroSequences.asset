@@ -15,13 +15,18 @@ MonoBehaviour:
   introSequences:
   - m_MainText: Deep within the mystical dark forest, where reality blends with the
       echoes of Peter's inner struggles, a world both enchanting and haunting awaits.
+  - m_MainText: Deep within the mystical dark forest, where reality blends with the
+      echoes of Peter's inner struggles, a world both enchanting and haunting awaits.
   - m_MainText: The fate of the magical dark forest hangs in the balance, and it
       is up to me to convince Peter to embark on a quest to save it, a quest that
       will also heal his wounded soul.
   - m_MainText: 'Unlock the hidden strength within Peter''s heart, empower him to
-      conquer his demons, and shape the destiny of the mystical dark forest.
+      conquer his demons, and shape the destiny of the mystical dark forest
 
-      
+      Together,
+      dear friend, we shall embark on this extraordinary journey in "Echoes of Within."'
+  - m_MainText: 'Unlock the hidden strength within Peter''s heart, empower him to
+      conquer his demons, and shape the destiny of the mystical dark forest
 
       Together,
       dear friend, we shall embark on this extraordinary journey in "Echoes of Within."'

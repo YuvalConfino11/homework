@@ -5,6 +5,7 @@ using Mobs;
 using Skills;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class Player : MonoBehaviour
     private float m_CurrentHealthPoint = 100;
     [SerializeField]
     private float m_ManaPoint;
+    [SerializeField]
+    private float m_MaxManaPoint = 100;
+    [SerializeField]
+    private ManaBarScript m_ManaBar;
     [SerializeField]
     private float m_ExperiencePoints;
     [SerializeField]
@@ -48,6 +53,15 @@ public class Player : MonoBehaviour
     private LayerMask m_MobLayerMask;
     [SerializeField]
     private LayerMask m_groundLayerMask;
+    [SerializeField]
+    private bool m_isAbleToShot = true;
+    [SerializeField]
+    private float m_shootingRate = 0.5f;
+    [SerializeField]
+    private float m_ObjectiveCollectRadius = 10f;
+    
+
+    [SerializeField] private PlayerAnimation m_PlayerAnimation;
 
     private float m_lastMovingDirection = 1f;
     private float m_LastArrowKeyPressTime;
@@ -55,8 +69,9 @@ public class Player : MonoBehaviour
     private Rigidbody2D m_rigidBody;
     private CapsuleCollider2D m_capsuleCollider;
     private Collider2D[] m_mobsInExplosionRadius;
-    private bool m_isFacingRight = false;
+    private bool m_isFacingRight = true;
     private BoxCollider2D m_feetBoxCollider2D;
+    
     
 
 
@@ -66,7 +81,9 @@ public class Player : MonoBehaviour
         m_rigidBody = GetComponent<Rigidbody2D>();
         m_capsuleCollider = GetComponent<CapsuleCollider2D>();
         m_feetBoxCollider2D = GetComponent<BoxCollider2D>();
-        m_ImaginaryFriend = GameObject.FindGameObjectWithTag("ImaginaryFriend");
+
+        m_ManaPoint = GetMaxMana();
+        m_ManaBar.SetMaxMana(GetMaxMana());
     }
 
     void Update()
@@ -100,13 +117,19 @@ public class Player : MonoBehaviour
         }
         Vector3 rayStartPosition =
             new Vector3(transform.position.x + 0.5f * m_lastMovingDirection, transform.position.y, 0);
-        m_raycastHit = Physics2D.Raycast(rayStartPosition, Vector2.down, m_capsuleCollider.size.y *2.75f,m_groundLayerMask);
-        m_Grounded = m_raycastHit.collider != null &&  m_rigidBody.velocity.y <= 0;
+        m_raycastHit = Physics2D.Raycast(rayStartPosition, Vector2.down, m_capsuleCollider.size.y * 1.25f,m_groundLayerMask);
+        m_Grounded = m_raycastHit.collider != null;
         if (m_rigidBody.velocity.y <= 0)
         {
             m_feetBoxCollider2D.enabled = true;
         }
         checkForUnlockedSAvailabilities();
+        m_PlayerAnimation.PlayPlayerAnimation(m_rigidBody.velocity.x, m_rigidBody.velocity.y, GetIsGrounded());
+
+        if(m_CurrentHealthPoint == 0)
+        {
+            SceneManager.LoadScene("DeathScene");
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -192,6 +215,7 @@ public class Player : MonoBehaviour
         {
             float jumpForce = Mathf.Sqrt( -2 * m_JumpHeight * (Physics2D.gravity.y * m_rigidBody.gravityScale));
             m_rigidBody.velocity = new Vector2(m_rigidBody.velocity.x, jumpForce);
+            m_PlayerAnimation.JumpAnimation();
             m_DoubleJump.GetAbilityStats().SetIsAvailable(true);
         }
         else if (m_DoubleJump.GetAbilityStats().GetIsAvailable() && m_DoubleJump.GetAbilityStats().GetIsUnlocked())
@@ -202,6 +226,7 @@ public class Player : MonoBehaviour
             }
             float jumpForce = Mathf.Sqrt( -2 * m_JumpHeight * (Physics2D.gravity.y * m_rigidBody.gravityScale));
             m_rigidBody.velocity = Vector2.up * jumpForce;
+            m_PlayerAnimation.JumpAnimation();
             m_DoubleJump.GetAbilityStats().SetIsAvailable(false);
             m_DoubleJump.RunAbility(m_JumpHeight, m_rigidBody);
         }
@@ -229,8 +254,14 @@ public class Player : MonoBehaviour
 
     private void attack()
     {
-        GameObject bullet = Instantiate(m_bullet, transform.position, transform.rotation);
-        bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * (m_lastMovingDirection * m_bulletSpeed);
+        if (m_isAbleToShot)
+        {
+            m_isAbleToShot = false;
+            GameObject bullet = Instantiate(m_bullet, transform.position, transform.rotation);
+            bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * (m_lastMovingDirection * m_bulletSpeed);
+            StartCoroutine(shootingCooldown());
+        }
+        
     }
 
     private bool GetIsGrounded()
@@ -268,8 +299,10 @@ public class Player : MonoBehaviour
             Gizmos.color = Color.red;
             Vector3 rayStartPosition =
                 new Vector3(transform.position.x + 0.5f * m_lastMovingDirection, transform.position.y, 0);
-            Gizmos.DrawRay(rayStartPosition,new Vector3(0,-1 * m_capsuleCollider.size.y * 2.75f,0));
+            Gizmos.DrawRay(rayStartPosition,new Vector3(0,-1 * m_capsuleCollider.size.y * 1.25f,0));
         }
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position,m_ObjectiveCollectRadius);
     }
     
     private void checkForUnlockedSAvailabilities()
@@ -295,6 +328,13 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(i_cooldownTime);
         i_Ability.SetIsAvailable(true);
     }
+    
+    private IEnumerator shootingCooldown()
+    {
+        yield return new WaitForSeconds(m_shootingRate);
+
+        m_isAbleToShot = true;
+    }
 
     public void getHit(float i_damage)
     {
@@ -310,4 +350,20 @@ public class Player : MonoBehaviour
     {
         return m_CurrentHealthPoint;
     }
+
+    public float GetMana()
+    {
+        return m_ManaPoint;
+    }
+    public void SetMana(float mana)
+    {
+        m_ManaPoint += mana;
+        m_ManaPoint = Math.Clamp(m_ManaPoint, 0f, 100f);
+        m_ManaBar.SetMana(m_ManaPoint);
+    }
+    public float GetMaxMana()
+    {
+        return m_MaxManaPoint;
+    }
+
 }

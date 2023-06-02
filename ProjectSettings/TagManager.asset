@@ -11,6 +11,7 @@ TagManager:
   - Floor
   - Ground
   - ImaginaryFriend
+  - Objective
   layers:
   - Default
   - TransparentFX

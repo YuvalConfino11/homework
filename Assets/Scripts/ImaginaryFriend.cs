@@ -1,3 +1,4 @@
+using System;
 using Mobs;
 using UnityEngine;
 using Skills;
@@ -15,18 +16,21 @@ public class ImaginaryFriend : MonoBehaviour
     [SerializeField]
     private LayerMask m_LayerMask;
     [SerializeField]
-    private GameObject m_StartingFriendPos;
-    [SerializeField]
     private bool m_FriendHitMob = false;
 
-
+    private GameObject m_StartingFriendPos;
     private Collider2D m_MobInAttackRadius;
+
+    private void Awake()
+    {
+        m_StartingFriendPos = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject;
+    }
 
     void Update()
     {
         float attackRadius = m_ImaginaryFriendAttack.GetAttackRadius();
         m_MobInAttackRadius = Physics2D.OverlapCircle(transform.position, attackRadius, m_LayerMask);
-        
+       
         if (m_MobInAttackRadius != null)
         {
             if (!m_FriendDuringAttack || (m_FriendDuringAttack && !m_FriendHitMob))
