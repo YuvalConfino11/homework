@@ -11,7 +11,7 @@ namespace Abilities
         
         public DoubleJump()
         {
-            m_AbilityStats = new AbilityStats(k_AvailabilityLevel);
+            m_AbilityStats = new AbilityStats();
         }
 
         public void RunAbility(float i_jumpHeight,Rigidbody2D i_rigidBody)
