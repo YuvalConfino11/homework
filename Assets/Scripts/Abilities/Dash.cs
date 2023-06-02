@@ -10,11 +10,8 @@ namespace Abilities
         [SerializeField]
         private float m_CooldownTime = 1f;
         [SerializeField]
-        private float m_DashDistance = 10f;
-        [SerializeField]
-        public float m_DashTime = 1f;
+        private float m_DashSpeed = 10f;
         private readonly AbilityStats r_AbilityStats;
-        public bool isUnlocked;
         
         public Dash()
         {
@@ -26,16 +23,9 @@ namespace Abilities
             return r_AbilityStats;
         }
 
-        public float DashDistance
+        public float GetDashSpeed()
         {
-            get => m_DashDistance;
-            set => m_DashDistance = value;
-        }
-
-        public float DashTime
-        {
-            get => m_DashTime;
-            set => m_DashTime = value;
+            return m_DashSpeed;
         }
     }
 }

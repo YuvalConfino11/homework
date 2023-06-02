@@ -1,71 +1,61 @@
-using System;
 using System.Collections;
 using UnityEngine;
-
 
 namespace Mobs
 {
     public class Mob : MonoBehaviour
     {
         [SerializeField] 
+        private float m_MobFieldOfHitRadius = 0.5f;
+        [SerializeField] 
+        private LayerMask m_PlayerLayerMask;
+        [SerializeField] 
         private MobStats m_MobStats;
         [SerializeField]
         private GameObject m_ManaBall;
-        [SerializeField]
-        private GameObject m_HPBall;
-        [SerializeField]
-        bool m_CanHitPlayer = false;
-        [SerializeField]
-        private float m_MobHitCooldown = 0.75f;
-        [SerializeField]
-        private float m_BallFallRatio = 0.7f;
         
-        // private GameObject m_PlayerGameObject;
-        private float timer = 0;
+        private GameObject m_PlayerGameObject;
 
         private void Awake()
         {
+            StartCoroutine(playerHitCheck());
             m_MobStats = GetComponent<MobStats>();
         }
 
         private void Update()
         {
-            timer += Time.deltaTime;
-            if (timer >= m_MobHitCooldown)
-            {
-                m_CanHitPlayer = true;
-                timer = 0;
-            }
             if (m_MobStats.isDead())
             {
                 Destroy(this.gameObject);
-                Instantiate(ChooseBall(m_ManaBall , m_HPBall), transform.position, transform.rotation);
+                Instantiate(m_ManaBall, transform.position, transform.rotation);
+            }
+        }
+
+        private IEnumerator playerHitCheck()
+        {
+            WaitForSeconds wait = new WaitForSeconds(0.5f);
+            while (true)
+            {
+                yield return wait;
+                hit();
             }
         }
         
-        private void OnTriggerEnter2D(Collider2D col)
+        private void hit()
         {
-            
-            if (col.gameObject.CompareTag("Player") && m_CanHitPlayer)
+            Collider2D hitPlayer = Physics2D.OverlapCircle(transform.position, m_MobFieldOfHitRadius * transform.localScale.x, m_PlayerLayerMask);
+            if (hitPlayer != null)
             {
-                Player player = col.gameObject.GetComponent<Player>();
-                player.getHit(m_MobStats.GetDamage());
-                m_CanHitPlayer = false;
+                m_PlayerGameObject = hitPlayer.gameObject;
+                m_PlayerGameObject.GetComponent<Player>().getHit(m_MobStats.GetDamage());
             }
         }
-        private GameObject ChooseBall(GameObject i_ManaBall , GameObject i_HPBall)
+
+        private void OnDrawGizmos()
         {
-            System.Random random = new System.Random();
-            float randomValue = random.Next(0,1);
-            if(randomValue > m_BallFallRatio)
-            {
-                return i_ManaBall;
-            }
-            else
-            {
-                return i_HPBall;
-            }
-            
+            Gizmos.color = Color.gray;
+            Gizmos.DrawWireSphere(transform.position, m_MobFieldOfHitRadius * transform.localScale.y);
         }
+        
     }
 }

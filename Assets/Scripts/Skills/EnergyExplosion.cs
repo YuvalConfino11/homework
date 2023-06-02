@@ -10,8 +10,6 @@ namespace Skills
         private float m_ExplosionForce = 5f;
         [SerializeField] 
         private float m_ExplosionDamage = 25f;
-        [SerializeField] 
-        private float m_ExplosionManaPointsCost = 25f;
         private readonly SkillsStats r_SkillsStats;
 
         public EnergyExplosion()
@@ -37,11 +35,6 @@ namespace Skills
         public float GetExplosionDamage()
         {
             return m_ExplosionDamage;
-        }
-        
-        public float getExplosionManaPoints()
-        {
-            return m_ExplosionManaPointsCost;
         }
     }
 }

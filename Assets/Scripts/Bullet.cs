@@ -1,17 +1,13 @@
-using System.Collections;
 using Mobs;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     private GameObject m_Player;
     [SerializeField]
-    private float m_Range = 100f;
+    private float m_Range = 10f;
     [SerializeField] 
     private float m_Damage = 30f;
-    [SerializeField] 
-    private float m_Speed = 25f;
     
     private bool m_IsmPlayerNotNull;
 
@@ -37,21 +33,8 @@ public class Bullet : MonoBehaviour
         if (i_Collision.gameObject.CompareTag("Mob"))
         {
             i_Collision.gameObject.GetComponent<MobStats>().GetHit(m_Damage);
-            this.gameObject.GetComponent<Animator>().SetBool("Hit",true);
-            StartCoroutine(AnimationCooldown(0.6f));
-            this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
+            Destroy(this.gameObject);
         }
     }
-    
-    public IEnumerator AnimationCooldown(float i_TimeToWait)
-    {
-        yield return new WaitForSeconds(i_TimeToWait);
-        Destroy(this.gameObject);
-    }
-
-    public float GetSpeed()
-    {
-        return m_Speed;
-    }
-
+   
 }

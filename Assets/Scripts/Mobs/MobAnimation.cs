@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MobAnimation : MonoBehaviour
 {
-    [SerializeField] private Animator m_animator;
+    [SerializeField] private Animator m_Animator;
     public void PlayMobAnimation(float i_MobHorizontalVelocity)
     {
-        m_animator.SetFloat("MobMoveSpeed", Mathf.Abs(i_MobHorizontalVelocity));
+        m_Animator.SetFloat("MobMoveSpeed", Mathf.Abs(i_MobHorizontalVelocity));
     }
 }

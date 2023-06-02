@@ -5,6 +5,8 @@ namespace Abilities
     [CreateAssetMenu(menuName = "Scriptable Objects/Double Jump",fileName = "Double Jump")]
     public class DoubleJump : ScriptableObject
     {
+        [SerializeField]
+        private short m_AvailabilityLevel = 2;
         private readonly AbilityStats r_AbilityStats;
         
         public DoubleJump()
