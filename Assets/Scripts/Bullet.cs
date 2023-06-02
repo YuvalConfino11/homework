@@ -5,9 +5,11 @@ public class Bullet : MonoBehaviour
 {
     private GameObject m_Player;
     [SerializeField]
-    private float m_Range = 10f;
+    private float m_Range = 100f;
     [SerializeField] 
     private float m_Damage = 30f;
+    [SerializeField] 
+    private float m_Speed = 25f;
     
     private bool m_IsmPlayerNotNull;
 
@@ -36,5 +38,10 @@ public class Bullet : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-   
+    
+    public float GetSpeed()
+    {
+        return m_Speed;
+    }
+
 }
