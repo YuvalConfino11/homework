@@ -6,19 +6,19 @@ using UnityEngine.UI;
 public class ManaBarScript : MonoBehaviour
 {
     [SerializeField]
-    private Slider m_slider;
+    private Slider m_Slider;
     [SerializeField]
-    private Player m_player;
+    private Player m_Player;
 
-    public void SetMana(float mana)
+    public void SetMana(float i_Mana)
     {
-        m_slider.value = mana; 
+        m_Slider.value = i_Mana; 
     }
 
-    public void SetMaxMana(float mana)
+    public void SetMaxMana(float i_Mana)
     {
-        m_slider.maxValue = mana;
-        m_slider.value = mana;
+        m_Slider.maxValue = i_Mana;
+        m_Slider.value = i_Mana;
     }
   
 }

@@ -255,5 +255,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5da01b8c28897243be72f8afab770c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_slider: {fileID: 3468966926742652920}
-  m_player: {fileID: 0}
+  m_Slider: {fileID: 3468966926742652920}
+  m_Player: {fileID: 0}

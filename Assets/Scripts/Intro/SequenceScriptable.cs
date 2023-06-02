@@ -8,7 +8,7 @@ namespace Sequences
     public class SequenceScriptable : ScriptableObject
     {
        
-        public IntroSequence[] introSequences;
+        public IntroSequence[] m_IntroSequences;
     }
 
     [System.Serializable]

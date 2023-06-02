@@ -9,23 +9,23 @@ namespace Skills
     {
 
         [SerializeField]
-        private short k_AvailabilityLevel = 2;
+        private short m_AvailabilityLevel = 2;
         [SerializeField]
         private float m_AttackRadius = 50;
         [SerializeField]
         private float m_AttackDamage = 30;
-        private readonly SkillsStats m_SkillsStats;
+        private readonly SkillsStats r_SkillsStats;
 
 
 
         public ImaginaryFriendAttack()
         {
-            m_SkillsStats = new SkillsStats(k_AvailabilityLevel);
+            r_SkillsStats = new SkillsStats(true,true);
         }
 
         public SkillsStats GetSkillsStats()
         {
-            return m_SkillsStats;
+            return r_SkillsStats;
         }
 
         public float GetAttackRadius()

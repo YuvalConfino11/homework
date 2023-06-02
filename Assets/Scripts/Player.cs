@@ -20,14 +20,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private ManaBarScript m_ManaBar;
     [SerializeField]
-    private float m_ExperiencePoints;
-    [SerializeField]
-    private float m_Level = 1;
-    [SerializeField]
-    private float m_Attack;
-    [SerializeField]
-    private float m_Defence;
-    [SerializeField]
     private float m_DefaultGravityScale = 5f;
     [SerializeField]
     private float m_WalkingSpeed = 4f;
@@ -46,31 +38,34 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject m_ImaginaryFriend;
     [SerializeField]
-    private float m_bulletSpeed = 8f;
+    private float m_BulletSpeed = 8f;
     [SerializeField]
-    private GameObject m_bullet;
+    private GameObject m_Bullet;
     [SerializeField]
     private LayerMask m_MobLayerMask;
     [SerializeField]
-    private LayerMask m_groundLayerMask;
+    private LayerMask m_GroundLayerMask;
     [SerializeField]
-    private bool m_isAbleToShot = true;
+    private LayerMask m_ObjectiveLayerMask;
     [SerializeField]
-    private float m_shootingRate = 0.5f;
+    private bool m_IsAbleToShot = true;
+    [SerializeField]
+    private float m_ShootingRate = 0.5f;
     [SerializeField]
     private float m_ObjectiveCollectRadius = 10f;
-    
+    [SerializeField]
+    private float m_GroundRaycastDistance = 10f;
 
     [SerializeField] private PlayerAnimation m_PlayerAnimation;
 
-    private float m_lastMovingDirection = 1f;
+    private float m_LastMovingDirection = 1f;
     private float m_LastArrowKeyPressTime;
-    private RaycastHit2D  m_raycastHit;
-    private Rigidbody2D m_rigidBody;
-    private CapsuleCollider2D m_capsuleCollider;
-    private Collider2D[] m_mobsInExplosionRadius;
-    private bool m_isFacingRight = true;
-    private BoxCollider2D m_feetBoxCollider2D;
+    private RaycastHit2D  m_RaycastHit;
+    private Rigidbody2D m_RigidBody;
+    private CapsuleCollider2D m_CapsuleCollider;
+    private Collider2D[] m_MobsInExplosionRadius;
+    private bool m_IsFacingRight = true;
+    private BoxCollider2D m_FeetBoxCollider2D;
     
     
 
@@ -78,9 +73,9 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        m_rigidBody = GetComponent<Rigidbody2D>();
-        m_capsuleCollider = GetComponent<CapsuleCollider2D>();
-        m_feetBoxCollider2D = GetComponent<BoxCollider2D>();
+        m_RigidBody = GetComponent<Rigidbody2D>();
+        m_CapsuleCollider = GetComponent<CapsuleCollider2D>();
+        m_FeetBoxCollider2D = GetComponent<BoxCollider2D>();
 
         m_ManaPoint = GetMaxMana();
         m_ManaBar.SetMaxMana(GetMaxMana());
@@ -89,9 +84,9 @@ public class Player : MonoBehaviour
     void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
-        m_lastMovingDirection = horizontalInput == 0 ? m_lastMovingDirection : horizontalInput > 0 ? 1 : -1;
+        m_LastMovingDirection = horizontalInput == 0 ? m_LastMovingDirection : horizontalInput > 0 ? 1 : -1;
         movement(horizontalInput);
-        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.LeftAlt)) && GetIsGrounded() && m_Dash.GetAbilityStats().GetIsUnlocked())
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.LeftAlt)) && getIsGrounded() && m_Dash.GetAbilityStats().GetIsUnlocked())
         {
             StartCoroutine(dash(horizontalInput));
         }
@@ -105,7 +100,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            m_rigidBody.gravityScale = m_DefaultGravityScale;
+            m_RigidBody.gravityScale = m_DefaultGravityScale;
         }
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
@@ -115,16 +110,20 @@ public class Player : MonoBehaviour
         {
             explosion();
         }
-        Vector3 rayStartPosition =
-            new Vector3(transform.position.x + 0.5f * m_lastMovingDirection, transform.position.y, 0);
-        m_raycastHit = Physics2D.Raycast(rayStartPosition, Vector2.down, m_capsuleCollider.size.y * 1.25f,m_groundLayerMask);
-        m_Grounded = m_raycastHit.collider != null;
-        if (m_rigidBody.velocity.y <= 0)
+
+        if (Input.GetKeyDown(KeyCode.Z))
         {
-            m_feetBoxCollider2D.enabled = true;
+            unlockedSAvailabilitiesAndSkills();
         }
-        checkForUnlockedSAvailabilities();
-        m_PlayerAnimation.PlayPlayerAnimation(m_rigidBody.velocity.x, m_rigidBody.velocity.y, GetIsGrounded());
+        Vector3 rayStartPosition =
+            new Vector3(transform.position.x + 0.5f * m_LastMovingDirection, transform.position.y, 0);
+        m_RaycastHit = Physics2D.Raycast(rayStartPosition, Vector2.down, m_GroundRaycastDistance,m_GroundLayerMask);
+        m_Grounded = m_RaycastHit.collider != null;
+        if (m_RigidBody.velocity.y <= 0)
+        {
+            m_FeetBoxCollider2D.enabled = true;
+        }
+        m_PlayerAnimation.PlayPlayerAnimation(m_RigidBody.velocity.x, m_RigidBody.velocity.y, getIsGrounded());
 
         if(m_CurrentHealthPoint == 0)
         {
@@ -132,72 +131,72 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D i_Collision)
     {
-        if (collision.gameObject.CompareTag("Platform"))
+        if (i_Collision.gameObject.CompareTag("Platform"))
         {
-            if (m_rigidBody.velocity.y > 0)
+            if (m_RigidBody.velocity.y > 0)
             {
-                m_feetBoxCollider2D.enabled = false;
+                m_FeetBoxCollider2D.enabled = false;
             }
             else
             {
-                m_feetBoxCollider2D.enabled = true; 
+                m_FeetBoxCollider2D.enabled = true; 
             }
         }
 
-        if (collision.gameObject.CompareTag("Ground"))
+        if (i_Collision.gameObject.CompareTag("Ground"))
         {
-            m_feetBoxCollider2D.enabled = true;
+            m_FeetBoxCollider2D.enabled = true;
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D i_Collision)
     {
-        if (collision.gameObject.CompareTag("Platform"))
+        if (i_Collision.gameObject.CompareTag("Platform"))
         {
-            if (m_rigidBody.velocity.y > 0)
+            if (m_RigidBody.velocity.y > 0)
             {
-                m_feetBoxCollider2D.enabled = false;
+                m_FeetBoxCollider2D.enabled = false;
             }
             else
             {
-                m_feetBoxCollider2D.enabled = true; 
+                m_FeetBoxCollider2D.enabled = true; 
             }
         }
 
-        if (collision.gameObject.CompareTag("Ground"))
+        if (i_Collision.gameObject.CompareTag("Ground"))
         {
-            m_feetBoxCollider2D.enabled = true;
+            m_FeetBoxCollider2D.enabled = true;
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D i_Collision)
     {
-        if (m_rigidBody.velocity.y > 0)
+        if (m_RigidBody.velocity.y > 0)
         {
-            m_feetBoxCollider2D.enabled = false;
+            m_FeetBoxCollider2D.enabled = false;
         }
-        m_capsuleCollider.isTrigger = true;
+        m_CapsuleCollider.isTrigger = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D i_Col)
     {
-        if (col.gameObject.CompareTag("Ground"))
+        if (i_Col.gameObject.CompareTag("Ground"))
         {
-            m_capsuleCollider.isTrigger = false;
+            m_CapsuleCollider.isTrigger = false;
         }
     }
 
 
-    private void movement(float i_horizontalInput)
+    private void movement(float i_HorizontalInput)
     {
-        m_rigidBody.velocity = new Vector2(i_horizontalInput * m_WalkingSpeed, m_rigidBody.velocity.y);
-        if (i_horizontalInput < 0 && m_isFacingRight)
+        m_RigidBody.velocity = new Vector2(i_HorizontalInput * m_WalkingSpeed, m_RigidBody.velocity.y);
+        if (i_HorizontalInput < 0 && m_IsFacingRight)
         {
             flip();
         }
-        else if(i_horizontalInput > 0 && !m_isFacingRight)
+        else if(i_HorizontalInput > 0 && !m_IsFacingRight)
         {
             flip();
         }
@@ -205,48 +204,50 @@ public class Player : MonoBehaviour
 
     private void flip()
     {
-        m_isFacingRight = !m_isFacingRight;
+        m_IsFacingRight = !m_IsFacingRight;
         transform.Rotate(0f, 180f, 0f);
     }
    
     private void jump()
     {
-        if (GetIsGrounded())
+        Debug.Log(m_DoubleJump.GetAbilityStats().GetIsAvailable() && m_DoubleJump.GetAbilityStats().GetIsUnlocked());
+
+        if (getIsGrounded())
         {
-            float jumpForce = Mathf.Sqrt( -2 * m_JumpHeight * (Physics2D.gravity.y * m_rigidBody.gravityScale));
-            m_rigidBody.velocity = new Vector2(m_rigidBody.velocity.x, jumpForce);
+            float jumpForce = Mathf.Sqrt( -2 * m_JumpHeight * (Physics2D.gravity.y * m_RigidBody.gravityScale));
+            m_RigidBody.velocity = new Vector2(m_RigidBody.velocity.x, jumpForce);
             m_PlayerAnimation.JumpAnimation();
             m_DoubleJump.GetAbilityStats().SetIsAvailable(true);
         }
         else if (m_DoubleJump.GetAbilityStats().GetIsAvailable() && m_DoubleJump.GetAbilityStats().GetIsUnlocked())
         {
-            if (m_rigidBody.gravityScale != m_DefaultGravityScale)
+            if (m_RigidBody.gravityScale != m_DefaultGravityScale)
             {
-                m_rigidBody.gravityScale = m_DefaultGravityScale;
+                m_RigidBody.gravityScale = m_DefaultGravityScale;
             }
-            float jumpForce = Mathf.Sqrt( -2 * m_JumpHeight * (Physics2D.gravity.y * m_rigidBody.gravityScale));
-            m_rigidBody.velocity = Vector2.up * jumpForce;
+            float jumpForce = Mathf.Sqrt( -2 * m_JumpHeight * (Physics2D.gravity.y * m_RigidBody.gravityScale));
+            m_RigidBody.velocity = Vector2.up * jumpForce;
             m_PlayerAnimation.JumpAnimation();
             m_DoubleJump.GetAbilityStats().SetIsAvailable(false);
-            m_DoubleJump.RunAbility(m_JumpHeight, m_rigidBody);
+            m_DoubleJump.RunAbility(m_JumpHeight, m_RigidBody);
         }
     }
 
     private void glide()
     {
-        if (m_Glide.GetAbilityStats().GetIsAvailable() && !GetIsGrounded() && m_rigidBody.velocity.y < 0)
+        if (m_Glide.GetAbilityStats().GetIsAvailable() && !getIsGrounded() && m_RigidBody.velocity.y < 0)
         {
-            m_rigidBody.gravityScale = m_Glide.GetGlideFactor();
+            m_RigidBody.gravityScale = m_Glide.GetGlideFactor();
         }
     }
 
-    private IEnumerator dash(float i_movingDirection)
+    private IEnumerator dash(float i_MovingDirection)
     {
-        if (m_Dash.GetAbilityStats().GetIsAvailable() && GetIsGrounded())
+        if (m_Dash.GetAbilityStats().GetIsAvailable() && getIsGrounded())
         {
             m_Dash.GetAbilityStats().SetIsAvailable(false);
-            Vector2 dashDirection = new Vector2(transform.localScale.x * i_movingDirection, 0);
-            m_rigidBody.velocity = dashDirection.normalized * m_Dash.GetDashSpeed();
+            Vector2 dashDirection = new Vector2(transform.localScale.x * i_MovingDirection, 0);
+            m_RigidBody.velocity = dashDirection.normalized * m_Dash.GetDashSpeed();
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(abilityCooldown(m_Dash.GetAbilityStats(),m_Dash.GetAbilityStats().GetCooldownTime()));
         }
@@ -254,39 +255,42 @@ public class Player : MonoBehaviour
 
     private void attack()
     {
-        if (m_isAbleToShot)
+        if (m_IsAbleToShot)
         {
-            m_isAbleToShot = false;
-            GameObject bullet = Instantiate(m_bullet, transform.position, transform.rotation);
-            bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * (m_lastMovingDirection * m_bulletSpeed);
+            m_IsAbleToShot = false;
+            GameObject bullet = Instantiate(m_Bullet, transform.position, transform.rotation);
+            bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * (m_LastMovingDirection * m_BulletSpeed);
             StartCoroutine(shootingCooldown());
         }
         
     }
 
-    private bool GetIsGrounded()
+    private bool getIsGrounded()
     {
         return m_Grounded;
     }
     
     private void explosion()
     {
-        float explosionRadius = m_EnergyExplosion.GetExplosionRadius();
-        float explosionForce = m_EnergyExplosion.GetExplosionForce();
-        Vector3 imaginaryFriendPosition = m_ImaginaryFriend.transform.position;
+        if (m_EnergyExplosion.GetSkillsStats().GetIsUnlocked() && m_EnergyExplosion.GetSkillsStats().GetIsAvailable())
+        {
+            float explosionRadius = m_EnergyExplosion.GetExplosionRadius();
+            float explosionForce = m_EnergyExplosion.GetExplosionForce();
+            Vector3 imaginaryFriendPosition = m_ImaginaryFriend.transform.position;
         
-        m_mobsInExplosionRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius,m_MobLayerMask);
+            m_MobsInExplosionRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius,m_MobLayerMask);
         
-        foreach (Collider2D mob in m_mobsInExplosionRadius) {
-            Rigidbody2D mobRigidbody2D = mob.GetComponent<Rigidbody2D>();
-            Vector2 mobDirection = (mob.transform.position - imaginaryFriendPosition).normalized;
-            float mobDistance = Vector2.Distance(mob.transform.position, imaginaryFriendPosition);
-            float distanceRatio = Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1);
-            float calculatedExplosionForce = explosionForce * distanceRatio * transform.localScale.y;
-            Debug.Log(mobDirection+"  "+calculatedExplosionForce);
-            mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
-            mob.GetComponent<MobStats>().GetHit(m_EnergyExplosion.GetExplosionDamage());
-            Debug.DrawLine(transform.position,mob.transform.position,Color.magenta,2);
+            foreach (Collider2D mob in m_MobsInExplosionRadius) {
+                Rigidbody2D mobRigidbody2D = mob.GetComponent<Rigidbody2D>();
+                Vector2 mobDirection = (mob.transform.position - imaginaryFriendPosition).normalized;
+                float mobDistance = Vector2.Distance(mob.transform.position, imaginaryFriendPosition);
+                float distanceRatio = Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1);
+                float calculatedExplosionForce = explosionForce * distanceRatio * transform.localScale.y;
+                Debug.Log(mobDirection+"  "+calculatedExplosionForce);
+                mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
+                mob.GetComponent<MobStats>().GetHit(m_EnergyExplosion.GetExplosionDamage());
+                Debug.DrawLine(transform.position,mob.transform.position,Color.magenta,2);
+            }
         }
     }
 
@@ -294,51 +298,61 @@ public class Player : MonoBehaviour
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position,m_EnergyExplosion.GetExplosionRadius());
-        if (m_capsuleCollider != null && transform.position != null)
+        if (m_CapsuleCollider != null && transform.position != null)
         {
             Gizmos.color = Color.red;
             Vector3 rayStartPosition =
-                new Vector3(transform.position.x + 0.5f * m_lastMovingDirection, transform.position.y, 0);
-            Gizmos.DrawRay(rayStartPosition,new Vector3(0,-1 * m_capsuleCollider.size.y * 1.25f,0));
+                new Vector3(transform.position.x + 0.5f * m_LastMovingDirection, transform.position.y, 0);
+            Gizmos.DrawRay(rayStartPosition,new Vector3(0,-1 * m_GroundRaycastDistance,0));
         }
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position,m_ObjectiveCollectRadius);
     }
     
-    private void checkForUnlockedSAvailabilities()
+    private void unlockedSAvailabilitiesAndSkills()
     {
-        if (m_Level >= m_DoubleJump.GetAbilityStats().GetAvailabilityLevel())
+        Collider2D objectivesInRadius = Physics2D.OverlapCircle(transform.position, m_ObjectiveCollectRadius,m_ObjectiveLayerMask);
+        if (!objectivesInRadius.Equals(null))
         {
-            m_DoubleJump.GetAbilityStats().SetIsUnlocked(true);
-        }
-        
-        if (m_Level >= m_Glide.GetAbilityStats().GetAvailabilityLevel())
-        {
-            m_Glide.GetAbilityStats().SetIsUnlocked(true);
-        }
-        
-        if (m_Level >= m_Dash.GetAbilityStats().GetAvailabilityLevel())
-        {
-            m_Dash.GetAbilityStats().SetIsUnlocked(true);
+            switch (objectivesInRadius.name)
+            {
+                case "DoubleJump":
+                    m_DoubleJump.GetAbilityStats().SetIsUnlocked(true);
+                    m_DoubleJump.GetAbilityStats().SetIsAvailable(true);
+                    break;
+                case "Dash":
+                    m_Dash.GetAbilityStats().SetIsUnlocked(true);
+                    m_Dash.GetAbilityStats().SetIsAvailable(true);
+                    break;
+                case "EnergyExplosion":
+                    m_EnergyExplosion.GetSkillsStats().SetIsUnlocked(true);
+                    m_EnergyExplosion.GetSkillsStats().SetIsAvailable(true);
+                    break;
+                case "Glide":
+                    m_Glide.GetAbilityStats().SetIsUnlocked(true);
+                    m_Glide.GetAbilityStats().SetIsAvailable(true);
+                    break;
+            }
+            Destroy(objectivesInRadius.gameObject);
         }
     }
 
-    private IEnumerator abilityCooldown(AbilityStats i_Ability, float i_cooldownTime)
+    private IEnumerator abilityCooldown(AbilityStats i_Ability, float i_CooldownTime)
     {
-        yield return new WaitForSeconds(i_cooldownTime);
+        yield return new WaitForSeconds(i_CooldownTime);
         i_Ability.SetIsAvailable(true);
     }
     
     private IEnumerator shootingCooldown()
     {
-        yield return new WaitForSeconds(m_shootingRate);
+        yield return new WaitForSeconds(m_ShootingRate);
 
-        m_isAbleToShot = true;
+        m_IsAbleToShot = true;
     }
 
-    public void getHit(float i_damage)
+    public void getHit(float i_Damage)
     {
-        m_CurrentHealthPoint = Mathf.Clamp(m_CurrentHealthPoint - i_damage,0,100);
+        m_CurrentHealthPoint = Mathf.Clamp(m_CurrentHealthPoint - i_Damage,0,100);
     }
 
     public float GetMaxHealth()
@@ -355,9 +369,9 @@ public class Player : MonoBehaviour
     {
         return m_ManaPoint;
     }
-    public void SetMana(float mana)
+    public void SetMana(float i_Mana)
     {
-        m_ManaPoint += mana;
+        m_ManaPoint += i_Mana;
         m_ManaPoint = Math.Clamp(m_ManaPoint, 0f, 100f);
         m_ManaBar.SetMana(m_ManaPoint);
     }

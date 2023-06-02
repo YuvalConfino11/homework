@@ -33,10 +33,10 @@ public class ImaginaryFriendAi : MonoBehaviour
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_ImaginaryFriendStartPosition = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0);
         
-        InvokeRepeating("UpdatePath", 0f, 0.5f);
+        InvokeRepeating("updatePath", 0f, 0.5f);
     }
 
-    void UpdatePath()     
+    void updatePath()     
     {
         if(m_MobInAttackRadius != null && m_FriendDuringAttack == false)
         {
@@ -59,11 +59,11 @@ public class ImaginaryFriendAi : MonoBehaviour
         m_Seeker.StartPath(m_Rigidbody2D.position, m_MainTarget.position, OnPathComplete);
     }
 
-    void OnPathComplete(Path p)
+    void OnPathComplete(Path i_P)
     {
-        if (!p.error)
+        if (!i_P.error)
         {
-            m_Path = p;
+            m_Path = i_P;
             m_CurrentWayPoint = 0;
         }
     }
@@ -97,9 +97,9 @@ public class ImaginaryFriendAi : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D i_Collision)
     {
-        if (collision.gameObject.CompareTag("Mob"))
+        if (i_Collision.gameObject.CompareTag("Mob"))
         {
             m_FriendHitMob = true;
         }

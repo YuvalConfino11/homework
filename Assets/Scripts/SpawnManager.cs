@@ -22,7 +22,7 @@ public class SpawnManager : MonoBehaviour
 
 
     private List<GameObject> m_SpwanPointsList;
-    private int mobsCounter = 0;
+    private int m_MobsCounter = 0;
     private float m_SpawnTimer = 0f;
 
     private void Start()
@@ -37,7 +37,7 @@ public class SpawnManager : MonoBehaviour
     private void Update()
     {
         m_IsPlayerInRadius = Physics2D.OverlapCircle(transform.position, m_SpawnManagerRadius, m_PlayerLayerMask) != null;
-        if (m_IsPlayerInRadius && m_SpawnTimer >= m_SpawnInterval && mobsCounter < m_MaxMobsInArea)
+        if (m_IsPlayerInRadius && m_SpawnTimer >= m_SpawnInterval && m_MobsCounter < m_MaxMobsInArea)
         {
             GameObject randomMob = m_MobsList[(int)Random.Range(0, m_MobsList.Count)];
             GameObject randomSpawnPoint = m_SpwanPointsList[(int)Random.Range(0, m_SpwanPointsList.Count)];
@@ -45,7 +45,7 @@ public class SpawnManager : MonoBehaviour
             m_SpawnTimer = 0f;
         }
         m_SpawnTimer += Time.deltaTime;
-        mobsCounter = Physics2D.OverlapCircleAll(transform.position, m_SpawnManagerRadius,m_MobsLayerMask).Length;
+        m_MobsCounter = Physics2D.OverlapCircleAll(transform.position, m_SpawnManagerRadius,m_MobsLayerMask).Length;
     }
 
     private void OnDrawGizmos()

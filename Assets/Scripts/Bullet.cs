@@ -3,36 +3,36 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private GameObject m_player;
+    private GameObject m_Player;
     [SerializeField]
-    private float m_range = 10f;
+    private float m_Range = 10f;
     [SerializeField] 
-    private float m_damage = 30f;
+    private float m_Damage = 30f;
     
-    private bool ismPlayerNotNull;
+    private bool m_IsmPlayerNotNull;
 
     private void Awake()
     {
-        m_player = GameObject.FindGameObjectWithTag("Player");
+        m_Player = GameObject.FindGameObjectWithTag("Player");
     }
 
 
     void Update()
     {
-        if (m_player != null)
+        if (m_Player != null)
         {
-            if (Mathf.Abs(transform.position.x - m_player.transform.position.x) > m_range)
+            if (Mathf.Abs(transform.position.x - m_Player.transform.position.x) > m_Range)
             {
                 Destroy(this.gameObject);
             }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D i_Collision)
     {
-        if (collision.gameObject.CompareTag("Mob"))
+        if (i_Collision.gameObject.CompareTag("Mob"))
         {
-            collision.gameObject.GetComponent<MobStats>().GetHit(m_damage);
+            i_Collision.gameObject.GetComponent<MobStats>().GetHit(m_Damage);
             Destroy(this.gameObject);
         }
     }

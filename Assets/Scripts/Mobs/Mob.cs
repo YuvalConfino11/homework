@@ -10,7 +10,7 @@ namespace Mobs
         [SerializeField] 
         private LayerMask m_PlayerLayerMask;
         [SerializeField] 
-        private MobStats m_mobStats;
+        private MobStats m_MobStats;
         [SerializeField]
         private GameObject m_ManaBall;
         
@@ -19,12 +19,12 @@ namespace Mobs
         private void Awake()
         {
             StartCoroutine(playerHitCheck());
-            m_mobStats = GetComponent<MobStats>();
+            m_MobStats = GetComponent<MobStats>();
         }
 
         private void Update()
         {
-            if (m_mobStats.isDead())
+            if (m_MobStats.isDead())
             {
                 Destroy(this.gameObject);
                 Instantiate(m_ManaBall, transform.position, transform.rotation);
@@ -47,7 +47,7 @@ namespace Mobs
             if (hitPlayer != null)
             {
                 m_PlayerGameObject = hitPlayer.gameObject;
-                m_PlayerGameObject.GetComponent<Player>().getHit(m_mobStats.GetDamage());
+                m_PlayerGameObject.GetComponent<Player>().getHit(m_MobStats.GetDamage());
             }
         }
 

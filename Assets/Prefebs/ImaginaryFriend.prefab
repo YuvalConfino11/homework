@@ -222,7 +222,7 @@ MonoBehaviour:
   m_MoveSpeedTowardMob: 12
   m_MoveSpeedTowardPlayer: 12
   m_FriendDuringAttack: 0
-  m_LayerMask:
+  m_MobLayerMask:
     serializedVersion: 2
     m_Bits: 512
   m_FriendHitMob: 0

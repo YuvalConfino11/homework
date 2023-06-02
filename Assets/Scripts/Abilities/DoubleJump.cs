@@ -6,21 +6,21 @@ namespace Abilities
     public class DoubleJump : ScriptableObject
     {
         [SerializeField]
-        private short k_AvailabilityLevel = 2;
-        private readonly AbilityStats m_AbilityStats;
+        private short m_AvailabilityLevel = 2;
+        private readonly AbilityStats r_AbilityStats;
         
         public DoubleJump()
         {
-            m_AbilityStats = new AbilityStats();
+            r_AbilityStats = new AbilityStats();
         }
 
-        public void RunAbility(float i_jumpHeight,Rigidbody2D i_rigidBody)
+        public void RunAbility(float i_JumpHeight,Rigidbody2D i_RigidBody)
         {
             
         }
         public AbilityStats GetAbilityStats()
         {
-            return m_AbilityStats;
+            return r_AbilityStats;
         }
     }
 

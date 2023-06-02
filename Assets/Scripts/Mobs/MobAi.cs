@@ -30,8 +30,8 @@ namespace Mobs
         private BoxCollider2D m_FeetBoxCollider2D;
         [SerializeField]
         private Transform m_CastPosition;
-
-        [SerializeField] private MobAnimation m_MobAnimation;
+        [SerializeField] 
+        private MobAnimation m_MobAnimation;
         
         private Rigidbody2D m_RigidBody;
         private GameObject m_PlayerGameObject;
@@ -40,7 +40,7 @@ namespace Mobs
         private float m_SameDirectionWalkTimer;
         private float m_RandomTimeOfWalkingInSameDirection;
         private RaycastHit2D  m_RaycastHit;
-        private bool m_encounterObstacle;
+        private bool m_EncounterObstacle;
         
 
 
@@ -68,7 +68,7 @@ namespace Mobs
             {
                 StartCoroutine(patrolStopForThink());
             }
-            if (!GetIsGrounded() && m_RigidBody.velocity.y > 0)
+            if (!getIsGrounded() && m_RigidBody.velocity.y > 0)
             {
                 m_FeetBoxCollider2D.enabled = false;
             }
@@ -134,7 +134,7 @@ namespace Mobs
         {
             changeMovingDirection();
             yield return new WaitForSeconds(m_RandomTimeOfWalkingInSameDirection);
-            m_encounterObstacle = false;
+            m_EncounterObstacle = false;
         }
 
         
@@ -188,8 +188,8 @@ namespace Mobs
                 if (Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, m_GroundLayerMask).collider == null)
                 {
                     m_PlayerGameObject = target.gameObject;
-                    m_encounterObstacle = !m_encounterObstacle ? isHittingWall() || isNearEdge() : m_encounterObstacle;
-                    setCanSeePlayer(!m_encounterObstacle);
+                    m_EncounterObstacle = !m_EncounterObstacle ? isHittingWall() || isNearEdge() : m_EncounterObstacle;
+                    setCanSeePlayer(!m_EncounterObstacle);
                 }
                 else
                 {
@@ -209,9 +209,9 @@ namespace Mobs
         }
 
 
-        private void setCanSeePlayer(bool i_canSeePlayer)
+        private void setCanSeePlayer(bool i_CanSeePlayer)
         {
-            m_CanSeePlayer = i_canSeePlayer;
+            m_CanSeePlayer = i_CanSeePlayer;
         }
 
         private void OnDrawGizmos()
@@ -243,7 +243,7 @@ namespace Mobs
             Gizmos.DrawLine(m_CastPosition.position, targetPosition);
         }
         
-        private bool GetIsGrounded()
+        private bool getIsGrounded()
         {
             return m_Grounded;
         }
