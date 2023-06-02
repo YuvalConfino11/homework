@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13f1849cfcfc02445a24e6b709a072f2, type: 3}
-  m_Name: ImaginaryFriendAttack
+  m_Script: {fileID: 11500000, guid: fa2d796aebe14ded814d99599b1a2a33, type: 3}
+  m_Name: Heal
   m_EditorClassIdentifier: 
-  m_AttackRadius: 100
-  m_AttackDamage: 60
+  m_HealAmount: 40
+  m_HealManaPointsCost: 50

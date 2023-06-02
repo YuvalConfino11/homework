@@ -212,7 +212,7 @@ MonoBehaviour:
   m_BaseCastDistance: 11
   m_GroundLayerMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 66048
   m_MaxThinkPauseTime: 4
   m_MinThinkPauseTime: 2
   m_MinWalkingOnSameDirectionTime: 4
@@ -222,6 +222,7 @@ MonoBehaviour:
   m_FeetBoxCollider2D: {fileID: 6279419858671199148}
   m_CastPosition: {fileID: 2002933695078471736}
   m_MobAnimation: {fileID: 8637067699560001742}
+  m_GroundCastDistance: 20
 --- !u!114 &7409972616175501009
 MonoBehaviour:
   m_ObjectHideFlags: 0

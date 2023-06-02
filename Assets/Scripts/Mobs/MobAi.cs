@@ -32,6 +32,8 @@ namespace Mobs
         private Transform m_CastPosition;
         [SerializeField] 
         private MobAnimation m_MobAnimation;
+        [SerializeField] 
+        private float m_GroundCastDistance = 10f;
         
         private Rigidbody2D m_RigidBody;
         private GameObject m_PlayerGameObject;
@@ -60,9 +62,8 @@ namespace Mobs
         private void Update()
         {
             m_SameDirectionWalkTimer += Time.deltaTime;
-            Vector3 rayStartPosition =
-                new Vector3(transform.position.x + 0.5f * m_MovingDirection, transform.position.y, 0);
-            m_RaycastHit = Physics2D.Raycast(rayStartPosition, Vector2.down, transform.localScale.y * 2.25f,m_GroundLayerMask);
+            Vector3 rayStartPosition = new Vector3(m_CastPosition.position.x, m_CastPosition.position.y, 0);
+            m_RaycastHit = Physics2D.Raycast(rayStartPosition, Vector2.down, m_GroundCastDistance,m_GroundLayerMask);
             m_Grounded = m_RaycastHit.collider != null;
             if (m_SameDirectionWalkTimer >= m_RandomTimeOfWalkingInSameDirection && !getCanSeePlayer())
             {
@@ -101,8 +102,7 @@ namespace Mobs
         private bool isHittingWall()
         {
             Vector3 targetPosition = m_CastPosition.position;
-            
-            targetPosition.x += m_MovingDirection * m_FeetBoxCollider2D.size.x * m_BaseCastDistance * 1.25f;
+            targetPosition.x += m_MovingDirection * m_BaseCastDistance;
            
             return Physics2D.Linecast(m_CastPosition.position, targetPosition, m_GroundLayerMask).collider != null;
         }
@@ -216,31 +216,26 @@ namespace Mobs
 
         private void OnDrawGizmos()
         {
-            float castDistance = m_BaseCastDistance;
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, m_MobFieldOfViewRadius * transform.localScale.y);
+            Gizmos.DrawWireSphere(m_CastPosition.position, m_MobFieldOfViewRadius);
+            
+            Gizmos.color = Color.cyan;
+            Vector3 nearEdgeTargetPosition = m_FeetBoxCollider2D.transform.position;
+            Vector3 nearEdgeStartPosition = m_CastPosition.position;
+            nearEdgeTargetPosition.y -= m_BaseCastDistance * 2f;
+            nearEdgeTargetPosition.x += m_BaseCastDistance * m_MovingDirection * 1.25f;
+            Gizmos.DrawLine(nearEdgeStartPosition, nearEdgeTargetPosition);
+            Vector3 hitWallStartPosition = m_CastPosition.position;
+            Vector3 hitWallTargetPosition = m_CastPosition.position;
+            hitWallTargetPosition.x += m_MovingDirection * m_BaseCastDistance;
+            Gizmos.DrawLine(hitWallStartPosition, hitWallTargetPosition);
             
             Gizmos.color = Color.green;
-            
-            Vector3 startPosition = m_CastPosition.position;
-            startPosition.y -= transform.localScale.y;
-            
-            Vector3 targetPosition = m_FeetBoxCollider2D.transform.position;
-            targetPosition.y -= castDistance * 2f;
-            targetPosition.x += castDistance * m_MovingDirection * 0.5f;
-            
-            Gizmos.DrawLine(startPosition, targetPosition);
-            
-            Gizmos.color = Color.magenta;
-            targetPosition = m_CastPosition.position;
-            targetPosition.x += m_MovingDirection * m_FeetBoxCollider2D.size.x * m_BaseCastDistance * 1.25f;
-            Gizmos.DrawLine(m_CastPosition.position, targetPosition);
-            
-            Gizmos.color = Color.Lerp(Color.red, Color.yellow, 0.5f);
-            startPosition = new Vector3(transform.position.x + 0.5f * m_MovingDirection, transform.position.y, 0);
-            targetPosition = startPosition;
-            targetPosition.y -= transform.localScale.y * 2.25f;
-            Gizmos.DrawLine(m_CastPosition.position, targetPosition);
+            Vector3 groundedPosition = m_CastPosition.position;
+            Vector3 groundedTargetPosition = groundedPosition;
+            groundedTargetPosition.y -= m_GroundCastDistance;
+            Gizmos.DrawLine(groundedPosition, groundedTargetPosition);
+
         }
         
         private bool getIsGrounded()
