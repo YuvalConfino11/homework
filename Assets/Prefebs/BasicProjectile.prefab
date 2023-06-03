@@ -138,5 +138,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Range: 50
   m_Damage: 50
-  m_Speed: 50
-  m_ManaPoint: 10
+  m_Speed: 100

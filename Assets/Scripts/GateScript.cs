@@ -10,45 +10,26 @@ public class GateScript : MonoBehaviour
     private Transform m_OpenGatePos;
     [SerializeField]
     private float  m_GateMoveSpeed = 3;
-   
-    public bool m_PlayerTouchedGate;
-    [SerializeField]
-    private SpriteRenderer m_SpriteRenderer;
-    [SerializeField]
-    private Sprite m_NewSprite;
-    [SerializeField]
-    private int m_GateNumber;
-
-
 
     private void Update()
     {
-        if (m_PlayerTouchedGate)
+        if (m_player.PlayerGotKey())
         {
-            m_SpriteRenderer.sprite = m_NewSprite;
-            MoveGate();
-
+            Debug.Log("Gate Open");
+            transform.position = Vector3.MoveTowards(transform.position, m_OpenGatePos.position, m_GateMoveSpeed * Time.deltaTime);
         }
     }
-    
-    private void OnCollisionEnter2D(Collision2D collision)
+
+   /* private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (m_player.PlayerGotKey(m_GateNumber))
+            if (m_player.PlayerGotKey())
             {
-                m_PlayerTouchedGate = true;
-                AudioManager.Instance.PlaySFX("GateOpen");
+                Debug.Log("");
+                transform.position = Vector3.MoveTowards(transform.position, m_OpenGatePos.position, m_GateMoveSpeed * Time.deltaTime);
             }
            
         }
-    }
-    public bool HasGateOpened()
-    {
-        return m_PlayerTouchedGate;
-    }
-    public void MoveGate()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, m_OpenGatePos.position, m_GateMoveSpeed * Time.deltaTime);
-    }
+    }*/
 }

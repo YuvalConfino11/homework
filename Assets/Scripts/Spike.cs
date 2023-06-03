@@ -1,37 +1,30 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using Mobs;
 
 public class Spike : MonoBehaviour
 {
     [SerializeField]
-    private Spikes m_Spikes;
-    [SerializeField]
-    private float m_currentHealth;
+    private float m_SpikeForce;
 
-    private void Awake()
+    private Rigidbody2D m_Rb;
+    // Start is called before the first frame update
+    void Start()
     {
-        m_currentHealth = m_Spikes.SpikeHP;
+        m_Rb = GetComponent<Rigidbody2D>();
+        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + 90);
     }
 
-    private void Update()
+    // Update is called once per frame
+    void Update()
     {
-        if (m_currentHealth <= 0)
+        m_Rb.AddForce( -transform.right * m_SpikeForce);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Player"))
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            collision.gameObject.GetComponent<Player>().getHit(m_Spikes.SpikeDamage);
-        }
-    }
-    
-    public void GetHit(float i_Damage)
-    {
-        m_currentHealth = Mathf.Clamp(m_currentHealth - i_Damage, 0, 100);
     }
 }
