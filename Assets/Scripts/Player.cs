@@ -130,9 +130,9 @@ public class Player : MonoBehaviour
 
         if(m_CurrentHealthPoint == 0)
         {
+            AudioManager.Instance.musicSource.Stop();
             SceneManager.LoadScene("DeathScene");
         }
-
 
         ////////delete later////////
         ///
@@ -232,6 +232,7 @@ public class Player : MonoBehaviour
             m_RigidBody.velocity = new Vector2(m_RigidBody.velocity.x, jumpForce);
             m_PlayerAnimation.JumpAnimation();
             m_DoubleJump.GetAbilityStats().SetIsAvailable(true);
+            AudioManager.Instance.PlaySFX("Jump");
         }
         else if (m_DoubleJump.GetAbilityStats().GetIsAvailable() && m_DoubleJump.GetAbilityStats().GetIsUnlocked())
         {
@@ -275,6 +276,7 @@ public class Player : MonoBehaviour
             GameObject bullet = Instantiate(m_Bullet, transform.position, transform.rotation);
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * (m_LastMovingDirection * bulletScript.GetSpeed());
+            AudioManager.Instance.PlaySFX("Shoot");
             StartCoroutine(shootingCooldown());
         }
         
