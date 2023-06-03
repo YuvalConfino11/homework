@@ -96,6 +96,7 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && m_Glide.GetAbilityStats().GetIsUnlocked())
         {
             glide();
+            m_PlayerAnimation.EndGlideAnimation();
         }
         else
         {
@@ -251,6 +252,7 @@ public class Player : MonoBehaviour
         if (m_Glide.GetAbilityStats().GetIsAvailable() && !getIsGrounded() && m_RigidBody.velocity.y < 0)
         {
             m_RigidBody.gravityScale = m_Glide.GetGlideFactor();
+            m_PlayerAnimation.GlideAnimation();
         }
     }
 
@@ -261,6 +263,7 @@ public class Player : MonoBehaviour
             m_Dash.GetAbilityStats().SetIsAvailable(false);
             Vector2 dashDirection = new Vector2(transform.localScale.x * i_MovingDirection, 0);
             m_RigidBody.velocity = dashDirection.normalized * m_Dash.GetDashSpeed();
+            m_PlayerAnimation.DashAnimation();
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(abilityCooldown(m_Dash.GetAbilityStats(),m_Dash.GetAbilityStats().GetCooldownTime()));
         }
