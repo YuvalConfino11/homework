@@ -21,16 +21,16 @@ public class PlayerAnimation : MonoBehaviour
     
     public void DashAnimation()
     {
-        m_animator.SetTrigger("Dash");
+        m_Animator.SetTrigger("Dash");
     }
     
     public void GlideAnimation()
     {
-        m_animator.SetTrigger("Glide");
+        m_Animator.SetTrigger("Glide");
     }
     
     public void EndGlideAnimation()
     {
-        m_animator.SetTrigger("EndGlide");
+        m_Animator.SetTrigger("EndGlide");
     }
 }
