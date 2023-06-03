@@ -46,9 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9452db2ea56ae6e44964f3efa144927e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_player: {fileID: 0}
-  defualtVol: 0.327
-  transitionTime: 2
   musicSounds:
   - name: Anticipation
     clip: {fileID: 8300000, guid: c2e894150dce56d4abcc2d37fb9e4555, type: 3}
@@ -67,20 +64,6 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 5d1c0cadd2f7b114dbe05a66d0c6efe2, type: 3}
   - name: Shoot
     clip: {fileID: 8300000, guid: e299c0cc5be11b6418e4b98f63c44cdc, type: 3}
-  - name: Angel
-    clip: {fileID: 8300000, guid: c8a85dd40ee14fe4d99f1fdb047b435b, type: 3}
-  - name: Ough
-    clip: {fileID: 8300000, guid: 7511655b6d0277c4e85b86cf9ac35893, type: 3}
-  - name: Explosion
-    clip: {fileID: 8300000, guid: 1d6e988ac642d7941bcfd67cbc8a2110, type: 3}
-  - name: GateOpen
-    clip: {fileID: 8300000, guid: bf9ea13e67f93d04da71f729d0fb6274, type: 3}
-  - name: Monster1
-    clip: {fileID: 8300000, guid: 2a58c8fae78c025419b12f685fd2c4a9, type: 3}
-  - name: LittleMonster
-    clip: {fileID: 8300000, guid: c15f93bb1567843448c30bd5573bebe1, type: 3}
-  - name: BlobMonster
-    clip: {fileID: 8300000, guid: b31f7062b1c695843aa7e7f3fe9d3fd0, type: 3}
   musicSource: {fileID: 6855977408045517330}
   sfxSource: {fileID: 6855977408424616261}
   endSource: {fileID: 0}
@@ -128,7 +111,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.327
+  m_Volume: 0.01
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -256,7 +239,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.737
+  m_Volume: 0.035
   m_Pitch: 1
   Loop: 0
   Mute: 0
