@@ -55,6 +55,8 @@ public class Player : MonoBehaviour
     private float m_ObjectiveCollectRadius = 10f;
     [SerializeField]
     private float m_GroundRaycastDistance = 10f;
+    [SerializeField]
+    private bool m_PlayerGotKey;
 
 
     [SerializeField] private PlayerAnimation m_PlayerAnimation;
@@ -130,6 +132,15 @@ public class Player : MonoBehaviour
         {
             SceneManager.LoadScene("DeathScene");
         }
+
+
+        ////////delete later////////
+        ///
+        if (Input.GetKey(KeyCode.K))
+        {
+            Debug.Log("pressed K");
+            m_PlayerGotKey = true;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D i_Collision)
@@ -149,6 +160,10 @@ public class Player : MonoBehaviour
         if (i_Collision.gameObject.CompareTag("Ground"))
         {
             m_FeetBoxCollider2D.enabled = true;
+        }
+        if (i_Collision.gameObject.CompareTag("Key"))
+        {
+            m_PlayerGotKey = true;
         }
     }
 
@@ -394,6 +409,10 @@ public class Player : MonoBehaviour
     public float GetMaxMana()
     {
         return m_MaxManaPoint;
+    }
+    public bool PlayerGotKey()
+    {
+        return m_PlayerGotKey;
     }
 
 }

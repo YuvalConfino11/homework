@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f1849cfcfc02445a24e6b709a072f2, type: 3}
   m_Name: ImaginaryFriendAttack
   m_EditorClassIdentifier: 
-  m_AttackRadius: 100
+  m_AttackRadius: 50
   m_AttackDamage: 60
