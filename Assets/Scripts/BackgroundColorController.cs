@@ -22,7 +22,7 @@ public class BackgroundColorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float healthRatio = Mathf.Clamp(((m_Player.GetCurrentHealth() / m_MaxHealth) + 0.2f),0,1);
+        float healthRatio = Mathf.Clamp(((m_Player.GetCurrentHealth() / m_MaxHealth) + 0.05f),0,1);
         Color targetColor = Color.HSVToRGB(0,  0, healthRatio, false);
         if (m_BackgroundSpriteRenderer != null)
         {
