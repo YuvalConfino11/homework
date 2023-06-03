@@ -19,9 +19,9 @@ namespace Mobs
             return m_Health;
         }
         
-        public void GetHit(float i_damage)
+        public void GetHit(float i_Damage)
         {
-            m_Health = Mathf.Clamp(m_Health - i_damage, 0, 100);
+            m_Health = Mathf.Clamp(m_Health - i_Damage, 0, 100);
         }
 
         public bool isDead()

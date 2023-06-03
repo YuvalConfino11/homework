@@ -4,33 +4,33 @@ using UnityEngine.U2D;
 
 public class BackgroundColorController : MonoBehaviour
 {
-    private SpriteRenderer m_backgroundSpriteRenderer;
-    private SpriteShapeRenderer m_backgroundSpriteShapeRenderer;
-    private float m_maxHealth;
+    private SpriteRenderer m_BackgroundSpriteRenderer;
+    private SpriteShapeRenderer m_BackgroundSpriteShapeRenderer;
+    private float m_MaxHealth;
     [SerializeField]
-    private Player m_player;
+    private Player m_Player;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        m_maxHealth = m_player.GetMaxHealth();
-        TryGetComponent<SpriteRenderer>(out m_backgroundSpriteRenderer);
-        TryGetComponent<SpriteShapeRenderer>(out m_backgroundSpriteShapeRenderer);
+        m_MaxHealth = m_Player.GetMaxHealth();
+        TryGetComponent<SpriteRenderer>(out m_BackgroundSpriteRenderer);
+        TryGetComponent<SpriteShapeRenderer>(out m_BackgroundSpriteShapeRenderer);
     }
 
     // Update is called once per frame
     void Update()
     {
-        float healthRatio = Mathf.Clamp(((m_player.GetCurrentHealth() / m_maxHealth) + 0.2f),0,1);
+        float healthRatio = Mathf.Clamp(((m_Player.GetCurrentHealth() / m_MaxHealth) + 0.2f),0,1);
         Color targetColor = Color.HSVToRGB(0,  0, healthRatio, false);
-        if (m_backgroundSpriteRenderer != null)
+        if (m_BackgroundSpriteRenderer != null)
         {
-            m_backgroundSpriteRenderer.color = Color.Lerp(m_backgroundSpriteRenderer.color, targetColor, Time.deltaTime);
+            m_BackgroundSpriteRenderer.color = Color.Lerp(m_BackgroundSpriteRenderer.color, targetColor, Time.deltaTime);
         }
-        else if (m_backgroundSpriteShapeRenderer != null)
+        else if (m_BackgroundSpriteShapeRenderer != null)
         {
-            m_backgroundSpriteShapeRenderer.color = Color.Lerp(m_backgroundSpriteShapeRenderer.color, targetColor, Time.deltaTime);
+            m_BackgroundSpriteShapeRenderer.color = Color.Lerp(m_BackgroundSpriteShapeRenderer.color, targetColor, Time.deltaTime);
         }
         
     }

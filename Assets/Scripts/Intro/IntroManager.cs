@@ -12,14 +12,14 @@ namespace Sequences {
     public class IntroManager : MonoBehaviour
     {
         [SerializeField]
-        private TextMeshProUGUI textComp;
+        private TextMeshProUGUI m_TextComp;
 
         [SerializeField]
-        private SequenceScriptable sequences;
+        private SequenceScriptable m_Sequences;
         [SerializeField]
-        private VideoPlayer player;
+        private VideoPlayer m_Player;
         [SerializeField]
-        Image blackMask;
+        Image m_BlackMask;
 
         private int m_TextIndex = 0;
         private int m_TimeForText = 6;
@@ -27,15 +27,15 @@ namespace Sequences {
         // Start is called before the first frame update
         void Start()
         {
-            ShowNextText();
-            player.prepareCompleted += Player_prepareCompleted;
+            showNextText();
+            m_Player.prepareCompleted += Player_prepareCompleted;
             
         }
 
-        private void Player_prepareCompleted(VideoPlayer source)
+        private void Player_prepareCompleted(VideoPlayer i_Source)
         {
             Debug.Log("Video is ready!");
-            blackMask.DOFade(0, 2f);
+            m_BlackMask.DOFade(0, 2f);
 
         }
 
@@ -44,14 +44,14 @@ namespace Sequences {
         {
             if((m_Timer += Time.deltaTime) >= m_TimeForText)
             {
-                ShowNextText();
+                showNextText();
                 m_Timer = 0;
             }
         }
 
-        private void ShowNextText()
+        private void showNextText()
         {
-            textComp.text = sequences.introSequences[m_TextIndex].m_MainText;
+            m_TextComp.text = m_Sequences.m_IntroSequences[m_TextIndex].m_MainText;
             m_TextIndex++;
             if(m_TextIndex == 5)
             {

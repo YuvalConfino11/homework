@@ -21,9 +21,9 @@ namespace Abilities
             return m_IsUnlocked;
         }
 
-        public void SetIsUnlocked(bool i_isUnlocked)
+        public void SetIsUnlocked(bool i_IsUnlocked)
         {
-            m_IsUnlocked = i_isUnlocked;
+            m_IsUnlocked = i_IsUnlocked;
         }
         
         public bool GetIsAvailable()
@@ -31,9 +31,9 @@ namespace Abilities
             return m_IsAvailableToUse;
         }
 
-        public void SetIsAvailable(bool i_isAvailable)
+        public void SetIsAvailable(bool i_IsAvailable)
         {
-            m_IsAvailableToUse = i_isAvailable;
+            m_IsAvailableToUse = i_IsAvailable;
         }
 
         public void SetAvailabilityLevel(short i_AvailabilityLevel)

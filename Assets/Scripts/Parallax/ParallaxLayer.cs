@@ -5,19 +5,19 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class ParallaxLayer : MonoBehaviour
 {
-    private float startPos, lengthSprite;
-    public float parallaxFactor;
+    private float m_StartPos, m_LengthSprite;
+    public float m_ParallaxFactor;
 
     private void Start()
     {
-        startPos = transform.position.x;
-        lengthSprite = GetComponent<SpriteRenderer>().bounds.size.x;
+        m_StartPos = transform.position.x;
+        m_LengthSprite = GetComponent<SpriteRenderer>().bounds.size.x;
     }
-    public void Move(float delta)
+    public void Move(float i_Delta)
     {
 
         Vector3 newPos = transform.localPosition;
-        newPos.x -= delta * parallaxFactor;
+        newPos.x -= i_Delta * m_ParallaxFactor;
         transform.localPosition = newPos;
     }
 }

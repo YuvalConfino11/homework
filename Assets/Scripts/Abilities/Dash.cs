@@ -8,19 +8,19 @@ namespace Abilities
     public class Dash : ScriptableObject
     {
         [SerializeField]
-        private float k_CooldownTime = 1f;
+        private float m_CooldownTime = 1f;
         [SerializeField]
         private float m_DashSpeed = 10f;
-        private readonly AbilityStats m_AbilityStats;
+        private readonly AbilityStats r_AbilityStats;
         
         public Dash()
         {
-            m_AbilityStats = new AbilityStats(false,true,k_CooldownTime);
+            r_AbilityStats = new AbilityStats(false,true,m_CooldownTime);
         }
 
         public AbilityStats GetAbilityStats()
         {
-            return m_AbilityStats;
+            return r_AbilityStats;
         }
 
         public float GetDashSpeed()

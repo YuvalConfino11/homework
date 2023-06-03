@@ -5,28 +5,28 @@ namespace Skills
     public class EnergyExplosion : ScriptableObject
     {
         [SerializeField]
-        private short k_AvailabilityLevel = 2;
-        [SerializeField]
-        private float m_maxExplosionRadius = 10f;
+        private float m_MaxExplosionRadius = 10f;
         [SerializeField]
         private float m_ExplosionForce = 5f;
         [SerializeField] 
         private float m_ExplosionDamage = 25f;
-        private readonly SkillsStats m_SkillsStats;
+        [SerializeField] 
+        private float m_ExplosionManaPointsCost = 25f;
+        private readonly SkillsStats r_SkillsStats;
 
         public EnergyExplosion()
         {
-            m_SkillsStats = new SkillsStats(k_AvailabilityLevel, false, true, 0);
+            r_SkillsStats = new SkillsStats(false, true, 0);
         }
         
         public SkillsStats GetSkillsStats()
         {
-            return m_SkillsStats;
+            return r_SkillsStats;
         }
         
         public float GetExplosionRadius()
         {
-            return m_maxExplosionRadius;
+            return m_MaxExplosionRadius;
         }
         
         public float GetExplosionForce()
@@ -37,6 +37,11 @@ namespace Skills
         public float GetExplosionDamage()
         {
             return m_ExplosionDamage;
+        }
+        
+        public float getExplosionManaPoints()
+        {
+            return m_ExplosionManaPointsCost;
         }
     }
 }

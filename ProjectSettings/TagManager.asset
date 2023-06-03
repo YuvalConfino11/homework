@@ -12,6 +12,8 @@ TagManager:
   - Ground
   - ImaginaryFriend
   - Objective
+  - Key
+  - Gate
   layers:
   - Default
   - TransparentFX
@@ -25,12 +27,12 @@ TagManager:
   - Ground
   - Imaginary Friend
   - EnergyBall
-  - 
+  - Objective
   - Backgound
   - Midground
   - Forground
-  - 
-  - 
+  - Platform
+  - Gate
   - 
   - 
   - 

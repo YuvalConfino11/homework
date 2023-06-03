@@ -707,14 +707,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b912f65b8c61d47a7cc41bb7697dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MobFieldOfViewRadius: 100
+  m_MobFieldOfViewRadius: 150
   m_PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  m_BaseCastDistance: 15
+  m_BaseCastDistance: 16
   m_GroundLayerMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 66048
   m_MaxThinkPauseTime: 4
   m_MinThinkPauseTime: 2
   m_MinWalkingOnSameDirectionTime: 4
@@ -724,6 +724,7 @@ MonoBehaviour:
   m_FeetBoxCollider2D: {fileID: 8193078469532997646}
   m_CastPosition: {fileID: 4421562829511533466}
   m_MobAnimation: {fileID: 8881888758399582304}
+  m_GroundCastDistance: 32.5
 --- !u!114 &4630492852500563315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -740,7 +741,7 @@ MonoBehaviour:
   m_PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  m_mobStats: {fileID: 3732124924582079859}
+  m_MobStats: {fileID: 3732124924582079859}
   m_ManaBall: {fileID: 7015440925964673975, guid: 1bef5d4fe15565c469e49d6663a7b924, type: 3}
 --- !u!114 &3732124924582079859
 MonoBehaviour:
@@ -768,4 +769,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d759eb65594654b846ca2311ca428b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_animator: {fileID: 4017503098492032182}
+  m_Animator: {fileID: 4017503098492032182}

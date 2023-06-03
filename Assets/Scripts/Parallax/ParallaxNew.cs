@@ -4,28 +4,28 @@ using UnityEngine;
 
 public class ParallaxNew : MonoBehaviour
 {
-    private float lengthSpriteX, startPosX;
-    public GameObject cam;
-    public float parallaxEffectX;
+    private float m_LengthSpriteX, m_StartPosX;
+    public GameObject m_Cam;
+    public float m_ParallaxEffectX;
 
     private void Start()
     {
-        startPosX = transform.position.x;
-        lengthSpriteX = GetComponent<SpriteRenderer>().bounds.size.x;
+        m_StartPosX = transform.position.x;
+        m_LengthSpriteX = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
     private void Update()
     {
-        float tempX = cam.transform.position.x * (1 - parallaxEffectX);
-        float distanceX = cam.transform.position.x * parallaxEffectX;
-        transform.position = new Vector3(startPosX + distanceX, transform.position.y, transform.position.z);
-        if (tempX > startPosX + lengthSpriteX)
+        float tempX = m_Cam.transform.position.x * (1 - m_ParallaxEffectX);
+        float distanceX = m_Cam.transform.position.x * m_ParallaxEffectX;
+        transform.position = new Vector3(m_StartPosX + distanceX, transform.position.y, transform.position.z);
+        if (tempX > m_StartPosX + m_LengthSpriteX)
         {
-            startPosX += lengthSpriteX;
+            m_StartPosX += m_LengthSpriteX;
         }
-        else if (tempX < startPosX - lengthSpriteX)
+        else if (tempX < m_StartPosX - m_LengthSpriteX)
         {
-            startPosX -= lengthSpriteX;
+            m_StartPosX -= m_LengthSpriteX;
         }
     }
 }

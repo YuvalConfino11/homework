@@ -7,12 +7,11 @@ namespace Skills
         private short m_AvailabilityLevel;
         private float m_CooldownTime;
 
-        public SkillsStats(short i_AvailabilityLevel, bool i_IsUnlocked = false, bool i_IsAvailableToUse = true,
+        public SkillsStats(bool i_IsUnlocked = false, bool i_IsAvailableToUse = true,
             float i_CooldownTime = 0)
         {
             m_IsUnlocked = i_IsUnlocked;
             m_IsAvailableToUse = i_IsAvailableToUse;
-            m_AvailabilityLevel = i_AvailabilityLevel;
             m_CooldownTime = i_CooldownTime;
         }
         
@@ -21,9 +20,9 @@ namespace Skills
             return m_IsUnlocked;
         }
 
-        public void SetIsUnlocked(bool i_isUnlocked)
+        public void SetIsUnlocked(bool i_IsUnlocked)
         {
-            m_IsUnlocked = i_isUnlocked;
+            m_IsUnlocked = i_IsUnlocked;
         }
         
         public bool GetIsAvailable()
@@ -31,9 +30,9 @@ namespace Skills
             return m_IsAvailableToUse;
         }
 
-        public void SetIsAvailable(bool i_isAvailable)
+        public void SetIsAvailable(bool i_IsAvailable)
         {
-            m_IsAvailableToUse = i_isAvailable;
+            m_IsAvailableToUse = i_IsAvailable;
         }
         
         public short GetAvailabilityLevel()
