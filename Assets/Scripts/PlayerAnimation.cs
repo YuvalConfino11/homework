@@ -18,4 +18,19 @@ public class PlayerAnimation : MonoBehaviour
     {
         m_Animator.SetTrigger("Jump");
     }
+    
+    public void DashAnimation()
+    {
+        m_animator.SetTrigger("Dash");
+    }
+    
+    public void GlideAnimation()
+    {
+        m_animator.SetTrigger("Glide");
+    }
+    
+    public void EndGlideAnimation()
+    {
+        m_animator.SetTrigger("EndGlide");
+    }
 }
