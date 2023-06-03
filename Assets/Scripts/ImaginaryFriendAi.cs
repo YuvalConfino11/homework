@@ -20,7 +20,6 @@ public class ImaginaryFriendAi : MonoBehaviour
     
     private Transform m_MainTarget;
     private Path m_Path;
-    private int m_CurrentWayPoint = 0;
     private Collider2D m_MobInAttackRadius;
     private Transform m_ImaginaryFriendStartPosition;
     private float m_AttackRadius;
