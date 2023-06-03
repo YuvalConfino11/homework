@@ -383,7 +383,10 @@ public class Player : MonoBehaviour
 
     public void getHit(float i_Damage)
     {
+        float movingDirection = Mathf.Sign(m_RigidBody.velocity.x);
         m_CurrentHealthPoint = Mathf.Clamp(m_CurrentHealthPoint - i_Damage,0,100);
+        Vector2 dashDirection = new Vector2(transform.localScale.x * movingDirection, 0);
+        m_RigidBody.velocity = dashDirection.normalized * m_Dash.GetDashSpeed();
     }
 
     public float GetMaxHealth()
