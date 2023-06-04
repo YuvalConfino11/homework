@@ -198,12 +198,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ImaginaryFriendAttack: {fileID: 11400000, guid: 07d207efe46c4484188a068a8f128969, type: 2}
-  m_MoveSpeed: 6000
-  m_NextWayPointDistance: 1
   m_MobLayerMask:
     serializedVersion: 2
     m_Bits: 128
   m_FriendDuringAttack: 0
   m_FriendHitMob: 0
-  m_MoveSpeedTowardMob: 15
-  m_MoveSpeedTowardPlayer: 15
+  m_MoveSpeedTowardMob: 80
+  m_MoveSpeedTowardPlayer: 60
+  m_WaitForAttack: 0
