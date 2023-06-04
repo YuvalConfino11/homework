@@ -7,6 +7,6 @@ public class DeathScene : MonoBehaviour
 {
     public void StartOver()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("Map");
     }
 }
