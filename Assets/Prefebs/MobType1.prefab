@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 7578005702554773261}
   - component: {fileID: 1919526740459900685}
   - component: {fileID: 1240481289709308154}
+  - component: {fileID: 6173740749729206252}
   m_Layer: 7
   m_Name: MobType1
   m_TagString: Mob
@@ -1597,6 +1598,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 2219045938970304629}
+--- !u!114 &6173740749729206252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5345240097684956972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6b43bdbc344d40ad0d9e231de24e3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_KnockbackPower: 25
+  m_KnockbackDuration: 1
+  m_player: {fileID: 0}
 --- !u!1 &8414048908666085239
 GameObject:
   m_ObjectHideFlags: 0
