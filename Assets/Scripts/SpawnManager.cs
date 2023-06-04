@@ -37,7 +37,8 @@ public class SpawnManager : MonoBehaviour
     
     private void Update()
     {
-        if (m_IsFirstEnter)
+        m_IsPlayerInRadius = Physics2D.OverlapCircle(transform.position, m_SpawnManagerRadius, m_PlayerLayerMask) != null;
+        if (m_IsFirstEnter && m_IsPlayerInRadius)
         {
             GameObject randomMob = m_MobsList[(int)Random.Range(0, m_MobsList.Count)];
             GameObject randomSpawnPoint = m_SpwanPointsList[(int)Random.Range(0, m_SpwanPointsList.Count)];
@@ -47,7 +48,6 @@ public class SpawnManager : MonoBehaviour
         }
         else
         {
-            m_IsPlayerInRadius = Physics2D.OverlapCircle(transform.position, m_SpawnManagerRadius, m_PlayerLayerMask) != null;
             if (m_IsPlayerInRadius && m_SpawnTimer >= m_SpawnInterval && m_MobsCounter < m_MaxMobsInArea)
             {
                 GameObject randomMob = m_MobsList[(int)Random.Range(0, m_MobsList.Count)];
