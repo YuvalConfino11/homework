@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Dash
   m_EditorClassIdentifier: 
   m_CooldownTime: 1
-  m_DashSpeed: 10
+  m_DashSpeed: 50
