@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: IntroSequences
   m_EditorClassIdentifier: 
   m_IntroSequences:
-  - m_MainText: Hello
-  - m_MainText: Hello
-  - m_MainText: I have no power for this
-  - m_MainText: goodbyr
-  - m_MainText: goodbye
+  - m_MainText: Hey, are you okay?
+  - m_MainText: Hey, are you okay?
+  - m_MainText: 'Watch out from the dark...
+
+      You have to be careful...'
+  - m_MainText: You have to save the light...
+  - m_MainText: You have to save the light...
