@@ -61,7 +61,6 @@ public class Player : MonoBehaviour
     private PlayerAnimation m_PlayerAnimation;
     [SerializeField]
     private BoxCollider2D m_FeetBoxCollider2D;
-
     
     private float m_LastMovingDirection = 1f;
     private float m_LastArrowKeyPressTime;
@@ -133,14 +132,7 @@ public class Player : MonoBehaviour
             AudioManager.Instance.musicSource.Stop();
             SceneManager.LoadScene("DeathScene");
         }
-
-        ////////delete later////////
-        ///
-        if (Input.GetKey(KeyCode.K))
-        {
-            Debug.Log("pressed K");
-            m_PlayerGotKey = true;
-        }
+        
     }
 
     private void OnCollisionEnter2D(Collision2D i_Collision)
@@ -253,12 +245,26 @@ public class Player : MonoBehaviour
         {
             m_Dash.GetAbilityStats().SetIsAvailable(false);
             Vector2 dashDirection = new Vector2(i_MovingDirection, 0);
-            m_RigidBody.AddForce(dashDirection.normalized * m_Dash.GetDashSpeed(), ForceMode2D.Impulse);
-            // m_RigidBody.velocity = dashDirection.normalized * m_Dash.GetDashSpeed();
+            m_RigidBody.AddForce(dashDirection.normalized * m_Dash.GetDashSpeed());
             m_PlayerAnimation.DashAnimation();
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(abilityCooldown(m_Dash.GetAbilityStats(),m_Dash.GetAbilityStats().GetCooldownTime()));
         }
+    }
+
+
+    public IEnumerator Knockback(float i_KnockbackDuration , float i_KnockbackPower , Transform i_ObjectTransform)
+    {
+        float timer = 0;
+
+        while(i_KnockbackDuration > timer)
+        {
+            timer += Time.deltaTime;
+            Debug.Log(new Vector2(i_ObjectTransform.transform.position.x - transform.position.x,0));
+            Vector2 dir = new Vector2(i_ObjectTransform.transform.position.x - transform.position.x,0);
+            m_RigidBody.AddForce(-dir * i_KnockbackPower);
+        }
+        yield return 0;
     }
 
     private void attack()
