@@ -81,7 +81,6 @@ public class Player : MonoBehaviour
 
         m_ManaPoint = GetMaxMana();
         m_ManaBar.SetMaxMana(GetMaxMana());
-
     }
 
     void Update()
@@ -92,7 +91,7 @@ public class Player : MonoBehaviour
         {
             movement(horizontalInput);
         }
-        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.LeftAlt)) && getIsGrounded() && m_Dash.GetAbilityStats().GetIsUnlocked())
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.LeftShift)) && getIsGrounded() && m_Dash.GetAbilityStats().GetIsUnlocked())
         {
             StartCoroutine(dash(horizontalInput));
         }
@@ -326,6 +325,7 @@ public class Player : MonoBehaviour
             float explosionRadius = m_EnergyExplosion.GetExplosionRadius();
             float explosionForce = m_EnergyExplosion.GetExplosionForce();
             Vector3 imaginaryFriendPosition = m_ImaginaryFriend.transform.position;
+            AudioManager.Instance.PlaySFX("Explosion");
         
             m_MobsInExplosionRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius,m_MobLayerMask);
             Debug.Log(m_MobLayerMask);
