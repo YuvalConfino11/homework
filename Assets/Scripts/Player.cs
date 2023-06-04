@@ -57,25 +57,24 @@ public class Player : MonoBehaviour
     private float m_GroundRaycastDistance = 10f;
     [SerializeField]
     private bool m_PlayerGotKey;
-    [SerializeField]
-    private float m_KnockBackForce = 3f;
     [SerializeField] 
     private PlayerAnimation m_PlayerAnimation;
+    [SerializeField]
+    private BoxCollider2D m_FeetBoxCollider2D;
 
+    
     private float m_LastMovingDirection = 1f;
     private float m_LastArrowKeyPressTime;
     private RaycastHit2D  m_RaycastHit;
     private Rigidbody2D m_RigidBody;
-    private CapsuleCollider2D m_CapsuleCollider;
+    private BoxCollider2D m_BoxCollider;
     private Collider2D[] m_MobsInExplosionRadius;
     private bool m_IsFacingRight = true;
-    private BoxCollider2D m_FeetBoxCollider2D;
-    
+   
     private void Awake()
     {
         m_RigidBody = GetComponent<Rigidbody2D>();
-        m_CapsuleCollider = GetComponent<CapsuleCollider2D>();
-        m_FeetBoxCollider2D = GetComponent<BoxCollider2D>();
+        m_BoxCollider = GetComponent<BoxCollider2D>();
 
         m_ManaPoint = GetMaxMana();
         m_ManaBar.SetMaxMana(GetMaxMana());
@@ -194,18 +193,8 @@ public class Player : MonoBehaviour
         {
             m_FeetBoxCollider2D.enabled = false;
         }
-        m_CapsuleCollider.isTrigger = true;
     }
-
-    private void OnTriggerEnter2D(Collider2D i_Col)
-    {
-        if (i_Col.gameObject.CompareTag("Ground"))
-        {
-            m_CapsuleCollider.isTrigger = false;
-        }
-    }
-
-
+    
     private void movement(float i_HorizontalInput)
     {
         m_RigidBody.velocity = new Vector2(i_HorizontalInput * m_WalkingSpeed, m_RigidBody.velocity.y);
@@ -263,8 +252,9 @@ public class Player : MonoBehaviour
         if (m_Dash.GetAbilityStats().GetIsAvailable() && getIsGrounded())
         {
             m_Dash.GetAbilityStats().SetIsAvailable(false);
-            Vector2 dashDirection = new Vector2(transform.localScale.x * i_MovingDirection, 0);
-            m_RigidBody.velocity = dashDirection.normalized * m_Dash.GetDashSpeed();
+            Vector2 dashDirection = new Vector2(i_MovingDirection, 0);
+            m_RigidBody.AddForce(dashDirection.normalized * m_Dash.GetDashSpeed(), ForceMode2D.Impulse);
+            Debug.Log(dashDirection.normalized * m_Dash.GetDashSpeed());
             m_PlayerAnimation.DashAnimation();
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(abilityCooldown(m_Dash.GetAbilityStats(),m_Dash.GetAbilityStats().GetCooldownTime()));
@@ -328,7 +318,7 @@ public class Player : MonoBehaviour
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position,m_EnergyExplosion.GetExplosionRadius());
-        if (m_CapsuleCollider != null && transform.position != null)
+        if (m_BoxCollider != null && transform.position != null)
         {
             Gizmos.color = Color.red;
             Vector3 rayStartPosition =
@@ -386,11 +376,10 @@ public class Player : MonoBehaviour
 
     public void getHit(float i_Damage)
     {
-        Debug.Log(transform.forward * (-1 * m_KnockBackForce));
-        Vector2 knockBackDirection = (transform.forward);
-        m_RigidBody.AddForce(transform.forward * (-1 * m_KnockBackForce),ForceMode2D.Impulse);
+        float movingDirection = Mathf.Sign(m_RigidBody.velocity.x);
         m_CurrentHealthPoint = Mathf.Clamp(m_CurrentHealthPoint - i_Damage,0,100);
-        
+        Vector2 dashDirection = new Vector2(transform.localScale.x * movingDirection, 0);
+        m_RigidBody.velocity = dashDirection.normalized * m_Dash.GetDashSpeed();
     }
 
     public float GetMaxHealth()
