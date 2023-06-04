@@ -213,6 +213,7 @@ MonoBehaviour:
   m_MobStats: {fileID: 1539239014669981393}
   m_ManaBall: {fileID: 7015440925964673975, guid: 1bef5d4fe15565c469e49d6663a7b924, type: 3}
   m_CanHitPlayer: 0
+  m_MobHitCooldown: 0.75
 --- !u!114 &1539239014669981393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -868,7 +869,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_KnockbackPower: 50
   m_KnockbackDuration: 1
-  m_player: {fileID: 3070312050616550591, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
+  m_player: {fileID: 0}
 --- !u!1 &5068683700230389347
 GameObject:
   m_ObjectHideFlags: 0
