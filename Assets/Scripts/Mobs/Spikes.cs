@@ -14,13 +14,11 @@ namespace Mobs
         public float SpikeDamage
         {
             get => m_SpikeDamage;
-            set => m_SpikeDamage = value;
         }
         
         public float SpikeHP
         {
             get => m_SpikeHP;
-            set => m_SpikeHP = value;
         }
     }
 }

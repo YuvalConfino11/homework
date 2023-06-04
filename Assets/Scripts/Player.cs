@@ -57,9 +57,10 @@ public class Player : MonoBehaviour
     private float m_GroundRaycastDistance = 10f;
     [SerializeField]
     private bool m_PlayerGotKey;
-
-
-    [SerializeField] private PlayerAnimation m_PlayerAnimation;
+    [SerializeField]
+    private float m_KnockBackForce = 3f;
+    [SerializeField] 
+    private PlayerAnimation m_PlayerAnimation;
 
     private float m_LastMovingDirection = 1f;
     private float m_LastArrowKeyPressTime;
@@ -385,10 +386,11 @@ public class Player : MonoBehaviour
 
     public void getHit(float i_Damage)
     {
-        float movingDirection = Mathf.Sign(m_RigidBody.velocity.x);
+        Debug.Log(transform.forward * (-1 * m_KnockBackForce));
+        Vector2 knockBackDirection = (transform.forward;
+        m_RigidBody.AddForce(transform.forward * (-1 * m_KnockBackForce),ForceMode2D.Impulse);
         m_CurrentHealthPoint = Mathf.Clamp(m_CurrentHealthPoint - i_Damage,0,100);
-        Vector2 dashDirection = new Vector2(transform.localScale.x * movingDirection, 0);
-        m_RigidBody.velocity = dashDirection.normalized * m_Dash.GetDashSpeed();
+        
     }
 
     public float GetMaxHealth()

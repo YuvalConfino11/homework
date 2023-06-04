@@ -228,7 +228,7 @@ MonoBehaviour:
   m_MaxManaPoint: 100
   m_ManaBar: {fileID: 0}
   m_DefaultGravityScale: 5
-  m_WalkingSpeed: 20
+  m_WalkingSpeed: 40
   m_Grounded: 1
   m_JumpHeight: 30
   m_DoubleJump: {fileID: 11400000, guid: c5ea01e8c31624e1ead50c365cf92820, type: 2}
@@ -251,6 +251,8 @@ MonoBehaviour:
   m_ShootingRate: 0.5
   m_ObjectiveCollectRadius: 25
   m_GroundRaycastDistance: 16.25
+  m_PlayerGotKey: 0
+  m_KnockBackForce: 60
   m_PlayerAnimation: {fileID: 666493324}
 --- !u!70 &8395473248632379404
 CapsuleCollider2D:
