@@ -64,6 +64,11 @@ public class ImaginaryFriend : MonoBehaviour
     {
         transform.position = Vector2.MoveTowards(transform.position, m_StartingFriendPos.transform.position, m_MoveSpeedTowardPlayer * Time.deltaTime);
     }
+
+    public float GetDamage()
+    {
+        return m_ImaginaryFriendAttack.getAttackDamage();
+    }
     
     
 

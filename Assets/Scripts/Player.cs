@@ -267,9 +267,15 @@ public class Player : MonoBehaviour
             m_movingEnabled = false;
             StartCoroutine(MovmentDisabled());
             m_Dash.GetAbilityStats().SetIsAvailable(false);
-            Vector2 dashDirection = new Vector2(i_MovingDirection, 0);
-            m_RigidBody.AddForce(dashDirection.normalized * m_Dash.GetDashSpeed());
+            float dashTimer = 0;
+            float dashDuration = m_Dash.DashTime;
             m_PlayerAnimation.DashAnimation();
+            while(dashDuration > dashTimer)
+            {
+                dashTimer += Time.deltaTime;
+                Vector2 dashDirection = new Vector2(i_MovingDirection * m_Dash.DashDistance, 0);
+                m_RigidBody.AddForce(dashDirection * m_Dash.DashDistance);
+            }
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(abilityCooldown(m_Dash.GetAbilityStats(),m_Dash.GetAbilityStats().GetCooldownTime()));
 
@@ -287,7 +293,6 @@ public class Player : MonoBehaviour
         while(i_KnockbackDuration > timer)
         {
             timer += Time.deltaTime;
-            Debug.Log(new Vector2(i_ObjectTransform.transform.position.x - transform.position.x,0));
             Vector2 dir = new Vector2(i_ObjectTransform.transform.position.x - transform.position.x,0);
             m_RigidBody.AddForce(-dir * i_KnockbackPower);
         }
@@ -323,17 +328,26 @@ public class Player : MonoBehaviour
             Vector3 imaginaryFriendPosition = m_ImaginaryFriend.transform.position;
         
             m_MobsInExplosionRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius,m_MobLayerMask);
-        
+            Debug.Log(m_MobLayerMask);
+            Debug.Log(m_MobsInExplosionRadius);
             foreach (Collider2D mob in m_MobsInExplosionRadius) {
-                Rigidbody2D mobRigidbody2D = mob.GetComponent<Rigidbody2D>();
-                Vector2 mobDirection = (mob.transform.position - imaginaryFriendPosition).normalized;
-                float mobDistance = Vector2.Distance(mob.transform.position, imaginaryFriendPosition);
-                float distanceRatio = Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1);
-                float calculatedExplosionForce = explosionForce * distanceRatio * transform.localScale.y;
-                Debug.Log(mobDirection+"  "+calculatedExplosionForce);
-                mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
-                mob.GetComponent<MobStats>().GetHit(m_EnergyExplosion.GetExplosionDamage());
-                Debug.DrawLine(transform.position,mob.transform.position,Color.magenta,2);
+                if (mob.CompareTag("Spike"))
+                {
+                    mob.gameObject.GetComponent<Spike>().GetHit(m_EnergyExplosion.GetExplosionDamage());
+                }
+                else
+                {
+                    Rigidbody2D mobRigidbody2D = mob.GetComponent<Rigidbody2D>();
+                    Vector2 mobDirection = (mob.transform.position - imaginaryFriendPosition).normalized;
+                    float mobDistance = Vector2.Distance(mob.transform.position, imaginaryFriendPosition);
+                    float distanceRatio = Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1);
+                    float calculatedExplosionForce = explosionForce * distanceRatio * transform.localScale.y;
+                    Debug.Log(mobDirection+"  "+calculatedExplosionForce);
+                    mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
+                    mob.GetComponent<MobStats>().GetHit(m_EnergyExplosion.GetExplosionDamage());
+                    Debug.DrawLine(transform.position,mob.transform.position,Color.magenta,2);
+                }
+                
             }
             SetMana(-m_EnergyExplosion.getExplosionManaPoints());
         }
@@ -378,10 +392,6 @@ public class Player : MonoBehaviour
                     m_Dash.GetAbilityStats().SetIsUnlocked(true);
                     m_Dash.GetAbilityStats().SetIsAvailable(true);
                     break;
-                case "EnergyExplosion":
-                    m_EnergyExplosion.GetSkillsStats().SetIsUnlocked(true);
-                    m_EnergyExplosion.GetSkillsStats().SetIsAvailable(true);
-                    break;
                 case "Glide":
                     m_Glide.GetAbilityStats().SetIsUnlocked(true);
                     m_Glide.GetAbilityStats().SetIsAvailable(true);
@@ -389,6 +399,10 @@ public class Player : MonoBehaviour
                 case "Heal":
                     m_Heal.GetSkillsStats().SetIsUnlocked(true);
                     m_Heal.GetSkillsStats().SetIsAvailable(true);
+                    break;
+                case "EnergyExplosion":
+                    m_EnergyExplosion.GetSkillsStats().SetIsUnlocked(true);
+                    m_EnergyExplosion.GetSkillsStats().SetIsAvailable(true);
                     break;
             }
             Destroy(objectivesInRadius.gameObject);
@@ -416,10 +430,7 @@ public class Player : MonoBehaviour
 
     public void getHit(float i_Damage)
     {
-        float movingDirection = Mathf.Sign(m_RigidBody.velocity.x);
         m_CurrentHealthPoint = Mathf.Clamp(m_CurrentHealthPoint - i_Damage,0,100);
-        Vector2 dashDirection = new Vector2(transform.localScale.x * movingDirection, 0);
-        m_RigidBody.velocity = dashDirection.normalized * m_Dash.GetDashSpeed();
     }
 
     public float GetMaxHealth()
