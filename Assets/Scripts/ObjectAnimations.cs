@@ -16,13 +16,9 @@ public class ObjectAnimations : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             Collider2D objectivesInRadius = Physics2D.OverlapCircle(transform.position, m_radius,m_ObjectiveLayerMask);
-            if (objectivesInRadius != null)
+            if (objectivesInRadius.name == "Player")
             {
-                if (objectivesInRadius.name == "Player")
-                {
-                    AudioManager.Instance.PlaySFX("Angel");
-                    m_Animator.Play("Objective_Dissipate");
-                }
+                m_Animator.Play("Objective_Dissipate");
             }
         }
     }
