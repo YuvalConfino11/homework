@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,22 +7,18 @@ namespace Mobs
     public class Mob : MonoBehaviour
     {
         [SerializeField] 
-        private float m_MobFieldOfHitRadius = 0.5f;
-        [SerializeField] 
-        private LayerMask m_PlayerLayerMask;
-        [SerializeField] 
         private MobStats m_MobStats;
         [SerializeField]
         private GameObject m_ManaBall;
+        [SerializeField]
+        bool m_CanHitPlayer = false;
         
         private GameObject m_PlayerGameObject;
-        private Transform m_CastPosition;
 
         private void Awake()
         {
             StartCoroutine(playerHitCheck());
             m_MobStats = GetComponent<MobStats>();
-            m_CastPosition = transform.GetChild(0).transform;
             
         }
 
@@ -40,19 +37,17 @@ namespace Mobs
             while (true)
             {
                 yield return wait;
-                hit();
+                m_CanHitPlayer = true;
             }
         }
-        
-        private void hit()
+
+        private void OnTriggerEnter2D(Collider2D col)
         {
-            Collider2D hitPlayer = Physics2D.OverlapCircle(m_CastPosition.position, m_MobFieldOfHitRadius, m_PlayerLayerMask);
-            if (hitPlayer != null)
+            if (col.gameObject.CompareTag("Player") && m_CanHitPlayer)
             {
-                m_PlayerGameObject = hitPlayer.gameObject;
-                m_PlayerGameObject.GetComponent<Player>().getHit(m_MobStats.GetDamage());
+                col.gameObject.GetComponent<Player>().getHit(m_MobStats.GetDamage());
+                m_CanHitPlayer = false;
             }
         }
-        
     }
 }

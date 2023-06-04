@@ -1567,12 +1567,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a7f3794a5834668bc42de167da368a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MobFieldOfHitRadius: 10
-  m_PlayerLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
   m_MobStats: {fileID: 1919526740459900685}
   m_ManaBall: {fileID: 7015440925964673975, guid: 1bef5d4fe15565c469e49d6663a7b924, type: 3}
+  m_CanHitPlayer: 0
 --- !u!114 &1919526740459900685
 MonoBehaviour:
   m_ObjectHideFlags: 0
