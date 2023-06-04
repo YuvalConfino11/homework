@@ -61,11 +61,7 @@ public class Player : MonoBehaviour
     private PlayerAnimation m_PlayerAnimation;
     [SerializeField]
     private BoxCollider2D m_FeetBoxCollider2D;
-    [SerializeField]
-    private bool m_movingEnabled = true;
-    [SerializeField]
-    private bool m_IsKnockedBack;
-
+    
     private float m_LastMovingDirection = 1f;
     private float m_LastArrowKeyPressTime;
     private RaycastHit2D  m_RaycastHit;
@@ -81,17 +77,13 @@ public class Player : MonoBehaviour
 
         m_ManaPoint = GetMaxMana();
         m_ManaBar.SetMaxMana(GetMaxMana());
-
     }
 
     void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         m_LastMovingDirection = horizontalInput == 0 ? m_LastMovingDirection : horizontalInput > 0 ? 1 : -1;
-        if (m_movingEnabled)
-        {
-            movement(horizontalInput);
-        }
+        movement(horizontalInput);
         if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.LeftAlt)) && getIsGrounded() && m_Dash.GetAbilityStats().GetIsUnlocked())
         {
             StartCoroutine(dash(horizontalInput));
@@ -194,20 +186,7 @@ public class Player : MonoBehaviour
             m_FeetBoxCollider2D.enabled = false;
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D i_Col)
-    {
-        if (i_Col.gameObject.CompareTag("Ground"))
-        {
-            m_BoxCollider.isTrigger = false;
-        }
-        if (i_Col.gameObject.CompareTag("Key"))
-        {
-            Destroy(i_Col.gameObject);
-        }
-    }
-
-
+    
     private void movement(float i_HorizontalInput)
     {
         m_RigidBody.velocity = new Vector2(i_HorizontalInput * m_WalkingSpeed, m_RigidBody.velocity.y);
@@ -264,34 +243,26 @@ public class Player : MonoBehaviour
     {
         if (m_Dash.GetAbilityStats().GetIsAvailable() && getIsGrounded())
         {
-            m_movingEnabled = false;
-            StartCoroutine(MovmentDisabled());
-            m_Dash.GetAbilityStats().SetIsAvailable(false);
             Vector2 dashDirection = new Vector2(i_MovingDirection, 0);
-            m_RigidBody.AddForce(dashDirection.normalized * m_Dash.GetDashSpeed());
+            m_RigidBody.AddForce(dashDirection * m_Dash.GetDashSpeed());
+            m_Dash.GetAbilityStats().SetIsAvailable(false);
             m_PlayerAnimation.DashAnimation();
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(abilityCooldown(m_Dash.GetAbilityStats(),m_Dash.GetAbilityStats().GetCooldownTime()));
-
         }
     }
 
 
     public IEnumerator Knockback(float i_KnockbackDuration , float i_KnockbackPower , Transform i_ObjectTransform)
     {
-        m_IsKnockedBack = true;
         float timer = 0;
-        m_movingEnabled = false;
-        StartCoroutine(MovmentDisabled());
 
         while(i_KnockbackDuration > timer)
         {
             timer += Time.deltaTime;
-            Debug.Log(new Vector2(i_ObjectTransform.transform.position.x - transform.position.x,0));
             Vector2 dir = new Vector2(i_ObjectTransform.transform.position.x - transform.position.x,0);
             m_RigidBody.AddForce(-dir * i_KnockbackPower);
         }
-        m_IsKnockedBack = false;
         yield return 0;
     }
 
@@ -325,15 +296,23 @@ public class Player : MonoBehaviour
             m_MobsInExplosionRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius,m_MobLayerMask);
         
             foreach (Collider2D mob in m_MobsInExplosionRadius) {
-                Rigidbody2D mobRigidbody2D = mob.GetComponent<Rigidbody2D>();
-                Vector2 mobDirection = (mob.transform.position - imaginaryFriendPosition).normalized;
-                float mobDistance = Vector2.Distance(mob.transform.position, imaginaryFriendPosition);
-                float distanceRatio = Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1);
-                float calculatedExplosionForce = explosionForce * distanceRatio * transform.localScale.y;
-                Debug.Log(mobDirection+"  "+calculatedExplosionForce);
-                mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
-                mob.GetComponent<MobStats>().GetHit(m_EnergyExplosion.GetExplosionDamage());
-                Debug.DrawLine(transform.position,mob.transform.position,Color.magenta,2);
+                if (mob.CompareTag("Spike"))
+                {
+                    mob.gameObject.GetComponent<Spike>().GetHit(m_EnergyExplosion.GetExplosionDamage());
+                }
+                else
+                {
+                    Rigidbody2D mobRigidbody2D = mob.GetComponent<Rigidbody2D>();
+                    Vector2 mobDirection = (mob.transform.position - imaginaryFriendPosition).normalized;
+                    float mobDistance = Vector2.Distance(mob.transform.position, imaginaryFriendPosition);
+                    float distanceRatio = Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1);
+                    float calculatedExplosionForce = explosionForce * distanceRatio * transform.localScale.y;
+                    Debug.Log(mobDirection+"  "+calculatedExplosionForce);
+                    mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
+                    mob.GetComponent<MobStats>().GetHit(m_EnergyExplosion.GetExplosionDamage());
+                    Debug.DrawLine(transform.position,mob.transform.position,Color.magenta,2);
+                }
+                
             }
             SetMana(-m_EnergyExplosion.getExplosionManaPoints());
         }
@@ -406,12 +385,6 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(m_ShootingRate);
 
         m_IsAbleToShot = true;
-    }
-    private IEnumerator MovmentDisabled()
-    {
-        yield return new WaitForSeconds(0.8f);
-
-        m_movingEnabled = true;
     }
 
     public void getHit(float i_Damage)

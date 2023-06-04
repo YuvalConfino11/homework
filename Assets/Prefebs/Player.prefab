@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Bullet: {fileID: 5051759465369138895, guid: 5ec0ddc53edbdc043ab4fc7bb5741e2d, type: 3}
   m_MobLayerMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 524416
   m_GroundLayerMask:
     serializedVersion: 2
     m_Bits: 66048
