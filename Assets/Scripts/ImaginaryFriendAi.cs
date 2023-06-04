@@ -20,13 +20,15 @@ public class ImaginaryFriendAi : MonoBehaviour
     [SerializeField]
     private float m_MoveSpeedTowardPlayer = 12f;
     [SerializeField]
-    private float m_WaitForAttack = 1.5f;
+    private float m_AttackCooldownTime = 2.5f;
     
     private Transform m_MainTarget;
     private Path m_Path;
     private Collider2D m_MobInAttackRadius;
     private Transform m_ImaginaryFriendStartPosition;
     private float m_AttackRadius;
+    private float m_attackCooldownTimer = 0;
+    private bool m_IsAbleToAttack = true;
     
     
     void Start()
@@ -38,34 +40,49 @@ public class ImaginaryFriendAi : MonoBehaviour
     void Update()
     {
         m_MobInAttackRadius = Physics2D.OverlapCircle(transform.position, m_AttackRadius, m_MobLayerMask);
-        
         if (m_MobInAttackRadius != null)
         {
-            if (!m_FriendDuringAttack || (m_FriendDuringAttack && !m_FriendHitMob))
+            if (m_FriendDuringAttack && !m_FriendHitMob || !m_FriendDuringAttack)
             {
-                Debug.Log(m_FriendDuringAttack);
-                attack();
-            } 
+                if (m_IsAbleToAttack)
+                {
+                    attack();
+                }
+                else
+                {
+                    returnToPlayer();
+                }
+            }
             else
             {
                 returnToPlayer();
             }
         }
-        else if (m_MobInAttackRadius == null)
+        else
         {
-            transform.position = Vector2.MoveTowards(transform.position, m_ImaginaryFriendStartPosition.position, m_MoveSpeedTowardPlayer * Time.deltaTime);
+            returnToPlayer();
         }
+        
         if (Vector2.Distance(transform.position, m_ImaginaryFriendStartPosition.position) < 0.01)
         {
             transform.position = m_ImaginaryFriendStartPosition.position;
-            StartCoroutine(WaitForAttack(m_WaitForAttack));
-            m_FriendHitMob = false;
         }
+
+        if (!m_IsAbleToAttack)
+        {
+            m_attackCooldownTimer += Time.deltaTime;
+        }
+        
+        if (m_attackCooldownTimer >= m_AttackCooldownTime)
+        {
+            m_IsAbleToAttack = true;
+        }
+        Debug.Log(m_attackCooldownTimer + " " + m_AttackCooldownTime);
+
     }
 
     private void attack()
     {
-        m_FriendDuringAttack = true;
         transform.position = Vector2.MoveTowards(transform.position, m_MobInAttackRadius.transform.position, m_MoveSpeedTowardMob * Time.deltaTime);
     }
 
@@ -80,6 +97,8 @@ public class ImaginaryFriendAi : MonoBehaviour
         if (i_Collision.gameObject.CompareTag("Mob"))
         {
             m_FriendHitMob = true;
+            m_IsAbleToAttack = false;
+            m_attackCooldownTimer = 0;
             i_Collision.gameObject.GetComponent<MobStats>().GetHit(m_ImaginaryFriendAttack.getAttackDamage());
         }
     }
@@ -88,11 +107,5 @@ public class ImaginaryFriendAi : MonoBehaviour
     {
         Gizmos.color = Color.black;
         Gizmos.DrawWireSphere(transform.position,m_AttackRadius);
-    }
-    public IEnumerator WaitForAttack(float i_TimerForAttack)
-    {
-        m_FriendDuringAttack = true;
-        yield return new WaitForSeconds(i_TimerForAttack);
-        m_FriendDuringAttack = false;
     }
 }
