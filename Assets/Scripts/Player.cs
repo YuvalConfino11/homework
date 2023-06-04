@@ -294,7 +294,8 @@ public class Player : MonoBehaviour
             Vector3 imaginaryFriendPosition = m_ImaginaryFriend.transform.position;
         
             m_MobsInExplosionRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius,m_MobLayerMask);
-        
+            Debug.Log(m_MobLayerMask);
+            Debug.Log(m_MobsInExplosionRadius);
             foreach (Collider2D mob in m_MobsInExplosionRadius) {
                 if (mob.CompareTag("Spike"))
                 {
@@ -357,10 +358,6 @@ public class Player : MonoBehaviour
                     m_Dash.GetAbilityStats().SetIsUnlocked(true);
                     m_Dash.GetAbilityStats().SetIsAvailable(true);
                     break;
-                case "EnergyExplosion":
-                    m_EnergyExplosion.GetSkillsStats().SetIsUnlocked(true);
-                    m_EnergyExplosion.GetSkillsStats().SetIsAvailable(true);
-                    break;
                 case "Glide":
                     m_Glide.GetAbilityStats().SetIsUnlocked(true);
                     m_Glide.GetAbilityStats().SetIsAvailable(true);
@@ -368,6 +365,10 @@ public class Player : MonoBehaviour
                 case "Heal":
                     m_Heal.GetSkillsStats().SetIsUnlocked(true);
                     m_Heal.GetSkillsStats().SetIsAvailable(true);
+                    break;
+                case "EnergyExplosion":
+                    m_EnergyExplosion.GetSkillsStats().SetIsUnlocked(true);
+                    m_EnergyExplosion.GetSkillsStats().SetIsAvailable(true);
                     break;
             }
             Destroy(objectivesInRadius.gameObject);
