@@ -57,9 +57,7 @@ public class Player : MonoBehaviour
     private float m_GroundRaycastDistance = 10f;
     [SerializeField]
     private bool m_PlayerGotKey;
-    [SerializeField]
-    public static Player m_instance;
-
+  
 
     [SerializeField] private PlayerAnimation m_PlayerAnimation;
 
@@ -204,6 +202,10 @@ public class Player : MonoBehaviour
         if (i_Col.gameObject.CompareTag("Ground"))
         {
             m_CapsuleCollider.isTrigger = false;
+        }
+        if (i_Col.gameObject.CompareTag("Key"))
+        {
+            Destroy(i_Col.gameObject);
         }
     }
 
