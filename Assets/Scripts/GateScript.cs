@@ -10,26 +10,30 @@ public class GateScript : MonoBehaviour
     private Transform m_OpenGatePos;
     [SerializeField]
     private float  m_GateMoveSpeed = 3;
+    [SerializeField]
+    private bool m_PlayerTouchedGate;
 
     private void Update()
     {
-        if (m_player.PlayerGotKey())
+        if (m_PlayerTouchedGate)
         {
-            Debug.Log("Gate Open");
             transform.position = Vector3.MoveTowards(transform.position, m_OpenGatePos.position, m_GateMoveSpeed * Time.deltaTime);
         }
     }
 
-   /* private void OnCollisionEnter2D(Collision2D collision)
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             if (m_player.PlayerGotKey())
             {
-                Debug.Log("");
-                transform.position = Vector3.MoveTowards(transform.position, m_OpenGatePos.position, m_GateMoveSpeed * Time.deltaTime);
+                Debug.Log("Gate Open");
+                m_PlayerTouchedGate = true;
+               
             }
            
         }
-    }*/
+    }
 }

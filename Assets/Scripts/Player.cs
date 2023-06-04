@@ -57,35 +57,41 @@ public class Player : MonoBehaviour
     private float m_GroundRaycastDistance = 10f;
     [SerializeField]
     private bool m_PlayerGotKey;
-    [SerializeField]
-    private float m_KnockBackForce = 3f;
     [SerializeField] 
     private PlayerAnimation m_PlayerAnimation;
+    [SerializeField]
+    private BoxCollider2D m_FeetBoxCollider2D;
+    [SerializeField]
+    private bool m_movingEnabled = true;
+    [SerializeField]
+    private bool m_IsKnockedBack;
 
     private float m_LastMovingDirection = 1f;
     private float m_LastArrowKeyPressTime;
     private RaycastHit2D  m_RaycastHit;
     private Rigidbody2D m_RigidBody;
-    private CapsuleCollider2D m_CapsuleCollider;
+    private BoxCollider2D m_BoxCollider;
     private Collider2D[] m_MobsInExplosionRadius;
     private bool m_IsFacingRight = true;
-    private BoxCollider2D m_FeetBoxCollider2D;
-    
+   
     private void Awake()
     {
         m_RigidBody = GetComponent<Rigidbody2D>();
-        m_CapsuleCollider = GetComponent<CapsuleCollider2D>();
-        m_FeetBoxCollider2D = GetComponent<BoxCollider2D>();
+        m_BoxCollider = GetComponent<BoxCollider2D>();
 
         m_ManaPoint = GetMaxMana();
         m_ManaBar.SetMaxMana(GetMaxMana());
+
     }
 
     void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         m_LastMovingDirection = horizontalInput == 0 ? m_LastMovingDirection : horizontalInput > 0 ? 1 : -1;
-        movement(horizontalInput);
+        if (m_movingEnabled)
+        {
+            movement(horizontalInput);
+        }
         if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.LeftAlt)) && getIsGrounded() && m_Dash.GetAbilityStats().GetIsUnlocked())
         {
             StartCoroutine(dash(horizontalInput));
@@ -134,14 +140,7 @@ public class Player : MonoBehaviour
             AudioManager.Instance.musicSource.Stop();
             SceneManager.LoadScene("DeathScene");
         }
-
-        ////////delete later////////
-        ///
-        if (Input.GetKey(KeyCode.K))
-        {
-            Debug.Log("pressed K");
-            m_PlayerGotKey = true;
-        }
+        
     }
 
     private void OnCollisionEnter2D(Collision2D i_Collision)
@@ -194,14 +193,17 @@ public class Player : MonoBehaviour
         {
             m_FeetBoxCollider2D.enabled = false;
         }
-        m_CapsuleCollider.isTrigger = true;
     }
 
     private void OnTriggerEnter2D(Collider2D i_Col)
     {
         if (i_Col.gameObject.CompareTag("Ground"))
         {
-            m_CapsuleCollider.isTrigger = false;
+            m_BoxCollider.isTrigger = false;
+        }
+        if (i_Col.gameObject.CompareTag("Key"))
+        {
+            Destroy(i_Col.gameObject);
         }
     }
 
@@ -262,13 +264,40 @@ public class Player : MonoBehaviour
     {
         if (m_Dash.GetAbilityStats().GetIsAvailable() && getIsGrounded())
         {
+            m_movingEnabled = false;
+            StartCoroutine(MovmentDisabled());
             m_Dash.GetAbilityStats().SetIsAvailable(false);
-            Vector2 dashDirection = new Vector2(transform.localScale.x * i_MovingDirection, 0);
-            m_RigidBody.velocity = dashDirection.normalized * m_Dash.GetDashSpeed();
+            float dashTimer = 0;
+            float dashDuration = m_Dash.DashTime;
             m_PlayerAnimation.DashAnimation();
+            while(dashDuration > dashTimer)
+            {
+                dashTimer += Time.deltaTime;
+                Vector2 dashDirection = new Vector2(i_MovingDirection * m_Dash.DashDistance, 0);
+                m_RigidBody.AddForce(dashDirection * m_Dash.DashDistance);
+            }
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(abilityCooldown(m_Dash.GetAbilityStats(),m_Dash.GetAbilityStats().GetCooldownTime()));
+
         }
+    }
+
+
+    public IEnumerator Knockback(float i_KnockbackDuration , float i_KnockbackPower , Transform i_ObjectTransform)
+    {
+        m_IsKnockedBack = true;
+        float timer = 0;
+        m_movingEnabled = false;
+        StartCoroutine(MovmentDisabled());
+
+        while(i_KnockbackDuration > timer)
+        {
+            timer += Time.deltaTime;
+            Vector2 dir = new Vector2(i_ObjectTransform.transform.position.x - transform.position.x,0);
+            m_RigidBody.AddForce(-dir * i_KnockbackPower);
+        }
+        m_IsKnockedBack = false;
+        yield return 0;
     }
 
     private void attack()
@@ -299,17 +328,26 @@ public class Player : MonoBehaviour
             Vector3 imaginaryFriendPosition = m_ImaginaryFriend.transform.position;
         
             m_MobsInExplosionRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius,m_MobLayerMask);
-        
+            Debug.Log(m_MobLayerMask);
+            Debug.Log(m_MobsInExplosionRadius);
             foreach (Collider2D mob in m_MobsInExplosionRadius) {
-                Rigidbody2D mobRigidbody2D = mob.GetComponent<Rigidbody2D>();
-                Vector2 mobDirection = (mob.transform.position - imaginaryFriendPosition).normalized;
-                float mobDistance = Vector2.Distance(mob.transform.position, imaginaryFriendPosition);
-                float distanceRatio = Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1);
-                float calculatedExplosionForce = explosionForce * distanceRatio * transform.localScale.y;
-                Debug.Log(mobDirection+"  "+calculatedExplosionForce);
-                mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
-                mob.GetComponent<MobStats>().GetHit(m_EnergyExplosion.GetExplosionDamage());
-                Debug.DrawLine(transform.position,mob.transform.position,Color.magenta,2);
+                if (mob.CompareTag("Spike"))
+                {
+                    mob.gameObject.GetComponent<Spike>().GetHit(m_EnergyExplosion.GetExplosionDamage());
+                }
+                else
+                {
+                    Rigidbody2D mobRigidbody2D = mob.GetComponent<Rigidbody2D>();
+                    Vector2 mobDirection = (mob.transform.position - imaginaryFriendPosition).normalized;
+                    float mobDistance = Vector2.Distance(mob.transform.position, imaginaryFriendPosition);
+                    float distanceRatio = Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1);
+                    float calculatedExplosionForce = explosionForce * distanceRatio * transform.localScale.y;
+                    Debug.Log(mobDirection+"  "+calculatedExplosionForce);
+                    mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
+                    mob.GetComponent<MobStats>().GetHit(m_EnergyExplosion.GetExplosionDamage());
+                    Debug.DrawLine(transform.position,mob.transform.position,Color.magenta,2);
+                }
+                
             }
             SetMana(-m_EnergyExplosion.getExplosionManaPoints());
         }
@@ -328,7 +366,7 @@ public class Player : MonoBehaviour
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position,m_EnergyExplosion.GetExplosionRadius());
-        if (m_CapsuleCollider != null && transform.position != null)
+        if (m_BoxCollider != null && transform.position != null)
         {
             Gizmos.color = Color.red;
             Vector3 rayStartPosition =
@@ -354,10 +392,6 @@ public class Player : MonoBehaviour
                     m_Dash.GetAbilityStats().SetIsUnlocked(true);
                     m_Dash.GetAbilityStats().SetIsAvailable(true);
                     break;
-                case "EnergyExplosion":
-                    m_EnergyExplosion.GetSkillsStats().SetIsUnlocked(true);
-                    m_EnergyExplosion.GetSkillsStats().SetIsAvailable(true);
-                    break;
                 case "Glide":
                     m_Glide.GetAbilityStats().SetIsUnlocked(true);
                     m_Glide.GetAbilityStats().SetIsAvailable(true);
@@ -365,6 +399,10 @@ public class Player : MonoBehaviour
                 case "Heal":
                     m_Heal.GetSkillsStats().SetIsUnlocked(true);
                     m_Heal.GetSkillsStats().SetIsAvailable(true);
+                    break;
+                case "EnergyExplosion":
+                    m_EnergyExplosion.GetSkillsStats().SetIsUnlocked(true);
+                    m_EnergyExplosion.GetSkillsStats().SetIsAvailable(true);
                     break;
             }
             Destroy(objectivesInRadius.gameObject);
@@ -383,14 +421,16 @@ public class Player : MonoBehaviour
 
         m_IsAbleToShot = true;
     }
+    private IEnumerator MovmentDisabled()
+    {
+        yield return new WaitForSeconds(0.8f);
+
+        m_movingEnabled = true;
+    }
 
     public void getHit(float i_Damage)
     {
-        Debug.Log(transform.forward * (-1 * m_KnockBackForce));
-        Vector2 knockBackDirection = (transform.forward);
-        m_RigidBody.AddForce(transform.forward * (-1 * m_KnockBackForce),ForceMode2D.Impulse);
         m_CurrentHealthPoint = Mathf.Clamp(m_CurrentHealthPoint - i_Damage,0,100);
-        
     }
 
     public float GetMaxHealth()
