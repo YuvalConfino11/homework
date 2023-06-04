@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,14 +10,6 @@ public class KnockbackScript : MonoBehaviour
     private float m_KnockbackDuration = 1;
     [SerializeField]
     private Player m_player;
-
-    private void Awake()
-    {
-        if (m_player == null)
-        {
-            m_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        }
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
