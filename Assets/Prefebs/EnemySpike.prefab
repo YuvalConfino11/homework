@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Spikes: {fileID: 11400000, guid: 6f80b73d53c684f818b848deb2ec27be, type: 2}
+  m_currentHealth: 0
 --- !u!114 &7831513024092405803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,8 +246,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd6b43bdbc344d40ad0d9e231de24e3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_KnockbackPower: 50
-  m_KnockbackDuration: 1
+  m_KnockbackPower: 20
+  m_KnockbackDuration: 0.2
   m_player: {fileID: 0}
 --- !u!1 &6795256531105960869
 GameObject:
@@ -494,8 +495,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd6b43bdbc344d40ad0d9e231de24e3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_KnockbackPower: 50
-  m_KnockbackDuration: 1
+  m_KnockbackPower: 20
+  m_KnockbackDuration: 0.2
   m_player: {fileID: 0}
 --- !u!1 &7112178913606317816
 GameObject:
@@ -743,8 +744,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd6b43bdbc344d40ad0d9e231de24e3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_KnockbackPower: 0.5
-  m_KnockbackDuration: 1
+  m_KnockbackPower: 20
+  m_KnockbackDuration: 0.2
   m_player: {fileID: 0}
 --- !u!1 &8363298205268019668
 GameObject:
@@ -992,8 +993,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd6b43bdbc344d40ad0d9e231de24e3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_KnockbackPower: 0.5
-  m_KnockbackDuration: 1
+  m_KnockbackPower: 20
+  m_KnockbackDuration: 0.2
   m_player: {fileID: 0}
 --- !u!1 &9030032656207166915
 GameObject:
@@ -1255,6 +1256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd6b43bdbc344d40ad0d9e231de24e3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_KnockbackPower: 0.5
-  m_KnockbackDuration: 1
+  m_KnockbackPower: 20
+  m_KnockbackDuration: 0.2
   m_player: {fileID: 0}

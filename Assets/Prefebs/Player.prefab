@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953440646292869076}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.71, y: 13.08, z: 0}
+  m_LocalPosition: {x: -11.2, y: 8.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -312,6 +312,8 @@ MonoBehaviour:
   m_PlayerGotKey: 0
   m_PlayerAnimation: {fileID: 666493324}
   m_FeetBoxCollider2D: {fileID: 926051546431564419}
+  m_movingEnabled: 1
+  m_IsKnockedBack: 0
 --- !u!61 &2174727239527324068
 BoxCollider2D:
   m_ObjectHideFlags: 0

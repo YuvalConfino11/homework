@@ -111,7 +111,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4707838281379028626}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -231.05, y: -5.5, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 1.3333334}
   m_ConstrainProportionsScale: 0
@@ -205,4 +205,4 @@ MonoBehaviour:
   m_FriendHitMob: 0
   m_MoveSpeedTowardMob: 80
   m_MoveSpeedTowardPlayer: 60
-  m_WaitForAttack: 0
+  m_AttackCooldownTime: 2.5
