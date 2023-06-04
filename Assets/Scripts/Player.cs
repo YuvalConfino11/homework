@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
         {
             movement(horizontalInput);
         }
-        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.LeftAlt)) && getIsGrounded() && m_Dash.GetAbilityStats().GetIsUnlocked())
+        if (Input.GetKeyDown(KeyCode.LeftShift) && getIsGrounded() && m_Dash.GetAbilityStats().GetIsUnlocked())
         {
             StartCoroutine(dash(horizontalInput));
         }
@@ -328,8 +328,6 @@ public class Player : MonoBehaviour
             Vector3 imaginaryFriendPosition = m_ImaginaryFriend.transform.position;
         
             m_MobsInExplosionRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius,m_MobLayerMask);
-            Debug.Log(m_MobLayerMask);
-            Debug.Log(m_MobsInExplosionRadius);
             foreach (Collider2D mob in m_MobsInExplosionRadius) {
                 if (mob.CompareTag("Spike"))
                 {
@@ -342,7 +340,6 @@ public class Player : MonoBehaviour
                     float mobDistance = Vector2.Distance(mob.transform.position, imaginaryFriendPosition);
                     float distanceRatio = Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1);
                     float calculatedExplosionForce = explosionForce * distanceRatio * transform.localScale.y;
-                    Debug.Log(mobDirection+"  "+calculatedExplosionForce);
                     mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
                     mob.GetComponent<MobStats>().GetHit(m_EnergyExplosion.GetExplosionDamage());
                     Debug.DrawLine(transform.position,mob.transform.position,Color.magenta,2);
