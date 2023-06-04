@@ -61,7 +61,11 @@ public class Player : MonoBehaviour
     private PlayerAnimation m_PlayerAnimation;
     [SerializeField]
     private BoxCollider2D m_FeetBoxCollider2D;
-    
+    [SerializeField]
+    private bool m_movingEnabled = true;
+    [SerializeField]
+    private bool m_IsKnockedBack;
+
     private float m_LastMovingDirection = 1f;
     private float m_LastArrowKeyPressTime;
     private RaycastHit2D  m_RaycastHit;
@@ -84,7 +88,10 @@ public class Player : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         m_LastMovingDirection = horizontalInput == 0 ? m_LastMovingDirection : horizontalInput > 0 ? 1 : -1;
-        movement(horizontalInput);
+        if (m_movingEnabled)
+        {
+            movement(horizontalInput);
+        }
         if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.LeftAlt)) && getIsGrounded() && m_Dash.GetAbilityStats().GetIsUnlocked())
         {
             StartCoroutine(dash(horizontalInput));
@@ -192,7 +199,7 @@ public class Player : MonoBehaviour
     {
         if (i_Col.gameObject.CompareTag("Ground"))
         {
-            m_CapsuleCollider.isTrigger = false;
+            m_BoxCollider.isTrigger = false;
         }
         if (i_Col.gameObject.CompareTag("Key"))
         {
@@ -257,19 +264,25 @@ public class Player : MonoBehaviour
     {
         if (m_Dash.GetAbilityStats().GetIsAvailable() && getIsGrounded())
         {
+            m_movingEnabled = false;
+            StartCoroutine(MovmentDisabled());
             m_Dash.GetAbilityStats().SetIsAvailable(false);
             Vector2 dashDirection = new Vector2(i_MovingDirection, 0);
             m_RigidBody.AddForce(dashDirection.normalized * m_Dash.GetDashSpeed());
             m_PlayerAnimation.DashAnimation();
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(abilityCooldown(m_Dash.GetAbilityStats(),m_Dash.GetAbilityStats().GetCooldownTime()));
+
         }
     }
 
 
     public IEnumerator Knockback(float i_KnockbackDuration , float i_KnockbackPower , Transform i_ObjectTransform)
     {
+        m_IsKnockedBack = true;
         float timer = 0;
+        m_movingEnabled = false;
+        StartCoroutine(MovmentDisabled());
 
         while(i_KnockbackDuration > timer)
         {
@@ -278,6 +291,7 @@ public class Player : MonoBehaviour
             Vector2 dir = new Vector2(i_ObjectTransform.transform.position.x - transform.position.x,0);
             m_RigidBody.AddForce(-dir * i_KnockbackPower);
         }
+        m_IsKnockedBack = false;
         yield return 0;
     }
 
@@ -392,6 +406,12 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(m_ShootingRate);
 
         m_IsAbleToShot = true;
+    }
+    private IEnumerator MovmentDisabled()
+    {
+        yield return new WaitForSeconds(0.8f);
+
+        m_movingEnabled = true;
     }
 
     public void getHit(float i_Damage)
