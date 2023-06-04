@@ -167,10 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2198f84730ef7054f9ab700a7acc59a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textComp: {fileID: 2058102002}
-  sequences: {fileID: 11400000, guid: 548d839d50034fa4881f19963fe9ab1a, type: 2}
-  player: {fileID: 1773754412}
-  blackMask: {fileID: 880671825}
+  m_TextComp: {fileID: 2058102002}
+  m_Sequences: {fileID: 11400000, guid: 548d839d50034fa4881f19963fe9ab1a, type: 2}
+  m_Player: {fileID: 1773754412}
+  m_BlackMask: {fileID: 880671825}
 --- !u!1 &880671823
 GameObject:
   m_ObjectHideFlags: 0

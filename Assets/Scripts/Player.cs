@@ -57,6 +57,8 @@ public class Player : MonoBehaviour
     private float m_GroundRaycastDistance = 10f;
     [SerializeField]
     private bool m_PlayerGotKey;
+    [SerializeField]
+    public static Player m_instance;
 
 
     [SerializeField] private PlayerAnimation m_PlayerAnimation;
@@ -78,6 +80,7 @@ public class Player : MonoBehaviour
 
         m_ManaPoint = GetMaxMana();
         m_ManaBar.SetMaxMana(GetMaxMana());
+
     }
 
     void Update()
@@ -267,6 +270,20 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(abilityCooldown(m_Dash.GetAbilityStats(),m_Dash.GetAbilityStats().GetCooldownTime()));
         }
+    }
+
+
+    public IEnumerator Knockback(float i_KnockbackDuration , float i_KnockbackPower , Transform obj)
+    {
+        float timer = 0;
+
+        while(i_KnockbackDuration > timer)
+        {
+            timer += Time.deltaTime;
+            Vector2 dir = (obj.transform.position - transform.position).normalized;
+            m_RigidBody.AddForce(-dir * i_KnockbackPower);
+        }
+        yield return 0;
     }
 
     private void attack()
