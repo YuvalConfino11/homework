@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using Mobs;
 using UnityEngine;
 using Pathfinding;
@@ -17,6 +19,8 @@ public class ImaginaryFriendAi : MonoBehaviour
     private float m_MoveSpeedTowardMob = 12f; 
     [SerializeField]
     private float m_MoveSpeedTowardPlayer = 12f;
+    [SerializeField]
+    private float m_WaitForAttack = 1.5f;
     
     private Transform m_MainTarget;
     private Path m_Path;
@@ -34,12 +38,14 @@ public class ImaginaryFriendAi : MonoBehaviour
     void Update()
     {
         m_MobInAttackRadius = Physics2D.OverlapCircle(transform.position, m_AttackRadius, m_MobLayerMask);
+        
         if (m_MobInAttackRadius != null)
         {
             if (!m_FriendDuringAttack || (m_FriendDuringAttack && !m_FriendHitMob))
             {
+                Debug.Log(m_FriendDuringAttack);
                 attack();
-            }
+            } 
             else
             {
                 returnToPlayer();
@@ -52,8 +58,8 @@ public class ImaginaryFriendAi : MonoBehaviour
         if (Vector2.Distance(transform.position, m_ImaginaryFriendStartPosition.position) < 0.01)
         {
             transform.position = m_ImaginaryFriendStartPosition.position;
+            StartCoroutine(WaitForAttack(m_WaitForAttack));
             m_FriendHitMob = false;
-            m_FriendDuringAttack = true;
         }
     }
 
@@ -82,5 +88,11 @@ public class ImaginaryFriendAi : MonoBehaviour
     {
         Gizmos.color = Color.black;
         Gizmos.DrawWireSphere(transform.position,m_AttackRadius);
+    }
+    public IEnumerator WaitForAttack(float i_TimerForAttack)
+    {
+        m_FriendDuringAttack = true;
+        yield return new WaitForSeconds(i_TimerForAttack);
+        m_FriendDuringAttack = false;
     }
 }
