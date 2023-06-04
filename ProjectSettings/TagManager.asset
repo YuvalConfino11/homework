@@ -14,7 +14,7 @@ TagManager:
   - Objective
   - Key
   - Gate
-  - Spikes
+  - Spike
   layers:
   - Default
   - TransparentFX
@@ -34,8 +34,8 @@ TagManager:
   - Forground
   - Platform
   - Gate
-  - Spikes
-  - 
+  - PlayerFeet
+  - Spike
   - 
   - 
   - 
