@@ -405,7 +405,10 @@ public class Player : MonoBehaviour
                     m_EnergyExplosion.GetSkillsStats().SetIsAvailable(true);
                     break;
             }
-            Destroy(objectivesInRadius.gameObject);
+
+            
+            Destroy(objectivesInRadius.gameObject, 1f);
+            
         }
     }
 
