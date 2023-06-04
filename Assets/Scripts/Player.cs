@@ -387,7 +387,7 @@ public class Player : MonoBehaviour
     public void getHit(float i_Damage)
     {
         Debug.Log(transform.forward * (-1 * m_KnockBackForce));
-        Vector2 knockBackDirection = (transform.forward;
+        Vector2 knockBackDirection = (transform.forward);
         m_RigidBody.AddForce(transform.forward * (-1 * m_KnockBackForce),ForceMode2D.Impulse);
         m_CurrentHealthPoint = Mathf.Clamp(m_CurrentHealthPoint - i_Damage,0,100);
         
