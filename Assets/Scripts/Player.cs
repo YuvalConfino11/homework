@@ -254,7 +254,7 @@ public class Player : MonoBehaviour
             m_Dash.GetAbilityStats().SetIsAvailable(false);
             Vector2 dashDirection = new Vector2(i_MovingDirection, 0);
             m_RigidBody.AddForce(dashDirection.normalized * m_Dash.GetDashSpeed(), ForceMode2D.Impulse);
-            // m_RigidBody.velocity = dashDirection.normalized * m_Dash.GetDashSpeed();
+            Debug.Log(dashDirection.normalized * m_Dash.GetDashSpeed());
             m_PlayerAnimation.DashAnimation();
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(abilityCooldown(m_Dash.GetAbilityStats(),m_Dash.GetAbilityStats().GetCooldownTime()));
