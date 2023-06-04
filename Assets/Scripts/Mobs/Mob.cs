@@ -12,40 +12,39 @@ namespace Mobs
         private GameObject m_ManaBall;
         [SerializeField]
         bool m_CanHitPlayer = false;
+        [SerializeField]
+        private float m_MobHitCooldown = 0.75f;
         
-        private GameObject m_PlayerGameObject;
+        // private GameObject m_PlayerGameObject;
+        private float timer = 0;
 
         private void Awake()
         {
-            StartCoroutine(playerHitCheck());
             m_MobStats = GetComponent<MobStats>();
-            
         }
 
         private void Update()
         {
+            timer += Time.deltaTime;
+            if (timer >= m_MobHitCooldown)
+            {
+                m_CanHitPlayer = true;
+                timer = 0;
+            }
             if (m_MobStats.isDead())
             {
                 Destroy(this.gameObject);
                 Instantiate(m_ManaBall, transform.position, transform.rotation);
             }
         }
-
-        private IEnumerator playerHitCheck()
-        {
-            WaitForSeconds wait = new WaitForSeconds(0.5f);
-            while (true)
-            {
-                yield return wait;
-                m_CanHitPlayer = true;
-            }
-        }
-
+        
         private void OnTriggerEnter2D(Collider2D col)
         {
+            
             if (col.gameObject.CompareTag("Player") && m_CanHitPlayer)
             {
-                col.gameObject.GetComponent<Player>().getHit(m_MobStats.GetDamage());
+                Player player = col.gameObject.GetComponent<Player>();
+                player.getHit(m_MobStats.GetDamage());
                 m_CanHitPlayer = false;
             }
         }

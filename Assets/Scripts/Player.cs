@@ -243,10 +243,16 @@ public class Player : MonoBehaviour
     {
         if (m_Dash.GetAbilityStats().GetIsAvailable() && getIsGrounded())
         {
-            Vector2 dashDirection = new Vector2(i_MovingDirection, 0);
-            m_RigidBody.AddForce(dashDirection * m_Dash.GetDashSpeed());
             m_Dash.GetAbilityStats().SetIsAvailable(false);
+            float dashTimer = 0;
+            float dashDuration = m_Dash.DashTime;
             m_PlayerAnimation.DashAnimation();
+            while(dashDuration > dashTimer)
+            {
+                dashTimer += Time.deltaTime;
+                Vector2 dashDirection = new Vector2(i_MovingDirection * m_Dash.DashDistance, 0);
+                m_RigidBody.AddForce(dashDirection * m_Dash.DashDistance);
+            }
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(abilityCooldown(m_Dash.GetAbilityStats(),m_Dash.GetAbilityStats().GetCooldownTime()));
         }
@@ -390,10 +396,7 @@ public class Player : MonoBehaviour
 
     public void getHit(float i_Damage)
     {
-        float movingDirection = Mathf.Sign(m_RigidBody.velocity.x);
         m_CurrentHealthPoint = Mathf.Clamp(m_CurrentHealthPoint - i_Damage,0,100);
-        Vector2 dashDirection = new Vector2(transform.localScale.x * movingDirection, 0);
-        m_RigidBody.velocity = dashDirection.normalized * m_Dash.GetDashSpeed();
     }
 
     public float GetMaxHealth()
