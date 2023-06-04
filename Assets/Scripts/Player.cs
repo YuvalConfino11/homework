@@ -57,24 +57,23 @@ public class Player : MonoBehaviour
     private float m_GroundRaycastDistance = 10f;
     [SerializeField]
     private bool m_PlayerGotKey;
-  
-
-    [SerializeField] private PlayerAnimation m_PlayerAnimation;
-
+    [SerializeField] 
+    private PlayerAnimation m_PlayerAnimation;
+    [SerializeField]
+    private BoxCollider2D m_FeetBoxCollider2D;
+    
     private float m_LastMovingDirection = 1f;
     private float m_LastArrowKeyPressTime;
     private RaycastHit2D  m_RaycastHit;
     private Rigidbody2D m_RigidBody;
-    private CapsuleCollider2D m_CapsuleCollider;
+    private BoxCollider2D m_BoxCollider;
     private Collider2D[] m_MobsInExplosionRadius;
     private bool m_IsFacingRight = true;
-    private BoxCollider2D m_FeetBoxCollider2D;
-    
+   
     private void Awake()
     {
         m_RigidBody = GetComponent<Rigidbody2D>();
-        m_CapsuleCollider = GetComponent<CapsuleCollider2D>();
-        m_FeetBoxCollider2D = GetComponent<BoxCollider2D>();
+        m_BoxCollider = GetComponent<BoxCollider2D>();
 
         m_ManaPoint = GetMaxMana();
         m_ManaBar.SetMaxMana(GetMaxMana());
@@ -131,17 +130,10 @@ public class Player : MonoBehaviour
 
         if(m_CurrentHealthPoint == 0)
         {
+            AudioManager.Instance.musicSource.Stop();
             SceneManager.LoadScene("DeathScene");
         }
-
-
-        ////////delete later////////
-        ///
-        if (Input.GetKey(KeyCode.K))
-        {
-            Debug.Log("pressed K");
-            m_PlayerGotKey = true;
-        }
+        
     }
 
     private void OnCollisionEnter2D(Collision2D i_Collision)
@@ -194,7 +186,6 @@ public class Player : MonoBehaviour
         {
             m_FeetBoxCollider2D.enabled = false;
         }
-        m_CapsuleCollider.isTrigger = true;
     }
 
     private void OnTriggerEnter2D(Collider2D i_Col)
@@ -237,6 +228,7 @@ public class Player : MonoBehaviour
             m_RigidBody.velocity = new Vector2(m_RigidBody.velocity.x, jumpForce);
             m_PlayerAnimation.JumpAnimation();
             m_DoubleJump.GetAbilityStats().SetIsAvailable(true);
+            AudioManager.Instance.PlaySFX("Jump");
         }
         else if (m_DoubleJump.GetAbilityStats().GetIsAvailable() && m_DoubleJump.GetAbilityStats().GetIsUnlocked())
         {
@@ -266,8 +258,8 @@ public class Player : MonoBehaviour
         if (m_Dash.GetAbilityStats().GetIsAvailable() && getIsGrounded())
         {
             m_Dash.GetAbilityStats().SetIsAvailable(false);
-            Vector2 dashDirection = new Vector2(transform.localScale.x * i_MovingDirection, 0);
-            m_RigidBody.velocity = dashDirection.normalized * m_Dash.GetDashSpeed();
+            Vector2 dashDirection = new Vector2(i_MovingDirection, 0);
+            m_RigidBody.AddForce(dashDirection.normalized * m_Dash.GetDashSpeed());
             m_PlayerAnimation.DashAnimation();
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(abilityCooldown(m_Dash.GetAbilityStats(),m_Dash.GetAbilityStats().GetCooldownTime()));
@@ -275,14 +267,15 @@ public class Player : MonoBehaviour
     }
 
 
-    public IEnumerator Knockback(float i_KnockbackDuration , float i_KnockbackPower , Transform obj)
+    public IEnumerator Knockback(float i_KnockbackDuration , float i_KnockbackPower , Transform i_ObjectTransform)
     {
         float timer = 0;
 
         while(i_KnockbackDuration > timer)
         {
             timer += Time.deltaTime;
-            Vector2 dir = (obj.transform.position - transform.position).normalized;
+            Debug.Log(new Vector2(i_ObjectTransform.transform.position.x - transform.position.x,0));
+            Vector2 dir = new Vector2(i_ObjectTransform.transform.position.x - transform.position.x,0);
             m_RigidBody.AddForce(-dir * i_KnockbackPower);
         }
         yield return 0;
@@ -296,6 +289,7 @@ public class Player : MonoBehaviour
             GameObject bullet = Instantiate(m_Bullet, transform.position, transform.rotation);
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * (m_LastMovingDirection * bulletScript.GetSpeed());
+            AudioManager.Instance.PlaySFX("Shoot");
             StartCoroutine(shootingCooldown());
         }
         
@@ -344,7 +338,7 @@ public class Player : MonoBehaviour
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position,m_EnergyExplosion.GetExplosionRadius());
-        if (m_CapsuleCollider != null && transform.position != null)
+        if (m_BoxCollider != null && transform.position != null)
         {
             Gizmos.color = Color.red;
             Vector3 rayStartPosition =

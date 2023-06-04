@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 7578005702554773261}
   - component: {fileID: 1919526740459900685}
   - component: {fileID: 1240481289709308154}
+  - component: {fileID: 6173740749729206252}
   m_Layer: 7
   m_Name: MobType1
   m_TagString: Mob
@@ -180,7 +181,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 4.1992154, y: -13.7099}
+  m_Offset: {x: 4.1992154, y: -13.489723}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -191,7 +192,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.9379816, y: 0.56817627}
+  m_Size: {x: 2.9379816, y: 0.45808792}
   m_EdgeRadius: 0
 --- !u!60 &6891677413964781768
 PolygonCollider2D:
@@ -1567,12 +1568,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a7f3794a5834668bc42de167da368a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MobFieldOfHitRadius: 10
-  m_PlayerLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
   m_MobStats: {fileID: 1919526740459900685}
   m_ManaBall: {fileID: 7015440925964673975, guid: 1bef5d4fe15565c469e49d6663a7b924, type: 3}
+  m_CanHitPlayer: 0
 --- !u!114 &1919526740459900685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1600,6 +1598,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 2219045938970304629}
+--- !u!114 &6173740749729206252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5345240097684956972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6b43bdbc344d40ad0d9e231de24e3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_KnockbackPower: 25
+  m_KnockbackDuration: 1
+  m_player: {fileID: 0}
 --- !u!1 &8414048908666085239
 GameObject:
   m_ObjectHideFlags: 0
