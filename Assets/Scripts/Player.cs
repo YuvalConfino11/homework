@@ -123,7 +123,8 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            unlockedSAvailabilitiesAndSkills();
+            interact();
+            Debug.Log("z was pressed");
         }
         Vector3 rayStartPosition =
             new Vector3(transform.position.x + 0.5f * m_LastMovingDirection, transform.position.y, 0);
@@ -161,10 +162,7 @@ public class Player : MonoBehaviour
         {
             m_FeetBoxCollider2D.enabled = true;
         }
-        if (i_Collision.gameObject.CompareTag("Key"))
-        {
-            m_PlayerGotKey = true;
-        }
+        
     }
 
     private void OnCollisionStay2D(Collision2D i_Collision)
@@ -374,11 +372,12 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position,m_ObjectiveCollectRadius);
     }
     
-    private void unlockedSAvailabilitiesAndSkills()
+    private void interact()
     {
         Collider2D objectivesInRadius = Physics2D.OverlapCircle(transform.position, m_ObjectiveCollectRadius,m_ObjectiveLayerMask);
         if (objectivesInRadius != null)
         {
+            Debug.Log(objectivesInRadius);
             switch (objectivesInRadius.name)
             {
                 case "DoubleJump":
@@ -401,9 +400,11 @@ public class Player : MonoBehaviour
                     m_EnergyExplosion.GetSkillsStats().SetIsUnlocked(true);
                     m_EnergyExplosion.GetSkillsStats().SetIsAvailable(true);
                     break;
+                case "Key":
+                    m_PlayerGotKey = true;
+                    Debug.Log("case Key");
+                    break;
             }
-
-            
             Destroy(objectivesInRadius.gameObject, 1f);
             
         }

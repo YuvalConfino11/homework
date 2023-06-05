@@ -12,17 +12,20 @@ public class GateScript : MonoBehaviour
     private float  m_GateMoveSpeed = 3;
     [SerializeField]
     private bool m_PlayerTouchedGate;
+    [SerializeField]
+    private SpriteRenderer m_SpriteRenderer;
+    [SerializeField]
+    private Sprite m_NewSprite;
 
     private void Update()
     {
         if (m_PlayerTouchedGate)
         {
+            m_SpriteRenderer.sprite = m_NewSprite;
             transform.position = Vector3.MoveTowards(transform.position, m_OpenGatePos.position, m_GateMoveSpeed * Time.deltaTime);
         }
     }
-
-
-
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -31,7 +34,6 @@ public class GateScript : MonoBehaviour
             {
                 Debug.Log("Gate Open");
                 m_PlayerTouchedGate = true;
-               
             }
            
         }
