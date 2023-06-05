@@ -5,6 +5,7 @@ using Mobs;
 using Skills;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
@@ -65,6 +66,8 @@ public class Player : MonoBehaviour
     private bool m_movingEnabled = true;
     [SerializeField]
     private bool m_IsKnockedBack;
+    [SerializeField]
+    private Light2D m_PlayerLight;
 
     private float m_LastMovingDirection = 1f;
     private float m_LastArrowKeyPressTime;
@@ -133,16 +136,22 @@ public class Player : MonoBehaviour
         {
             m_FeetBoxCollider2D.enabled = true;
         }
+        
         m_PlayerAnimation.PlayPlayerAnimation(m_RigidBody.velocity.x, m_RigidBody.velocity.y, getIsGrounded());
-
         if(m_CurrentHealthPoint == 0)
         {
             AudioManager.Instance.musicSource.Stop();
             SceneManager.LoadScene("DeathScene");
         }
         
+        AdjustPlayerLightIntensity();
     }
 
+    private void AdjustPlayerLightIntensity()
+    {
+        m_PlayerLight.intensity = (1f - (m_CurrentHealthPoint / m_MaxHealthPoint)) * 0.1f;
+        Debug.Log(m_PlayerLight.intensity);
+    }
     private void OnCollisionEnter2D(Collision2D i_Collision)
     {
         if (i_Collision.gameObject.CompareTag("Platform"))
