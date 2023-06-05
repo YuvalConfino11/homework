@@ -124,7 +124,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             interact();
-            Debug.Log("z was pressed");
         }
         Vector3 rayStartPosition =
             new Vector3(transform.position.x + 0.5f * m_LastMovingDirection, transform.position.y, 0);
@@ -377,7 +376,6 @@ public class Player : MonoBehaviour
         Collider2D objectivesInRadius = Physics2D.OverlapCircle(transform.position, m_ObjectiveCollectRadius,m_ObjectiveLayerMask);
         if (objectivesInRadius != null)
         {
-            Debug.Log(objectivesInRadius);
             switch (objectivesInRadius.name)
             {
                 case "DoubleJump":
@@ -402,7 +400,6 @@ public class Player : MonoBehaviour
                     break;
                 case "Key":
                     m_PlayerGotKey = true;
-                    Debug.Log("case Key");
                     break;
             }
             Destroy(objectivesInRadius.gameObject, 1f);
