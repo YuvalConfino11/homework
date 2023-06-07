@@ -98,18 +98,18 @@ MonoBehaviour:
       y: 21
       width: 203.33331
       height: 366.66666
-    m_Scale: {x: 1.650311, y: 1.650311}
-    m_Translation: {x: 101.666626, y: 183.33333}
+    m_Scale: {x: 0.16361976, y: 0.16361976}
+    m_Translation: {x: 101.09666, y: 183.33333}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -61.604527
-      y: -111.09017
-      width: 123.20909
-      height: 222.18034
+      x: -617.8756
+      y: -1120.484
+      width: 1242.7186
+      height: 2240.968
     m_MinimalGUI: 1
   m_defaultScale: 0.15885416
   m_LastWindowPixelSize: {x: 304.99997, y: 581.5}
@@ -227,23 +227,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 18240000
       m_LastClickedID: 0
       m_ExpandedIDs: dc74ffff00fbffff3670000082700000d0aa00001aab0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: ImaginaryFriend
+        m_OriginalName: ImaginaryFriend
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 43642
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 5}
       m_SearchString: 
@@ -572,9 +572,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -1199.7347, y: 363.3156, z: -4.4229693}
+    m_Target: {x: -1224.4462, y: 383.15085, z: -0.0053268936}
     speed: 2
-    m_Value: {x: -1199.7347, y: 363.3156, z: -4.4229693}
+    m_Value: {x: -1224.4462, y: 383.15085, z: -0.0053268936}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -625,9 +625,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 30.123425
+    m_Target: 3.7070835
     speed: 2
-    m_Value: 30.123425
+    m_Value: 3.7070835
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -932,22 +932,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Images and videos/ImaginaryFriend/ImaginaryFriend_Attack
+    - Assets/Scripts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 39
   m_LastFolders:
-  - Assets/Images and videos/ImaginaryFriend/ImaginaryFriend_Attack
+  - Assets/Scripts
   m_LastFoldersGridSize: 39
   m_LastProjectPath: C:\Users\redsp\OneDrive\Desktop\Studies\Echoes-of-Within
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 186.33334}
-    m_SelectedIDs: 4a7a0000
-    m_LastClickedID: 31306
-    m_ExpandedIDs: 0000000066790000687900006a7900006c7900006e79000070790000727900007479000076790000787900007a7900007c7900007e7900008079000098790000487a000000ca9a3b
+    m_SelectedIDs: a6790000
+    m_LastClickedID: 31142
+    m_ExpandedIDs: 0000000066790000687900006a7900006c7900006e79000070790000727900007479000076790000787900007a7900007c7900007e79000080790000487a000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1000,8 +1000,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 18240000
+    m_LastClickedInstanceID: 9240
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c623000000000000fc6c000034810000a28b0000ec800000ec7b0000cc6f0000
     m_RenameOverlay:
@@ -1027,7 +1027,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 54.333344}
     m_GridSize: 39
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 207
