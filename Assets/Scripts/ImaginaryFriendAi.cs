@@ -21,6 +21,8 @@ public class ImaginaryFriendAi : MonoBehaviour
     private float m_MoveSpeedTowardPlayer = 12f;
     [SerializeField]
     private float m_AttackCooldownTime = 2.5f;
+    [SerializeField]
+    private Animator m_Animator;
     
     private Transform m_MainTarget;
     private Path m_Path;
@@ -83,11 +85,13 @@ public class ImaginaryFriendAi : MonoBehaviour
 
     private void attack()
     {
+        m_Animator.SetBool("IsAttacking",true);
         transform.position = Vector2.MoveTowards(transform.position, m_MobInAttackRadius.transform.position, m_MoveSpeedTowardMob * Time.deltaTime);
     }
 
     private void returnToPlayer()
     {
+        m_Animator.SetBool("IsAttacking",false);
         transform.position = Vector2.MoveTowards(transform.position, m_ImaginaryFriendStartPosition.position, m_MoveSpeedTowardPlayer * Time.deltaTime);
     }
     
