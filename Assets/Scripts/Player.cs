@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
 
         m_ManaPoint = GetMaxMana();
         m_ManaBar.SetMaxMana(GetMaxMana());
-
+        AudioManager.Instance.PlayMusic("Happy ver1");
     }
 
     void Update()
@@ -218,9 +218,12 @@ public class Player : MonoBehaviour
             ResetSkill(m_EnergyExplosion.GetSkillsStats());
             ResetAbility(m_Glide.GetAbilityStats());
             ResetSkill(m_Heal.GetSkillsStats());
-
-
         }
+        if (i_Col.gameObject.CompareTag("Spike"))
+        {
+            StartCoroutine(Invicible());
+        }
+
     }
 
 
@@ -302,6 +305,7 @@ public class Player : MonoBehaviour
     public IEnumerator Knockback(float i_KnockbackDuration , float i_KnockbackPower , Transform i_ObjectTransform)
     {
         m_IsKnockedBack = true;
+     
         float timer = 0;
         m_movingEnabled = false;
         StartCoroutine(MovmentDisabled());
@@ -312,6 +316,7 @@ public class Player : MonoBehaviour
             Vector2 dir = new Vector2(i_ObjectTransform.transform.position.x - transform.position.x,0);
             m_RigidBody.AddForce(-dir * i_KnockbackPower);
         }
+      
         m_IsKnockedBack = false;
         yield return 0;
     }
@@ -425,6 +430,13 @@ public class Player : MonoBehaviour
             
         }
     }
+    private IEnumerator Invicible()
+    {
+        m_BoxCollider.enabled = false;
+        yield return new WaitForSeconds(1f);
+        m_BoxCollider.enabled = true;
+
+    }
 
     private IEnumerator abilityCooldown(AbilityStats i_Ability, float i_CooldownTime)
     {
@@ -486,4 +498,6 @@ public class Player : MonoBehaviour
     {
         i_Skill.SetIsUnlocked(false);
     }
+   
+
 }
