@@ -77,7 +77,7 @@ public class ImaginaryFriendAi : MonoBehaviour
         {
             m_IsAbleToAttack = true;
         }
-        Debug.Log(m_attackCooldownTimer + " " + m_AttackCooldownTime);
+        
 
     }
 

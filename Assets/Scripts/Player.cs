@@ -150,7 +150,7 @@ public class Player : MonoBehaviour
     private void AdjustPlayerLightIntensity()
     {
         m_PlayerLight.intensity = (1f - (m_CurrentHealthPoint / m_MaxHealthPoint)) * 0.1f;
-        Debug.Log(m_PlayerLight.intensity);
+      
     }
     private void OnCollisionEnter2D(Collision2D i_Collision)
     {
