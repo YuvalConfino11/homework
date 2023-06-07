@@ -814,8 +814,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd6b43bdbc344d40ad0d9e231de24e3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_KnockbackPower: 60
-  m_KnockbackDuration: 1
+  m_KnockbackPower: 15
+  m_KnockbackDuration: 0.2
   m_player: {fileID: 0}
 --- !u!1 &8714287595042925883
 GameObject:

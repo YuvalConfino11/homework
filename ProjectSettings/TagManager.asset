@@ -15,6 +15,7 @@ TagManager:
   - Key
   - Gate
   - Spike
+  - ResetWall
   layers:
   - Default
   - TransparentFX
@@ -38,7 +39,6 @@ TagManager:
   - Spike
   - Key
   - MobFeet
-  - 
   - 
   - 
   - 
