@@ -211,6 +211,16 @@ public class Player : MonoBehaviour
         {
             Destroy(i_Col.gameObject);
         }
+        if (i_Col.gameObject.CompareTag("ResetWall"))
+        {
+            ResetAbility(m_Dash.GetAbilityStats());
+            ResetAbility(m_DoubleJump.GetAbilityStats());
+            ResetSkill(m_EnergyExplosion.GetSkillsStats());
+            ResetAbility(m_Glide.GetAbilityStats());
+            ResetSkill(m_Heal.GetSkillsStats());
+
+
+        }
     }
 
 
@@ -468,5 +478,12 @@ public class Player : MonoBehaviour
     {
         return m_PlayerGotKey;
     }
-
+    public void ResetAbility(AbilityStats i_Ability)
+    {
+        i_Ability.SetIsUnlocked(false);
+    }
+    public void ResetSkill(SkillsStats i_Skill)
+    {
+        i_Skill.SetIsUnlocked(false);
+    }
 }
