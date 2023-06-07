@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,10 +12,19 @@ public class KnockbackScript : MonoBehaviour
     [SerializeField]
     private Player m_player;
 
+    private void Awake()
+    {
+        if (m_player == null)
+        {
+            m_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+           // AudioManager.Instance.PlaySFX("")
             StartCoroutine(m_player.Knockback(m_KnockbackDuration , m_KnockbackPower , transform));
         }
     }
