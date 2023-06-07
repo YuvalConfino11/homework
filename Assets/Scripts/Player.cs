@@ -231,6 +231,7 @@ public class Player : MonoBehaviour
     {
         m_IsFacingRight = !m_IsFacingRight;
         transform.Rotate(0f, 180f, 0f);
+        m_ImaginaryFriend.transform.Rotate(0f, 180f, 0f);
     }
    
     private void jump()
