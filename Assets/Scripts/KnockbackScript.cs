@@ -24,7 +24,7 @@ public class KnockbackScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            AudioManager.Instance.PlaySFX("Ough");
+           // AudioManager.Instance.PlaySFX("")
             StartCoroutine(m_player.Knockback(m_KnockbackDuration , m_KnockbackPower , transform));
         }
     }
