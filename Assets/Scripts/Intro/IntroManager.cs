@@ -22,7 +22,7 @@ namespace Sequences {
         Image m_BlackMask;
 
         private int m_TextIndex = 0;
-        private int m_TimeForText = 4;
+        private int m_TimeForText = 6;
         private float m_Timer;
         // Start is called before the first frame update
         void Start()
@@ -53,9 +53,9 @@ namespace Sequences {
         {
             m_TextComp.text = m_Sequences.m_IntroSequences[m_TextIndex].m_MainText;
             m_TextIndex++;
-            if(m_TextIndex == m_Sequences.m_IntroSequences.Length)
+            if(m_TextIndex == 5)
             {
-                SceneManager.LoadScene("Tutorial");
+                SceneManager.LoadScene("Map");
             }
         }
     }
