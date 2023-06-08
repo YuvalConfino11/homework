@@ -20,6 +20,7 @@ public class ObjectAnimations : MonoBehaviour
             {
                 if (objectivesInRadius.name == "Player")
                 {
+                    AudioManager.Instance.PlaySFX("Angel");
                     m_Animator.Play("Objective_Dissipate");
                 }
             }
