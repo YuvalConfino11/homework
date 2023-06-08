@@ -34,6 +34,8 @@ namespace Mobs
         private MobAnimation m_MobAnimation;
         [SerializeField] 
         private float m_GroundCastDistance = 10f;
+        [SerializeField]
+        private bool m_MonsterGrowled;
         
         private Rigidbody2D m_RigidBody;
         private GameObject m_PlayerGameObject;
@@ -78,6 +80,7 @@ namespace Mobs
                 m_FeetBoxCollider2D.enabled = true;
             }
             m_MobAnimation.PlayMobAnimation(m_RigidBody.velocity.x);
+            MakeSound();
         }
 
         private void FixedUpdate()
@@ -241,6 +244,28 @@ namespace Mobs
         private bool getIsGrounded()
         {
             return m_Grounded;
+        }
+        //// omer after adding sound add in parentasis of the function string i_ audio which will get the required audio
+        private void MakeSound()
+        {
+            Collider2D playerInRangeCheck = Physics2D.OverlapCircle(transform.position, m_MobFieldOfViewRadius * transform.localScale.y, m_PlayerLayerMask);
+            if (playerInRangeCheck != null)
+            {
+                if (m_MonsterGrowled == false)
+                {
+                    //AudioManager.Instance.PlaySFX(i_audio);
+                    Debug.Log("Roar");
+                    m_MonsterGrowled = true;
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                m_MonsterGrowled = false;
+            }
         }
         
     }

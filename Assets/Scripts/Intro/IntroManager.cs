@@ -55,7 +55,7 @@ namespace Sequences {
             m_TextIndex++;
             if(m_TextIndex == 5)
             {
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene("Map");
             }
         }
     }
