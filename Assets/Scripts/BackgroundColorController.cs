@@ -32,6 +32,5 @@ public class BackgroundColorController : MonoBehaviour
         {
             m_BackgroundSpriteShapeRenderer.color = Color.Lerp(m_BackgroundSpriteShapeRenderer.color, targetColor, Time.deltaTime);
         }
-        
     }
 }
