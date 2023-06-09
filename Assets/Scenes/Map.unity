@@ -12843,6 +12843,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1597692399}
     - target: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
+      propertyPath: defualtVol
+      value: 0.327
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
+      propertyPath: transitionTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
       propertyPath: sfxSounds.Array.size
       value: 5
       objectReference: {fileID: 0}
