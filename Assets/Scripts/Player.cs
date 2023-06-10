@@ -170,6 +170,7 @@ public class Player : MonoBehaviour
         {
             m_FeetBoxCollider2D.enabled = true;
         }
+      
         
     }
 
@@ -222,6 +223,11 @@ public class Player : MonoBehaviour
         if (i_Col.gameObject.CompareTag("Spike"))
         {
             StartCoroutine(Invicible());
+        }
+        if (i_Col.gameObject.CompareTag("Change Scene Wall"))
+        {
+          
+            SceneManager.LoadScene("Map");
         }
 
     }
