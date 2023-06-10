@@ -5,6 +5,7 @@ using Mobs;
 using Skills;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
@@ -65,6 +66,8 @@ public class Player : MonoBehaviour
     private bool m_movingEnabled = true;
     [SerializeField]
     private bool m_IsKnockedBack;
+    [SerializeField]
+    private Light2D m_PlayerLight;
 
     private float m_LastMovingDirection = 1f;
     private float m_LastArrowKeyPressTime;
@@ -81,6 +84,7 @@ public class Player : MonoBehaviour
 
         m_ManaPoint = GetMaxMana();
         m_ManaBar.SetMaxMana(GetMaxMana());
+        AudioManager.Instance.PlayMusic("Happy ver1");
     }
 
     void Update()
@@ -91,7 +95,7 @@ public class Player : MonoBehaviour
         {
             movement(horizontalInput);
         }
-        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.LeftShift)) && getIsGrounded() && m_Dash.GetAbilityStats().GetIsUnlocked())
+        if (Input.GetKeyDown(KeyCode.LeftShift) && getIsGrounded() && m_Dash.GetAbilityStats().GetIsUnlocked())
         {
             StartCoroutine(dash(horizontalInput));
         }
@@ -122,7 +126,7 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            unlockedSAvailabilitiesAndSkills();
+            interact();
         }
         Vector3 rayStartPosition =
             new Vector3(transform.position.x + 0.5f * m_LastMovingDirection, transform.position.y, 0);
@@ -132,16 +136,22 @@ public class Player : MonoBehaviour
         {
             m_FeetBoxCollider2D.enabled = true;
         }
+        
         m_PlayerAnimation.PlayPlayerAnimation(m_RigidBody.velocity.x, m_RigidBody.velocity.y, getIsGrounded());
-
         if(m_CurrentHealthPoint == 0)
         {
             AudioManager.Instance.musicSource.Stop();
             SceneManager.LoadScene("DeathScene");
         }
         
+        AdjustPlayerLightIntensity();
     }
 
+    private void AdjustPlayerLightIntensity()
+    {
+        m_PlayerLight.intensity = (1f - (m_CurrentHealthPoint / m_MaxHealthPoint)) * 0.1f;
+      
+    }
     private void OnCollisionEnter2D(Collision2D i_Collision)
     {
         if (i_Collision.gameObject.CompareTag("Platform"))
@@ -160,10 +170,8 @@ public class Player : MonoBehaviour
         {
             m_FeetBoxCollider2D.enabled = true;
         }
-        if (i_Collision.gameObject.CompareTag("Key"))
-        {
-            m_PlayerGotKey = true;
-        }
+      
+        
     }
 
     private void OnCollisionStay2D(Collision2D i_Collision)
@@ -204,6 +212,24 @@ public class Player : MonoBehaviour
         {
             Destroy(i_Col.gameObject);
         }
+        if (i_Col.gameObject.CompareTag("ResetWall"))
+        {
+            ResetAbility(m_Dash.GetAbilityStats());
+            ResetAbility(m_DoubleJump.GetAbilityStats());
+            ResetSkill(m_EnergyExplosion.GetSkillsStats());
+            ResetAbility(m_Glide.GetAbilityStats());
+            ResetSkill(m_Heal.GetSkillsStats());
+        }
+        if (i_Col.gameObject.CompareTag("Spike"))
+        {
+            StartCoroutine(Invicible());
+        }
+        if (i_Col.gameObject.CompareTag("Change Scene Wall"))
+        {
+          
+            SceneManager.LoadScene("Map");
+        }
+
     }
 
 
@@ -286,6 +312,7 @@ public class Player : MonoBehaviour
     public IEnumerator Knockback(float i_KnockbackDuration , float i_KnockbackPower , Transform i_ObjectTransform)
     {
         m_IsKnockedBack = true;
+     
         float timer = 0;
         m_movingEnabled = false;
         StartCoroutine(MovmentDisabled());
@@ -296,6 +323,7 @@ public class Player : MonoBehaviour
             Vector2 dir = new Vector2(i_ObjectTransform.transform.position.x - transform.position.x,0);
             m_RigidBody.AddForce(-dir * i_KnockbackPower);
         }
+      
         m_IsKnockedBack = false;
         yield return 0;
     }
@@ -326,11 +354,8 @@ public class Player : MonoBehaviour
             float explosionRadius = m_EnergyExplosion.GetExplosionRadius();
             float explosionForce = m_EnergyExplosion.GetExplosionForce();
             Vector3 imaginaryFriendPosition = m_ImaginaryFriend.transform.position;
-            AudioManager.Instance.PlaySFX("Explosion");
         
             m_MobsInExplosionRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius,m_MobLayerMask);
-            Debug.Log(m_MobLayerMask);
-            Debug.Log(m_MobsInExplosionRadius);
             foreach (Collider2D mob in m_MobsInExplosionRadius) {
                 if (mob.CompareTag("Spike"))
                 {
@@ -343,7 +368,6 @@ public class Player : MonoBehaviour
                     float mobDistance = Vector2.Distance(mob.transform.position, imaginaryFriendPosition);
                     float distanceRatio = Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1);
                     float calculatedExplosionForce = explosionForce * distanceRatio * transform.localScale.y;
-                    Debug.Log(mobDirection+"  "+calculatedExplosionForce);
                     mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
                     mob.GetComponent<MobStats>().GetHit(m_EnergyExplosion.GetExplosionDamage());
                     Debug.DrawLine(transform.position,mob.transform.position,Color.magenta,2);
@@ -378,7 +402,7 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position,m_ObjectiveCollectRadius);
     }
     
-    private void unlockedSAvailabilitiesAndSkills()
+    private void interact()
     {
         Collider2D objectivesInRadius = Physics2D.OverlapCircle(transform.position, m_ObjectiveCollectRadius,m_ObjectiveLayerMask);
         if (objectivesInRadius != null)
@@ -405,9 +429,20 @@ public class Player : MonoBehaviour
                     m_EnergyExplosion.GetSkillsStats().SetIsUnlocked(true);
                     m_EnergyExplosion.GetSkillsStats().SetIsAvailable(true);
                     break;
+                case "Key":
+                    m_PlayerGotKey = true;
+                    break;
             }
-            Destroy(objectivesInRadius.gameObject);
+            Destroy(objectivesInRadius.gameObject, 1f);
+            
         }
+    }
+    private IEnumerator Invicible()
+    {
+        m_BoxCollider.enabled = false;
+        yield return new WaitForSeconds(1f);
+        m_BoxCollider.enabled = true;
+
     }
 
     private IEnumerator abilityCooldown(AbilityStats i_Ability, float i_CooldownTime)
@@ -462,5 +497,14 @@ public class Player : MonoBehaviour
     {
         return m_PlayerGotKey;
     }
+    public void ResetAbility(AbilityStats i_Ability)
+    {
+        i_Ability.SetIsUnlocked(false);
+    }
+    public void ResetSkill(SkillsStats i_Skill)
+    {
+        i_Skill.SetIsUnlocked(false);
+    }
+   
 
 }
