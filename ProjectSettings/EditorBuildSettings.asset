@@ -12,10 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/IntroScene.unity
     guid: 4c8f75890a071ca43b35034fb8d5b0b2
   - enabled: 1
-    path: Assets/Scenes/Tutorial.unity
-    guid: 2ddca6939b80575429959427f9e4da8f
-  - enabled: 1
-    path: Assets/Scenes/Map.unity
+    path: Assets/Prefebs/Map.unity
     guid: 4fecb100cc29029428eda7f533dfcb3e
   - enabled: 1
     path: Assets/Scenes/DeathScene.unity
