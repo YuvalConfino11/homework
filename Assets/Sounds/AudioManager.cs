@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
     bool m_checkIfEntered = true;
     private void Awake()
     {
+        m_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         if(Instance == null)
         {
             Instance = this;
@@ -38,7 +39,6 @@ public class AudioManager : MonoBehaviour
     {
         if(m_player.GetCurrentHealth() < 50f && m_checkIfEntered)
         {
-            Debug.Log("Im here");
             StartCoroutine(ChangeMusic("Sad ver1"));
             m_checkIfEntered = false;
         }

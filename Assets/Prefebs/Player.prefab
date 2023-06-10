@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &172586845
+--- !u!1 &727526745156582979
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 172586846}
-  - component: {fileID: 172586847}
+  - component: {fileID: 3428797927596757065}
+  - component: {fileID: 4493179147055390286}
   m_Layer: 6
   m_Name: PlayerLight
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &172586846
+--- !u!4 &3428797927596757065
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 172586845}
+  m_GameObject: {fileID: 727526745156582979}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,13 +32,13 @@ Transform:
   m_Father: {fileID: 5279076933203895377}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &172586847
+--- !u!114 &4493179147055390286
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 172586845}
+  m_GameObject: {fileID: 727526745156582979}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
@@ -136,7 +136,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953440646292869076}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.2, y: 8.6, z: 0}
+  m_LocalPosition: {x: -6.71, y: 13.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -355,7 +355,7 @@ Transform:
   - {fileID: 9010140335367180418}
   - {fileID: 4227881873574935474}
   - {fileID: 2388343700640912761}
-  - {fileID: 172586846}
+  - {fileID: 3428797927596757065}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -426,7 +426,7 @@ MonoBehaviour:
   m_FeetBoxCollider2D: {fileID: 926051546431564419}
   m_movingEnabled: 1
   m_IsKnockedBack: 0
-  m_PlayerLight: {fileID: 172586847}
+  m_PlayerLight: {fileID: 4493179147055390286}
 --- !u!61 &2174727239527324068
 BoxCollider2D:
   m_ObjectHideFlags: 0

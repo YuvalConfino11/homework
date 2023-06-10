@@ -14,6 +14,7 @@ public class BackgroundColorController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         m_MaxHealth = m_Player.GetMaxHealth();
         TryGetComponent<SpriteRenderer>(out m_BackgroundSpriteRenderer);
         TryGetComponent<SpriteShapeRenderer>(out m_BackgroundSpriteShapeRenderer);
