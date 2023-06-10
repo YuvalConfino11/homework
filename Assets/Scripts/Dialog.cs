@@ -30,7 +30,7 @@ public class Dialog : MonoBehaviour
             if (!m_DialogPanel.activeInHierarchy)
             {
                 m_DialogPanel.SetActive(true);
-                //Time.timeScale = 0;
+                Time.timeScale = 0;
                 StartCoroutine(Typing());
             }
             else
@@ -53,7 +53,7 @@ public class Dialog : MonoBehaviour
         foreach(char letter in m_Dialog[m_index].ToCharArray())
         {
             m_DialogText.text += letter;
-            yield return new WaitForSeconds(m_DialogSpeed);
+            yield return new WaitForSecondsRealtime(m_DialogSpeed);
         }
     }
 
@@ -74,7 +74,7 @@ public class Dialog : MonoBehaviour
             m_DialogText.text = "";
             m_index = 0;
 
-            //Time.timeScale = 1;
+            Time.timeScale = 1;
         }
     }
 }
