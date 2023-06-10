@@ -254,7 +254,6 @@ namespace Mobs
                 if (m_MonsterGrowled == false)
                 {
                     //AudioManager.Instance.PlaySFX(i_audio);
-                    Debug.Log("Roar");
                     m_MonsterGrowled = true;
                 }
                 else
