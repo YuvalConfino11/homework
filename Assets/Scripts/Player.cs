@@ -170,6 +170,7 @@ public class Player : MonoBehaviour
         {
             m_FeetBoxCollider2D.enabled = true;
         }
+      
         
     }
 
@@ -223,6 +224,11 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(Invicible());
         }
+        if (i_Col.gameObject.CompareTag("Change Scene Wall"))
+        {
+          
+            SceneManager.LoadScene("Map");
+        }
 
     }
 
@@ -244,6 +250,7 @@ public class Player : MonoBehaviour
     {
         m_IsFacingRight = !m_IsFacingRight;
         transform.Rotate(0f, 180f, 0f);
+        m_ImaginaryFriend.transform.Rotate(0f, 180f, 0f);
     }
    
     private void jump()
