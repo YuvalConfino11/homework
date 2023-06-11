@@ -59091,6 +59091,14 @@ PrefabInstance:
       propertyPath: m_DialogPanel
       value: 
       objectReference: {fileID: 1472288887}
+    - target: {fileID: 4114893504670288933, guid: 4f22a52d9cbc1c0438c8f18d06708301, type: 3}
+      propertyPath: m_Dialog.Array.data[0]
+      value: Good, you're up. I was worried.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4114893504670288933, guid: 4f22a52d9cbc1c0438c8f18d06708301, type: 3}
+      propertyPath: m_Dialog.Array.data[1]
+      value: We have to get out of here its not safe to talk now.
+      objectReference: {fileID: 0}
     - target: {fileID: 4114893504670288934, guid: 4f22a52d9cbc1c0438c8f18d06708301, type: 3}
       propertyPath: m_Name
       value: Dialog Trigger
