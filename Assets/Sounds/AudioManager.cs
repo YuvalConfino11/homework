@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
     }
     private void Update()
     {
-        if(m_player.GetCurrentHealth() < 50f && m_checkIfEntered)
+        if (m_player.GetCurrentHealth() < 50f && m_checkIfEntered)
         {
             StartCoroutine(ChangeMusic("Sad ver1"));
             m_checkIfEntered = false;
