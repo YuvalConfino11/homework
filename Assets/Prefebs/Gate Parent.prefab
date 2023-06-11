@@ -127,6 +127,26 @@ PrefabInstance:
       propertyPath: m_OpenGatePos
       value: 
       objectReference: {fileID: 4465306661448634511}
+    - target: {fileID: 5535433213525844088, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_Constraints
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5535433214918902665, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5535433214918902665, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_SortingLayer
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5535433214918902665, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5535433214918902665, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1142286055
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
 --- !u!4 &4465306661846416492 stripped
