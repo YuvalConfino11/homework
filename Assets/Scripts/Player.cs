@@ -431,6 +431,7 @@ public class Player : MonoBehaviour
                     break;
                 case "Key":
                     m_PlayerGotKey = true;
+                    AudioManager.Instance.PlaySFX("Angel");
                     break;
             }
             Destroy(objectivesInRadius.gameObject, 1f);
