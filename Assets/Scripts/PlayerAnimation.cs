@@ -33,4 +33,9 @@ public class PlayerAnimation : MonoBehaviour
     {
         m_Animator.SetTrigger("EndGlide");
     }
+
+    public void SetAttackAnimation(bool i_IsAttacking)
+    {
+        m_Animator.SetBool("IsAttacking", i_IsAttacking);
+    }
 }
