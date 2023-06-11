@@ -8,6 +8,8 @@ public class EnemyProjectiles : MonoBehaviour
     private Player m_Player;
     [SerializeField]
     private float m_ProjForce;
+    [SerializeField]
+    private float m_EnemyProjDamage;
 
     private Rigidbody2D m_Rb;
     // Start is called before the first frame update
@@ -34,6 +36,7 @@ public class EnemyProjectiles : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            collision.gameObject.GetComponent<Player>().getHit(m_EnemyProjDamage);
             Destroy(gameObject);
         }
     }
