@@ -759,6 +759,8 @@ MonoBehaviour:
   m_CastPosition: {fileID: 4421562829511533466}
   m_MobAnimation: {fileID: 8881888758399582304}
   m_GroundCastDistance: 32.5
+  m_MonsterGrowled: 0
+  m_monsterAudio: Monster1
 --- !u!114 &4630492852500563315
 MonoBehaviour:
   m_ObjectHideFlags: 0

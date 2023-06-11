@@ -65,9 +65,16 @@ public class Player : MonoBehaviour
     [SerializeField]
     private bool m_movingEnabled = true;
     [SerializeField]
-    private bool m_IsKnockedBack;
+    private Animator m_HealAnimator;
+    [SerializeField]
+    private Animator m_ExplosionAnimator;
+    [SerializeField]
+    private float m_HealAnimatorCooldown = 0.5f;
+    [SerializeField]
+    private float m_ExplosionAnimatorCooldown = 0.8f;
     [SerializeField]
     private Light2D m_PlayerLight;
+    
 
     private float m_LastMovingDirection = 1f;
     private float m_LastArrowKeyPressTime;
@@ -123,10 +130,14 @@ public class Player : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftCommand) || Input.GetKeyUp(KeyCode.LeftAlt))
         {
             explosion();
+            m_ExplosionAnimator.SetBool("IsExplosionPulseActive",true);
+            StartCoroutine(AnimatorCooldown("IsExplosionPulseActive", m_ExplosionAnimator, m_ExplosionAnimatorCooldown));
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
             heal();
+            m_HealAnimator.SetBool("IsHealPulseActive",true);
+            StartCoroutine(AnimatorCooldown("IsHealPulseActive", m_HealAnimator, m_HealAnimatorCooldown));
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {
@@ -315,8 +326,6 @@ public class Player : MonoBehaviour
 
     public IEnumerator Knockback(float i_KnockbackDuration , float i_KnockbackPower , Transform i_ObjectTransform)
     {
-        m_IsKnockedBack = true;
-     
         float timer = 0;
         m_movingEnabled = false;
         StartCoroutine(MovmentDisabled());
@@ -327,8 +336,7 @@ public class Player : MonoBehaviour
             Vector2 dir = new Vector2(i_ObjectTransform.transform.position.x - transform.position.x,0);
             m_RigidBody.AddForce(-dir * i_KnockbackPower);
         }
-      
-        m_IsKnockedBack = false;
+        
         yield return 0;
     }
 
@@ -436,6 +444,7 @@ public class Player : MonoBehaviour
                     break;
                 case "Key":
                     m_PlayerGotKey = true;
+                    AudioManager.Instance.PlaySFX("Angel");
                     break;
             }
             Destroy(objectivesInRadius.gameObject, 1f);
@@ -510,6 +519,11 @@ public class Player : MonoBehaviour
     {
         i_Skill.SetIsUnlocked(false);
     }
-   
+
+    public IEnumerator AnimatorCooldown(string i_AnimationsBool, Animator i_Animator, float i_TimeToWait)
+    {
+        yield return new WaitForSeconds(i_TimeToWait);
+        i_Animator.SetBool(i_AnimationsBool,false);
+    }
 
 }
