@@ -20,10 +20,12 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private int m_MaxMobsInArea = 10;
     
-
+    
     private bool m_IsFirstEnter = true;
     private List<GameObject> m_SpwanPointsList;
+    private bool m_IsKillMob = false;
     private int m_MobsCounter = 0;
+    private int m_LastMobsCounter = 0;
     private float m_SpawnTimer = 0f;
 
     private void Start()
@@ -45,19 +47,28 @@ public class SpawnManager : MonoBehaviour
         if (m_IsFirstEnter && m_IsPlayerInRadius)
         {
             Instantiate(randomMob, randomSpawnPointPosition, Quaternion.identity);
+            m_LastMobsCounter = Physics2D.OverlapCircleAll(transform.position, m_SpawnManagerRadius,m_MobsLayerMask).Length;
             m_SpawnTimer = 0f;
             m_IsFirstEnter = false;
+            m_IsKillMob = false;
         }
         else
         {
             if (m_IsPlayerInRadius && m_SpawnTimer >= m_SpawnInterval && m_MobsCounter < m_MaxMobsInArea)
             {
                 Instantiate(randomMob, randomSpawnPointPosition, Quaternion.identity);
+                m_LastMobsCounter = Physics2D.OverlapCircleAll(transform.position, m_SpawnManagerRadius,m_MobsLayerMask).Length;
                 m_SpawnTimer = 0f;
+                m_IsKillMob = false;
             }
         }
         m_SpawnTimer += Time.deltaTime;
         m_MobsCounter = Physics2D.OverlapCircleAll(transform.position, m_SpawnManagerRadius,m_MobsLayerMask).Length;
+        if (m_MobsCounter < m_LastMobsCounter && !m_IsKillMob)
+        {
+            m_SpawnTimer = 0f;
+            m_IsKillMob = true;
+        }
     }
 
     private void OnDrawGizmos()
