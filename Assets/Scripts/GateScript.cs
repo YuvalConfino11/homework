@@ -23,7 +23,6 @@ public class GateScript : MonoBehaviour
         {
             m_SpriteRenderer.sprite = m_NewSprite;
             transform.position = Vector3.MoveTowards(transform.position, m_OpenGatePos.position, m_GateMoveSpeed * Time.deltaTime);
-            AudioManager.Instance.PlaySFX("GateOpen");
         }
     }
     
@@ -35,6 +34,7 @@ public class GateScript : MonoBehaviour
             {
                 Debug.Log("Gate Open");
                 m_PlayerTouchedGate = true;
+                AudioManager.Instance.PlaySFX("GateOpen");
             }
            
         }
