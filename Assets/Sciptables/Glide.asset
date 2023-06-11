@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544dc570ccdb45e4bd3b3219c016a579, type: 3}
   m_Name: Glide
   m_EditorClassIdentifier: 
-  m_GlideFactor: 1.54
+  m_GlideFactor: 1.25
