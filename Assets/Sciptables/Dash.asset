@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Dash
   m_EditorClassIdentifier: 
   m_CooldownTime: 1
-  m_DashDistance: 4
+  m_DashDistance: 4.03
   m_DashTime: 1
