@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2445125519140120947}
   - component: {fileID: -1451915299829254006}
   - component: {fileID: -3799130133420045652}
+  - component: {fileID: -3058354988784747433}
   m_Layer: 12
   m_Name: Enemy Projetile
   m_TagString: Untagged
@@ -138,3 +139,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Player: {fileID: 0}
   m_ProjForce: 40
+  m_EnemyProjDamage: 2
+--- !u!114 &-3058354988784747433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2190364147599891419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6b43bdbc344d40ad0d9e231de24e3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_KnockbackPower: 10
+  m_KnockbackDuration: 0.2
+  m_player: {fileID: 0}
