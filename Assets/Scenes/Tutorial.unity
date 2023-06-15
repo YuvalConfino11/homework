@@ -59022,6 +59022,14 @@ PrefabInstance:
       propertyPath: m_DialogPanel
       value: 
       objectReference: {fileID: 1472288887}
+    - target: {fileID: 4114893504670288933, guid: 4f22a52d9cbc1c0438c8f18d06708301, type: 3}
+      propertyPath: m_Dialog.Array.data[0]
+      value: Good, you're up. I was worried.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4114893504670288933, guid: 4f22a52d9cbc1c0438c8f18d06708301, type: 3}
+      propertyPath: m_Dialog.Array.data[1]
+      value: We have to get out of here its not safe to talk now.
+      objectReference: {fileID: 0}
     - target: {fileID: 4114893504670288934, guid: 4f22a52d9cbc1c0438c8f18d06708301, type: 3}
       propertyPath: m_Name
       value: Dialog Trigger
@@ -59321,6 +59329,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c283b8d7eb83ce841a730a85b4d3f81a, type: 3}
+--- !u!1001 &5535433215454593704
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 426338720}
+    m_Modifications:
+    - target: {fileID: 5535433213525844069, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_Name
+      value: Gate
+      objectReference: {fileID: 0}
+    - target: {fileID: 5535433213525844070, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5535433213525844070, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5535433213525844070, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5535433213525844070, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5535433213525844070, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5535433213525844070, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5535433213525844070, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5535433213525844070, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5535433213525844070, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5535433213525844070, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5535433213525844070, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5535433213525844071, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_player
+      value: 
+      objectReference: {fileID: 1597692399}
+    - target: {fileID: 5535433213525844071, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_OpenGatePos
+      value: 
+      objectReference: {fileID: 1599344173}
+    - target: {fileID: 5535433214918902665, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_SortingLayer
+      value: -7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
 --- !u!4 &5991456418434310329
 Transform:
   m_ObjectHideFlags: 0
