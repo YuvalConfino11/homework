@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float m_GroundRaycastDistance = 10f;
     [SerializeField]
-    private bool m_PlayerGotKey;
+    private bool[] m_PlayerGotKey = new bool[2];
     [SerializeField] 
     private PlayerAnimation m_PlayerAnimation;
     [SerializeField]
@@ -92,6 +92,9 @@ public class Player : MonoBehaviour
         m_ManaPoint = GetMaxMana();
         m_ManaBar.SetMaxMana(GetMaxMana());
         AudioManager.Instance.PlayMusic("Happy ver1");
+
+
+        
     }
 
     void Update()
@@ -442,8 +445,12 @@ public class Player : MonoBehaviour
                     m_EnergyExplosion.GetSkillsStats().SetIsUnlocked(true);
                     m_EnergyExplosion.GetSkillsStats().SetIsAvailable(true);
                     break;
-                case "Key":
-                    m_PlayerGotKey = true;
+                case "Key 0":
+                    m_PlayerGotKey[0] = true;
+                    AudioManager.Instance.PlaySFX("Angel");
+                    break;
+                case "Key 1":
+                    m_PlayerGotKey[1] = true;
                     AudioManager.Instance.PlaySFX("Angel");
                     break;
             }
@@ -507,9 +514,9 @@ public class Player : MonoBehaviour
     {
         return m_MaxManaPoint;
     }
-    public bool PlayerGotKey()
+    public bool PlayerGotKey(int i_KeyNumber)
     {
-        return m_PlayerGotKey;
+        return m_PlayerGotKey[i_KeyNumber];
     }
     public void ResetAbility(AbilityStats i_Ability)
     {
