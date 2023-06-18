@@ -37,6 +37,7 @@ public class EnemyProjectiles : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<Player>().getHit(m_EnemyProjDamage);
+            StartCoroutine(m_Player.TimeItsRed(0.2f, 0.2f));
             Destroy(gameObject);
         }
     }

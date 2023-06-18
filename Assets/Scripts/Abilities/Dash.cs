@@ -14,6 +14,7 @@ namespace Abilities
         [SerializeField]
         public float m_DashTime = 1f;
         private readonly AbilityStats r_AbilityStats;
+        public bool isUnlocked;
         
         public Dash()
         {
