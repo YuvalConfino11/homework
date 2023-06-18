@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class KnockbackScript : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class KnockbackScript : MonoBehaviour
     private float m_KnockbackDuration = 1;
     [SerializeField]
     private Player m_player;
+    
 
     private void Awake()
     {
@@ -26,7 +28,13 @@ public class KnockbackScript : MonoBehaviour
         {
            // AudioManager.Instance.PlaySFX("")
             StartCoroutine(m_player.Knockback(m_KnockbackDuration , m_KnockbackPower , transform));
+            m_player.GetHurtFeedback(0.2f);
+            StartCoroutine(m_player.TimeItsRed(0.2f , 0.2f));
+
+
         }
     }
+   
+   
 
 }

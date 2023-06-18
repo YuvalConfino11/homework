@@ -7,6 +7,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using DG.Tweening;
+
 
 public class Player : MonoBehaviour
 {
@@ -74,7 +77,10 @@ public class Player : MonoBehaviour
     private float m_ExplosionAnimatorCooldown = 0.8f;
     [SerializeField]
     private Light2D m_PlayerLight;
-    
+    [SerializeField]
+    private Image m_HitScreen;
+
+
 
     private float m_LastMovingDirection = 1f;
     private float m_LastArrowKeyPressTime;
@@ -92,6 +98,7 @@ public class Player : MonoBehaviour
         m_ManaPoint = GetMaxMana();
         m_ManaBar.SetMaxMana(GetMaxMana());
         AudioManager.Instance.PlayMusic("Happy ver1");
+        m_HitScreen.gameObject.SetActive(false);
 
 
         
@@ -531,6 +538,20 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(i_TimeToWait);
         i_Animator.SetBool(i_AnimationsBool,false);
+    }
+    public void GetHurtFeedback(float i_Time)
+    {
+        m_HitScreen.gameObject.SetActive(true);
+        m_HitScreen.DOFade(0.5f, i_Time);
+
+    }
+    public IEnumerator TimeItsRed(float i_TimeItsRed, float i_TimeFadeOut)
+    {
+        yield return new WaitForSeconds(i_TimeItsRed);
+        m_HitScreen.DOFade(0f, i_TimeFadeOut);
+        yield return new WaitForSeconds(i_TimeFadeOut);
+        m_HitScreen.gameObject.SetActive(false);
+
     }
 
 }
