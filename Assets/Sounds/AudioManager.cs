@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
     bool m_checkIfEntered = true;
     private void Awake()
     {
+        m_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         if(Instance == null)
         {
             Instance = this;

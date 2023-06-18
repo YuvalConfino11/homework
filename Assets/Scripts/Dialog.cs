@@ -59,7 +59,6 @@ public class Dialog : MonoBehaviour
 
     public void NextLine()
     {
-        Debug.Log(m_index);
         if(m_index < m_Dialog.Length - 1)
         {
             m_index++;
@@ -67,9 +66,7 @@ public class Dialog : MonoBehaviour
             StartCoroutine(Typing());
         }
         else
-        {
-            Debug.Log("false");
-           
+        {  
             m_DialogPanel.SetActive(false);
             m_DialogText.text = "";
             m_index = 0;
