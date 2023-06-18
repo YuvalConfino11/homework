@@ -313,6 +313,7 @@ public class Player : MonoBehaviour
         {
             m_movingEnabled = false;
             StartCoroutine(MovmentDisabled());
+            StartCoroutine(Invicible());
             m_Dash.GetAbilityStats().SetIsAvailable(false);
             float dashTimer = 0;
             float dashDuration = m_Dash.DashTime;
