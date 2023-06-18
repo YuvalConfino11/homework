@@ -56,6 +56,7 @@ public class SaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
        PlayerPrefs.SetInt("DashAvailability", boolToInt(m_Dash.GetAbilityStats().GetIsUnlocked()));
        PlayerPrefs.SetInt("GlideAvailability", boolToInt(m_Glide.GetAbilityStats().GetIsUnlocked()));
        PlayerPrefs.SetInt("DoubleJumpAvailability", boolToInt(m_DoubleJump.GetAbilityStats().GetIsUnlocked()));
@@ -66,10 +67,6 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.Save();
 
 
-        if (m_DoubleJump.GetAbilityStats().GetIsAvailable())
-        {
-            Debug.Log("Dash");
-        }
 
         if (m_GateOpened)
         {
