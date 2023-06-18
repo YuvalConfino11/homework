@@ -140,14 +140,10 @@ public class Player : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftCommand) || Input.GetKeyUp(KeyCode.LeftAlt))
         {
             explosion();
-            m_ExplosionAnimator.SetBool("IsExplosionPulseActive",true);
-            StartCoroutine(AnimatorCooldown("IsExplosionPulseActive", m_ExplosionAnimator, m_ExplosionAnimatorCooldown));
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
             heal();
-            m_HealAnimator.SetBool("IsHealPulseActive",true);
-            StartCoroutine(AnimatorCooldown("IsHealPulseActive", m_HealAnimator, m_HealAnimatorCooldown));
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {
@@ -398,6 +394,8 @@ public class Player : MonoBehaviour
                 
             }
             SetMana(-m_EnergyExplosion.getExplosionManaPoints());
+            m_ExplosionAnimator.SetBool("IsExplosionPulseActive",true);
+            StartCoroutine(AnimatorCooldown("IsExplosionPulseActive", m_ExplosionAnimator, m_ExplosionAnimatorCooldown));
         }
     }
 
@@ -407,6 +405,8 @@ public class Player : MonoBehaviour
         {
             m_CurrentHealthPoint += m_Heal.GetHealAmount();
             SetMana(-m_Heal.GetManaPointsCost());
+            m_HealAnimator.SetBool("IsHealPulseActive",true);
+            StartCoroutine(AnimatorCooldown("IsHealPulseActive", m_HealAnimator, m_HealAnimatorCooldown));
         }
     }
 
