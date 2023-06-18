@@ -428,6 +428,7 @@ public class Player : MonoBehaviour
                 case "EnergyExplosion":
                     m_EnergyExplosion.GetSkillsStats().SetIsUnlocked(true);
                     m_EnergyExplosion.GetSkillsStats().SetIsAvailable(true);
+                    AudioManager.Instance.PlaySFX("Explosion");
                     break;
                 case "Key":
                     m_PlayerGotKey = true;

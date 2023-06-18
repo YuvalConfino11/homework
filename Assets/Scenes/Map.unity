@@ -10368,85 +10368,9 @@ PrefabInstance:
       propertyPath: m_player
       value: 
       objectReference: {fileID: 1597692399}
-    - target: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
-      propertyPath: defualtVol
-      value: 0.327
-      objectReference: {fileID: 0}
-    - target: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
-      propertyPath: transitionTime
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
-      propertyPath: sfxSounds.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
-      propertyPath: sfxSounds.Array.data[2].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: c8a85dd40ee14fe4d99f1fdb047b435b, type: 3}
-    - target: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
-      propertyPath: sfxSounds.Array.data[2].name
-      value: Angel
-      objectReference: {fileID: 0}
-    - target: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
-      propertyPath: sfxSounds.Array.data[3].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 7511655b6d0277c4e85b86cf9ac35893, type: 3}
-    - target: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
-      propertyPath: sfxSounds.Array.data[3].name
-      value: Ough
-      objectReference: {fileID: 0}
-    - target: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
-      propertyPath: sfxSounds.Array.data[4].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 1d6e988ac642d7941bcfd67cbc8a2110, type: 3}
-    - target: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
-      propertyPath: sfxSounds.Array.data[4].name
-      value: Explosion
-      objectReference: {fileID: 0}
-    - target: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
-      propertyPath: sfxSounds.Array.data[5].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: bf9ea13e67f93d04da71f729d0fb6274, type: 3}
-    - target: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
-      propertyPath: sfxSounds.Array.data[5].name
-      value: GateOpen
-      objectReference: {fileID: 0}
-    - target: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
-      propertyPath: sfxSounds.Array.data[6].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 2a58c8fae78c025419b12f685fd2c4a9, type: 3}
-    - target: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
-      propertyPath: sfxSounds.Array.data[6].name
-      value: Monster1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
-      propertyPath: sfxSounds.Array.data[7].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: c15f93bb1567843448c30bd5573bebe1, type: 3}
-    - target: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
-      propertyPath: sfxSounds.Array.data[7].name
-      value: LittleMonster
-      objectReference: {fileID: 0}
-    - target: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
-      propertyPath: sfxSounds.Array.data[8].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: b31f7062b1c695843aa7e7f3fe9d3fd0, type: 3}
-    - target: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
-      propertyPath: sfxSounds.Array.data[8].name
-      value: BlobMonster
-      objectReference: {fileID: 0}
     - target: {fileID: 6855977407642929167, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
       propertyPath: m_Name
       value: Audio Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 6855977408045517330, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
-      propertyPath: m_Volume
-      value: 0.327
-      objectReference: {fileID: 0}
-    - target: {fileID: 6855977408424616261, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
-      propertyPath: m_Volume
-      value: 0.737
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
