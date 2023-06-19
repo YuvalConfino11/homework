@@ -81,6 +81,8 @@ public class Player : MonoBehaviour
     private Light2D m_PlayerLight;
     [SerializeField]
     private Image m_HitScreen;
+    [SerializeField]
+    private GameObject m_ProjectileStartingPosition;
 
 
 
@@ -357,7 +359,7 @@ public class Player : MonoBehaviour
         if (m_IsAbleToShot)
         {
             m_IsAbleToShot = false;
-            GameObject bullet = Instantiate(m_Bullet, transform.position, transform.rotation);
+            GameObject bullet = Instantiate(m_Bullet, m_ProjectileStartingPosition.transform.position, transform.rotation);
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             m_PlayerAnimation.SetAttackAnimation(true);
             bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * (m_LastMovingDirection * bulletScript.GetSpeed());
