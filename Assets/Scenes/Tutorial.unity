@@ -9270,6 +9270,10 @@ PrefabInstance:
       propertyPath: m_DefaultGravityScale
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 3070312050616550591, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
+      propertyPath: m_PlayerGotKey.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5279076933203895377, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
       propertyPath: m_RootOrder
       value: 3

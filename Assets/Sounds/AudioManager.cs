@@ -14,7 +14,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
 
     public Sound[] musicSounds, sfxSounds;
-    public AudioSource musicSource, sfxSource, endSource;
+    public AudioSource musicSource, sfxSource;
 
     bool m_checkIfEntered = true;
     private void Awake()
@@ -79,7 +79,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayEnd(string name)
+    /*public void PlayEnd(string name)
     {
         Sound s = Array.Find(musicSounds, x => x.name == name);
 
@@ -92,7 +92,7 @@ public class AudioManager : MonoBehaviour
         {
             endSource.PlayOneShot(s.clip);
         }
-    }
+    }*/
 
     private IEnumerator ChangeMusic(string audioNamePlaying)
     {
