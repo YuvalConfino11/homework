@@ -136,6 +136,7 @@ public class Player : MonoBehaviour
             explosion();
             m_ExplosionAnimator.SetBool("IsExplosionPulseActive",true);
             StartCoroutine(AnimatorCooldown("IsExplosionPulseActive", m_ExplosionAnimator, m_ExplosionAnimatorCooldown));
+            AudioManager.Instance.PlaySFX("Explosion");
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
@@ -371,6 +372,7 @@ public class Player : MonoBehaviour
             float explosionRadius = m_EnergyExplosion.GetExplosionRadius();
             float explosionForce = m_EnergyExplosion.GetExplosionForce();
             Vector3 imaginaryFriendPosition = m_ImaginaryFriend.transform.position;
+            AudioManager.Instance.PlaySFX("Explosion");
         
             m_MobsInExplosionRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius,m_MobLayerMask);
             foreach (Collider2D mob in m_MobsInExplosionRadius) {
@@ -401,6 +403,7 @@ public class Player : MonoBehaviour
         {
             m_CurrentHealthPoint += m_Heal.GetHealAmount();
             SetMana(-m_Heal.GetManaPointsCost());
+            AudioManager.Instance.PlaySFX("Angel");
         }
     }
 
