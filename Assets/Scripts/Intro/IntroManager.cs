@@ -55,7 +55,7 @@ namespace Sequences {
             m_TextIndex++;
             if(m_TextIndex == m_Sequences.m_IntroSequences.Length)
             {
-                SceneManager.LoadScene("Map");
+                SceneManager.LoadScene("Tutorial");
             }
         }
     }

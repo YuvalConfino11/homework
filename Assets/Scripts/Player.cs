@@ -97,7 +97,10 @@ public class Player : MonoBehaviour
 
         m_ManaPoint = GetMaxMana();
         m_ManaBar.SetMaxMana(GetMaxMana());
-        AudioManager.Instance.PlayMusic("Happy ver1");
+        if(AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayMusic("Happy ver1");
+        }
         m_HitScreen.gameObject.SetActive(false);
 
 
@@ -507,6 +510,7 @@ public class Player : MonoBehaviour
     {
         return m_CurrentHealthPoint;
     }
+
 
     public float GetMana()
     {

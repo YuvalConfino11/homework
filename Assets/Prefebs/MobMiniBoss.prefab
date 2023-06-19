@@ -775,8 +775,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MobStats: {fileID: 3732124924582079859}
   m_ManaBall: {fileID: 7015440925964673975, guid: 1bef5d4fe15565c469e49d6663a7b924, type: 3}
+  m_HPBall: {fileID: 4249172948917393650, guid: 00c72379269c0f1478b0384b689bab2a, type: 3}
   m_CanHitPlayer: 0
   m_MobHitCooldown: 0.75
+  m_BallFallRatio: 0.2
 --- !u!114 &3732124924582079859
 MonoBehaviour:
   m_ObjectHideFlags: 0

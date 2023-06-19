@@ -10,7 +10,7 @@ public class HPBall : MonoBehaviour
     {
         if (i_Collision.gameObject.CompareTag("Player"))
         {
-            i_Collision.gameObject.GetComponent<Player>().SetHp(m_HPPoints);
+            i_Collision.gameObject.GetComponent<Player>().getHit(-m_HPPoints);
             Destroy(gameObject);
         }
     }

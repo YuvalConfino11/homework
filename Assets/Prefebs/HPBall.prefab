@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8534392787776206660}
   - component: {fileID: 8116454410606858427}
   - component: {fileID: 9154579803059086315}
-  - component: {fileID: -1918286698261297467}
+  - component: {fileID: 2596363787395665934}
   m_Layer: 0
   m_Name: HPBall
   m_TagString: Untagged
@@ -124,7 +124,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.25
---- !u!114 &-1918286698261297467
+--- !u!114 &2596363787395665934
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4249172948917393650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dde06f0eccfcc6498fce07f64641a89, type: 3}
+  m_Script: {fileID: 11500000, guid: 83298b0160d150b45b2cfa7818a0df7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HPPoints: 5
+  m_ManaPoints: 10
