@@ -68,6 +68,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private bool m_movingEnabled = true;
     [SerializeField]
+    private float m_movingdisabledTime = 0.8f;
+    [SerializeField]
     private Animator m_HealAnimator;
     [SerializeField]
     private Animator m_ExplosionAnimator;
@@ -102,9 +104,9 @@ public class Player : MonoBehaviour
             AudioManager.Instance.PlayMusic("Happy ver1");
         }
         m_HitScreen.gameObject.SetActive(false);
+        StartCoroutine(MovmentDisabled(3f));
 
 
-        
     }
 
     void Update()
@@ -314,8 +316,8 @@ public class Player : MonoBehaviour
     {
         if (m_Dash.GetAbilityStats().GetIsAvailable() && getIsGrounded())
         {
-            m_movingEnabled = false;
-            StartCoroutine(MovmentDisabled());
+           
+            StartCoroutine(MovmentDisabled(m_movingdisabledTime));
             StartCoroutine(Invicible());
             m_Dash.GetAbilityStats().SetIsAvailable(false);
             float dashTimer = 0;
@@ -338,7 +340,7 @@ public class Player : MonoBehaviour
     {
         float timer = 0;
         m_movingEnabled = false;
-        StartCoroutine(MovmentDisabled());
+        StartCoroutine(MovmentDisabled(m_movingdisabledTime));
 
         while(i_KnockbackDuration > timer)
         {
@@ -456,11 +458,11 @@ public class Player : MonoBehaviour
                     m_EnergyExplosion.GetSkillsStats().SetIsUnlocked(true);
                     m_EnergyExplosion.GetSkillsStats().SetIsAvailable(true);
                     break;
-                case "Key 0":
+                case "Key0":
                     m_PlayerGotKey[0] = true;
                     AudioManager.Instance.PlaySFX("Angel");
                     break;
-                case "Key 1":
+                case "Key1":
                     m_PlayerGotKey[1] = true;
                     AudioManager.Instance.PlaySFX("Angel");
                     break;
@@ -489,9 +491,10 @@ public class Player : MonoBehaviour
 
         m_IsAbleToShot = true;
     }
-    private IEnumerator MovmentDisabled()
+    public IEnumerator MovmentDisabled(float i_time)
     {
-        yield return new WaitForSeconds(0.8f);
+        m_movingEnabled = false;
+        yield return new WaitForSeconds(i_time);
 
         m_movingEnabled = true;
     }
@@ -515,6 +518,11 @@ public class Player : MonoBehaviour
     public float GetMana()
     {
         return m_ManaPoint;
+    }
+    public void SetHp(float i_Hp)
+    {
+        m_CurrentHealthPoint += i_Hp;
+        m_CurrentHealthPoint = Math.Clamp(m_CurrentHealthPoint, 0f, 100f);
     }
     public void SetMana(float i_Mana)
     {
