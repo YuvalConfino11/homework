@@ -15,6 +15,7 @@ public class Crushers : MonoBehaviour
     [SerializeField]
     private ActivateCrushers m_Activate;
 
+
     private bool m_Crush;
    
     // Update is called once per frame
@@ -39,4 +40,7 @@ public class Crushers : MonoBehaviour
             }
         
     }
+
+    
+   
 }
