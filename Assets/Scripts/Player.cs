@@ -383,6 +383,7 @@ public class Player : MonoBehaviour
             float explosionRadius = m_EnergyExplosion.GetExplosionRadius();
             float explosionForce = m_EnergyExplosion.GetExplosionForce();
             Vector3 imaginaryFriendPosition = m_ImaginaryFriend.transform.position;
+            AudioManager.Instance.PlaySFX("Explosion");
         
             m_MobsInExplosionRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius,m_MobLayerMask);
             foreach (Collider2D mob in m_MobsInExplosionRadius) {
@@ -415,6 +416,7 @@ public class Player : MonoBehaviour
         {
             m_CurrentHealthPoint += m_Heal.GetHealAmount();
             SetMana(-m_Heal.GetManaPointsCost());
+            AudioManager.Instance.PlaySFX("Angel");
             m_HealAnimator.SetBool("IsHealPulseActive",true);
             StartCoroutine(AnimatorCooldown("IsHealPulseActive", m_HealAnimator, m_HealAnimatorCooldown));
         }
@@ -461,6 +463,7 @@ public class Player : MonoBehaviour
                 case "EnergyExplosion":
                     m_EnergyExplosion.GetSkillsStats().SetIsUnlocked(true);
                     m_EnergyExplosion.GetSkillsStats().SetIsAvailable(true);
+                    AudioManager.Instance.PlaySFX("Explosion");
                     break;
                 case "Key0":
                     m_PlayerGotKey[0] = true;
