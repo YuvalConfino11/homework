@@ -83,6 +83,8 @@ public class Player : MonoBehaviour
     private Image m_HitScreen;
     [SerializeField]
     private GameObject m_ProjectileStartingPosition;
+    [SerializeField]
+    private Crushers m_Crusher;
 
 
 
