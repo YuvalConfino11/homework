@@ -321,7 +321,7 @@ public class Player : MonoBehaviour
         {
            
             StartCoroutine(MovmentDisabled(m_movingdisabledTime));
-            StartCoroutine(invicible());
+            StartCoroutine(invicible(0.5f));
             m_Dash.GetAbilityStats().SetIsAvailable(false);
             float dashTimer = 0;
             float dashDuration = m_Dash.DashTime;
@@ -481,10 +481,11 @@ public class Player : MonoBehaviour
             
         }
     }
-    private IEnumerator invicible()
+    private IEnumerator invicible(float i_InvicibleTime = 1f)
+
     {
         m_BoxCollider.enabled = false;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(i_InvicibleTime);
         m_BoxCollider.enabled = true;
     }
 
