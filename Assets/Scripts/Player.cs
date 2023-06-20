@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float m_GroundRaycastDistance = 10f;
     [SerializeField]
-    private bool[] m_PlayerGotKey = new bool[2];
+    private bool[] m_PlayerGotKey = new bool[3];
     [SerializeField] 
     private PlayerAnimation m_PlayerAnimation;
     [SerializeField]
@@ -466,6 +466,10 @@ public class Player : MonoBehaviour
                     break;
                 case "Key1":
                     m_PlayerGotKey[1] = true;
+                    AudioManager.Instance.PlaySFX("Angel");
+                    break;
+                case "Key2":
+                    m_PlayerGotKey[2] = true;
                     AudioManager.Instance.PlaySFX("Angel");
                     break;
             }
