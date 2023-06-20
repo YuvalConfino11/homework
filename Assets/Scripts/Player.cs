@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject m_ProjectileStartingPosition;
     [SerializeField]
-    private Crushers m_Crusher;
+    private BoxCollider2D m_BoxCollider;
 
 
 
@@ -92,7 +92,6 @@ public class Player : MonoBehaviour
     private float m_LastArrowKeyPressTime;
     private RaycastHit2D  m_RaycastHit;
     private Rigidbody2D m_RigidBody;
-    private BoxCollider2D m_BoxCollider;
     private Collider2D[] m_MobsInExplosionRadius;
     private bool m_IsFacingRight = true;
    
@@ -252,7 +251,7 @@ public class Player : MonoBehaviour
         }
         if (i_Col.gameObject.CompareTag("Spike"))
         {
-            StartCoroutine(Invicible());
+            StartCoroutine(invicible());
         }
         if (i_Col.gameObject.CompareTag("Change Scene Wall"))
         {
@@ -322,7 +321,7 @@ public class Player : MonoBehaviour
         {
            
             StartCoroutine(MovmentDisabled(m_movingdisabledTime));
-            StartCoroutine(Invicible());
+            StartCoroutine(invicible());
             m_Dash.GetAbilityStats().SetIsAvailable(false);
             float dashTimer = 0;
             float dashDuration = m_Dash.DashTime;
@@ -482,12 +481,11 @@ public class Player : MonoBehaviour
             
         }
     }
-    private IEnumerator Invicible()
+    private IEnumerator invicible()
     {
         m_BoxCollider.enabled = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         m_BoxCollider.enabled = true;
-
     }
 
     private IEnumerator abilityCooldown(AbilityStats i_Ability, float i_CooldownTime)
