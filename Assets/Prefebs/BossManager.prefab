@@ -110,11 +110,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3761913563243012210, guid: 5c23b25f2a80640ccad85a25f0c0923d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 211.9
+      value: 211
       objectReference: {fileID: 0}
     - target: {fileID: 3761913563243012210, guid: 5c23b25f2a80640ccad85a25f0c0923d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -16.8
+      value: -80
       objectReference: {fileID: 0}
     - target: {fileID: 3761913563243012210, guid: 5c23b25f2a80640ccad85a25f0c0923d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -168,7 +168,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Ground
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3152385544019444965, guid: 5c23b25f2a80640ccad85a25f0c0923d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5c23b25f2a80640ccad85a25f0c0923d, type: 3}
 --- !u!4 &2528571473260291009 stripped
 Transform:
@@ -196,11 +197,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3761913563243012210, guid: 5c23b25f2a80640ccad85a25f0c0923d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -294.5
+      value: -301
       objectReference: {fileID: 0}
     - target: {fileID: 3761913563243012210, guid: 5c23b25f2a80640ccad85a25f0c0923d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -23.6
+      value: -85
       objectReference: {fileID: 0}
     - target: {fileID: 3761913563243012210, guid: 5c23b25f2a80640ccad85a25f0c0923d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -254,7 +255,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Ground
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3152385544019444965, guid: 5c23b25f2a80640ccad85a25f0c0923d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5c23b25f2a80640ccad85a25f0c0923d, type: 3}
 --- !u!4 &3426249538362921704 stripped
 Transform:
