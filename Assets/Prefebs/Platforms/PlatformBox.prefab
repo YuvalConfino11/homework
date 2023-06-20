@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6232372929836817182}
   - component: {fileID: 7656151969428311295}
   - component: {fileID: 2711126108533030386}
+  - component: {fileID: 2535363585158630434}
   m_Layer: 16
   m_Name: foreground (2)
   m_TagString: Platform
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4959153799896962530}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3761913563243012210}
@@ -93,8 +94,8 @@ SpriteShapeRenderer:
   - {fileID: -450873449423121466, guid: a9039dd5570910f4da903c4dd164a44b, type: 3}
   - {fileID: -7027585254569617934, guid: a9039dd5570910f4da903c4dd164a44b, type: 3}
   m_LocalAABB:
-    m_Center: {x: 173.04749, y: -40.878708, z: 0}
-    m_Extent: {x: 38.64878, y: 28.541435, z: 0}
+    m_Center: {x: -0.29002, y: -19.280174, z: 0}
+    m_Extent: {x: 41.843254, y: 49.61988, z: 0}
 --- !u!114 &7656151969428311295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,9 +111,9 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: 144.3701, y: -68.18158, z: 0}
-      leftTangent: {x: 1.895935, y: 0.07072449, z: 0}
-      rightTangent: {x: -10.488281, y: -0.39102936, z: 0}
+    - position: {x: -35.885193, y: -67.71588, z: 0}
+      leftTangent: {x: 1.895752, y: 0.07058716, z: 0}
+      rightTangent: {x: -10.488281, y: -0.3911438, z: 0}
       mode: 1
       height: 1
       bevelCutoff: 0
@@ -120,7 +121,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 135.70451, y: -14.678459, z: 0}
+    - position: {x: -37.39714, y: 26.885437, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -130,9 +131,9 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 210.52048, y: -15.050882, z: 0}
-      leftTangent: {x: 1.8811035, y: 2.6331644, z: 0}
-      rightTangent: {x: -3.0345764, y: -5.453377, z: 0}
+    - position: {x: 39.601166, y: 27.948395, z: 0}
+      leftTangent: {x: 1.8811035, y: 2.632965, z: 0}
+      rightTangent: {x: -3.03553, y: -5.453491, z: 0}
       mode: 2
       height: 1
       bevelCutoff: 0
@@ -140,9 +141,9 @@ MonoBehaviour:
       spriteIndex: 2
       corner: 1
       m_CornerMode: 1
-    - position: {x: 201.052, y: -68.196915, z: 0}
-      leftTangent: {x: 7.258957, y: 0.16321564, z: 0}
-      rightTangent: {x: -5.365921, y: -0.12082672, z: 0}
+    - position: {x: 37.25274, y: -65.12497, z: 0}
+      leftTangent: {x: 7.25898, y: 0.16323853, z: 0}
+      rightTangent: {x: -5.366028, y: -0.12084961, z: 0}
       mode: 1
       height: 1
       bevelCutoff: 0
@@ -179,6 +180,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Player: {fileID: 0}
+--- !u!61 &2535363585158630434
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4959153799896962530}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -18.383896}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 75.14749, y: 94.02377}
+  m_EdgeRadius: 0
 --- !u!1 &8819233343686080131
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +229,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8819233343686080131}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1647.1, y: -183.7, z: 44.601463}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
