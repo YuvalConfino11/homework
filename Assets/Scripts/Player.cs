@@ -7,6 +7,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using DG.Tweening;
+
 
 public class Player : MonoBehaviour
 {
@@ -57,13 +60,15 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float m_GroundRaycastDistance = 10f;
     [SerializeField]
-    private bool m_PlayerGotKey;
+    private bool[] m_PlayerGotKey = new bool[3];
     [SerializeField] 
     private PlayerAnimation m_PlayerAnimation;
     [SerializeField]
     private BoxCollider2D m_FeetBoxCollider2D;
     [SerializeField]
     private bool m_movingEnabled = true;
+    [SerializeField]
+    private float m_movingdisabledTime = 0.8f;
     [SerializeField]
     private Animator m_HealAnimator;
     [SerializeField]
@@ -74,7 +79,12 @@ public class Player : MonoBehaviour
     private float m_ExplosionAnimatorCooldown = 0.8f;
     [SerializeField]
     private Light2D m_PlayerLight;
-    
+    [SerializeField]
+    private Image m_HitScreen;
+    [SerializeField]
+    private GameObject m_ProjectileStartingPosition;
+
+
 
     private float m_LastMovingDirection = 1f;
     private float m_LastArrowKeyPressTime;
@@ -91,11 +101,14 @@ public class Player : MonoBehaviour
 
         m_ManaPoint = GetMaxMana();
         m_ManaBar.SetMaxMana(GetMaxMana());
-        if (AudioManager.Instance != null)
+        if(AudioManager.Instance != null)
         {
             AudioManager.Instance.PlayMusic("Happy ver1");
         }
-        
+        m_HitScreen.gameObject.SetActive(false);
+        StartCoroutine(MovmentDisabled(3f));
+
+
     }
 
     void Update()
@@ -134,15 +147,10 @@ public class Player : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftCommand) || Input.GetKeyUp(KeyCode.LeftAlt))
         {
             explosion();
-            m_ExplosionAnimator.SetBool("IsExplosionPulseActive",true);
-            StartCoroutine(AnimatorCooldown("IsExplosionPulseActive", m_ExplosionAnimator, m_ExplosionAnimatorCooldown));
-            AudioManager.Instance.PlaySFX("Explosion");
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
             heal();
-            m_HealAnimator.SetBool("IsHealPulseActive",true);
-            StartCoroutine(AnimatorCooldown("IsHealPulseActive", m_HealAnimator, m_HealAnimatorCooldown));
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {
@@ -310,8 +318,9 @@ public class Player : MonoBehaviour
     {
         if (m_Dash.GetAbilityStats().GetIsAvailable() && getIsGrounded())
         {
-            m_movingEnabled = false;
-            StartCoroutine(MovmentDisabled());
+           
+            StartCoroutine(MovmentDisabled(m_movingdisabledTime));
+            StartCoroutine(Invicible());
             m_Dash.GetAbilityStats().SetIsAvailable(false);
             float dashTimer = 0;
             float dashDuration = m_Dash.DashTime;
@@ -333,7 +342,7 @@ public class Player : MonoBehaviour
     {
         float timer = 0;
         m_movingEnabled = false;
-        StartCoroutine(MovmentDisabled());
+        StartCoroutine(MovmentDisabled(m_movingdisabledTime));
 
         while(i_KnockbackDuration > timer)
         {
@@ -350,7 +359,7 @@ public class Player : MonoBehaviour
         if (m_IsAbleToShot)
         {
             m_IsAbleToShot = false;
-            GameObject bullet = Instantiate(m_Bullet, transform.position, transform.rotation);
+            GameObject bullet = Instantiate(m_Bullet, m_ProjectileStartingPosition.transform.position, transform.rotation);
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             m_PlayerAnimation.SetAttackAnimation(true);
             bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * (m_LastMovingDirection * bulletScript.GetSpeed());
@@ -394,6 +403,8 @@ public class Player : MonoBehaviour
                 
             }
             SetMana(-m_EnergyExplosion.getExplosionManaPoints());
+            m_ExplosionAnimator.SetBool("IsExplosionPulseActive",true);
+            StartCoroutine(AnimatorCooldown("IsExplosionPulseActive", m_ExplosionAnimator, m_ExplosionAnimatorCooldown));
         }
     }
 
@@ -404,6 +415,8 @@ public class Player : MonoBehaviour
             m_CurrentHealthPoint += m_Heal.GetHealAmount();
             SetMana(-m_Heal.GetManaPointsCost());
             AudioManager.Instance.PlaySFX("Angel");
+            m_HealAnimator.SetBool("IsHealPulseActive",true);
+            StartCoroutine(AnimatorCooldown("IsHealPulseActive", m_HealAnimator, m_HealAnimatorCooldown));
         }
     }
 
@@ -450,8 +463,16 @@ public class Player : MonoBehaviour
                     m_EnergyExplosion.GetSkillsStats().SetIsAvailable(true);
                     AudioManager.Instance.PlaySFX("Explosion");
                     break;
-                case "Key":
-                    m_PlayerGotKey = true;
+                case "Key0":
+                    m_PlayerGotKey[0] = true;
+                    AudioManager.Instance.PlaySFX("Angel");
+                    break;
+                case "Key1":
+                    m_PlayerGotKey[1] = true;
+                    AudioManager.Instance.PlaySFX("Angel");
+                    break;
+                case "Key2":
+                    m_PlayerGotKey[2] = true;
                     AudioManager.Instance.PlaySFX("Angel");
                     break;
             }
@@ -479,9 +500,10 @@ public class Player : MonoBehaviour
 
         m_IsAbleToShot = true;
     }
-    private IEnumerator MovmentDisabled()
+    public IEnumerator MovmentDisabled(float i_time)
     {
-        yield return new WaitForSeconds(0.8f);
+        m_movingEnabled = false;
+        yield return new WaitForSeconds(i_time);
 
         m_movingEnabled = true;
     }
@@ -501,9 +523,15 @@ public class Player : MonoBehaviour
         return m_CurrentHealthPoint;
     }
 
+
     public float GetMana()
     {
         return m_ManaPoint;
+    }
+    public void SetHp(float i_Hp)
+    {
+        m_CurrentHealthPoint += i_Hp;
+        m_CurrentHealthPoint = Math.Clamp(m_CurrentHealthPoint, 0f, 100f);
     }
     public void SetMana(float i_Mana)
     {
@@ -515,9 +543,9 @@ public class Player : MonoBehaviour
     {
         return m_MaxManaPoint;
     }
-    public bool PlayerGotKey()
+    public bool PlayerGotKey(int i_KeyNumber)
     {
-        return m_PlayerGotKey;
+        return m_PlayerGotKey[i_KeyNumber];
     }
     public void ResetAbility(AbilityStats i_Ability)
     {
@@ -532,6 +560,20 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(i_TimeToWait);
         i_Animator.SetBool(i_AnimationsBool,false);
+    }
+    public void GetHurtFeedback(float i_Time)
+    {
+        m_HitScreen.gameObject.SetActive(true);
+        m_HitScreen.DOFade(0.5f, i_Time);
+
+    }
+    public IEnumerator TimeItsRed(float i_TimeItsRed, float i_TimeFadeOut)
+    {
+        yield return new WaitForSeconds(i_TimeItsRed);
+        m_HitScreen.DOFade(0f, i_TimeFadeOut);
+        yield return new WaitForSeconds(i_TimeFadeOut);
+        m_HitScreen.gameObject.SetActive(false);
+
     }
 
 }

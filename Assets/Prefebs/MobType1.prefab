@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1377311806412294145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1590477970433960440}
+  m_Layer: 0
+  m_Name: ProjectileStartPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1590477970433960440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377311806412294145}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 11.4, y: -4.6, z: 0.17897674}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5345240097684956975}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3889349214791821856
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,7 +334,7 @@ GameObject:
   - component: {fileID: 5345240097684956975}
   - component: {fileID: 5345240097684956968}
   - component: {fileID: 6891677413964781768}
-  - component: {fileID: 4569999283084362231}
+  - component: {fileID: 7860384768033973330}
   - component: {fileID: 7578005702554773261}
   - component: {fileID: 1919526740459900685}
   - component: {fileID: 1240481289709308154}
@@ -331,6 +362,7 @@ Transform:
   - {fileID: 6954831871770799313}
   - {fileID: 3383565395757964255}
   - {fileID: 3110354338442875243}
+  - {fileID: 1590477970433960440}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1687,7 +1719,7 @@ PolygonCollider2D:
       - {x: 1.11, y: 0.29999998}
       - {x: 0.98999995, y: 0.29999998}
       - {x: 0.96999997, y: 0.32}
---- !u!114 &4569999283084362231
+--- !u!114 &7860384768033973330
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1696,7 +1728,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5345240097684956972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41b912f65b8c61d47a7cc41bb7697dc8, type: 3}
+  m_Script: {fileID: 11500000, guid: 29f1d97dcfab8a94180e4d3ebe5fba52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_MobFieldOfViewRadius: 75
@@ -1718,7 +1750,10 @@ MonoBehaviour:
   m_MobAnimation: {fileID: 1240481289709308154}
   m_GroundCastDistance: 10
   m_MonsterGrowled: 0
-  m_monsterAudio: LittleMonster
+  m_EnemyCanShoot: 0
+  m_TimeBetweenProjetiles: 2
+  m_EnemyProj: {fileID: 2190364147599891419, guid: 86d992f121cc4654d8a2b7873b602533, type: 3}
+  m_EnemyProjPos: {fileID: 1590477970433960440}
 --- !u!114 &7578005702554773261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1733,8 +1768,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MobStats: {fileID: 1919526740459900685}
   m_ManaBall: {fileID: 7015440925964673975, guid: 1bef5d4fe15565c469e49d6663a7b924, type: 3}
+  m_HPBall: {fileID: 4249172948917393650, guid: 00c72379269c0f1478b0384b689bab2a, type: 3}
   m_CanHitPlayer: 0
   m_MobHitCooldown: 0.75
+  m_BallFallRatio: 0.2
 --- !u!114 &1919526740459900685
 MonoBehaviour:
   m_ObjectHideFlags: 0
