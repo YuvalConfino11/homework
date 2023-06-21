@@ -83,6 +83,10 @@ public class Player : MonoBehaviour
     private Image m_HitScreen;
     [SerializeField]
     private GameObject m_ProjectileStartingPosition;
+    [SerializeField]
+    private GameObject m_StoneWall;
+    [SerializeField]
+    private float m_DebrisTime;
 
 
 
@@ -385,9 +389,17 @@ public class Player : MonoBehaviour
         
             m_MobsInExplosionRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius,m_MobLayerMask);
             foreach (Collider2D mob in m_MobsInExplosionRadius) {
-                if (mob.CompareTag("Spike"))
+                if (mob.CompareTag("StoneWall"))
                 {
-                    mob.gameObject.GetComponent<Spike>().GetHit(m_EnergyExplosion.GetExplosionDamage());
+                   foreach (Transform child in m_StoneWall.transform)
+                    {
+                        child.transform.GetComponent<Rigidbody2D>().gravityScale=2;
+                        child.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+                        child.gameObject.layer = 21;
+                        child.transform.GetComponent<SpriteRenderer>().sortingLayerName = "Mob";
+                        Fadeout(11f, child.gameObject);
+                    }
+                    Destroy(m_StoneWall, m_DebrisTime);
                 }
                 else
                 {
@@ -461,7 +473,6 @@ public class Player : MonoBehaviour
                 case "EnergyExplosion":
                     m_EnergyExplosion.GetSkillsStats().SetIsUnlocked(true);
                     m_EnergyExplosion.GetSkillsStats().SetIsAvailable(true);
-                    AudioManager.Instance.PlaySFX("Explosion");
                     break;
                 case "Key0":
                     m_PlayerGotKey[0] = true;
@@ -574,6 +585,10 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(i_TimeFadeOut);
         m_HitScreen.gameObject.SetActive(false);
 
+    }
+    void Fadeout(float i_Time,GameObject i_transform)
+    {
+        i_transform.GetComponent<SpriteRenderer>().DOFade(0, i_Time);
     }
 
 }

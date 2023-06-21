@@ -17,6 +17,7 @@ TagManager:
   - Spike
   - ResetWall
   - Change Scene Wall
+  - StoneWall
   layers:
   - Default
   - TransparentFX
@@ -39,7 +40,8 @@ TagManager:
   - PlayerFeet
   - Spike
   - MobFeet
-  - 
+  - Debris
+  - StoneWall
   - 
   - 
   - 

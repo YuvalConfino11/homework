@@ -152,7 +152,6 @@ GameObject:
   - component: {fileID: 4630492852500563315}
   - component: {fileID: 3732124924582079859}
   - component: {fileID: 6412567768566302720}
-  - component: {fileID: 6015172022364821391}
   m_Layer: 7
   m_Name: MobBoss
   m_TagString: Mob
@@ -854,21 +853,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 770271081004103944}
---- !u!114 &6015172022364821391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7153606485435401554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd6b43bdbc344d40ad0d9e231de24e3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_KnockbackPower: 20
-  m_KnockbackDuration: 0.2
-  m_player: {fileID: 0}
 --- !u!1 &8723409264307627579
 GameObject:
   m_ObjectHideFlags: 0

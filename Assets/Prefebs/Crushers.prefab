@@ -167,8 +167,7 @@ GameObject:
   - component: {fileID: 7840221991763515672}
   - component: {fileID: 7840221991763515668}
   - component: {fileID: 7840221991763515669}
-  - component: {fileID: 7840221991763515674}
-  - component: {fileID: 7840221991763515675}
+  - component: {fileID: 2068533537363076526}
   m_Layer: 19
   m_Name: Spike (6)
   m_TagString: Spike
@@ -376,7 +375,7 @@ PolygonCollider2D:
       - {x: -0.22999999, y: -0.48999998}
       - {x: -0.22, y: -0.45}
       - {x: -0.22, y: -0.21}
---- !u!114 &7840221991763515674
+--- !u!114 &2068533537363076526
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -390,21 +389,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Spikes: {fileID: 11400000, guid: 6f80b73d53c684f818b848deb2ec27be, type: 2}
   m_currentHealth: 0
---- !u!114 &7840221991763515675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7840221991763515673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd6b43bdbc344d40ad0d9e231de24e3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_KnockbackPower: 20
-  m_KnockbackDuration: 0.2
-  m_player: {fileID: 0}
 --- !u!1 &7840221991839801761
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,7 +401,6 @@ GameObject:
   - component: {fileID: 7840221991839801756}
   - component: {fileID: 7840221991839801757}
   - component: {fileID: 7840221991839801762}
-  - component: {fileID: 7840221991839801763}
   m_Layer: 19
   m_Name: Spike (5)
   m_TagString: Spike
@@ -617,21 +600,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Spikes: {fileID: 11400000, guid: 6f80b73d53c684f818b848deb2ec27be, type: 2}
   m_currentHealth: 0
---- !u!114 &7840221991839801763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7840221991839801761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd6b43bdbc344d40ad0d9e231de24e3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_KnockbackPower: 20
-  m_KnockbackDuration: 0.2
-  m_player: {fileID: 0}
 --- !u!1 &7840221992177788260
 GameObject:
   m_ObjectHideFlags: 0

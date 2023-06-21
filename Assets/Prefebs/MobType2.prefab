@@ -121,7 +121,6 @@ GameObject:
   - component: {fileID: 1539239014669981393}
   - component: {fileID: 8637067699560001742}
   - component: {fileID: 528855323080904337}
-  - component: {fileID: -1059677298408894194}
   m_Layer: 7
   m_Name: MobType2
   m_TagString: Mob
@@ -859,21 +858,6 @@ PolygonCollider2D:
       - {x: 9.166667, y: -0.7666667}
       - {x: 9.1, y: -0.8333334}
       - {x: 8.933333, y: -0.8000001}
---- !u!114 &-1059677298408894194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5031054393018285808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd6b43bdbc344d40ad0d9e231de24e3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_KnockbackPower: 20
-  m_KnockbackDuration: 0.2
-  m_player: {fileID: 0}
 --- !u!1 &5068683700230389347
 GameObject:
   m_ObjectHideFlags: 0

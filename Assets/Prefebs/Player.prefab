@@ -519,7 +519,7 @@ MonoBehaviour:
   m_Bullet: {fileID: 5051759465369138895, guid: 5ec0ddc53edbdc043ab4fc7bb5741e2d, type: 3}
   m_MobLayerMask:
     serializedVersion: 2
-    m_Bits: 524416
+    m_Bits: 4194432
   m_GroundLayerMask:
     serializedVersion: 2
     m_Bits: 66048
@@ -534,6 +534,7 @@ MonoBehaviour:
   m_PlayerAnimation: {fileID: 666493324}
   m_FeetBoxCollider2D: {fileID: 926051546431564419}
   m_movingEnabled: 1
+  m_movingdisabledTime: 0.8
   m_HealAnimator: {fileID: 4023265880929883762}
   m_ExplosionAnimator: {fileID: 1339626311737033555}
   m_HealAnimatorCooldown: 0.5
@@ -541,6 +542,8 @@ MonoBehaviour:
   m_PlayerLight: {fileID: 4493179147055390286}
   m_HitScreen: {fileID: 0}
   m_ProjectileStartingPosition: {fileID: 8138675577935199828}
+  m_StoneWall: {fileID: 0}
+  m_DebrisTime: 9
 --- !u!61 &2174727239527324068
 BoxCollider2D:
   m_ObjectHideFlags: 0
