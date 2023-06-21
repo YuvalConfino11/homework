@@ -18,7 +18,7 @@ namespace Mobs
         [SerializeField]
         private float m_MobHitCooldown = 0.75f;
         [SerializeField]
-        private float m_BallFallRatio = 0.7f;
+        private float m_BallFallRatio = 0.5f;
         
         // private GameObject m_PlayerGameObject;
         private float timer = 0;
