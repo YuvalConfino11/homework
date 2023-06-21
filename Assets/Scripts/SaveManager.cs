@@ -21,6 +21,16 @@ public class SaveManager : MonoBehaviour
     private Heal m_Heal;
     [SerializeField]
     private int m_TimesStartedScene;
+    [SerializeField]
+    private GameObject m_DashObjective;
+    [SerializeField]
+    private GameObject m_DoubleJumpObjective;
+    [SerializeField]
+    private GameObject m_GlideObjective;
+    [SerializeField]
+    private GameObject m_HealObjective;
+    [SerializeField]
+    private GameObject m_ExplosionObjective;
 
     private bool m_DashAvailability;
     private bool m_DoubleJumpAvailability;
@@ -34,14 +44,18 @@ public class SaveManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_DashAvailability = intToBool( PlayerPrefs.GetInt("DashAvailability", 0));
-        m_DoubleJumpAvailability = intToBool(PlayerPrefs.GetInt("DoubleJumpAvailability" , 0));
-        m_GlideAvailability = intToBool(PlayerPrefs.GetInt("GlideAvailability" , 0));
-        m_EnergyExplosionAvailability = intToBool(PlayerPrefs.GetInt("EnergyExplosionAvailability", 0));
-        m_HealAvailability = intToBool(PlayerPrefs.GetInt("HealAvailability" , 0));
+        m_DashAvailability = intToBool( PlayerPrefs.GetInt("DashAvailability"));
+        m_DoubleJumpAvailability = intToBool(PlayerPrefs.GetInt("DoubleJumpAvailability"));
+        m_GlideAvailability = intToBool(PlayerPrefs.GetInt("GlideAvailability"));
+        m_EnergyExplosionAvailability = intToBool(PlayerPrefs.GetInt("EnergyExplosionAvailability"));
+        m_HealAvailability = intToBool(PlayerPrefs.GetInt("HealAvailability" ));
         m_GateOpened = intToBool(PlayerPrefs.GetInt("GateOpened"));
+        PlayerPrefs.Save();
 
-        Debug.Log(m_DashAvailability);
+
+
+
+
 
         SetSavedAbilityStats(m_Dash.GetAbilityStats(), m_DashAvailability);
         SetSavedAbilityStats(m_DoubleJump.GetAbilityStats(), m_DoubleJumpAvailability);
@@ -49,13 +63,36 @@ public class SaveManager : MonoBehaviour
 
         SetSavedSkillStats(m_EnergyExplosion.GetSkillsStats(), m_EnergyExplosionAvailability);
         SetSavedSkillStats(m_Heal.GetSkillsStats(), m_HealAvailability);
+        PlayerPrefs.Save();
 
+      
+        if (m_DashAvailability)
+        {
+            DestroyObjective(m_DashObjective);
+        }
+        if (m_DoubleJumpAvailability)
+        {
+            DestroyObjective(m_DoubleJumpObjective);
+        }
+        if (m_GlideAvailability)
+        {
+            DestroyObjective(m_GlideObjective);
+        }
+        if (m_EnergyExplosionAvailability)
+        {
+            DestroyObjective(m_ExplosionObjective);
+        }
+        if (m_HealAvailability)
+        {
+            DestroyObjective(m_HealObjective);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        PlayerPrefs.SetInt("TimesStartedScene", m_TimesStartedScene);
+      
+
         PlayerPrefs.SetInt("DashAvailability", boolToInt(m_Dash.GetAbilityStats().GetIsUnlocked()));
         PlayerPrefs.SetInt("GlideAvailability", boolToInt(m_Glide.GetAbilityStats().GetIsUnlocked()));
         PlayerPrefs.SetInt("DoubleJumpAvailability", boolToInt(m_DoubleJump.GetAbilityStats().GetIsUnlocked()));
@@ -65,7 +102,7 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetInt("GateOpened",boolToInt(m_FirstGate.HasGateOpened()));
         PlayerPrefs.Save();
       
-
+      
 
         if (m_GateOpened)
         {
@@ -100,6 +137,11 @@ public class SaveManager : MonoBehaviour
     {
         i_Skill.SetIsUnlocked(i_availibility);
         i_Skill.SetIsAvailable(i_availibility);
+    }
+
+    private void DestroyObjective(GameObject objective)
+    {
+        objective.gameObject.SetActive(false);
     }
    
 }

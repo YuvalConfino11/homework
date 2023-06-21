@@ -31,7 +31,6 @@ public class ScenesChanges : MonoBehaviour
     {
         yield return new WaitForSeconds(i_TimeForMask);
         m_BlackMask.enabled = false;
-        Destroy(m_BlackMask);
         
     }
 }
