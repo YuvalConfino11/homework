@@ -19,6 +19,9 @@ namespace Mobs
         private float m_MobHitCooldown = 0.75f;
         [SerializeField]
         private float m_BallFallRatio = 0.5f;
+
+        private SpriteRenderer m_SpriteRenderer;
+        private Color m_MobColor;
         
         // private GameObject m_PlayerGameObject;
         private float timer = 0;
@@ -26,10 +29,14 @@ namespace Mobs
         private void Awake()
         {
             m_MobStats = GetComponent<MobStats>();
+            m_SpriteRenderer = this.gameObject.GetComponentInChildren<SpriteRenderer>();
         }
 
         private void Update()
         {
+            m_MobColor = m_SpriteRenderer.color;
+            m_MobColor.a = m_MobStats.GetHealth() / m_MobStats.GetMaxHealth();
+            m_SpriteRenderer.color = m_MobColor;
             timer += Time.deltaTime;
             if (timer >= m_MobHitCooldown)
             {
