@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Range: 50
-  m_Damage: 50
+  m_Damage: 10
   m_Speed: 100
 --- !u!95 &8955718124470273413
 Animator:

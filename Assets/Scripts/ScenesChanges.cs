@@ -35,10 +35,8 @@ public class ScenesChanges : MonoBehaviour
         {
             if(m_QuitMenuCounter == 0)
             {
-                //change the alpha of black mask.
-                m_color.a = 0.5f;  // change it between 0 and 1 where 1 is solid black and 0 is transparent.
+                m_color.a = 0.5f;
                 m_BlackMask.color = m_color;
-                //do m_BlackMask.enabled = true;
                 m_BlackMask.enabled = true;
                 m_QuitMenu.SetActive(true);
                 m_QuitMenuCounter++;
@@ -46,9 +44,7 @@ public class ScenesChanges : MonoBehaviour
             }
             else
             {
-              
                 m_QuitMenu.SetActive(false);
-                //do m_BlackMask.enabled = false;
                 m_BlackMask.enabled = false;
                 m_QuitMenuCounter = 0;
                 Time.timeScale = 1;

@@ -477,8 +477,6 @@ public class Player : MonoBehaviour
                     AudioManager.Instance.PlaySFX("Angel");
                     break;
             }
-            StartCoroutine(SetActiveToFalse(objectivesInRadius.gameObject, 1f));
-            
         }
     }
     private IEnumerator invicible(float i_InvicibleTime = 1f)
@@ -576,10 +574,4 @@ public class Player : MonoBehaviour
         m_HitScreen.gameObject.SetActive(false);
 
     }
-    public IEnumerator SetActiveToFalse(GameObject i_GameObject, float i_TimeToFalse)
-    {
-        yield return new WaitForSeconds(i_TimeToFalse);
-        i_GameObject.SetActive(false);
-    }
-
 }

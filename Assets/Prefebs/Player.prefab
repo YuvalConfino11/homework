@@ -530,7 +530,7 @@ MonoBehaviour:
   m_ShootingRate: 0.5
   m_ObjectiveCollectRadius: 25
   m_GroundRaycastDistance: 16.25
-  m_PlayerGotKey: 
+  m_PlayerGotKey: 000000
   m_PlayerAnimation: {fileID: 666493324}
   m_FeetBoxCollider2D: {fileID: 926051546431564419}
   m_movingEnabled: 1
