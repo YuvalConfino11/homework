@@ -17,6 +17,7 @@ TagManager:
   - Spike
   - ResetWall
   - Change Scene Wall
+  - SpiderWeb
   layers:
   - Default
   - TransparentFX
@@ -39,6 +40,7 @@ TagManager:
   - PlayerFeet
   - Spike
   - MobFeet
+  - 
   - 
   - 
   - 

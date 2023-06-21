@@ -507,7 +507,8 @@ MonoBehaviour:
   m_MaxManaPoint: 100
   m_ManaBar: {fileID: 0}
   m_DefaultGravityScale: 20
-  m_WalkingSpeed: 50
+  m_CurrentWalkingSpeed: 50
+  m_RegularWalkingSpeed: 50
   m_Grounded: 1
   m_JumpHeight: 30
   m_DoubleJump: {fileID: 11400000, guid: c5ea01e8c31624e1ead50c365cf92820, type: 2}

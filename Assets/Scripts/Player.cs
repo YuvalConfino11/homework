@@ -26,7 +26,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float m_DefaultGravityScale = 5f;
     [SerializeField]
-    private float m_WalkingSpeed = 4f;
+    private float m_CurrentWalkingSpeed = 4f;
+    [SerializeField]
+    private float m_RegularWalkingSpeed = 4f;
     [SerializeField]
     private bool m_Grounded = true;
     [SerializeField]
@@ -94,6 +96,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D m_RigidBody;
     private Collider2D[] m_MobsInExplosionRadius;
     private bool m_IsFacingRight = true;
+    private bool m_IsOnDash = false;
    
     private void Awake()
     {
@@ -106,12 +109,14 @@ public class Player : MonoBehaviour
         {
             AudioManager.Instance.PlayMusic("Happy ver1");
         }
+        
         m_HitScreen.gameObject.SetActive(false);
+        m_CurrentWalkingSpeed = m_RegularWalkingSpeed;
         StartCoroutine(MovmentDisabled(3f));
 
 
     }
-
+    
     void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -199,7 +204,6 @@ public class Player : MonoBehaviour
         {
             m_FeetBoxCollider2D.enabled = true;
         }
-      
         
     }
 
@@ -229,6 +233,12 @@ public class Player : MonoBehaviour
         {
             m_FeetBoxCollider2D.enabled = false;
         }
+        
+        if (i_Collision.gameObject.CompareTag("SpiderWeb"))
+        {
+            m_BoxCollider.isTrigger = false;
+            m_CurrentWalkingSpeed = m_RegularWalkingSpeed;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D i_Col)
@@ -237,10 +247,12 @@ public class Player : MonoBehaviour
         {
             m_BoxCollider.isTrigger = false;
         }
+
         if (i_Col.gameObject.CompareTag("Key"))
         {
             Destroy(i_Col.gameObject);
         }
+        
         if (i_Col.gameObject.CompareTag("ResetWall"))
         {
             ResetAbility(m_Dash.GetAbilityStats());
@@ -249,22 +261,37 @@ public class Player : MonoBehaviour
             ResetAbility(m_Glide.GetAbilityStats());
             ResetSkill(m_Heal.GetSkillsStats());
         }
+        
         if (i_Col.gameObject.CompareTag("Spike"))
         {
             StartCoroutine(invicible());
         }
+        
         if (i_Col.gameObject.CompareTag("Change Scene Wall"))
         {
-          
             SceneManager.LoadScene("Map");
         }
+        
+        if (i_Col.gameObject.CompareTag("SpiderWeb"))
+        {
+            m_BoxCollider.isTrigger = true;
+            m_CurrentWalkingSpeed = m_RegularWalkingSpeed / 2;
+        }
+    }
 
+    private void OnTriggerExit2D(Collider2D i_Col)
+    {
+        if (i_Col.gameObject.CompareTag("SpiderWeb"))
+        {
+            m_BoxCollider.isTrigger = false;
+            m_CurrentWalkingSpeed = m_RegularWalkingSpeed;
+        }
     }
 
 
     private void movement(float i_HorizontalInput)
     {
-        m_RigidBody.velocity = new Vector2(i_HorizontalInput * m_WalkingSpeed, m_RigidBody.velocity.y);
+        m_RigidBody.velocity = new Vector2(i_HorizontalInput * m_CurrentWalkingSpeed, m_RigidBody.velocity.y);
         if (i_HorizontalInput < 0 && m_IsFacingRight)
         {
             flip();
@@ -480,11 +507,10 @@ public class Player : MonoBehaviour
         }
     }
     private IEnumerator invicible(float i_InvicibleTime = 1f)
-
     {
-        m_BoxCollider.enabled = false;
+        m_BoxCollider.isTrigger = true;
         yield return new WaitForSeconds(i_InvicibleTime);
-        m_BoxCollider.enabled = true;
+        m_BoxCollider.isTrigger = false;
     }
 
     private IEnumerator abilityCooldown(AbilityStats i_Ability, float i_CooldownTime)
@@ -573,5 +599,16 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(i_TimeFadeOut);
         m_HitScreen.gameObject.SetActive(false);
 
+    }
+    public IEnumerator SetActiveToFalse(GameObject i_GameObject, float i_TimeToFalse)
+    {
+        yield return new WaitForSeconds(i_TimeToFalse);
+        i_GameObject.SetActive(false);
+    }
+    
+    public float WalkingSpeed
+    {
+        get => m_CurrentWalkingSpeed;
+        set => m_CurrentWalkingSpeed = value;
     }
 }
