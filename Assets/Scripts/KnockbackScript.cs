@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class KnockbackScript : MonoBehaviour
 {
     [SerializeField]
-    private float m_KnockbackPower = 100;
+    private float m_KnockbackPower = 15;
     [SerializeField]
-    private float m_KnockbackDuration = 1;
+    private float m_KnockbackDuration = 0.2f;
     [SerializeField]
     private Player m_player;
     

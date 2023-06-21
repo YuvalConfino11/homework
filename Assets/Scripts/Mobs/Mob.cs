@@ -18,25 +18,25 @@ namespace Mobs
         [SerializeField]
         private float m_MobHitCooldown = 0.75f;
         [SerializeField]
-        private float m_BallFallRatio = 0.5f;
+        private float m_BallFallRatio = 0.7f;
+        [SerializeField]
+        private Rigidbody2D m_RigidBody;
+        [SerializeField]
+        private float m_KnockbackPower = 15;
+        [SerializeField]
+        private float m_KnockbackDuration = 0.2f;
 
-        private SpriteRenderer m_SpriteRenderer;
-        private Color m_MobColor;
-        
         // private GameObject m_PlayerGameObject;
         private float timer = 0;
 
         private void Awake()
         {
             m_MobStats = GetComponent<MobStats>();
-            m_SpriteRenderer = this.gameObject.GetComponentInChildren<SpriteRenderer>();
+            m_RigidBody = transform.GetComponent<Rigidbody2D>();
         }
 
         private void Update()
         {
-            m_MobColor = m_SpriteRenderer.color;
-            m_MobColor.a = m_MobStats.GetHealth() / m_MobStats.GetMaxHealth();
-            m_SpriteRenderer.color = m_MobColor;
             timer += Time.deltaTime;
             if (timer >= m_MobHitCooldown)
             {
@@ -59,6 +59,10 @@ namespace Mobs
                 player.getHit(m_MobStats.GetDamage());
                 m_CanHitPlayer = false;
             }
+            if (col.gameObject.CompareTag("Bullet"))
+            {
+                StartCoroutine(EnemyKnockback(m_KnockbackDuration, m_KnockbackPower, col.transform));
+            }
         }
         private GameObject ChooseBall(GameObject i_ManaBall , GameObject i_HPBall)
         {
@@ -73,6 +77,20 @@ namespace Mobs
                 return i_HPBall;
             }
             
+        }
+        public IEnumerator EnemyKnockback(float i_KnockbackDuration, float i_KnockbackPower, Transform i_ObjectTransform)
+        {
+            float timer = 0;
+           
+
+            while (i_KnockbackDuration > timer)
+            {
+                timer += Time.deltaTime;
+                Vector2 dir = new Vector2(i_ObjectTransform.transform.position.x - transform.position.x, 0);
+                m_RigidBody.AddForce(-dir * i_KnockbackPower);
+            }
+
+            yield return 0;
         }
     }
 }
