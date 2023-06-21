@@ -507,7 +507,8 @@ MonoBehaviour:
   m_MaxManaPoint: 100
   m_ManaBar: {fileID: 0}
   m_DefaultGravityScale: 20
-  m_WalkingSpeed: 50
+  m_CurrentWalkingSpeed: 50
+  m_RegularWalkingSpeed: 50
   m_Grounded: 1
   m_JumpHeight: 30
   m_DoubleJump: {fileID: 11400000, guid: c5ea01e8c31624e1ead50c365cf92820, type: 2}
@@ -530,7 +531,7 @@ MonoBehaviour:
   m_ShootingRate: 0.5
   m_ObjectiveCollectRadius: 25
   m_GroundRaycastDistance: 16.25
-  m_PlayerGotKey: 
+  m_PlayerGotKey: 000000
   m_PlayerAnimation: {fileID: 666493324}
   m_FeetBoxCollider2D: {fileID: 926051546431564419}
   m_movingEnabled: 1
@@ -712,7 +713,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8138675577935199828}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.7, y: 3.4, z: 163.07742}
+  m_LocalPosition: {x: 9.7, y: 3.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

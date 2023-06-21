@@ -35,17 +35,17 @@ public class ScenesChanges : MonoBehaviour
         {
             if(m_QuitMenuCounter == 0)
             {
-                //change the alpha of black mask.
-                //do m_BlackMask.enabled = true;
+                m_color.a = 0.5f;
+                m_BlackMask.color = m_color;
+                m_BlackMask.enabled = true;
                 m_QuitMenu.SetActive(true);
                 m_QuitMenuCounter++;
                 Time.timeScale = 0;
             }
             else
             {
-              
                 m_QuitMenu.SetActive(false);
-                //do m_BlackMask.enabled = false;
+                m_BlackMask.enabled = false;
                 m_QuitMenuCounter = 0;
                 Time.timeScale = 1;
             }
