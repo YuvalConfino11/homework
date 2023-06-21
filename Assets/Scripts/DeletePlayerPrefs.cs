@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class DeletePlayerPrefs : MonoBehaviour
 {
+    public static DeletePlayerPrefs Instance;
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
-        PlayerPrefs.DeleteAll();
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+        }
+        else if (Instance != this)
+            Destroy(gameObject);
     }
 
 }

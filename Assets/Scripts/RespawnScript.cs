@@ -8,11 +8,14 @@ public class RespawnScript : MonoBehaviour
     private GameObject m_RespawnPoint;
     [SerializeField]
     private Player m_Player;
+    [SerializeField]
+    private ImaginaryFriendAi m_ImaginaryFriend;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player")) 
         {
-            m_Player.transform.position = m_RespawnPoint.transform.position;        
+            m_Player.transform.position = m_RespawnPoint.transform.position;
+            m_ImaginaryFriend.transform.position = m_RespawnPoint.transform.position;
         }
     }
 }

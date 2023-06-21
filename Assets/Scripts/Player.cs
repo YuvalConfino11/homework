@@ -475,7 +475,7 @@ public class Player : MonoBehaviour
                     AudioManager.Instance.PlaySFX("Angel");
                     break;
             }
-            Destroy(objectivesInRadius.gameObject, 1f);
+            StartCoroutine(SetActiveToFalse(objectivesInRadius.gameObject, 1f));
             
         }
     }
@@ -573,6 +573,11 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(i_TimeFadeOut);
         m_HitScreen.gameObject.SetActive(false);
 
+    }
+    public IEnumerator SetActiveToFalse(GameObject i_GameObject, float i_TimeToFalse)
+    {
+        yield return new WaitForSeconds(i_TimeToFalse);
+        i_GameObject.SetActive(false);
     }
 
 }
