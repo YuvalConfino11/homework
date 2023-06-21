@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject m_ProjectileStartingPosition;
     [SerializeField]
-    private Crushers m_Crusher;
+    private BoxCollider2D m_BoxCollider;
 
 
 
@@ -92,7 +92,6 @@ public class Player : MonoBehaviour
     private float m_LastArrowKeyPressTime;
     private RaycastHit2D  m_RaycastHit;
     private Rigidbody2D m_RigidBody;
-    private BoxCollider2D m_BoxCollider;
     private Collider2D[] m_MobsInExplosionRadius;
     private bool m_IsFacingRight = true;
    
@@ -252,7 +251,7 @@ public class Player : MonoBehaviour
         }
         if (i_Col.gameObject.CompareTag("Spike"))
         {
-            StartCoroutine(Invicible());
+            StartCoroutine(invicible());
         }
         if (i_Col.gameObject.CompareTag("Change Scene Wall"))
         {
@@ -322,7 +321,7 @@ public class Player : MonoBehaviour
         {
            
             StartCoroutine(MovmentDisabled(m_movingdisabledTime));
-            StartCoroutine(Invicible());
+            StartCoroutine(invicible(0.5f));
             m_Dash.GetAbilityStats().SetIsAvailable(false);
             float dashTimer = 0;
             float dashDuration = m_Dash.DashTime;
@@ -383,6 +382,7 @@ public class Player : MonoBehaviour
             float explosionRadius = m_EnergyExplosion.GetExplosionRadius();
             float explosionForce = m_EnergyExplosion.GetExplosionForce();
             Vector3 imaginaryFriendPosition = m_ImaginaryFriend.transform.position;
+            AudioManager.Instance.PlaySFX("Explosion");
         
             m_MobsInExplosionRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius,m_MobLayerMask);
             foreach (Collider2D mob in m_MobsInExplosionRadius) {
@@ -415,6 +415,7 @@ public class Player : MonoBehaviour
         {
             m_CurrentHealthPoint += m_Heal.GetHealAmount();
             SetMana(-m_Heal.GetManaPointsCost());
+            AudioManager.Instance.PlaySFX("Angel");
             m_HealAnimator.SetBool("IsHealPulseActive",true);
             StartCoroutine(AnimatorCooldown("IsHealPulseActive", m_HealAnimator, m_HealAnimatorCooldown));
         }
@@ -461,6 +462,7 @@ public class Player : MonoBehaviour
                 case "EnergyExplosion":
                     m_EnergyExplosion.GetSkillsStats().SetIsUnlocked(true);
                     m_EnergyExplosion.GetSkillsStats().SetIsAvailable(true);
+                    AudioManager.Instance.PlaySFX("Explosion");
                     break;
                 case "Key0":
                     m_PlayerGotKey[0] = true;
@@ -479,12 +481,12 @@ public class Player : MonoBehaviour
             
         }
     }
-    private IEnumerator Invicible()
+    private IEnumerator invicible(float i_InvicibleTime = 1f)
+
     {
         m_BoxCollider.enabled = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(i_InvicibleTime);
         m_BoxCollider.enabled = true;
-
     }
 
     private IEnumerator abilityCooldown(AbilityStats i_Ability, float i_CooldownTime)

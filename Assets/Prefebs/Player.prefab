@@ -483,7 +483,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 20
   m_Material: {fileID: 6200000, guid: fc994adede1b14a52a2a9ad018277093, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -534,13 +534,15 @@ MonoBehaviour:
   m_PlayerAnimation: {fileID: 666493324}
   m_FeetBoxCollider2D: {fileID: 926051546431564419}
   m_movingEnabled: 1
+  m_movingdisabledTime: 0.8
   m_HealAnimator: {fileID: 4023265880929883762}
   m_ExplosionAnimator: {fileID: 1339626311737033555}
   m_HealAnimatorCooldown: 0.5
   m_ExplosionAnimatorCooldown: 0.8
   m_PlayerLight: {fileID: 4493179147055390286}
-  m_HitScreen: {fileID: 0}
+  m_HitScreen: {fileID: 4074974699251795833, guid: cf553e6cb96b52f43a3fedfe7f441a00, type: 3}
   m_ProjectileStartingPosition: {fileID: 8138675577935199828}
+  m_BoxCollider: {fileID: 2174727239527324068}
 --- !u!61 &2174727239527324068
 BoxCollider2D:
   m_ObjectHideFlags: 0
