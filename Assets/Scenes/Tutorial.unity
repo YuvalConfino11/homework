@@ -58071,6 +58071,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 66489486, guid: 069bdd964f05441e58219b1083a709ef, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 237893573, guid: 069bdd964f05441e58219b1083a709ef, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -58190,6 +58194,10 @@ PrefabInstance:
     - target: {fileID: 2826707220717438877, guid: 069bdd964f05441e58219b1083a709ef, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5797283236624804487, guid: 069bdd964f05441e58219b1083a709ef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 069bdd964f05441e58219b1083a709ef, type: 3}
