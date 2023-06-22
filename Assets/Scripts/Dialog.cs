@@ -37,7 +37,16 @@ public class Dialog : MonoBehaviour
             {
                 m_OpenedDialog = true;
             }
+           
         }
+        if (m_OpenedDialog)
+        {
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                NextLine();
+            }
+        }
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -18,6 +18,7 @@ TagManager:
   - ResetWall
   - Change Scene Wall
   - StoneWall
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -42,6 +43,7 @@ TagManager:
   - MobFeet
   - Debris
   - StoneWall
+  - 
   - 
   - 
   - 

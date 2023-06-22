@@ -33,7 +33,10 @@ public class SpawnManager : MonoBehaviour
         m_SpwanPointsList = new List<GameObject>();
         foreach (Transform child in transform)
         {
-            m_SpwanPointsList.Add(child.gameObject);
+            if (!child.gameObject.CompareTag("Ground"))
+            {
+                m_SpwanPointsList.Add(child.gameObject);
+            }
         }
     }
     
@@ -75,9 +78,16 @@ public class SpawnManager : MonoBehaviour
     {
         Gizmos.color = new Color(141, 191, 144);
         Gizmos.DrawWireSphere(transform.position, m_SpawnManagerRadius);
-        foreach (Transform child in transform)
+        if (m_SpwanPointsList != null)
         {
-            Gizmos.DrawWireSphere(child.position, 10f);
+            foreach (GameObject child in m_SpwanPointsList)
+            {
+                if (child != null)
+                {
+                    Gizmos.DrawWireSphere(child.transform.position, 10f);
+                }
+            }
         }
+        
     }
 }

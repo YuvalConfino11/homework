@@ -853,6 +853,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 770271081004103944}
+--- !u!114 &6015172022364821391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7153606485435401554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab6d6a95ead03dc4a97b085a8465c8f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_KnockbackPower: 20
+  m_KnockbackDuration: 0.2
+  m_player: {fileID: 0}
 --- !u!1 &8723409264307627579
 GameObject:
   m_ObjectHideFlags: 0

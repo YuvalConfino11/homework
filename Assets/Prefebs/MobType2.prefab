@@ -161,7 +161,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -217,6 +217,9 @@ MonoBehaviour:
   m_CanHitPlayer: 0
   m_MobHitCooldown: 0.75
   m_BallFallRatio: 0.2
+  m_RigidBody: {fileID: 0}
+  m_KnockbackPower: 100
+  m_KnockbackDuration: 0.5
 --- !u!114 &1539239014669981393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,7 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Damage: 10
-  m_Health: 80
+  m_Health: 5000
 --- !u!114 &8637067699560001742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,6 +861,21 @@ PolygonCollider2D:
       - {x: 9.166667, y: -0.7666667}
       - {x: 9.1, y: -0.8333334}
       - {x: 8.933333, y: -0.8000001}
+--- !u!114 &-1059677298408894194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5031054393018285808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab6d6a95ead03dc4a97b085a8465c8f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_KnockbackPower: 15
+  m_KnockbackDuration: 0.2
+  m_player: {fileID: 0}
 --- !u!1 &5068683700230389347
 GameObject:
   m_ObjectHideFlags: 0
