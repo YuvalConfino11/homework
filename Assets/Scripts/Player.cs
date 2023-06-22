@@ -136,11 +136,11 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && m_Glide.GetAbilityStats().GetIsUnlocked())
         {
             glide();
-            m_PlayerAnimation.EndGlideAnimation();
         }
         else
         {
             m_RigidBody.gravityScale = m_DefaultGravityScale;
+            m_PlayerAnimation.EndGlideAnimation();
         }
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {

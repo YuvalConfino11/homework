@@ -17,6 +17,13 @@ public class PlayerAnimation : MonoBehaviour
     public void JumpAnimation()
     {
         m_Animator.SetTrigger("Jump");
+        StartCoroutine(jumpTransition());
+    }
+
+    private IEnumerator jumpTransition()
+    {
+        yield return new WaitForSeconds(0.2f);
+        m_Animator.SetTrigger("Jump");
     }
     
     public void DashAnimation()
@@ -26,12 +33,12 @@ public class PlayerAnimation : MonoBehaviour
     
     public void GlideAnimation()
     {
-        m_Animator.SetTrigger("Glide");
+        m_Animator.SetBool("IsGliding", true);
     }
     
     public void EndGlideAnimation()
     {
-        m_Animator.SetTrigger("EndGlide");
+        m_Animator.SetBool("IsGliding", false);
     }
 
     public void SetAttackAnimation(bool i_IsAttacking)
