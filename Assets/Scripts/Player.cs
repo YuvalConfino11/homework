@@ -146,10 +146,6 @@ public class Player : MonoBehaviour
         {
             attack();
         }
-        if (Input.GetKeyUp(KeyCode.LeftControl))
-        {
-            m_PlayerAnimation.SetAttackAnimation(false);
-        }
         if (Input.GetKeyUp(KeyCode.LeftCommand) || Input.GetKeyUp(KeyCode.LeftAlt))
         {
             explosion();
@@ -399,9 +395,16 @@ public class Player : MonoBehaviour
             m_PlayerAnimation.SetAttackAnimation(true);
             bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * (m_LastMovingDirection * bulletScript.GetSpeed());
             AudioManager.Instance.PlaySFX("Shoot");
+            StartCoroutine(shotingAnimationOff());
             StartCoroutine(shootingCooldown());
         }
 
+    }
+
+    private IEnumerator shotingAnimationOff()
+    {
+        yield return new WaitForSeconds(0.2f);
+        m_PlayerAnimation.SetAttackAnimation(false);
     }
 
     private bool getIsGrounded()
