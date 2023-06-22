@@ -1918,11 +1918,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1665843917365385329, guid: 069bdd964f05441e58219b1083a709ef, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.72300005
       objectReference: {fileID: 0}
     - target: {fileID: 1665843917365385329, guid: 069bdd964f05441e58219b1083a709ef, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1665843919082795423, guid: 069bdd964f05441e58219b1083a709ef, type: 3}
       propertyPath: m_Player
@@ -2019,6 +2019,10 @@ PrefabInstance:
     - target: {fileID: 2826707220717438877, guid: 069bdd964f05441e58219b1083a709ef, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826707220717438877, guid: 069bdd964f05441e58219b1083a709ef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 069bdd964f05441e58219b1083a709ef, type: 3}

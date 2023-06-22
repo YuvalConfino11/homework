@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5528980888368930027}
   - component: {fileID: 5953381854104941932}
   - component: {fileID: 5896442026698488337}
-  m_Layer: 19
+  m_Layer: 0
   m_Name: SpiderWeb2
   m_TagString: SpiderWeb
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 1348533825000313587}
   - component: {fileID: 3021944678377253358}
   - component: {fileID: 4020646028730467719}
-  m_Layer: 19
+  m_Layer: 0
   m_Name: SpiderWeb1
   m_TagString: SpiderWeb
   m_Icon: {fileID: 0}
@@ -447,7 +447,7 @@ GameObject:
   - component: {fileID: 3754426918148500770}
   m_Layer: 0
   m_Name: SpiderWebs
-  m_TagString: Untagged
+  m_TagString: SpiderWeb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -459,7 +459,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3754426918148500768}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2561, y: 319, z: -0.33669376}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
