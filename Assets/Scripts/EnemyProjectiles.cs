@@ -12,6 +12,8 @@ public class EnemyProjectiles : MonoBehaviour
     private float m_EnemyProjDamage;
 
     private Rigidbody2D m_Rb;
+    
+    private float damp = 5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,9 @@ public class EnemyProjectiles : MonoBehaviour
         m_Rb = GetComponent<Rigidbody2D>();
 
         Vector3 m_Dir = m_Player.transform.position - transform.position;
+        float angle = Mathf.Atan2(m_Dir.y, m_Dir.x) * Mathf.Rad2Deg;
         m_Rb.velocity = new Vector2(m_Dir.x , m_Dir.y).normalized * m_ProjForce;
+        transform.Rotate(0,0,angle);
        
     }
 
