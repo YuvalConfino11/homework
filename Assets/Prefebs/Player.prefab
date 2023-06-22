@@ -539,7 +539,7 @@ MonoBehaviour:
   m_HealAnimator: {fileID: 4023265880929883762}
   m_ExplosionAnimator: {fileID: 1339626311737033555}
   m_HealAnimatorCooldown: 0.9
-  m_ExplosionAnimatorCooldown: 1
+  m_ExplosionAnimatorCooldown: 0.9
   m_PlayerLight: {fileID: 4493179147055390286}
   m_HitScreen: {fileID: 4074974699251795833, guid: cf553e6cb96b52f43a3fedfe7f441a00, type: 3}
   m_ProjectileStartingPosition: {fileID: 8138675577935199828}
