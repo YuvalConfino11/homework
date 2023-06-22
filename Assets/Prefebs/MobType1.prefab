@@ -338,6 +338,7 @@ GameObject:
   - component: {fileID: 7578005702554773261}
   - component: {fileID: 1919526740459900685}
   - component: {fileID: 1240481289709308154}
+  - component: {fileID: 6173740749729206252}
   m_Layer: 7
   m_Name: MobType1
   m_TagString: Mob
@@ -1771,6 +1772,9 @@ MonoBehaviour:
   m_CanHitPlayer: 0
   m_MobHitCooldown: 0.75
   m_BallFallRatio: 0.2
+  m_RigidBody: {fileID: 5345240097684956968}
+  m_KnockbackPower: 15
+  m_KnockbackDuration: 0.2
 --- !u!114 &1919526740459900685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1784,7 +1788,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Damage: 5
-  m_Health: 40
+  m_MaxHealth: 40
+  m_CurrentHealth: 100
 --- !u!114 &1240481289709308154
 MonoBehaviour:
   m_ObjectHideFlags: 0

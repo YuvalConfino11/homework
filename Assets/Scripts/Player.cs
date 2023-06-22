@@ -89,6 +89,8 @@ public class Player : MonoBehaviour
     private GameObject m_StoneWall;
     [SerializeField]
     private float m_DebrisTime;
+    [SerializeField]
+    private AudioManager m_audioManager;
     private BoxCollider2D m_BoxCollider;
 
 
@@ -279,6 +281,14 @@ public class Player : MonoBehaviour
         {
             m_BoxCollider.isTrigger = true;
             m_CurrentWalkingSpeed = m_RegularWalkingSpeed / 2;
+        }
+        if (i_Col.gameObject.CompareTag("TriggerMusic"))
+        {
+            StartCoroutine(m_audioManager.ChangeMusic("TheChase"));
+        }
+        if (i_Col.gameObject.CompareTag("TriggerMusicExit"))
+        {
+            StartCoroutine(m_audioManager.ChangeMusic("Happy ver1"));
         }
     }
 

@@ -11,6 +11,8 @@ public class AudioManager : MonoBehaviour
     private float defualtVol;
     [SerializeField]
     private float transitionTime;
+    [SerializeField]
+    public float m_ChaseVol;
     public static AudioManager Instance;
 
     public Sound[] musicSounds, sfxSounds;
@@ -93,7 +95,7 @@ public class AudioManager : MonoBehaviour
         }
     }*/
 
-    private IEnumerator ChangeMusic(string audioNamePlaying)
+    public IEnumerator ChangeMusic(string audioNamePlaying)
     {
         float percentage = 0;
         while(musicSource.volume > 0)

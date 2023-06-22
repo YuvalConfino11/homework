@@ -19,6 +19,9 @@ TagManager:
   - Change Scene Wall
   - StoneWall
   - Bullet
+  - SpiderWeb
+  - TriggerMusic
+  - TriggerMusicExit
   layers:
   - Default
   - TransparentFX
@@ -43,7 +46,6 @@ TagManager:
   - MobFeet
   - Debris
   - StoneWall
-  - 
   - 
   - 
   - 
