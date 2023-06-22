@@ -205,6 +205,12 @@ public class Player : MonoBehaviour
             m_FeetBoxCollider2D.enabled = true;
         }
         
+        if (i_Collision.gameObject.CompareTag("SpiderWeb"))
+        {
+            m_BoxCollider.isTrigger = false;
+            m_CurrentWalkingSpeed = m_RegularWalkingSpeed;
+        }
+        
     }
 
     private void OnCollisionStay2D(Collision2D i_Collision)
@@ -264,6 +270,7 @@ public class Player : MonoBehaviour
         
         if (i_Col.gameObject.CompareTag("Spike"))
         {
+            Debug.Log(1);
             StartCoroutine(invicible());
         }
         
