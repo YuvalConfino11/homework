@@ -106,7 +106,6 @@ public class Player : MonoBehaviour
     private Collider2D[] m_MobsInExplosionRadius;
     private Collider2D[] m_WebInDashRadius;
     private bool m_IsFacingRight = true;
-    private bool m_IsOnDash = false;
     private PauseControl m_PauseController;
    
     private void Awake()
@@ -285,7 +284,12 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(invicible());
         }
-        
+        if (i_Col.gameObject.CompareTag("EnemyProjectile"))
+        {
+            GetHurtFeedback(0.2f);
+            StartCoroutine(TimeItsRed(0.2f, 0.2f));
+        }
+
         if (i_Col.gameObject.CompareTag("Change Scene Wall"))
         {
             SceneManager.LoadScene("Map");
@@ -497,7 +501,7 @@ public class Player : MonoBehaviour
     {
         if (m_Heal.GetSkillsStats().GetIsUnlocked() && m_Heal.GetSkillsStats().GetIsAvailable())
         {
-            m_CurrentHealthPoint += m_Heal.GetHealAmount();
+            SetHp(m_Heal.GetHealAmount());
             SetMana(-m_Heal.GetManaPointsCost());
             AudioManager.Instance.PlaySFX("Angel");
             m_HealAnimator.SetBool("IsHealPulseActive",true);

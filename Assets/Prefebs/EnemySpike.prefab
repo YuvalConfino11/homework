@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 5126421670461875372}
   - component: {fileID: 6420052480828164293}
   - component: {fileID: 8577489830131487776}
-  - component: {fileID: 3885090290747024095}
   - component: {fileID: 2702894475041729601}
   m_Layer: 19
   m_Name: Spike
@@ -266,21 +265,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Spikes: {fileID: 11400000, guid: 6f80b73d53c684f818b848deb2ec27be, type: 2}
   m_currentHealth: 40
---- !u!114 &3885090290747024095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4984463650262035289}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 107fd3e44e96ada4498b079a742f8626, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RespawnPoint: {fileID: 4380090756424727079}
-  m_Player: {fileID: 0}
-  m_ImaginaryFriend: {fileID: 0}
 --- !u!50 &2702894475041729601
 Rigidbody2D:
   serializedVersion: 4

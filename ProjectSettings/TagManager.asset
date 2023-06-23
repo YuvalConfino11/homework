@@ -25,6 +25,7 @@ TagManager:
   - SpikeRespawnPoint
   - CrusherSpike
   - StoneWallStone
+  - EnemyProjectile
   layers:
   - Default
   - TransparentFX

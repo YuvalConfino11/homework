@@ -40,6 +40,7 @@ public class Bullet : MonoBehaviour
             this.gameObject.GetComponent<Animator>().SetBool("Hit",true);
             StartCoroutine(AnimationCooldown(0.6f));
             this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
+            m_Player.GetComponent<Player>().SetMana(2);
         }
     }
     
