@@ -247,7 +247,7 @@ namespace Mobs
         {
             return m_Grounded;
         }
-        //// omer after adding sound add in parentasis of the function string i_ audio which will get the required audio
+        
         private void MakeSound(string i_audio)
         {
             Collider2D playerInRangeCheck = Physics2D.OverlapCircle(transform.position, m_MobFieldOfViewRadius * transform.localScale.y, m_PlayerLayerMask);
@@ -257,10 +257,6 @@ namespace Mobs
                 {
                     AudioManager.Instance.PlaySFX(i_audio);
                     m_MonsterGrowled = true;
-                }
-                else
-                {
-                    return;
                 }
             }
             else

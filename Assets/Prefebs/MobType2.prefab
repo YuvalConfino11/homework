@@ -221,6 +221,8 @@ MonoBehaviour:
   m_RigidBody: {fileID: 5031054393018285812}
   m_KnockbackPower: 100
   m_KnockbackDuration: 0.5
+  m_MobAnimation: {fileID: 8637067699560001742}
+  m_MobAttackAnimationDuration: 0.4
 --- !u!114 &1539239014669981393
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,11 +25,14 @@ namespace Mobs
         private float m_KnockbackPower = 15;
         [SerializeField]
         private float m_KnockbackDuration = 0.2f;
+        [SerializeField] 
+        private MobAnimation m_MobAnimation;
+        [SerializeField] 
+        private float m_MobAttackAnimationDuration = 0.4f;
         
         private SpriteRenderer m_SpriteRenderer;
         private Color m_MobColor;
         
-        // private GameObject m_PlayerGameObject;
         private float timer = 0;
 
         private void Awake()
@@ -62,6 +65,8 @@ namespace Mobs
             
             if (col.gameObject.CompareTag("Player") && m_CanHitPlayer)
             {
+                m_MobAnimation.PlayMobAttackAnimation();
+                StartCoroutine(attackAnimationOff());
                 Player player = col.gameObject.GetComponent<Player>();
                 player.getHit(m_MobStats.GetDamage());
                 m_CanHitPlayer = false;
@@ -93,6 +98,12 @@ namespace Mobs
             }
 
             yield return 0;
+        }
+        
+        private IEnumerator attackAnimationOff()
+        {
+            yield return new WaitForSeconds(m_MobAttackAnimationDuration);
+            m_MobAnimation.StopMobAttackAnimation();
         }
     }
 }

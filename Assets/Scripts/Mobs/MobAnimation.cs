@@ -9,4 +9,14 @@ public class MobAnimation : MonoBehaviour
     {
         m_Animator.SetFloat("MobMoveSpeed", Mathf.Abs(i_MobHorizontalVelocity));
     }
+
+    public void PlayMobAttackAnimation()
+    {
+        m_Animator.SetBool("IsMobAttacking", true);
+    }
+    
+    public void StopMobAttackAnimation()
+    {
+        m_Animator.SetBool("IsMobAttacking", false);
+    }
 }
