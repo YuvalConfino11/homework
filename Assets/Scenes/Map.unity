@@ -1248,11 +1248,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 418070631053152, guid: 4b2afc843d619714ab6e6f82fa7b9d6d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3441.8896
+      value: 3540.9
       objectReference: {fileID: 0}
     - target: {fileID: 418070631053152, guid: 4b2afc843d619714ab6e6f82fa7b9d6d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -101.10559
+      value: -91.4
       objectReference: {fileID: 0}
     - target: {fileID: 418070631053152, guid: 4b2afc843d619714ab6e6f82fa7b9d6d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4053,6 +4053,10 @@ PrefabInstance:
     - target: {fileID: 3218260605575897817, guid: c94221b35710d1f48848660de544f0bc, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4143347069974621290, guid: c94221b35710d1f48848660de544f0bc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 343
       objectReference: {fileID: 0}
     - target: {fileID: 4716281963182759493, guid: c94221b35710d1f48848660de544f0bc, type: 3}
       propertyPath: m_RootOrder
@@ -8066,6 +8070,14 @@ PrefabInstance:
       propertyPath: m_Player
       value: 
       objectReference: {fileID: 1597692399}
+    - target: {fileID: 4958813860482522484, guid: c94221b35710d1f48848660de544f0bc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -70
+      objectReference: {fileID: 0}
+    - target: {fileID: 4958813860482522484, guid: c94221b35710d1f48848660de544f0bc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 439
+      objectReference: {fileID: 0}
     - target: {fileID: 4958813860516669896, guid: c94221b35710d1f48848660de544f0bc, type: 3}
       propertyPath: m_Player
       value: 
@@ -8202,6 +8214,10 @@ PrefabInstance:
       propertyPath: m_player
       value: 
       objectReference: {fileID: 1597692399}
+    - target: {fileID: 8729887230645505816, guid: c94221b35710d1f48848660de544f0bc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 518
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7183042108762164121, guid: c94221b35710d1f48848660de544f0bc, type: 3}
     - {fileID: 7183042109338177211, guid: c94221b35710d1f48848660de544f0bc, type: 3}
