@@ -18545,6 +18545,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9038989545201288124, guid: 0fa7aad1f7dc3964cb1de07595cdcf4a, type: 3}
+    - {fileID: 7840221991783118410, guid: 0fa7aad1f7dc3964cb1de07595cdcf4a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0fa7aad1f7dc3964cb1de07595cdcf4a, type: 3}
 --- !u!4 &1485192470443772134 stripped
 Transform:
@@ -18998,7 +18999,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpike (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8577489830131487776, guid: 3b742660b2a37445f8de76c4e1532229, type: 3}
+      propertyPath: m_currentHealth
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2702894475041729601, guid: 3b742660b2a37445f8de76c4e1532229, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3b742660b2a37445f8de76c4e1532229, type: 3}
 --- !u!4 &2416535137606851583 stripped
 Transform:
