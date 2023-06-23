@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bccc7d3ad6f4a8f8bdfeca2a1b7f58d, type: 3}
   m_Name: EnergyExplosion
   m_EditorClassIdentifier: 
-  m_MaxExplosionRadius: 75
+  m_MaxExplosionRadius: 60
   m_ExplosionForce: 50
   m_ExplosionDamage: 25
+  m_ExplosionManaPointsCost: 1

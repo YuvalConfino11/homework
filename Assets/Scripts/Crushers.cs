@@ -41,8 +41,9 @@ public class Crushers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
- 
-            if (transform.position.y >= m_UpperPos.position.y && m_Activate.m_ActivateCrushers)
+        if (m_Activate.m_ActivateCrushers)
+        {
+            if (transform.position.y >= m_UpperPos.position.y)
             {
                 m_Crush = true;
             }
@@ -58,6 +59,7 @@ public class Crushers : MonoBehaviour
             {
                 transform.position = Vector2.MoveTowards(transform.position, m_UpperPos.position, m_UpSpeed * Time.deltaTime);
             }
+        }
         
     }
 }

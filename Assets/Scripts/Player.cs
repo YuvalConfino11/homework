@@ -54,11 +54,15 @@ public class Player : MonoBehaviour
     [SerializeField]
     private LayerMask m_ObjectiveLayerMask;
     [SerializeField]
+    private LayerMask m_WebLayerMask;
+    [SerializeField]
     private bool m_IsAbleToShot = true;
     [SerializeField]
     private float m_ShootingRate = 0.5f;
     [SerializeField]
     private float m_ObjectiveCollectRadius = 10f;
+    [SerializeField]
+    private float m_DashDetectRadius = 10f;
     [SerializeField]
     private float m_GroundRaycastDistance = 10f;
     [SerializeField]
@@ -69,6 +73,8 @@ public class Player : MonoBehaviour
     private BoxCollider2D m_FeetBoxCollider2D;
     [SerializeField]
     private bool m_movingEnabled = true;
+    [SerializeField]
+    private bool m_IsDashing = false;
     [SerializeField]
     private float m_movingdisabledTime = 0.8f;
     [SerializeField]
@@ -98,6 +104,7 @@ public class Player : MonoBehaviour
     private RaycastHit2D  m_RaycastHit;
     private Rigidbody2D m_RigidBody;
     private Collider2D[] m_MobsInExplosionRadius;
+    private Collider2D[] m_WebInDashRadius;
     private bool m_IsFacingRight = true;
     private bool m_IsOnDash = false;
     private PauseControl m_PauseController;
@@ -284,10 +291,14 @@ public class Player : MonoBehaviour
             SceneManager.LoadScene("Map");
         }
         
-        if (i_Col.gameObject.CompareTag("SpiderWeb"))
+        if (i_Col.gameObject.CompareTag("SpiderWeb") && m_IsDashing)
         {
+            Debug.Log(i_Col);
             m_BoxCollider.isTrigger = true;
-            m_CurrentWalkingSpeed = m_RegularWalkingSpeed / 2;
+        }
+        else
+        {
+            m_BoxCollider.isTrigger = false;
         }
         if (i_Col.gameObject.CompareTag("TriggerMusic"))
         {
@@ -366,19 +377,28 @@ public class Player : MonoBehaviour
     {
         if (m_Dash.GetAbilityStats().GetIsAvailable() && getIsGrounded())
         {
-           
             StartCoroutine(MovmentDisabled(m_movingdisabledTime));
             StartCoroutine(invicible(0.5f));
             m_Dash.GetAbilityStats().SetIsAvailable(false);
             float dashTimer = 0;
             float dashDuration = m_Dash.DashTime;
             m_PlayerAnimation.DashAnimation();
-            while(dashDuration > dashTimer)
+            m_IsDashing = true;
+            m_WebInDashRadius = Physics2D.OverlapCircleAll(transform.position, m_ObjectiveCollectRadius, m_WebLayerMask);
+            foreach (Collider2D web in m_WebInDashRadius)
+            {
+                Debug.Log(web);
+                web.GetComponent<PolygonCollider2D>().isTrigger = true;
+                StartCoroutine(SetTriggerToFalse(web.gameObject, dashDuration));
+            }
+            
+            while (dashDuration > dashTimer)
             {
                 dashTimer += Time.deltaTime;
                 Vector2 dashDirection = new Vector2(i_MovingDirection * m_Dash.DashDistance, 0);
                 m_RigidBody.AddForce(dashDirection * m_Dash.DashDistance);
             }
+            m_IsDashing = false;
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(abilityCooldown(m_Dash.GetAbilityStats(),m_Dash.GetAbilityStats().GetCooldownTime()));
 
@@ -433,6 +453,7 @@ public class Player : MonoBehaviour
     {
         if (m_EnergyExplosion.GetSkillsStats().GetIsUnlocked() && m_EnergyExplosion.GetSkillsStats().GetIsAvailable() && m_EnergyExplosion.getExplosionManaPoints() <= GetMana())
         {
+            Debug.Log("first");
             float explosionRadius = m_EnergyExplosion.GetExplosionRadius();
             float explosionForce = m_EnergyExplosion.GetExplosionForce();
             Vector3 imaginaryFriendPosition = m_ImaginaryFriend.transform.position;
@@ -450,6 +471,7 @@ public class Player : MonoBehaviour
                        child.gameObject.layer = 21;
                        Fadeout(11f, child.gameObject);
                    }
+                   // here is the dotween warnings
                    Destroy(mob.gameObject, m_DebrisTime);
                 }
                 else
@@ -649,5 +671,10 @@ public class Player : MonoBehaviour
     {
         get => m_CurrentWalkingSpeed;
         set => m_CurrentWalkingSpeed = value;
+    }
+    public IEnumerator SetTriggerToFalse(GameObject i_GameObject, float i_TimeToFalse)
+    {
+        yield return new WaitForSeconds(i_TimeToFalse);
+        i_GameObject.GetComponent<PolygonCollider2D>().isTrigger = false;
     }
 }
