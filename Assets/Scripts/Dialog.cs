@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,14 @@ public class Dialog : MonoBehaviour
     private bool m_OpenedDialog;
     [SerializeField]
     private int m_index;
+    
+    private PauseControl m_PauseController;
 
+
+    private void Awake()
+    {
+        m_PauseController = FindObjectOfType<PauseControl>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -31,6 +39,7 @@ public class Dialog : MonoBehaviour
             {
                 m_DialogPanel.SetActive(true);
                 Time.timeScale = 0;
+                m_PauseController.IsGamePaused = true;
                 StartCoroutine(Typing());
             }
             else
@@ -81,6 +90,7 @@ public class Dialog : MonoBehaviour
             m_index = 0;
 
             Time.timeScale = 1;
+            m_PauseController.IsGamePaused = false;
         }
     }
 }

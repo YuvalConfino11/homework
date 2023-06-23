@@ -18,25 +18,32 @@ namespace Mobs
         [SerializeField]
         private float m_MobHitCooldown = 0.75f;
         [SerializeField]
-        private float m_BallFallRatio = 0.7f;
+        private float m_BallFallRatio = 0.5f;
         [SerializeField]
         private Rigidbody2D m_RigidBody;
         [SerializeField]
         private float m_KnockbackPower = 15;
         [SerializeField]
         private float m_KnockbackDuration = 0.2f;
-
+        
+        private SpriteRenderer m_SpriteRenderer;
+        private Color m_MobColor;
+        
         // private GameObject m_PlayerGameObject;
         private float timer = 0;
 
         private void Awake()
         {
             m_MobStats = GetComponent<MobStats>();
+            m_SpriteRenderer = this.gameObject.GetComponentInChildren<SpriteRenderer>();
             m_RigidBody = transform.GetComponent<Rigidbody2D>();
         }
 
         private void Update()
         {
+            m_MobColor = m_SpriteRenderer.color;
+            m_MobColor.a = m_MobStats.GetHealth() / m_MobStats.GetMaxHealth();
+            m_SpriteRenderer.color = m_MobColor;
             timer += Time.deltaTime;
             if (timer >= m_MobHitCooldown)
             {
@@ -66,17 +73,12 @@ namespace Mobs
         }
         private GameObject ChooseBall(GameObject i_ManaBall , GameObject i_HPBall)
         {
-            System.Random random = new System.Random();
-            float randomValue = random.Next(0,1);
+            float randomValue = UnityEngine.Random.Range(0f,1f);
             if(randomValue > m_BallFallRatio)
             {
                 return i_ManaBall;
             }
-            else
-            {
-                return i_HPBall;
-            }
-            
+            return i_HPBall;
         }
         public IEnumerator EnemyKnockback(float i_KnockbackDuration, float i_KnockbackPower, Transform i_ObjectTransform)
         {

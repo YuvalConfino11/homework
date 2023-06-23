@@ -19,6 +19,7 @@ public class ScenesChanges : MonoBehaviour
     private int m_QuitMenuCounter;
 
     private Color m_color;
+    private PauseControl m_PauseController;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,7 @@ public class ScenesChanges : MonoBehaviour
         ChangeScene(m_TimeBetweenScenes);
         StartCoroutine(DisableMask(m_TimeForMask));
         m_color = m_BlackMask.color;
+        m_PauseController = FindObjectOfType<PauseControl>();
     }
     private void Update()
     {
@@ -41,6 +43,7 @@ public class ScenesChanges : MonoBehaviour
                 m_QuitMenu.SetActive(true);
                 m_QuitMenuCounter++;
                 Time.timeScale = 0;
+                m_PauseController.IsGamePaused = true;
             }
             else
             {
@@ -48,6 +51,7 @@ public class ScenesChanges : MonoBehaviour
                 m_BlackMask.enabled = false;
                 m_QuitMenuCounter = 0;
                 Time.timeScale = 1;
+                m_PauseController.IsGamePaused = false;
             }
             
         }
@@ -73,6 +77,7 @@ public class ScenesChanges : MonoBehaviour
         m_QuitMenu.SetActive(false);
         m_QuitMenuCounter = 0;
         Time.timeScale = 1;
+        m_PauseController.IsGamePaused = false;
         EventSystem.current.SetSelectedGameObject(null);
     }
 }

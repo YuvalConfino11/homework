@@ -11,6 +11,21 @@ public class RespawnScript : MonoBehaviour
     private Player m_Player;
     [SerializeField]
     private ImaginaryFriendAi m_ImaginaryFriend;
+
+    private void Awake()
+    {
+       if (m_Player == null)
+       {
+            m_Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+       }
+       
+       if (m_ImaginaryFriend == null) 
+       {
+            m_ImaginaryFriend = GameObject.FindGameObjectWithTag("ImaginaryFriend").GetComponent<ImaginaryFriendAi>();
+       }
+    }
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         onCollisionHandler(collision);

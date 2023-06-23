@@ -13,6 +13,12 @@ public class ObjectAnimations : MonoBehaviour
     [SerializeField] private Animator m_Animator;
     [SerializeField] private float m_radius = 10f;
     private bool m_IsScreenOpen = false;
+    private PauseControl m_PauseController;
+
+    private void Awake()
+    {
+        m_PauseController = FindObjectOfType<PauseControl>();
+    }
 
     void Update()
     {
@@ -21,13 +27,9 @@ public class ObjectAnimations : MonoBehaviour
             Collider2D objectivesInRadius = Physics2D.OverlapCircle(transform.position, m_radius,m_ObjectiveLayerMask);
             if (objectivesInRadius != null)
             {
-                Debug.Log(m_IsScreenOpen);
-                if (objectivesInRadius.name == "Player")
-                {
-                    AudioManager.Instance.PlaySFX("Angel");
-                    m_Animator.Play("Objective_Dissipate");
-                    StartCoroutine(ShowSkillScreen());
-                }
+                AudioManager.Instance.PlaySFX("Angel");
+                m_Animator.Play("Objective_Dissipate");
+                StartCoroutine(ShowSkillScreen());
             }
         }
         if (m_IsScreenOpen == true && Input.GetKeyDown(KeyCode.Z))
@@ -35,6 +37,7 @@ public class ObjectAnimations : MonoBehaviour
             m_SkillScreen.SetActive(false);
             m_IsScreenOpen = false;
             Time.timeScale = 1f;
+            m_PauseController.IsGamePaused = false;
             this.gameObject.SetActive(false);
         }
     }
@@ -44,6 +47,7 @@ public class ObjectAnimations : MonoBehaviour
         yield return new WaitForSeconds(0.9f);
         m_SkillScreen.SetActive(true);
         Time.timeScale = 0f;
+        m_PauseController.IsGamePaused = true;
         m_IsScreenOpen = true;
 
     }

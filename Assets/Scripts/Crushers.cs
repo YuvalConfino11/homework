@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +18,26 @@ public class Crushers : MonoBehaviour
 
 
     private bool m_Crush;
-   
+
+    private void Awake()
+    {
+        
+        if (m_UpperPos == null)
+        {
+            m_UpperPos = transform.parent.GetChild(1);
+        }
+        
+        if (m_LowerPos == null)
+        {
+            m_LowerPos = transform.parent.GetChild(2);
+        }
+        
+        if (m_Activate == null)
+        {
+            m_Activate = transform.parent.GetChild(3)?.GetComponent<ActivateCrushers>();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -40,7 +60,4 @@ public class Crushers : MonoBehaviour
             }
         
     }
-
-    
-   
 }

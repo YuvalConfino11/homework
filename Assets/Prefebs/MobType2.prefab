@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 1539239014669981393}
   - component: {fileID: 8637067699560001742}
   - component: {fileID: 528855323080904337}
+  - component: {fileID: -1059677298408894194}
   m_Layer: 7
   m_Name: MobType2
   m_TagString: Mob
@@ -217,7 +218,7 @@ MonoBehaviour:
   m_CanHitPlayer: 0
   m_MobHitCooldown: 0.75
   m_BallFallRatio: 0.2
-  m_RigidBody: {fileID: 0}
+  m_RigidBody: {fileID: 5031054393018285812}
   m_KnockbackPower: 100
   m_KnockbackDuration: 0.5
 --- !u!114 &1539239014669981393
@@ -233,7 +234,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Damage: 10
-  m_Health: 5000
+  m_MaxHealth: 25
+  m_CurrentHealth: 25
 --- !u!114 &8637067699560001742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -873,7 +875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6d6a95ead03dc4a97b085a8465c8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_KnockbackPower: 15
+  m_KnockbackPower: 10
   m_KnockbackDuration: 0.2
   m_player: {fileID: 0}
 --- !u!1 &5068683700230389347

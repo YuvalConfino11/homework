@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: 4630492852500563315}
   - component: {fileID: 3732124924582079859}
   - component: {fileID: 8881888758399582304}
+  - component: {fileID: 1734748903372724222}
   m_Layer: 7
   m_Name: MobMiniBoss
   m_TagString: Mob
@@ -778,6 +779,9 @@ MonoBehaviour:
   m_CanHitPlayer: 0
   m_MobHitCooldown: 0.75
   m_BallFallRatio: 0.2
+  m_RigidBody: {fileID: 7153606485435401558}
+  m_KnockbackPower: 15
+  m_KnockbackDuration: 0.2
 --- !u!114 &3732124924582079859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -791,7 +795,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Damage: 20
-  m_Health: 100
+  m_MaxHealth: 60
+  m_CurrentHealth: 60
 --- !u!114 &8881888758399582304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -817,7 +822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6d6a95ead03dc4a97b085a8465c8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_KnockbackPower: 20
+  m_KnockbackPower: 7.5
   m_KnockbackDuration: 0.2
   m_player: {fileID: 0}
 --- !u!1 &8714287595042925883

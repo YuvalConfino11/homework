@@ -86,8 +86,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject m_ProjectileStartingPosition;
     [SerializeField]
-    private GameObject m_StoneWall;
-    [SerializeField]
     private float m_DebrisTime;
     [SerializeField]
     private AudioManager m_audioManager;
@@ -102,12 +100,12 @@ public class Player : MonoBehaviour
     private Collider2D[] m_MobsInExplosionRadius;
     private bool m_IsFacingRight = true;
     private bool m_IsOnDash = false;
+    private PauseControl m_PauseController;
    
     private void Awake()
     {
         m_RigidBody = GetComponent<Rigidbody2D>();
         m_BoxCollider = GetComponent<BoxCollider2D>();
-
         m_ManaPoint = GetMaxMana();
         m_ManaBar.SetMaxMana(GetMaxMana());
         if(AudioManager.Instance != null)
@@ -117,69 +115,71 @@ public class Player : MonoBehaviour
         
         m_HitScreen.gameObject.SetActive(false);
         m_CurrentWalkingSpeed = m_RegularWalkingSpeed;
+        m_PauseController = FindObjectOfType<PauseControl>();
         StartCoroutine(MovmentDisabled(3f));
-
-
     }
     
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        m_LastMovingDirection = horizontalInput == 0 ? m_LastMovingDirection : horizontalInput > 0 ? 1 : -1;
-        if (m_movingEnabled)
+        if (!m_PauseController.IsGamePaused)
         {
-            movement(horizontalInput);
+            float horizontalInput = Input.GetAxis("Horizontal");
+            m_LastMovingDirection = horizontalInput == 0 ? m_LastMovingDirection : horizontalInput > 0 ? 1 : -1;
+            if (m_movingEnabled)
+            {
+                movement(horizontalInput);
+            }
+            if (Input.GetKeyDown(KeyCode.LeftShift) && getIsGrounded() && m_Dash.GetAbilityStats().GetIsUnlocked())
+            {
+                StartCoroutine(dash(horizontalInput));
+            }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                jump();
+            }
+            if (Input.GetKey(KeyCode.Space) && m_Glide.GetAbilityStats().GetIsUnlocked())
+            {
+                glide();
+            }
+            else
+            {
+                m_RigidBody.gravityScale = m_DefaultGravityScale;
+                m_PlayerAnimation.EndGlideAnimation();
+            }
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                attack();
+            }
+            if (Input.GetKeyUp(KeyCode.LeftCommand) || Input.GetKeyUp(KeyCode.LeftAlt))
+            {
+                explosion();
+            }
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                heal();
+            }
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                interact();
+            }
+            Vector3 rayStartPosition =
+                new Vector3(transform.position.x + 0.5f * m_LastMovingDirection, transform.position.y, 0);
+            m_RaycastHit = Physics2D.Raycast(rayStartPosition, Vector2.down, m_GroundRaycastDistance,m_GroundLayerMask);
+            m_Grounded = m_RaycastHit.collider != null;
+            if (m_RigidBody.velocity.y <= 0)
+            {
+                m_FeetBoxCollider2D.enabled = true;
+            }
+            
+            m_PlayerAnimation.PlayPlayerAnimation(m_RigidBody.velocity.x, m_RigidBody.velocity.y, getIsGrounded());
+            if(m_CurrentHealthPoint == 0)
+            {
+                AudioManager.Instance.musicSource.Stop();
+                SceneManager.LoadScene("DeathScene");
+            }
+            
+            AdjustPlayerLightIntensity();
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift) && getIsGrounded() && m_Dash.GetAbilityStats().GetIsUnlocked())
-        {
-            StartCoroutine(dash(horizontalInput));
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            jump();
-        }
-        if (Input.GetKey(KeyCode.Space) && m_Glide.GetAbilityStats().GetIsUnlocked())
-        {
-            glide();
-        }
-        else
-        {
-            m_RigidBody.gravityScale = m_DefaultGravityScale;
-            m_PlayerAnimation.EndGlideAnimation();
-        }
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            attack();
-        }
-        if (Input.GetKeyUp(KeyCode.LeftCommand) || Input.GetKeyUp(KeyCode.LeftAlt))
-        {
-            explosion();
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            heal();
-        }
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            interact();
-        }
-        Vector3 rayStartPosition =
-            new Vector3(transform.position.x + 0.5f * m_LastMovingDirection, transform.position.y, 0);
-        m_RaycastHit = Physics2D.Raycast(rayStartPosition, Vector2.down, m_GroundRaycastDistance,m_GroundLayerMask);
-        m_Grounded = m_RaycastHit.collider != null;
-        if (m_RigidBody.velocity.y <= 0)
-        {
-            m_FeetBoxCollider2D.enabled = true;
-        }
-        
-        m_PlayerAnimation.PlayPlayerAnimation(m_RigidBody.velocity.x, m_RigidBody.velocity.y, getIsGrounded());
-        if(m_CurrentHealthPoint == 0)
-        {
-            AudioManager.Instance.musicSource.Stop();
-            SceneManager.LoadScene("DeathScene");
-        }
-        
-        AdjustPlayerLightIntensity();
     }
 
     private void AdjustPlayerLightIntensity()
@@ -250,6 +250,11 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D i_Col)
     {
+        if (i_Col.CompareTag("StoneWall"))
+        {
+            m_BoxCollider.isTrigger = false;
+        }
+        
         if (i_Col.gameObject.CompareTag("Ground"))
         {
             m_BoxCollider.isTrigger = false;
@@ -271,7 +276,6 @@ public class Player : MonoBehaviour
         
         if (i_Col.gameObject.CompareTag("Spike"))
         {
-            Debug.Log(1);
             StartCoroutine(invicible());
         }
         
@@ -427,7 +431,7 @@ public class Player : MonoBehaviour
     
     private void explosion()
     {
-        if (m_EnergyExplosion.GetSkillsStats().GetIsUnlocked() && m_EnergyExplosion.GetSkillsStats().GetIsAvailable())
+        if (m_EnergyExplosion.GetSkillsStats().GetIsUnlocked() && m_EnergyExplosion.GetSkillsStats().GetIsAvailable() && m_EnergyExplosion.getExplosionManaPoints() <= GetMana())
         {
             float explosionRadius = m_EnergyExplosion.GetExplosionRadius();
             float explosionForce = m_EnergyExplosion.GetExplosionForce();
@@ -437,16 +441,16 @@ public class Player : MonoBehaviour
             m_MobsInExplosionRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius,m_MobLayerMask);
             foreach (Collider2D mob in m_MobsInExplosionRadius) {
                 if (mob.CompareTag("StoneWall"))
-                {
-                   foreach (Transform child in m_StoneWall.transform)
-                    {
-                        child.transform.GetComponent<Rigidbody2D>().gravityScale=2;
-                        child.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-                        child.gameObject.layer = 21;
-                        child.transform.GetComponent<SpriteRenderer>().sortingLayerName = "Mob";
-                        Fadeout(11f, child.gameObject);
-                    }
-                    Destroy(m_StoneWall, m_DebrisTime);
+                { 
+                    mob.GetComponent<BoxCollider2D>().enabled = false;
+                   foreach (Transform child in mob.transform)
+                   {
+                       child.transform.GetComponent<Rigidbody2D>().gravityScale=2;
+                       child.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+                       child.gameObject.layer = 21;
+                       Fadeout(11f, child.gameObject);
+                   }
+                   Destroy(mob.gameObject, m_DebrisTime);
                 }
                 else
                 {
@@ -456,7 +460,7 @@ public class Player : MonoBehaviour
                     float distanceRatio = Mathf.Clamp(1 - (mobDistance / explosionRadius), 0.02f, 1);
                     float calculatedExplosionForce = explosionForce * distanceRatio * transform.localScale.y;
                     mobRigidbody2D.AddForce(mobDirection * calculatedExplosionForce,ForceMode2D.Impulse);
-                    mob.GetComponent<MobStats>().GetHit(m_EnergyExplosion.GetExplosionDamage());
+                    mob.GetComponent<MobStats>()?.GetHit(m_EnergyExplosion.GetExplosionDamage());
                     Debug.DrawLine(transform.position,mob.transform.position,Color.magenta,2);
                 }
                 

@@ -22,6 +22,9 @@ TagManager:
   - SpiderWeb
   - TriggerMusic
   - TriggerMusicExit
+  - SpikeRespawnPoint
+  - CrusherSpike
+  - StoneWallStone
   layers:
   - Default
   - TransparentFX
