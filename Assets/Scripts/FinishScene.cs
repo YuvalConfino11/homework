@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DeathScene : MonoBehaviour
+public class FinishScene : MonoBehaviour
 {
     public void StartOver()
     {
-        SceneManager.LoadScene("Map");
+        SceneManager.LoadScene("MainMenu");
     }
 }

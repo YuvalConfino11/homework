@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 12677026}
-  - component: {fileID: 12677025}
+  - component: {fileID: 12677027}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -140,18 +140,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &12677025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12677024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcc8e3a02ec2ce94391afe5f10071810, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &12677026
 Transform:
   m_ObjectHideFlags: 0
@@ -167,6 +155,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &12677027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12677024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa3ccfe9a2f21e439b0a3c25ed22f12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &445087116
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,8 +673,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 12677025}
-        m_TargetAssemblyTypeName: DeathScene, Assembly-CSharp
+      - m_Target: {fileID: 12677027}
+        m_TargetAssemblyTypeName: FinishScene, Assembly-CSharp
         m_MethodName: StartOver
         m_Mode: 1
         m_Arguments:

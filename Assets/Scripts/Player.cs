@@ -122,7 +122,6 @@ public class Player : MonoBehaviour
         m_HitScreen.gameObject.SetActive(false);
         m_CurrentWalkingSpeed = m_RegularWalkingSpeed;
         m_PauseController = FindObjectOfType<PauseControl>();
-        StartCoroutine(MovmentDisabled(3f));
     }
     
     void Update()

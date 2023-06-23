@@ -527,14 +527,19 @@ MonoBehaviour:
   m_ObjectiveLayerMask:
     serializedVersion: 2
     m_Bits: 4096
+  m_WebLayerMask:
+    serializedVersion: 2
+    m_Bits: 8388608
   m_IsAbleToShot: 1
   m_ShootingRate: 0.5
   m_ObjectiveCollectRadius: 25
+  m_DashDetectRadius: 10
   m_GroundRaycastDistance: 16.25
   m_PlayerGotKey: 000000
   m_PlayerAnimation: {fileID: 666493324}
   m_FeetBoxCollider2D: {fileID: 926051546431564419}
   m_movingEnabled: 1
+  m_IsDashing: 0
   m_movingdisabledTime: 0.8
   m_HealAnimator: {fileID: 4023265880929883762}
   m_ExplosionAnimator: {fileID: 1339626311737033555}
@@ -543,7 +548,6 @@ MonoBehaviour:
   m_PlayerLight: {fileID: 4493179147055390286}
   m_HitScreen: {fileID: 0}
   m_ProjectileStartingPosition: {fileID: 8138675577935199828}
-  m_StoneWall: {fileID: 0}
   m_DebrisTime: 10
   m_audioManager: {fileID: 0}
 --- !u!61 &2174727239527324068

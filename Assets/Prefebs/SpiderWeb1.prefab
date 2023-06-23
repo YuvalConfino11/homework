@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4462082829622196754}
   - component: {fileID: 480317547417223439}
   - component: {fileID: 7359884284143251519}
-  m_Layer: 0
+  m_Layer: 23
   m_Name: SpiderWeb1
   m_TagString: SpiderWeb
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
