@@ -968,7 +968,7 @@ PrefabInstance:
       objectReference: {fileID: 1898621078}
     - target: {fileID: 3070312050616550591, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
       propertyPath: m_DebrisTime
-      value: 5
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 3070312050616550591, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
       propertyPath: m_audioManager
