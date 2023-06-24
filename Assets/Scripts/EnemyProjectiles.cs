@@ -12,8 +12,6 @@ public class EnemyProjectiles : MonoBehaviour
     private float m_EnemyProjDamage;
 
     private Rigidbody2D m_Rb;
-    
-    private float damp = 5f;
     // Start is called before the first frame update
     void Start()
     {

@@ -62,8 +62,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float m_ObjectiveCollectRadius = 10f;
     [SerializeField]
-    private float m_DashDetectRadius = 10f;
-    [SerializeField]
     private float m_GroundRaycastDistance = 10f;
     [SerializeField]
     private bool[] m_PlayerGotKey = new bool[3];

@@ -8,8 +8,6 @@ namespace Mobs
     {
         [SerializeField] 
         private float m_MobFieldOfViewRadius = 10f;
-        [SerializeField]
-        private float m_MobFieldOfAttackRadius = 9f;
         [SerializeField] 
         private LayerMask m_PlayerLayerMask;
         [SerializeField] 

@@ -95,8 +95,9 @@ namespace Mobs {
             m_Timer += Time.deltaTime;
             if (m_Timer > m_TimeBetweenProjetiles)
             {
-                m_Timer = 0;
                 m_EnemyCanShoot = true;
+                m_Timer = 0;
+                
             }
         }
 
@@ -187,7 +188,6 @@ namespace Mobs {
             while (true)
             {
                 yield return wait;
-
                 fov();
             }
         }
@@ -206,6 +206,7 @@ namespace Mobs {
                 if (m_EnemyCanShoot)
                 {
                     Shoot();
+                    m_EnemyCanShoot = false;
                 }
 
 
@@ -298,7 +299,6 @@ namespace Mobs {
             yield return new WaitForSeconds(m_MobAttackAnimationDuration);
             m_MobAnimation.StopMobAttackAnimation();
             Instantiate(m_EnemyProj, m_EnemyProjPos.position, Quaternion.identity);
-            m_EnemyCanShoot = false;
         }
     }
 }
