@@ -82,10 +82,7 @@ public class SpawnManager : MonoBehaviour
         {
             foreach (GameObject child in m_SpwanPointsList)
             {
-                if (child != null)
-                {
-                    Gizmos.DrawWireSphere(child.transform.position, 10f);
-                }
+                Gizmos.DrawWireSphere(child.transform.position, 10f);
             }
         }
         

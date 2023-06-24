@@ -454,7 +454,6 @@ public class Player : MonoBehaviour
     {
         if (m_EnergyExplosion.GetSkillsStats().GetIsUnlocked() && m_EnergyExplosion.GetSkillsStats().GetIsAvailable() && m_EnergyExplosion.getExplosionManaPoints() <= GetMana())
         {
-            Debug.Log("first");
             float explosionRadius = m_EnergyExplosion.GetExplosionRadius();
             float explosionForce = m_EnergyExplosion.GetExplosionForce();
             Vector3 imaginaryFriendPosition = m_ImaginaryFriend.transform.position;
@@ -470,7 +469,7 @@ public class Player : MonoBehaviour
                        child.transform.GetComponent<Rigidbody2D>().gravityScale=2;
                        child.transform.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
                        child.gameObject.layer = 21;
-                       Fadeout(11f, child.gameObject);
+                       Fadeout(7f, child.gameObject);
                    }
                    // here is the dotween warnings
                    Destroy(mob.gameObject, m_DebrisTime);
@@ -659,7 +658,7 @@ public class Player : MonoBehaviour
     }
     void Fadeout(float i_Time,GameObject i_transform)
     {
-        i_transform.GetComponent<SpriteRenderer>().DOFade(0, i_Time);
+        i_transform.GetComponent<SpriteRenderer>()?.DOFade(0, i_Time);
     }
 
     public IEnumerator SetActiveToFalse(GameObject i_GameObject, float i_TimeToFalse)

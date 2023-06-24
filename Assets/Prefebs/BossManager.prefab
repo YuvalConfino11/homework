@@ -87,7 +87,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   m_BossMob: {fileID: 7153606485435401554, guid: 4eb542fbff1ad43018eb231a66d3dbe0, type: 3}
-  m_MaxBarriersMovingDistance: 60
+  m_MaxBarriersMovingDistance: 80
   m_BarriersMovingSpeed: 20
 --- !u!1001 &1666976381697737651
 PrefabInstance:

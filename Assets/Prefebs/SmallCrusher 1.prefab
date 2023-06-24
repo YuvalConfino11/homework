@@ -454,7 +454,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6d86cc5fe678184eaa374be3fb34937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crusher: {fileID: 7629631731001738354}
   m_ActivateCrushers: 0
+  m_StartPos: {fileID: 0}
 --- !u!1 &7629631731001738354
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,7 +470,6 @@ GameObject:
   - component: {fileID: 5216832208030078050}
   - component: {fileID: 1364157517401363870}
   - component: {fileID: 5539379867020820543}
-  - component: {fileID: 8165532501613464373}
   - component: {fileID: 7629631731001738355}
   m_Layer: 9
   m_Name: CrusherGround
@@ -671,21 +672,6 @@ MonoBehaviour:
   m_UpperPos: {fileID: 4242857607511163919}
   m_LowerPos: {fileID: 4242857608682121506}
   m_Activate: {fileID: 6210385679652028287}
---- !u!114 &8165532501613464373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7629631731001738354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 107fd3e44e96ada4498b079a742f8626, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RespawnPoint: {fileID: 0}
-  m_Player: {fileID: 0}
-  m_ImaginaryFriend: {fileID: 0}
 --- !u!114 &7629631731001738355
 MonoBehaviour:
   m_ObjectHideFlags: 0
