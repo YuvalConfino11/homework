@@ -454,7 +454,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6d86cc5fe678184eaa374be3fb34937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crusher: {fileID: 7629631731001738354}
   m_ActivateCrushers: 0
+  m_StartPos: {fileID: 0}
 --- !u!1 &7629631731001738354
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,7 +671,6 @@ MonoBehaviour:
   m_DownSpeed: 60
   m_UpperPos: {fileID: 4242857607511163919}
   m_LowerPos: {fileID: 4242857608682121506}
-  m_StartPos: {fileID: 0}
   m_Activate: {fileID: 6210385679652028287}
 --- !u!114 &7629631731001738355
 MonoBehaviour:

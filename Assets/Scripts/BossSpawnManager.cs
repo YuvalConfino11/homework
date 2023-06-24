@@ -30,6 +30,7 @@ public class BossSpawnManager : MonoBehaviour
     private bool m_IsMoveBarrier = false;
     private float m_BarrierMovingDirection = 1f;
     private float m_BarriersMovingDistance = 0;
+    private float m_YScale = 3f;
     
 
     private void Start()
@@ -54,6 +55,7 @@ public class BossSpawnManager : MonoBehaviour
                 foreach (GameObject barrier in m_BossAreaBarriers)
                 {
                     barrier.transform.position += new Vector3(0, m_BarrierMovingDirection * Time.deltaTime * m_BarriersMovingSpeed, 0);
+                    barrier.transform.localScale = new Vector3(barrier.transform.localScale.x, m_YScale, barrier.transform.localScale.z);
                 }
 
                 m_BarriersMovingDistance += m_BarrierMovingDirection * Time.deltaTime * m_BarriersMovingSpeed;
@@ -82,6 +84,7 @@ public class BossSpawnManager : MonoBehaviour
 
         if (m_IsMobDead && m_IsBarrierUp && !m_IsFirstEnter && !m_IsMoveBarrier)
         {
+            m_YScale = 1f;
             m_BarriersMovingDistance = 0;
             m_BarrierMovingDirection = -1f;
             m_IsMoveBarrier = true;
