@@ -300,7 +300,6 @@ public class Player : MonoBehaviour
             StartCoroutine(MovmentDisabled(20f));
             m_RigidBody.velocity = new Vector3(0, 0, 0);
             m_scenesChanges.ShowEndImage(10f);
-            Debug.Log("change");
             StartCoroutine(WaitToChangeScene(15f));
 
         }
