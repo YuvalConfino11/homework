@@ -71,6 +71,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4465306662624409346}
     m_Modifications:
+    - target: {fileID: 3226547681656372150, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_Size.x
+      value: 49.78131
+      objectReference: {fileID: 0}
+    - target: {fileID: 3226547681656372150, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_Size.y
+      value: 75.906555
+      objectReference: {fileID: 0}
+    - target: {fileID: 3226547681656372150, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.61624146
+      objectReference: {fileID: 0}
+    - target: {fileID: 3226547681656372150, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
+      propertyPath: m_Offset.y
+      value: 6.0343323
+      objectReference: {fileID: 0}
     - target: {fileID: 5535433213525844069, guid: 0bc1a03c66af552439caabfd57e9b9ed, type: 3}
       propertyPath: m_Name
       value: Gate
