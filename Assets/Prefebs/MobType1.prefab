@@ -1790,8 +1790,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Damage: 5
-  m_MaxHealth: 15
-  m_CurrentHealth: 15
+  m_MaxHealth: 20
+  m_CurrentHealth: 20
 --- !u!114 &1240481289709308154
 MonoBehaviour:
   m_ObjectHideFlags: 0
