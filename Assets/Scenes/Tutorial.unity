@@ -247,6 +247,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 106327054703509316, guid: 5d93b244f8f2948cabd7f7dee28dc21f, type: 3}
   m_PrefabInstance: {fileID: 17758308}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &38919877 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6855977407642929166, guid: f4e8e9c08b9fe1043871f7cfca9ff4bc, type: 3}
+  m_PrefabInstance: {fileID: 1045788631}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9452db2ea56ae6e44964f3efa144927e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &120825833
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -951,6 +962,14 @@ PrefabInstance:
       propertyPath: m_StoneWall
       value: 
       objectReference: {fileID: 168993732}
+    - target: {fileID: 3070312050616550591, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
+      propertyPath: m_audioManager
+      value: 
+      objectReference: {fileID: 38919877}
+    - target: {fileID: 3070312050616550591, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
+      propertyPath: m_scenesChanges
+      value: 
+      objectReference: {fileID: 451023456}
     - target: {fileID: 3070312050616550591, guid: 2e7d895988c5a0547a10ad9c2bb6064e, type: 3}
       propertyPath: m_ImaginaryFriend
       value: 

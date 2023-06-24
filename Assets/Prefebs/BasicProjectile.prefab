@@ -139,7 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Range: 80
   m_Damage: 10
-  m_Speed: 100
+  m_Speed: 120
 --- !u!95 &8955718124470273413
 Animator:
   serializedVersion: 5
