@@ -18,7 +18,7 @@ namespace Mobs
         [SerializeField]
         private float m_MobHitCooldown = 0.75f;
         [SerializeField]
-        private float m_BallFallRatio = 0.5f;
+        private float m_BallFallRatio = 0.3f;
         [SerializeField]
         private Rigidbody2D m_RigidBody;
         [SerializeField]
@@ -27,8 +27,7 @@ namespace Mobs
         private float m_KnockbackDuration = 0.2f;
         [SerializeField] 
         private MobAnimation m_MobAnimation;
-        [SerializeField] 
-        private float m_MobAttackAnimationDuration = 0.4f;
+
         
         private SpriteRenderer m_SpriteRenderer;
         private Color m_MobColor;
@@ -55,8 +54,12 @@ namespace Mobs
             }
             if (m_MobStats.isDead())
             {
+                float randomValue = UnityEngine.Random.Range(0f, 1f);
+                if (randomValue > m_BallFallRatio)
+                {
+                    Instantiate(ChooseBall(m_ManaBall, m_HPBall), transform.position, transform.rotation);
+                }
                 Destroy(this.gameObject);
-                Instantiate(ChooseBall(m_ManaBall , m_HPBall), transform.position, transform.rotation);
             }
         }
         
@@ -65,8 +68,7 @@ namespace Mobs
             
             if (col.gameObject.CompareTag("Player") && m_CanHitPlayer)
             {
-                m_MobAnimation.PlayMobAttackAnimation();
-                StartCoroutine(attackAnimationOff());
+               
                 Player player = col.gameObject.GetComponent<Player>();
                 player.getHit(m_MobStats.GetDamage());
                 m_CanHitPlayer = false;
@@ -100,10 +102,6 @@ namespace Mobs
             yield return 0;
         }
         
-        private IEnumerator attackAnimationOff()
-        {
-            yield return new WaitForSeconds(m_MobAttackAnimationDuration);
-            m_MobAnimation.StopMobAttackAnimation();
-        }
+        
     }
 }

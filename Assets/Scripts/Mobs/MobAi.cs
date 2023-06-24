@@ -8,6 +8,8 @@ namespace Mobs
     {
         [SerializeField] 
         private float m_MobFieldOfViewRadius = 10f;
+        [SerializeField]
+        private float m_MobFieldOfAttackRadius = 9f;
         [SerializeField] 
         private LayerMask m_PlayerLayerMask;
         [SerializeField] 
@@ -37,7 +39,15 @@ namespace Mobs
         [SerializeField]
         private bool m_MonsterGrowled;
         [SerializeField]
+        private bool m_PlayerIsInRadius;
+        [SerializeField]
         private string m_monsterAudio;
+        [SerializeField]
+        private float m_MobAttackAnimationDuration = 0.4f;
+        [SerializeField]
+        private float m_MobHitCooldown = 1.5f;
+        [SerializeField]
+        bool m_CanHitPlayer = false;
 
         private Rigidbody2D m_RigidBody;
         private GameObject m_PlayerGameObject;
@@ -47,7 +57,8 @@ namespace Mobs
         private float m_RandomTimeOfWalkingInSameDirection;
         private RaycastHit2D  m_RaycastHit;
         private bool m_EncounterObstacle;
-        
+        private float timer = 0;
+
 
 
         private void Awake()
@@ -83,6 +94,14 @@ namespace Mobs
             }
             m_MobAnimation.PlayMobAnimation(m_RigidBody.velocity.x);
             MakeSound(m_monsterAudio);
+            timer += Time.deltaTime;
+            if (timer >= m_MobHitCooldown)
+            {
+                m_CanHitPlayer = true;
+                timer = 0;
+            }
+           
+
         }
 
         private void FixedUpdate()
@@ -172,8 +191,12 @@ namespace Mobs
             while (true)
             {
                 yield return wait;
-
-                fov();
+                PlayerInAttackRadius();
+                if (!m_PlayerIsInRadius)
+                {
+                    fov();
+                }
+                
             }
         }
 
@@ -223,7 +246,9 @@ namespace Mobs
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(m_CastPosition.position, m_MobFieldOfViewRadius);
-            
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(m_CastPosition.position, m_MobFieldOfAttackRadius);
+
             Gizmos.color = Color.cyan;
             Vector3 nearEdgeTargetPosition = m_FeetBoxCollider2D.transform.position;
             Vector3 nearEdgeStartPosition = m_CastPosition.position;
@@ -264,6 +289,31 @@ namespace Mobs
                 m_MonsterGrowled = false;
             }
         }
-        
+        private void PlayerInAttackRadius()
+        {
+            Collider2D playerInAttackRadius = Physics2D.OverlapCircle(transform.position,
+               m_MobFieldOfAttackRadius * transform.localScale.y, m_PlayerLayerMask);
+            if(playerInAttackRadius != null)
+            {
+                m_PlayerIsInRadius = true;
+                if (m_CanHitPlayer)
+                {
+                    Debug.Log("i am attacking");
+                    m_MobAnimation.PlayMobAttackAnimation();
+                    StartCoroutine(attackAnimationOff());
+                    m_CanHitPlayer = false;
+                }
+            }
+            else
+            {
+                m_PlayerIsInRadius = false;
+            }
+        }
+        private IEnumerator attackAnimationOff()
+        {
+            yield return new WaitForSeconds(m_MobAttackAnimationDuration);
+            m_MobAnimation.StopMobAttackAnimation();
+        }
+
     }
 }
