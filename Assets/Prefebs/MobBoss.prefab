@@ -791,7 +791,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MobFieldOfViewRadius: 150
-  m_MobFieldOfAttackRadius: 9
   m_PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -803,7 +802,7 @@ MonoBehaviour:
   m_MinThinkPauseTime: 2
   m_MinWalkingOnSameDirectionTime: 4
   m_MaxWalkingOnSameDirectionTime: 12
-  m_WalkingSpeed: 4
+  m_WalkingSpeed: 12
   m_Grounded: 1
   m_FeetBoxCollider2D: {fileID: 2210104573977967158}
   m_CastPosition: {fileID: 4421562829511533466}
@@ -837,9 +836,9 @@ MonoBehaviour:
   m_HPBall: {fileID: 4249172948917393650, guid: 00c72379269c0f1478b0384b689bab2a, type: 3}
   m_CanHitPlayer: 0
   m_MobHitCooldown: 0.75
-  m_BallFallRatio: 0.2
+  m_BallFallRatio: 1
   m_RigidBody: {fileID: 0}
-  m_KnockbackPower: 15
+  m_KnockbackPower: 30
   m_KnockbackDuration: 0.2
   m_MobAnimation: {fileID: 0}
 --- !u!114 &3732124924582079859
@@ -855,8 +854,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Damage: 20
-  m_MaxHealth: 100
-  m_CurrentHealth: 100
+  m_MaxHealth: 250
+  m_CurrentHealth: 250
 --- !u!114 &6412567768566302720
 MonoBehaviour:
   m_ObjectHideFlags: 0

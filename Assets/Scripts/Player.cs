@@ -296,6 +296,7 @@ public class Player : MonoBehaviour
         if (i_Col.gameObject.CompareTag("EndWall"))
         {
             m_HealAnimator.SetBool("IsHealPulseActive", true);
+            SetHp(100f);
             StartCoroutine(AnimatorCooldown("IsHealPulseActive", m_HealAnimator, m_HealAnimatorCooldown));
             StartCoroutine(MovmentDisabled(20f));
             m_RigidBody.velocity = new Vector3(0, 0, 0);

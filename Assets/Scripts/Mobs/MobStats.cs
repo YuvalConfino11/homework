@@ -34,7 +34,7 @@ namespace Mobs
         
         public void GetHit(float i_Damage)
         {
-            m_CurrentHealth = Mathf.Clamp(m_CurrentHealth - i_Damage, 0, 100);
+            m_CurrentHealth = Mathf.Clamp(m_CurrentHealth - i_Damage, 0, 500);
         }
 
         public bool isDead()

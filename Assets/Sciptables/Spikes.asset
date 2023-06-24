@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc90ac6f0a2a4657afb6f89896871653, type: 3}
   m_Name: Spikes
   m_EditorClassIdentifier: 
-  m_SpikeDamage: 15
+  m_SpikeDamage: 10
   m_SpikeHP: 40

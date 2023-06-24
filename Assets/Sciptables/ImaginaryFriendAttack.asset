@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ImaginaryFriendAttack
   m_EditorClassIdentifier: 
   m_AttackRadius: 50
-  m_AttackDamage: 1
+  m_AttackDamage: 3

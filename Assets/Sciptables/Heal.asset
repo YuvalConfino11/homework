@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa2d796aebe14ded814d99599b1a2a33, type: 3}
   m_Name: Heal
   m_EditorClassIdentifier: 
-  m_HealAmount: 40
-  m_HealManaPointsCost: 50
+  m_HealAmount: 20
+  m_HealManaPointsCost: 30

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MaxExplosionRadius: 60
   m_ExplosionForce: 50
-  m_ExplosionDamage: 25
-  m_ExplosionManaPointsCost: 1
+  m_ExplosionDamage: 15
+  m_ExplosionManaPointsCost: 10

@@ -1772,9 +1772,9 @@ MonoBehaviour:
   m_HPBall: {fileID: 4249172948917393650, guid: 00c72379269c0f1478b0384b689bab2a, type: 3}
   m_CanHitPlayer: 0
   m_MobHitCooldown: 0.75
-  m_BallFallRatio: 0.2
+  m_BallFallRatio: 0.5
   m_RigidBody: {fileID: 5345240097684956968}
-  m_KnockbackPower: 15
+  m_KnockbackPower: 10
   m_KnockbackDuration: 0.2
   m_MobAnimation: {fileID: 0}
 --- !u!114 &1919526740459900685
