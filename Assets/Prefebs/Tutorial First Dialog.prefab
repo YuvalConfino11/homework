@@ -129,9 +129,10 @@ MonoBehaviour:
   m_Dialog:
   - Good, you're up. I was worried.
   - I'm glad you're okay. The Forest is not safe anymore.
-  - 'These monsters started appeareaing not long ago and attacked our home. '
+  - 'These monsters started appearing not long ago and attacked our home. '
   - We have to get out of here its not safe to talk now.
   m_DialogSpeed: 0.06
   m_DialogIsNear: 0
   m_OpenedDialog: 0
   m_index: 0
+  isTyping: 0

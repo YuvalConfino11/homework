@@ -90,10 +90,11 @@ public class Dialog : MonoBehaviour
         }
         else
         {  
-            m_DialogPanel.SetActive(false);
+            
             m_DialogText.text = "";
             m_index = 0;
-
+            m_DialogPanel.SetActive(false);
+            
             Time.timeScale = 1;
             m_PauseController.IsGamePaused = false;
         }
