@@ -32,6 +32,8 @@ namespace Mobs
         private BoxCollider2D m_FeetBoxCollider2D;
         [SerializeField]
         private Transform m_CastPosition;
+        [SerializeField]
+        private Transform m_AttackPosition;
         [SerializeField] 
         private MobAnimation m_MobAnimation;
         [SerializeField] 
@@ -77,6 +79,7 @@ namespace Mobs
             m_RigidBody = GetComponent<Rigidbody2D>();
             m_FeetBoxCollider2D = m_FeetBoxCollider2D == null ? GetComponent<BoxCollider2D>() : m_FeetBoxCollider2D;
             m_CastPosition = m_CastPosition == null ? transform.GetChild(0).transform : m_CastPosition;
+            m_AttackPosition = m_AttackPosition == null ? transform.GetChild(1).transform : m_AttackPosition;
             m_PlayerGameObject = GameObject.FindGameObjectWithTag("Player");
             m_MovingDirection = Mathf.Sign(transform.localScale.x);
             StartCoroutine(fovCheck());
@@ -255,7 +258,7 @@ namespace Mobs
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(m_CastPosition.position, m_MobFieldOfViewRadius);
             Gizmos.color = Color.white;
-            Vector3 AttackPosition = m_CastPosition.position;
+            Vector3 AttackPosition = m_AttackPosition.position;
             Vector3 AttackTargetPosition = AttackPosition;
             AttackTargetPosition.x +=transform.localScale.x *m_AttackCastDistance;
             Gizmos.DrawLine(AttackPosition, AttackTargetPosition);
@@ -302,7 +305,7 @@ namespace Mobs
         }
         private void PlayerInAttackRadius()
         {
-            Vector3 rayStartPosition = new Vector3(m_CastPosition.position.x, m_CastPosition.position.y, 0);
+            Vector3 rayStartPosition = new Vector3(m_AttackPosition.position.x, m_AttackPosition.position.y, 0);
             RaycastHit2D playerInAttackRayCast = Physics2D.Raycast(rayStartPosition,transform.localScale.x *Vector2.right, m_AttackCastDistance, m_PlayerLayerMask);
             if (playerInAttackRayCast.collider != null)
             {

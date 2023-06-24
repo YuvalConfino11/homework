@@ -24,12 +24,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1062938567523157119}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.0495148, y: -6.9322205, z: -0.024910927}
+  m_LocalPosition: {x: 0, y: -0.503, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5031054393018285811}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4181100076182418428
 GameObject:
@@ -62,7 +62,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5031054393018285811}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5101098898919443247
 SpriteRenderer:
@@ -173,9 +173,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2002933695078471736}
+  - {fileID: 1977710903598020778}
   - {fileID: 8033146721797993741}
   - {fileID: 4270774895490720033}
-  - {fileID: 1977710903598020778}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -229,6 +229,7 @@ MonoBehaviour:
   m_Grounded: 1
   m_FeetBoxCollider2D: {fileID: 3164869048277095641}
   m_CastPosition: {fileID: 2002933695078471736}
+  m_AttackPosition: {fileID: 0}
   m_MobAnimation: {fileID: 8637067699560001742}
   m_GroundCastDistance: 20
   m_AttackCastDistance: 25
@@ -950,7 +951,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5031054393018285811}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &3164869048277095641
 BoxCollider2D:
