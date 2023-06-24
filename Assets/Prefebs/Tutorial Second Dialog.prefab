@@ -127,8 +127,10 @@ MonoBehaviour:
   m_DialogPanel: {fileID: 0}
   m_DialogText: {fileID: 0}
   m_Dialog:
-  - 
-  - 
+  - We're going deeper into the forest.
+  - Be cautious, I wont be able to protect you there
+  - We're really doing this huh? Oh, I almots forgot...
+  - I am Aria, nice to see you... again...
   m_DialogSpeed: 0.06
   m_DialogIsNear: 0
   m_OpenedDialog: 0

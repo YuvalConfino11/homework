@@ -21,9 +21,6 @@ public class Dialog : MonoBehaviour
     private bool m_OpenedDialog;
     [SerializeField]
     private int m_index;
-
-    [SerializeField]
-    private bool isTyping;
     
     private PauseControl m_PauseController;
 
@@ -53,7 +50,7 @@ public class Dialog : MonoBehaviour
         }
         if (m_OpenedDialog)
         {
-            if (Input.GetKeyDown(KeyCode.Z) && !isTyping)
+            if (Input.GetKeyDown(KeyCode.Z))
             {
                 NextLine();
             }
@@ -71,13 +68,11 @@ public class Dialog : MonoBehaviour
 
     private IEnumerator Typing()
     {
-        isTyping = true;
         foreach(char letter in m_Dialog[m_index].ToCharArray())
         {
             m_DialogText.text += letter;
             yield return new WaitForSecondsRealtime(m_DialogSpeed);
         }
-        isTyping = false;
     }
 
     public void NextLine()
