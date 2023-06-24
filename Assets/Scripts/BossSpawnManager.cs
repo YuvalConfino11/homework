@@ -19,6 +19,8 @@ public class BossSpawnManager : MonoBehaviour
     private float m_MaxBarriersMovingDistance = 60f;
     [SerializeField]
     private float m_BarriersMovingSpeed = 10f;
+    [SerializeField]
+    private string m_BossMusicName = "Boss ver1";
     
     
     private bool m_IsFirstEnter = true;
@@ -31,6 +33,7 @@ public class BossSpawnManager : MonoBehaviour
     private float m_BarrierMovingDirection = 1f;
     private float m_BarriersMovingDistance = 0;
     private float m_YScale = 3f;
+    private bool m_InBoss = false;
     
 
     private void Start()
@@ -57,7 +60,12 @@ public class BossSpawnManager : MonoBehaviour
                     barrier.transform.position += new Vector3(0, m_BarrierMovingDirection * Time.deltaTime * m_BarriersMovingSpeed, 0);
                     barrier.transform.localScale = new Vector3(barrier.transform.localScale.x, m_YScale, barrier.transform.localScale.z);
                 }
-
+                if (!m_InBoss)
+                {
+                    AudioManager.Instance.PlayMusic(m_BossMusicName);
+                    m_InBoss = true;
+                }
+                
                 m_BarriersMovingDistance += m_BarrierMovingDirection * Time.deltaTime * m_BarriersMovingSpeed;
             }
             else
@@ -88,6 +96,10 @@ public class BossSpawnManager : MonoBehaviour
             m_BarriersMovingDistance = 0;
             m_BarrierMovingDirection = -1f;
             m_IsMoveBarrier = true;
+            if (m_InBoss)
+            {
+                AudioManager.Instance.PlayMusic("Happy ver1");
+            }
         }
 
         m_IsMobDead = Physics2D.OverlapBox(transform.position, new Vector2(m_SpawnManagerRadius,m_SpawnManagerRadius),0, m_MobsLayerMask) == null;
