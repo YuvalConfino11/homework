@@ -44,7 +44,7 @@ namespace Mobs
         private void Update()
         {
             m_MobColor = m_SpriteRenderer.color;
-            m_MobColor.a = m_MobStats.GetHealth() / m_MobStats.GetMaxHealth();
+            m_MobColor.a = Mathf.Clamp(m_MobStats.GetHealth() / m_MobStats.GetMaxHealth(),0.2f,1f);
             m_SpriteRenderer.color = m_MobColor;
             timer += Time.deltaTime;
             if (timer >= m_MobHitCooldown)
