@@ -790,6 +790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MobFieldOfViewRadius: 150
+  m_MobFieldOfAttackRadius: 9
   m_PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -807,8 +808,16 @@ MonoBehaviour:
   m_CastPosition: {fileID: 4421562829511533466}
   m_MobAnimation: {fileID: 6412567768566302720}
   m_GroundCastDistance: 45
+  m_AttackCastDistance: 10
   m_MonsterGrowled: 0
+  m_PlayerIsInRadius: 0
   m_monsterAudio: 
+  m_MobAttackAnimationDuration: 0.4
+  m_MobHitCooldown: 1.5
+  m_CanHitPlayer: 0
+  m_MobStats: {fileID: 3732124924582079859}
+  m_KnockbackPower: 15
+  m_KnockbackDuration: 0.2
 --- !u!114 &4630492852500563315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -830,6 +839,7 @@ MonoBehaviour:
   m_RigidBody: {fileID: 0}
   m_KnockbackPower: 15
   m_KnockbackDuration: 0.2
+  m_MobAnimation: {fileID: 0}
 --- !u!114 &3732124924582079859
 MonoBehaviour:
   m_ObjectHideFlags: 0

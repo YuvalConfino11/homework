@@ -2490,7 +2490,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpike (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2702894475041729601, guid: 3b742660b2a37445f8de76c4e1532229, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3b742660b2a37445f8de76c4e1532229, type: 3}
 --- !u!1 &1380372654
 GameObject:
@@ -13610,6 +13611,10 @@ PrefabInstance:
       propertyPath: m_UpperPos
       value: 
       objectReference: {fileID: 2012025188}
+    - target: {fileID: 8599311139750996728, guid: c94221b35710d1f48848660de544f0bc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8729887228798157943, guid: c94221b35710d1f48848660de544f0bc, type: 3}
       propertyPath: m_player
       value: 

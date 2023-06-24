@@ -199,12 +199,16 @@ MonoBehaviour:
   m_CastPosition: {fileID: 2002933695078471736}
   m_MobAnimation: {fileID: 8637067699560001742}
   m_GroundCastDistance: 20
+  m_AttackCastDistance: 25
   m_MonsterGrowled: 0
   m_PlayerIsInRadius: 0
   m_monsterAudio: BlobMonster
   m_MobAttackAnimationDuration: 0.4
   m_MobHitCooldown: 1.5
   m_CanHitPlayer: 0
+  m_MobStats: {fileID: 1539239014669981393}
+  m_KnockbackPower: 5
+  m_KnockbackDuration: 0.2
 --- !u!114 &7409972616175501009
 MonoBehaviour:
   m_ObjectHideFlags: 0

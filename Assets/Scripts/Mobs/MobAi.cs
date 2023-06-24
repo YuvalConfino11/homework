@@ -37,6 +37,8 @@ namespace Mobs
         [SerializeField] 
         private float m_GroundCastDistance = 10f;
         [SerializeField]
+        private float m_AttackCastDistance = 10f;
+        [SerializeField]
         private bool m_MonsterGrowled;
         [SerializeField]
         private bool m_PlayerIsInRadius;
@@ -48,6 +50,12 @@ namespace Mobs
         private float m_MobHitCooldown = 1.5f;
         [SerializeField]
         bool m_CanHitPlayer = false;
+        [SerializeField]
+        private MobStats m_MobStats;
+        [SerializeField]
+        private float m_KnockbackPower = 15;
+        [SerializeField]
+        private float m_KnockbackDuration = 0.2f;
 
         private Rigidbody2D m_RigidBody;
         private GameObject m_PlayerGameObject;
@@ -246,8 +254,11 @@ namespace Mobs
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(m_CastPosition.position, m_MobFieldOfViewRadius);
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(m_CastPosition.position, m_MobFieldOfAttackRadius);
+            Gizmos.color = Color.black;
+            Vector3 AttackPosition = m_CastPosition.position;
+            Vector3 AttackTargetPosition = AttackPosition;
+            AttackTargetPosition.x +=transform.localScale.x *m_AttackCastDistance;
+            Gizmos.DrawLine(AttackPosition, AttackTargetPosition);
 
             Gizmos.color = Color.cyan;
             Vector3 nearEdgeTargetPosition = m_FeetBoxCollider2D.transform.position;
@@ -291,17 +302,28 @@ namespace Mobs
         }
         private void PlayerInAttackRadius()
         {
-            Collider2D playerInAttackRadius = Physics2D.OverlapCircle(transform.position,
-               m_MobFieldOfAttackRadius * transform.localScale.y, m_PlayerLayerMask);
-            if(playerInAttackRadius != null)
+            Vector3 rayStartPosition = new Vector3(m_CastPosition.position.x, m_CastPosition.position.y, 0);
+            RaycastHit2D playerInAttackRayCast = Physics2D.Raycast(rayStartPosition,transform.localScale.x *Vector2.right, m_AttackCastDistance, m_PlayerLayerMask);
+            if (playerInAttackRayCast.collider != null)
             {
                 m_PlayerIsInRadius = true;
                 if (m_CanHitPlayer)
                 {
-                    Debug.Log("i am attacking");
                     m_MobAnimation.PlayMobAttackAnimation();
                     StartCoroutine(attackAnimationOff());
                     m_CanHitPlayer = false;
+                    new WaitForSeconds(m_MobAttackAnimationDuration);
+                    if(playerInAttackRayCast.collider != null)
+                    {
+                        Player m_player = playerInAttackRayCast.collider.GetComponent<Player>();
+                        m_player.getHit(m_MobStats.GetDamage());
+                        AudioManager.Instance.PlaySFX("Ough");
+                        StartCoroutine(m_player.Knockback(m_KnockbackDuration, m_KnockbackPower, transform));
+                        m_player.GetHurtFeedback(0.2f);
+                        StartCoroutine(m_player.TimeItsRed(0.2f, 0.2f));
+
+                        m_CanHitPlayer = false;
+                    }
                 }
             }
             else
