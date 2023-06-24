@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: IntroSequences
   m_EditorClassIdentifier: 
   m_IntroSequences:
-  - m_MainText: '....
+  - m_MainText: Where is this place....
+  - m_MainText: Everything around seem strange yet familiar.....
+  - m_MainText: 'Familiar voice:
 
-      *!!#$@*'
-  - m_MainText: '....
-
-      *!!#$@*'
-  - m_MainText: 'DO YOU HEAR ME!?
+      HEY! DO YOU HEAR ME?!'
+  - m_MainText: 'Familiar voice:
 
       ARE YOU OKAY!?'
-  - m_MainText: QUICK BEFORE THEY GET HERE!!
-  - m_MainText: QUICK BEFORE THEY GET HERE!!
+  - m_MainText: Where... Who is this...? Mommy...? Daddy...?
+  - m_MainText: 'Familiar voice:
+
+      QUICK, WE HAVE TO GET OUT OF HERE!'
