@@ -401,7 +401,6 @@ public class Player : MonoBehaviour
             m_WebInDashRadius = Physics2D.OverlapCircleAll(transform.position, m_ObjectiveCollectRadius, m_WebLayerMask);
             foreach (Collider2D web in m_WebInDashRadius)
             {
-                Debug.Log(web);
                 web.GetComponent<PolygonCollider2D>().isTrigger = true;
                 StartCoroutine(SetTriggerToFalse(web.gameObject, dashDuration));
             }
