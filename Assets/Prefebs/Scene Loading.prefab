@@ -47,3 +47,6 @@ MonoBehaviour:
   m_BlackMask: {fileID: 0}
   m_TimeBetweenScenes: 2
   m_TimeForMask: 2
+  m_QuitMenu: {fileID: 0}
+  m_QuitMenuCounter: 0
+  m_EndImage: {fileID: 8609671016881877492, guid: c2c31c44856a3f9429176f28e16a4737, type: 3}

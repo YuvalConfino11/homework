@@ -26,6 +26,7 @@ TagManager:
   - CrusherSpike
   - StoneWallStone
   - EnemyProjectile
+  - EndWall
   layers:
   - Default
   - TransparentFX

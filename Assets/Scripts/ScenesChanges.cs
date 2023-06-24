@@ -17,6 +17,8 @@ public class ScenesChanges : MonoBehaviour
     private GameObject m_QuitMenu;
     [SerializeField]
     private int m_QuitMenuCounter;
+    [SerializeField]
+    Image m_EndImage;
 
     private Color m_color;
     private PauseControl m_PauseController;
@@ -30,6 +32,7 @@ public class ScenesChanges : MonoBehaviour
         StartCoroutine(DisableMask(m_TimeForMask));
         m_color = m_BlackMask.color;
         m_PauseController = FindObjectOfType<PauseControl>();
+        m_EndImage.enabled = false;
     }
     private void Update()
     {
@@ -79,5 +82,10 @@ public class ScenesChanges : MonoBehaviour
         Time.timeScale = 1;
         m_PauseController.IsGamePaused = false;
         EventSystem.current.SetSelectedGameObject(null);
+    }
+    public void ShowEndImage(float i_Time)
+    {
+        m_EndImage.enabled = true;
+        m_EndImage.DOFade(1, i_Time);
     }
 }

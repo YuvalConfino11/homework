@@ -92,6 +92,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float m_DebrisTime;
     [SerializeField]
+    private ScenesChanges m_scenesChanges;
+    [SerializeField]
     private AudioManager m_audioManager;
     private BoxCollider2D m_BoxCollider;
 
@@ -291,7 +293,18 @@ public class Player : MonoBehaviour
         {
             SceneManager.LoadScene("Map");
         }
-        
+        if (i_Col.gameObject.CompareTag("EndWall"))
+        {
+            m_HealAnimator.SetBool("IsHealPulseActive", true);
+            StartCoroutine(AnimatorCooldown("IsHealPulseActive", m_HealAnimator, m_HealAnimatorCooldown));
+            StartCoroutine(MovmentDisabled(20f));
+            m_RigidBody.velocity = new Vector3(0, 0, 0);
+            m_scenesChanges.ShowEndImage(10f);
+            Debug.Log("change");
+            StartCoroutine(WaitToChangeScene(15f));
+
+        }
+
         if (i_Col.gameObject.CompareTag("SpiderWeb") && m_IsDashing)
         {
             Debug.Log(i_Col);
@@ -676,5 +689,12 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(i_TimeToFalse);
         i_GameObject.GetComponent<PolygonCollider2D>().isTrigger = false;
+    }
+    public IEnumerator WaitToChangeScene(float i_Time)
+    {
+        yield return new WaitForSeconds(i_Time);
+        SceneManager.LoadScene("Credits");
+
+
     }
 }
