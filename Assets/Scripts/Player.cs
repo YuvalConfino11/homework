@@ -508,7 +508,7 @@ public class Player : MonoBehaviour
 
     private void heal()
     {
-        if (m_Heal.GetSkillsStats().GetIsUnlocked() && m_Heal.GetSkillsStats().GetIsAvailable())
+        if (m_Heal.GetSkillsStats().GetIsUnlocked() && m_Heal.GetSkillsStats().GetIsAvailable() && m_Heal.GetManaPointsCost() <= GetMana())
         {
             SetHp(m_Heal.GetHealAmount());
             SetMana(-m_Heal.GetManaPointsCost());
