@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class ActivateCrushers : MonoBehaviour
 {
-
+    [SerializeField]
+    private GameObject crusher;
     [SerializeField]
     public bool m_ActivateCrushers;
+    [SerializeField]
+    private Transform m_StartPos;
     // Start is called before the first frame update
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -20,6 +23,7 @@ public class ActivateCrushers : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             m_ActivateCrushers = false;
+            crusher.transform.position = m_StartPos.position;
         }
     }
 }
