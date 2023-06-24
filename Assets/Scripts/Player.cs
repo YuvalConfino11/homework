@@ -298,8 +298,8 @@ public class Player : MonoBehaviour
             m_HealAnimator.SetBool("IsHealPulseActive", true);
             SetHp(100f);
             StartCoroutine(AnimatorCooldown("IsHealPulseActive", m_HealAnimator, m_HealAnimatorCooldown));
-            StartCoroutine(MovmentDisabled(20f));
             m_RigidBody.velocity = new Vector3(0, 0, 0);
+            StartCoroutine(MovmentDisabled(20f));
             m_scenesChanges.ShowEndImage(10f);
             StartCoroutine(WaitToChangeScene(15f));
 
