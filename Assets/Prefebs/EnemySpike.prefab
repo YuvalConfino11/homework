@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 5126421670461875372}
   - component: {fileID: 6420052480828164293}
   - component: {fileID: 8577489830131487776}
-  - component: {fileID: 2702894475041729601}
   m_Layer: 19
   m_Name: Spike
   m_TagString: Spike
@@ -265,27 +264,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Spikes: {fileID: 11400000, guid: 6f80b73d53c684f818b848deb2ec27be, type: 2}
   m_currentHealth: 40
---- !u!50 &2702894475041729601
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4984463650262035289}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &6543387856366706786
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,7 +287,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6543387856366706786}
-  m_LocalRotation: {x: -0, y: -0, z: -0.05111908, w: 0.9986926}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0511159, w: 0.99869275}
   m_LocalPosition: {x: -414.4, y: 334.5, z: 8.881993}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

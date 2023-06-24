@@ -277,6 +277,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CrusherGround
       objectReference: {fileID: 0}
+    - target: {fileID: 8671876667792291141, guid: ea98f528d0dc84274b4a58b348f1b517, type: 3}
+      propertyPath: m_UpSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8671876667792291141, guid: ea98f528d0dc84274b4a58b348f1b517, type: 3}
+      propertyPath: m_DownSpeed
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea98f528d0dc84274b4a58b348f1b517, type: 3}
 --- !u!4 &252080255081531497 stripped
@@ -284,3 +292,43 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5684760142662414775, guid: ea98f528d0dc84274b4a58b348f1b517, type: 3}
   m_PrefabInstance: {fileID: 5592277298988939742}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3874067034631545800 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8671876667678186006, guid: ea98f528d0dc84274b4a58b348f1b517, type: 3}
+  m_PrefabInstance: {fileID: 5592277298988939742}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1173935251907205488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3874067034631545800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 107fd3e44e96ada4498b079a742f8626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RespawnPoint: {fileID: 0}
+  m_Player: {fileID: 0}
+  m_ImaginaryFriend: {fileID: 0}
+--- !u!1 &3874067034708351856 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8671876667735597742, guid: ea98f528d0dc84274b4a58b348f1b517, type: 3}
+  m_PrefabInstance: {fileID: 5592277298988939742}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6789885724836789775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3874067034708351856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 107fd3e44e96ada4498b079a742f8626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RespawnPoint: {fileID: 0}
+  m_Player: {fileID: 0}
+  m_ImaginaryFriend: {fileID: 0}
