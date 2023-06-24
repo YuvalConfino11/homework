@@ -1754,6 +1754,7 @@ MonoBehaviour:
   m_TimeBetweenProjetiles: 2
   m_EnemyProj: {fileID: 2190364147599891419, guid: 86d992f121cc4654d8a2b7873b602533, type: 3}
   m_EnemyProjPos: {fileID: 1590477970433960440}
+  m_MobAttackAnimationDuration: 0.4
 --- !u!114 &7578005702554773261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1775,6 +1776,7 @@ MonoBehaviour:
   m_RigidBody: {fileID: 5345240097684956968}
   m_KnockbackPower: 15
   m_KnockbackDuration: 0.2
+  m_MobAnimation: {fileID: 0}
 --- !u!114 &1919526740459900685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1815,7 +1817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6d6a95ead03dc4a97b085a8465c8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_KnockbackPower: 15
+  m_KnockbackPower: 5
   m_KnockbackDuration: 0.2
   m_player: {fileID: 0}
 --- !u!1 &8414048908666085239
