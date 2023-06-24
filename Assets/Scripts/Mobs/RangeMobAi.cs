@@ -43,6 +43,8 @@ namespace Mobs {
         private GameObject m_EnemyProj;
         [SerializeField]
         private Transform m_EnemyProjPos;
+        [SerializeField]
+        private float m_MobAttackAnimationDuration;
 
         private Rigidbody2D m_RigidBody;
         private GameObject m_PlayerGameObject;
@@ -288,9 +290,15 @@ namespace Mobs {
         }
         private void Shoot()
         {
+            m_MobAnimation.PlayMobAttackAnimation();
+            StartCoroutine(attackAnimationOff());
+        }
+        private IEnumerator attackAnimationOff()
+        {
+            yield return new WaitForSeconds(m_MobAttackAnimationDuration);
+            m_MobAnimation.StopMobAttackAnimation();
             Instantiate(m_EnemyProj, m_EnemyProjPos.position, Quaternion.identity);
             m_EnemyCanShoot = false;
         }
     }
-
 }
