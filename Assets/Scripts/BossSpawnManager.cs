@@ -19,6 +19,8 @@ public class BossSpawnManager : MonoBehaviour
     private float m_MaxBarriersMovingDistance = 60f;
     [SerializeField]
     private float m_BarriersMovingSpeed = 10f;
+    [SerializeField]
+    private string m_BossMusicName = "Boss ver1";
     
     
     private bool m_IsFirstEnter = true;
@@ -60,7 +62,7 @@ public class BossSpawnManager : MonoBehaviour
                 }
                 if (!m_InBoss)
                 {
-                    AudioManager.Instance.PlayMusic("Boss ver1");
+                    AudioManager.Instance.PlayMusic(m_BossMusicName);
                     m_InBoss = true;
                 }
                 

@@ -3255,7 +3255,7 @@ PrefabInstance:
     - target: {fileID: 5208277313308937110, guid: fb8d1b7bc9e2a95469d6a826c75d2f46, type: 3}
       propertyPath: m_EndImage
       value: 
-      objectReference: {fileID: 1404542630}
+      objectReference: {fileID: 0}
     - target: {fileID: 5208277313308937110, guid: fb8d1b7bc9e2a95469d6a826c75d2f46, type: 3}
       propertyPath: m_QuitMenu
       value: 
@@ -17076,17 +17076,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 178
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -174.619}
---- !u!114 &1404542630 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7021601382000969143, guid: 069bdd964f05441e58219b1083a709ef, type: 3}
-  m_PrefabInstance: {fileID: 2826707220720289316}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1413470930
 GameObject:
   m_ObjectHideFlags: 0
@@ -28214,6 +28203,10 @@ PrefabInstance:
     - target: {fileID: 2475724146702007988, guid: f4acceba9f2e94a2a93ed12d8dedb068, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3248315886636282330, guid: f4acceba9f2e94a2a93ed12d8dedb068, type: 3}
+      propertyPath: m_BossMusicName
+      value: Big Boss
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4acceba9f2e94a2a93ed12d8dedb068, type: 3}
