@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1062938567523157119
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1977710903598020778}
+  m_Layer: 0
+  m_Name: AttackCastPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1977710903598020778
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062938567523157119}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.0495148, y: -6.9322205, z: -0.024910927}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5031054393018285811}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4181100076182418428
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,6 +175,7 @@ Transform:
   - {fileID: 2002933695078471736}
   - {fileID: 8033146721797993741}
   - {fileID: 4270774895490720033}
+  - {fileID: 1977710903598020778}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -207,7 +239,7 @@ MonoBehaviour:
   m_MobHitCooldown: 1.5
   m_CanHitPlayer: 0
   m_MobStats: {fileID: 1539239014669981393}
-  m_KnockbackPower: 5
+  m_KnockbackPower: 8
   m_KnockbackDuration: 0.2
 --- !u!114 &7409972616175501009
 MonoBehaviour:
@@ -885,7 +917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6d6a95ead03dc4a97b085a8465c8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_KnockbackPower: 10
+  m_KnockbackPower: 5
   m_KnockbackDuration: 0.2
   m_player: {fileID: 0}
 --- !u!1 &5068683700230389347

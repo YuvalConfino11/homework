@@ -254,7 +254,7 @@ namespace Mobs
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(m_CastPosition.position, m_MobFieldOfViewRadius);
-            Gizmos.color = Color.black;
+            Gizmos.color = Color.white;
             Vector3 AttackPosition = m_CastPosition.position;
             Vector3 AttackTargetPosition = AttackPosition;
             AttackTargetPosition.x +=transform.localScale.x *m_AttackCastDistance;
