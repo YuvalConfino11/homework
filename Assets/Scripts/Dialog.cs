@@ -21,10 +21,10 @@ public class Dialog : MonoBehaviour
     private bool m_OpenedDialog;
     [SerializeField]
     private int m_index;
-
     [SerializeField]
     private bool isTyping;
-    
+    [SerializeField]
+    private bool m_IsDialogEnded;
     private PauseControl m_PauseController;
 
 
@@ -36,7 +36,7 @@ public class Dialog : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_DialogIsNear && !m_OpenedDialog)
+        if (m_DialogIsNear && !m_OpenedDialog && !m_IsDialogEnded)
         {
             if (!m_DialogPanel.activeInHierarchy)
             {
@@ -94,9 +94,15 @@ public class Dialog : MonoBehaviour
             m_DialogText.text = "";
             m_index = 0;
             m_DialogPanel.SetActive(false);
-            
+            m_IsDialogEnded = true;
             Time.timeScale = 1;
             m_PauseController.IsGamePaused = false;
         }
+    }
+    
+    public bool IsDialogEnded
+    {
+        get => m_IsDialogEnded;
+        set => m_IsDialogEnded = value;
     }
 }

@@ -8,7 +8,7 @@ using Skills;
 public class SaveManager : MonoBehaviour
 {
     [SerializeField]
-    private GateScript m_FirstGate;
+    private GateScript[] m_Gates;
     [SerializeField]
     private Dash m_Dash;
     [SerializeField]
@@ -31,13 +31,15 @@ public class SaveManager : MonoBehaviour
     private GameObject m_HealObjective;
     [SerializeField]
     private GameObject m_ExplosionObjective;
-
+    [SerializeField]
+    private Dialog[] m_Dialogs;
     private bool m_DashAvailability;
     private bool m_DoubleJumpAvailability;
     private bool m_GlideAvailability;
     private bool m_EnergyExplosionAvailability;
     private bool m_HealAvailability;
-    private bool m_GateOpened;
+    private bool[] m_IsGatesOpened;
+    private bool[] m_IsDialogsEnded;
     private float m_GateXPos;
     private float m_GateYPos;
 
@@ -49,14 +51,18 @@ public class SaveManager : MonoBehaviour
         m_GlideAvailability = intToBool(PlayerPrefs.GetInt("GlideAvailability"));
         m_EnergyExplosionAvailability = intToBool(PlayerPrefs.GetInt("EnergyExplosionAvailability"));
         m_HealAvailability = intToBool(PlayerPrefs.GetInt("HealAvailability" ));
-        m_GateOpened = intToBool(PlayerPrefs.GetInt("GateOpened"));
+        m_IsGatesOpened = new bool[m_Gates.Length];
+        m_IsDialogsEnded = new bool[m_Dialogs.Length];
+        for (int i = 0; i < m_Gates.Length; i++)
+        {
+            m_IsGatesOpened[i] = intToBool(PlayerPrefs.GetInt("GateOpened"+ (i + 1)));
+        }
+        for (int i = 0; i < m_Dialogs.Length; i++)
+        {
+            m_IsDialogsEnded[i] = intToBool(PlayerPrefs.GetInt("Dialog"+ (i + 1)));
+        }
         PlayerPrefs.Save();
-
-
-
-
-
-
+        
         SetSavedAbilityStats(m_Dash.GetAbilityStats(), m_DashAvailability);
         SetSavedAbilityStats(m_DoubleJump.GetAbilityStats(), m_DoubleJumpAvailability);
         SetSavedAbilityStats(m_Glide.GetAbilityStats(), m_GlideAvailability);
@@ -91,27 +97,28 @@ public class SaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
-
         PlayerPrefs.SetInt("DashAvailability", boolToInt(m_Dash.GetAbilityStats().GetIsUnlocked()));
         PlayerPrefs.SetInt("GlideAvailability", boolToInt(m_Glide.GetAbilityStats().GetIsUnlocked()));
         PlayerPrefs.SetInt("DoubleJumpAvailability", boolToInt(m_DoubleJump.GetAbilityStats().GetIsUnlocked()));
         PlayerPrefs.SetInt("HealAvailability", boolToInt(m_Heal.GetSkillsStats().GetIsUnlocked()));
         PlayerPrefs.SetInt("EnergyExplosionAvailability", boolToInt(m_EnergyExplosion.GetSkillsStats().GetIsUnlocked()));
-
-        PlayerPrefs.SetInt("GateOpened",boolToInt(m_FirstGate.HasGateOpened()));
-        PlayerPrefs.Save();
-      
-      
-
-        if (m_GateOpened)
+        for (int i = 0; i < m_Gates.Length; i++)
         {
-          
-            m_FirstGate.MoveGate();
+            PlayerPrefs.SetInt("GateOpened"+ (i + 1),boolToInt(m_Gates[i].HasGateOpened()));
+            if (m_IsGatesOpened[i])
+            {
+                m_Gates[i].MoveGate();
+            }
         }
-
-
-
+        for (int i = 0; i < m_Dialogs.Length; i++)
+        {
+            PlayerPrefs.SetInt("Dialog"+ (i + 1),boolToInt(m_Dialogs[i].IsDialogEnded));
+            if (m_IsDialogsEnded[i])
+            {
+                m_Dialogs[i].IsDialogEnded = true;
+            }
+        }
+        PlayerPrefs.Save();
     }
     private int boolToInt(bool i_val)
     {

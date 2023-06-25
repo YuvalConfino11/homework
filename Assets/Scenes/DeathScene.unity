@@ -236,6 +236,10 @@ PrefabInstance:
       value: Scene Loading
       objectReference: {fileID: 0}
     - target: {fileID: 5208277313308937110, guid: fb8d1b7bc9e2a95469d6a826c75d2f46, type: 3}
+      propertyPath: m_EndImage
+      value: 
+      objectReference: {fileID: 1357707439}
+    - target: {fileID: 5208277313308937110, guid: fb8d1b7bc9e2a95469d6a826c75d2f46, type: 3}
       propertyPath: m_QuitMenu
       value: 
       objectReference: {fileID: 1266443908}
