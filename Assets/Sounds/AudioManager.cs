@@ -13,6 +13,8 @@ public class AudioManager : MonoBehaviour
     private float transitionTime;
     [SerializeField]
     public float m_ChaseVol;
+    [SerializeField] 
+    public BossSpawnManager BossSpawnManager;
     public static AudioManager Instance;
 
     public Sound[] musicSounds, sfxSounds;
@@ -38,12 +40,12 @@ public class AudioManager : MonoBehaviour
     }
     private void Update()
     {
-        if (m_player.GetCurrentHealth() < 50f && m_checkIfEntered)
+        if (m_player.GetCurrentHealth() < 50f && m_checkIfEntered && !BossSpawnManager.m_IsBarrierUp)
         {
             StartCoroutine(ChangeMusic("Sad ver1"));
             m_checkIfEntered = false;
         }
-        if (m_player.GetCurrentHealth() >= 50f && !m_checkIfEntered)
+        if (m_player.GetCurrentHealth() >= 50f && !m_checkIfEntered && !BossSpawnManager.m_IsBarrierUp)
         {
             StartCoroutine(ChangeMusic("Happy ver1"));
             m_checkIfEntered = true;

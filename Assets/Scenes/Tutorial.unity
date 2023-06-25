@@ -4282,6 +4282,10 @@ PrefabInstance:
       propertyPath: m_KeyAnimator
       value: 
       objectReference: {fileID: 847589263}
+    - target: {fileID: 753513870165085793, guid: 4b2afc843d619714ab6e6f82fa7b9d6d, type: 3}
+      propertyPath: m_KeyAnimator
+      value: 
+      objectReference: {fileID: 847589263}
     - target: {fileID: 2463244568226964982, guid: 4b2afc843d619714ab6e6f82fa7b9d6d, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -11874,11 +11878,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4465306662624409346, guid: 926f2fd94f27bb14b98ac179bcd2914a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -868.8
+      value: -869.2
       objectReference: {fileID: 0}
     - target: {fileID: 4465306662624409346, guid: 926f2fd94f27bb14b98ac179bcd2914a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 443.6
+      value: 441.1
       objectReference: {fileID: 0}
     - target: {fileID: 4465306662624409346, guid: 926f2fd94f27bb14b98ac179bcd2914a, type: 3}
       propertyPath: m_LocalPosition.z
