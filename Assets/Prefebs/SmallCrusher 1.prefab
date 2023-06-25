@@ -488,7 +488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crusher: {fileID: 7629631731001738354}
   m_ActivateCrushers: 0
-  m_StartPos: {fileID: 0}
+  m_StartPos: {fileID: 8560366653334452024}
 --- !u!1 &7629631731001738354
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5684760142662414775}
   - component: {fileID: 7957904400146138991}
   - component: {fileID: 8998908941530882328}
+  - component: {fileID: 9089800109172719786}
   - component: {fileID: 2767764650452377828}
   - component: {fileID: 8671876667792291141}
   m_Layer: 9
@@ -169,6 +170,19 @@ MonoBehaviour:
   m_EnableTangents: 0
   m_GeometryCached: 0
   m_UTess2D: 0
+--- !u!114 &9089800109172719786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6730208406051991816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51953efe076f1d45bf25f855dafe41e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToAttach: {fileID: 0}
 --- !u!68 &2767764650452377828
 EdgeCollider2D:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,14 @@ using UnityEngine;
 public class AttachChildOnTouch : MonoBehaviour
 {
     [SerializeField] private GameObject objectToAttach;
+
+    private void Awake()
+    {
+        if (objectToAttach == null)
+        {
+            objectToAttach = GameObject.FindGameObjectWithTag("Player");
+        }
+    }
 
     public GameObject GetObjectToAttach()
     {

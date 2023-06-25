@@ -58,6 +58,7 @@ MonoBehaviour:
   m_BossMob: {fileID: 7153606485435401554, guid: 4a7f3b594ce5b094183ccc5a93db7afc, type: 3}
   m_MaxBarriersMovingDistance: 60
   m_BarriersMovingSpeed: 20
+  m_BossMusicName: Boss ver1
 --- !u!1 &2762108806130926747
 GameObject:
   m_ObjectHideFlags: 0
@@ -82,7 +83,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2762108806130926747}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: -7, z: 0}
+  m_LocalPosition: {x: 16.3, y: -163.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6517538266135196344}
   - component: {fileID: 8855913451739628640}
+  - component: {fileID: 8828185981609278331}
   - component: {fileID: 7526691177915556375}
   - component: {fileID: 3674852597294506987}
   - component: {fileID: 7840221991783118410}
@@ -96,6 +97,19 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: 49.870647, y: -10.596281, z: 0}
     m_Extent: {x: 54.63564, y: 18.069332, z: 0}
+--- !u!114 &8828185981609278331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5327795045055754759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4508c5e4810df48b26b3770e407404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Player: {fileID: 0}
 --- !u!114 &7526691177915556375
 MonoBehaviour:
   m_ObjectHideFlags: 0
