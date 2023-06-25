@@ -59,7 +59,16 @@ namespace Mobs
                 {
                     Instantiate(ChooseBall(m_ManaBall, m_HPBall), transform.position, transform.rotation);
                 }
-                Destroy(this.gameObject);
+
+                if (name == "MobBoss" || name == "MobMiniBoss")
+                {
+                    gameObject.SetActive(false);
+                }
+                else
+                {
+                    Destroy(this.gameObject);
+                }
+                
             }
         }
         

@@ -274,6 +274,7 @@ MonoBehaviour:
   defualtVol: 0.327
   transitionTime: 2
   m_ChaseVol: 0.7
+  BossSpawnManager: {fileID: 0}
   musicSounds:
   - name: Anticipation
     clip: {fileID: 8300000, guid: c2e894150dce56d4abcc2d37fb9e4555, type: 3}

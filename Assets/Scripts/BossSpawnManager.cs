@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mobs;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -23,13 +24,14 @@ public class BossSpawnManager : MonoBehaviour
     private string m_BossMusicName = "Boss ver1";
     [SerializeField]
     private string m_ExitBossMusic;
+    [SerializeField]
+    private List<GameObject> m_BossAreaBarriers;
     
     
     private bool m_IsFirstEnter = true;
     private GameObject m_SpwanPoint;
     private bool m_IsMobDead = false;
     private  float m_MobHeight;
-    private List<GameObject> m_BossAreaBarriers = new List<GameObject>();
     public bool m_IsBarrierUp = false;
     private bool m_IsMoveBarrier = false;
     private float m_BarrierMovingDirection = 1f;
@@ -37,18 +39,12 @@ public class BossSpawnManager : MonoBehaviour
     private float m_YScale = 3f;
     public bool m_InBoss = false;
     
+    
 
     private void Start()
     {
         m_SpwanPoint = transform.GetChild(0).gameObject;
         m_MobHeight= Mathf.Abs(m_BossMob.gameObject.GetComponentInChildren<BoxCollider2D>().offset.y);
-        foreach (Transform child in transform)
-        {
-            if (child.gameObject.CompareTag("Ground"))
-            {
-                m_BossAreaBarriers.Add(child.gameObject);
-            }
-        }
     }
     
     private void Update()
@@ -62,12 +58,6 @@ public class BossSpawnManager : MonoBehaviour
                     barrier.transform.position += new Vector3(0, m_BarrierMovingDirection * Time.deltaTime * m_BarriersMovingSpeed, 0);
                     barrier.transform.localScale = new Vector3(barrier.transform.localScale.x, m_YScale, barrier.transform.localScale.z);
                 }
-                if (!m_InBoss)
-                {
-                    AudioManager.Instance.PlayMusic(m_BossMusicName);
-                    m_InBoss = true;
-                }
-                
                 m_BarriersMovingDistance += m_BarrierMovingDirection * Time.deltaTime * m_BarriersMovingSpeed;
             }
             else
@@ -81,9 +71,11 @@ public class BossSpawnManager : MonoBehaviour
         if (m_IsFirstEnter && m_IsPlayerInRadius)
         {
             Vector3 spawnPointPosition = new Vector3(m_SpwanPoint.transform.position.x, m_SpwanPoint.transform.position.y + m_MobHeight, m_SpwanPoint.transform.position.z);
-            Instantiate(m_BossMob, spawnPointPosition, Quaternion.identity);
+            m_BossMob.SetActive(true);
             m_IsFirstEnter = false;
             m_IsMobDead = false;
+            m_InBoss = true;
+            AudioManager.Instance.PlayMusic(m_BossMusicName);
             foreach (GameObject barrier in m_BossAreaBarriers)
             {
                 barrier.transform.position += new Vector3(0, m_MaxBarriersMovingDistance * Time.deltaTime, 0);
@@ -98,9 +90,14 @@ public class BossSpawnManager : MonoBehaviour
             m_BarriersMovingDistance = 0;
             m_BarrierMovingDirection = -1f;
             m_IsMoveBarrier = true;
+            if (m_BossMob.name == "MobMiniBoss")
+            {
+                m_InBoss = false;
+            }
+            AudioManager.Instance.PlayMusic(m_ExitBossMusic);
         }
-        
-        m_IsMobDead = Physics2D.OverlapBox(transform.position, new Vector2(m_SpawnManagerRadius,m_SpawnManagerRadius),0, m_MobsLayerMask) == null;
+
+        m_IsMobDead = m_BossMob.GetComponent<MobStats>().isDead();
     }
 
     private void OnDrawGizmos()

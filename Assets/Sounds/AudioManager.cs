@@ -40,12 +40,12 @@ public class AudioManager : MonoBehaviour
     }
     private void Update()
     {
-        if (m_player.GetCurrentHealth() < 50f && m_checkIfEntered && !BossSpawnManager.m_IsBarrierUp)
+        if (m_player.GetCurrentHealth() < 50f && m_checkIfEntered && !BossSpawnManager.m_InBoss)
         {
             StartCoroutine(ChangeMusic("Sad ver1"));
             m_checkIfEntered = false;
         }
-        if (m_player.GetCurrentHealth() >= 50f && !m_checkIfEntered && !BossSpawnManager.m_IsBarrierUp)
+        if (m_player.GetCurrentHealth() >= 50f && !m_checkIfEntered && !BossSpawnManager.m_InBoss)
         {
             StartCoroutine(ChangeMusic("Happy ver1"));
             m_checkIfEntered = true;

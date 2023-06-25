@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 466492f3241dc44cb94b5772117d0950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SpawnManagerRadius: 600
+  m_SpawnManagerRadius: 400
   m_IsPlayerInRadius: 0
   m_PlayerLayerMask:
     serializedVersion: 2
@@ -58,7 +58,13 @@ MonoBehaviour:
   m_BossMob: {fileID: 7153606485435401554, guid: 4a7f3b594ce5b094183ccc5a93db7afc, type: 3}
   m_MaxBarriersMovingDistance: 60
   m_BarriersMovingSpeed: 20
-  m_BossMusicName: Boss ver1
+  m_BossMusicName: Big Boss
+  m_ExitBossMusic: Peace
+  m_BossAreaBarriers:
+  - {fileID: 4772792590969815667}
+  - {fileID: 5667617420680180570}
+  m_IsBarrierUp: 0
+  m_InBoss: 0
 --- !u!1 &2762108806130926747
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,6 +183,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3761913563243012210, guid: 5c23b25f2a80640ccad85a25f0c0923d, type: 3}
   m_PrefabInstance: {fileID: 3801981449226503641}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5667617420680180570 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8819233343686080131, guid: 5c23b25f2a80640ccad85a25f0c0923d, type: 3}
+  m_PrefabInstance: {fileID: 3801981449226503641}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4060109881618674928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -262,5 +273,10 @@ PrefabInstance:
 --- !u!4 &895486358678525058 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3761913563243012210, guid: 5c23b25f2a80640ccad85a25f0c0923d, type: 3}
+  m_PrefabInstance: {fileID: 4060109881618674928}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4772792590969815667 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8819233343686080131, guid: 5c23b25f2a80640ccad85a25f0c0923d, type: 3}
   m_PrefabInstance: {fileID: 4060109881618674928}
   m_PrefabAsset: {fileID: 0}
