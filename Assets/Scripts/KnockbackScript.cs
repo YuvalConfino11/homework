@@ -27,11 +27,13 @@ public class KnockbackScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             AudioManager.Instance.PlaySFX("Ough");
-            StartCoroutine(m_player.Knockback(m_KnockbackDuration , m_KnockbackPower , transform));
+            if (transform.gameObject.CompareTag("Mob"))
+            {
+                StartCoroutine(m_player.Knockback(m_KnockbackDuration , m_KnockbackPower , transform));
+            }
             m_player.GetHurtFeedback(0.2f);
             StartCoroutine(m_player.TimeItsRed(0.2f , 0.2f));
-
-
+            
         }
     }
    
