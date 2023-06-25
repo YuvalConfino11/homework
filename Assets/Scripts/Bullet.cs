@@ -12,8 +12,12 @@ public class Bullet : MonoBehaviour
     private float m_Damage = 30f;
     [SerializeField] 
     private float m_Speed = 25f;
+    [SerializeField]
+    private float m_MaxTimeAlive = 2f;
     
     private bool m_IsmPlayerNotNull;
+    private float timeCounter = 0f;
+    
 
     private void Awake()
     {
@@ -25,9 +29,13 @@ public class Bullet : MonoBehaviour
     {
         if (m_Player != null)
         {
-            if (Mathf.Abs(transform.position.x - m_Player.transform.position.x) > m_Range)
+            if (Mathf.Abs(transform.position.x - m_Player.transform.position.x) > m_Range || timeCounter >= m_MaxTimeAlive)
             {
                 Destroy(this.gameObject);
+            }
+            else
+            {
+                timeCounter += Time.deltaTime;
             }
         }
     }

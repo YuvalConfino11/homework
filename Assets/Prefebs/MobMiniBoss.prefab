@@ -790,7 +790,7 @@ MonoBehaviour:
   m_MobHitCooldown: 0.75
   m_BallFallRatio: 1
   m_RigidBody: {fileID: 7153606485435401558}
-  m_KnockbackPower: 30
+  m_KnockbackPower: 10
   m_KnockbackDuration: 0.2
   m_MobAnimation: {fileID: 0}
 --- !u!114 &3732124924582079859
