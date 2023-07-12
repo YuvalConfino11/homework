@@ -32,7 +32,7 @@ public class ScenesChanges : MonoBehaviour
         StartCoroutine(DisableMask(m_TimeForMask));
         m_color = m_BlackMask.color;
         m_PauseController = FindObjectOfType<PauseControl>();
-        m_EndImage.enabled = false;
+        m_EndImage.gameObject.SetActive(false);
     }
     private void Update()
     {
@@ -85,7 +85,7 @@ public class ScenesChanges : MonoBehaviour
     }
     public void ShowEndImage(float i_Time)
     {
-        m_EndImage.enabled = true;
+        m_EndImage.gameObject.SetActive(true);
         m_EndImage.DOFade(1, i_Time);
     }
 }
